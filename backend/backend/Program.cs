@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -32,24 +33,24 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 //Add Identity
 builder.Services
-    AddIdentity< ApplicationUser,IdentityUser > 0
-    AddEntityFrameworkStores<ApplicationDbContext>0
-    AddDefaultTokenProviders();
+    .AddIdentity< ApplicationUser,IdentityUser > ()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
 
 //Config Identity
-builder.ServicesConfigure<IdentityOptions>(Options =>
+builder.Services.Configure<IdentityOptions>(Options =>
 {
-    Options.Password RequiredLength = 8;
-    Options.Password RequiredDigit = false;
-    Options.Password RequiredUppercase = false;
-    Options.Password RequiredNonAlphanumeric = false;
-    Options.Signin RequireConfirmedAccount = false;
-    Options.Signin RequireConfirmedEmail = false;
-    Options.Signin RequireConfirmedPhoneNumber = false;
+    Options.Password.RequiredLength = 8;
+    Options.Password.RequireDigit = false;
+    Options.Password.RequireUppercase = false;
+    Options.Password.RequireNonAlphanumeric = false;
+    Options.SignIn.RequireConfirmedAccount = false;
+    Options.SignIn.RequireConfirmedEmail = false;
+    Options.SignIn.RequireConfirmedPhoneNumber = false;
 });
 
 //AuthenticationSchema and JWT Bearer
-builder.Services
+builder.Services.
     AddAuthentication(Options =>
     {
     Options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -58,15 +59,15 @@ builder.Services
 })
  .AddJwtBearer(Options =>
 {
-    Options.SvaeToken = true;
-    Options.RequiredHttpsMetadata = false;
-    Options.TokenValidationParameters = new Microsoft IdentityModel Tokens TokenValidationParameters()
+    Options.SaveToken = true;
+    Options.RequireHttpsMetadata = false;
+    Options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
     {
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidIssuer = builder.Configuration["JWT:Validissuer"],
-        ValidAudience = builder.Configuraton["JWT:ValidAudience"],
-        ValidSigningKey = new SymmetircSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
+        ValidAudience = builder.Configuration["JWT:ValidAudience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
     };
 });
 
