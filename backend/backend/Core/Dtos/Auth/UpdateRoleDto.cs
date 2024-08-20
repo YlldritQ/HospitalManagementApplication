@@ -14,6 +14,6 @@ namespace backend.Core.Dtos.Auth
     {
         ADMIN,
         MANAGER,
-        USER,
+        USER
     }
 }

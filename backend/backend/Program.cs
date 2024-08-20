@@ -1,4 +1,6 @@
 using backend.Core.DbContext;
+using backend.Core.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
@@ -16,6 +18,7 @@ builder.Services.AddControllers().
 
 //DbConfig
 
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
     options.UseSqlServer(builder.Configuration.GetConnectionString("local"))
@@ -25,8 +28,22 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 
 //Add Identity
+builder.Services
+    AddIdentity< ApplicationUser,IdentityUser > 0
+    AddEntityFrameworkStores<ApplicationDbContext>0
+    AddDefaultTokenProviders();
 
 //Config Identity
+builder.ServicesConfigure<IdentityOptions>(Options =>
+{
+    Options Password RequiredLength = 8;
+    Options Password RequiredDigit = false;
+    Options Password RequiredUppercase = false;
+    Options Password RequiredNonAlphanumeric = false;
+    Options Signin RequireConfirmedAccount = false;
+    Options Signin RequireConfirmedEmail = false;
+    Options Signin RequireConfirmedPhoneNumber = false;
+});
 
 //AuthenticationSchema and JWT Bearer
 
