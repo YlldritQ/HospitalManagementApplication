@@ -2,7 +2,7 @@
 {
     public class LoginServiceResponseDto
     {
-        public string newToken { get; set; }
+        public string NewToken { get; set; }
         public UserInfoResult UserInfo { get; set; }
     }
 }

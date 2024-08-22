@@ -2,7 +2,7 @@
 {
     public class GeneralServiceResponseDto
     {
-        public bool isSucceed { get; set; }
+        public bool IsSucceed { get; set; }
 
         public int StatusCode { get; set; }
 
