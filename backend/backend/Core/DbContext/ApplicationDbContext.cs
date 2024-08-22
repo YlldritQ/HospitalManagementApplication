@@ -12,6 +12,7 @@ namespace backend.Core.DbContext
         }
 
         public DbSet<Log> Logs { get; set; }
+        public DbSet<Patient> Patients { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
