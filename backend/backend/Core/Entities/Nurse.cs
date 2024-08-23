@@ -1,8 +1,8 @@
 ﻿namespace backend.Core.Entities
 {
-    public class Doctor : MedicalStaff
+    public class Nurse : MedicalStaff
     {
-        public string Specialty { get; set; } = null!;
+        public string Department { get; set; } = null!;
         public string Qualifications { get; set; } = null!;
         public bool IsAvailable { get; set; }
     }

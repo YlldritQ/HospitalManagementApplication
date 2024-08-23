@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using backend.Core.DbContext;
+﻿using backend.Core.DbContext;
 using backend.Core.Dtos.General;
 using backend.Core.Entities;
-using backend.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Core.Services
@@ -25,12 +21,15 @@ namespace backend.Core.Services
 
             return new DoctorDto
             {
-                DoctorId = doctor.DoctorId,
+                Id = doctor.Id,
                 FirstName = doctor.FirstName,
                 LastName = doctor.LastName,
+                Gender = doctor.Gender,
+                ContactInfo = doctor.ContactInfo,
+                DateOfBirth = doctor.DateOfBirth,
+                DateHired = doctor.DateHired,
                 Specialty = doctor.Specialty,
                 Qualifications = doctor.Qualifications,
-                ContactInfo = doctor.ContactInfo,
                 IsAvailable = doctor.IsAvailable
             };
         }
@@ -40,34 +39,39 @@ namespace backend.Core.Services
             return await _context.Doctors
                 .Select(doctor => new DoctorDto
                 {
-                    DoctorId = doctor.DoctorId,
+                    Id = doctor.Id,
                     FirstName = doctor.FirstName,
                     LastName = doctor.LastName,
+                    Gender = doctor.Gender,
+                    ContactInfo = doctor.ContactInfo,
+                    DateOfBirth = doctor.DateOfBirth,
+                    DateHired = doctor.DateHired,
                     Specialty = doctor.Specialty,
                     Qualifications = doctor.Qualifications,
-                    ContactInfo = doctor.ContactInfo,
                     IsAvailable = doctor.IsAvailable
                 })
                 .ToListAsync();
         }
 
-        public async Task<DoctorDto> CreateDoctorAsync(DoctorDto doctorDto)
+        public async Task CreateDoctorAsync(DoctorDto doctorDto)
         {
             var doctor = new Doctor
             {
                 FirstName = doctorDto.FirstName,
                 LastName = doctorDto.LastName,
+                Gender = doctorDto.Gender,
+                ContactInfo = doctorDto.ContactInfo,
+                DateOfBirth = doctorDto.DateOfBirth,
+                DateHired = doctorDto.DateHired,
                 Specialty = doctorDto.Specialty,
                 Qualifications = doctorDto.Qualifications,
-                ContactInfo = doctorDto.ContactInfo,
                 IsAvailable = doctorDto.IsAvailable
             };
 
             await _context.Doctors.AddAsync(doctor);
             await _context.SaveChangesAsync();
 
-            doctorDto.DoctorId = doctor.DoctorId;
-            return doctorDto;
+            doctorDto.Id = doctor.Id;
         }
 
         public async Task UpdateDoctorAsync(int doctorId, DoctorDto doctorDto)
@@ -77,13 +81,18 @@ namespace backend.Core.Services
 
             doctor.FirstName = doctorDto.FirstName;
             doctor.LastName = doctorDto.LastName;
+            doctor.Gender = doctorDto.Gender;
+            doctor.ContactInfo = doctorDto.ContactInfo;
+            doctor.DateOfBirth = doctorDto.DateOfBirth;
+            doctor.DateHired = doctorDto.DateHired;
             doctor.Specialty = doctorDto.Specialty;
             doctor.Qualifications = doctorDto.Qualifications;
-            doctor.ContactInfo = doctorDto.ContactInfo;
             doctor.IsAvailable = doctorDto.IsAvailable;
 
             await _context.SaveChangesAsync();
         }
+
+
 
         public async Task DeleteDoctorAsync(int doctorId)
         {

@@ -1,6 +1,6 @@
-﻿namespace backend.Core.Dtos.General
+﻿namespace backend.Core.Entities
 {
-    public class DoctorDto
+    public abstract class MedicalStaff
     {
         public int Id { get; set; }
         public string FirstName { get; set; } = null!;
@@ -9,8 +9,5 @@
         public string ContactInfo { get; set; } = null!;
         public DateTime DateOfBirth { get; set; }
         public DateTime DateHired { get; set; }
-        public string Specialty { get; set; } = null!;
-        public string Qualifications { get; set; } = null!;
-        public bool IsAvailable { get; set; }
     }
 }
