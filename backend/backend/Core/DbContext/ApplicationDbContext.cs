@@ -21,6 +21,8 @@ namespace backend.Core.DbContext
 
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
 
+        public DbSet<Department> Departments { get; set; }
+
 
         public DbSet<Room> Rooms { get; set; }
 
