@@ -33,6 +33,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //Dependency Injection
 builder.Services.AddScoped<ILogService, LogService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IDoctorService, DoctorService>();
+builder.Services.AddScoped<INurseService, NurseService>();
+builder.Services.AddScoped<IPatientService, PatientService>();
 
 //Add Identity
 builder.Services
