@@ -12,8 +12,8 @@ using backend.Core.DbContext;
 namespace backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240823155636_MedicalStaffEntity")]
-    partial class MedicalStaffEntity
+    [Migration("20240825202543_add2")]
+    partial class add2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
