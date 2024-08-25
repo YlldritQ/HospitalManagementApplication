@@ -17,6 +17,9 @@ namespace backend.Core.DbContext
 
         public DbSet<Nurse> Nurses { get; set; }
 
+        public DbSet<Appointment> Appointments { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
