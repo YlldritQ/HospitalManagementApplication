@@ -26,6 +26,8 @@ namespace backend.Core.DbContext
 
         public DbSet<Room> Rooms { get; set; }
 
+        public DbSet<Prescription> Prescriptions { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
