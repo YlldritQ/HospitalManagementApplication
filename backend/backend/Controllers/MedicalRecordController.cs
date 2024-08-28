@@ -1,5 +1,7 @@
-﻿using backend.Core.Dtos.General;
+﻿using backend.Core.Constants;
+using backend.Core.Dtos.General;
 using backend.Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
@@ -17,6 +19,7 @@ namespace backend.Controllers
 
         // GET: api/medicalrecord
         [HttpGet]
+        [Authorize(Roles = StaticUserRoles.AdminDoctorNurseUser)]
         public async Task<ActionResult<IEnumerable<MedicalRecordDto>>> GetAllMedicalRecords()
         {
             var records = await _medicalRecordService.GetAllMedicalRecordsAsync();

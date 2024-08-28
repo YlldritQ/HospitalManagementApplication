@@ -52,12 +52,10 @@ namespace backend.Controllers
         }
 
         // Route -> Update User Role
-        // An Owner can change everything
-        // An Admin can change just User to Manager or reverse
-        // Manager and User Roles don't have access to this Route
+        // An Admin can change everything
         [HttpPost]
         [Route("update-role")]
-        [Authorize(Roles = StaticUserRoles.OwnerAdmin)]
+        [Authorize(Roles = StaticUserRoles.ADMIN)]
         public async Task<IActionResult> UpdateRole([FromBody] UpdateRoleDto updateRoleDto)
         {
             var updateRoleResult = await _authService.UpdateRoleAsync(User, updateRoleDto);

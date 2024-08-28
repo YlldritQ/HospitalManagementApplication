@@ -3,6 +3,8 @@ using backend.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
+using backend.Core.Constants;
 
 namespace backend.Controllers
 {
@@ -19,6 +21,7 @@ namespace backend.Controllers
 
         // GET: api/doctor
         [HttpGet]
+        [Authorize(Roles =StaticUserRoles.AdminDoctor)]
         public async Task<ActionResult<IEnumerable<DoctorDto>>> GetAllDoctors()
         {
             var doctors = await _doctorService.GetAllDoctorsAsync();
@@ -27,6 +30,7 @@ namespace backend.Controllers
 
         // GET: api/doctor/{id}
         [HttpGet("{id}")]
+        [Authorize(Roles =StaticUserRoles.AdminDoctor)]
         public async Task<ActionResult<DoctorDto>> GetDoctorById(int id)
         {
             var doctor = await _doctorService.GetDoctorByIdAsync(id);
@@ -39,6 +43,7 @@ namespace backend.Controllers
 
         // POST: api/doctor
         [HttpPost]
+        [Authorize(Roles = StaticUserRoles.Admin)]
         public async Task<ActionResult<DoctorDto>> CreateDoctor([FromBody] DoctorDto doctorDto)
         {
             if (!ModelState.IsValid)
@@ -54,6 +59,7 @@ namespace backend.Controllers
 
         // PUT: api/doctor/{id}
         [HttpPut("{id}")]
+        [Authorize(Roles =StaticUserRoles.AdminDoctor)]
         public async Task<IActionResult> UpdateDoctor(int id, [FromBody] DoctorDto doctorDto)
         {
             if (!ModelState.IsValid)
@@ -74,6 +80,7 @@ namespace backend.Controllers
 
         // DELETE: api/doctor/{id}
         [HttpDelete("{id}")]
+        [Authorize(Roles = StaticUserRoles.Admin)]
         public async Task<IActionResult> DeleteDoctor(int id)
         {
             var doctor = await _doctorService.GetDoctorByIdAsync(id);

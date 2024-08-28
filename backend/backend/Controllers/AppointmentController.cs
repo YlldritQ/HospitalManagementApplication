@@ -1,5 +1,7 @@
-﻿using backend.Core.Dtos.General;
+﻿using backend.Core.Constants;
+using backend.Core.Dtos.General;
 using backend.Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -19,6 +21,8 @@ namespace backend.Controllers
 
         // GET: api/appointment
         [HttpGet]
+        [Route ("GetAllAppointments")]
+        [Authorize(Roles = StaticUserRoles.ADMIN)]
         public async Task<ActionResult<IEnumerable<AppointmentDto>>> GetAllAppointments()
         {
             var appointments = await _appointmentService.GetAllAppointmentsAsync();

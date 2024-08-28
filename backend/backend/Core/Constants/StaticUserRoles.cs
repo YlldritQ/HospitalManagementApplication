@@ -3,14 +3,14 @@
     //this class is used to avoid typing errors
     public class StaticUserRoles
     {
-        public const string OWNER = "OWNER";
-        public const string ADMIN = "ADMIN";
-        public const string MANAGER = "MANAGER";
-        public const string USER = "USER";
+        public const string ADMIN = "Admin";
+        public const string USER = "User";
+        public const string DOCTOR = "Doctor";
+        public const string NURSE = "Nurse";
+        public const string PATIENT = "Patient";
 
-        public const string OwnerAdmin = "OWNER,ADMIN";
-        public const string OwnerAdminManager = "OWNER,ADMIN,MANAGER";
-        public const string OwnerAdminManagerUser = "OWNER,ADMIN,MANAGER,USER";
+        public const string AdminDoctor = "Admin,Doctor";
+        public const string AdminDoctorNurseUser = "Admin,Doctor,Nurse,User";
 
     }
 }

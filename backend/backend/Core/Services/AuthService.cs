@@ -29,12 +29,13 @@ namespace backend.Core.Services
 
         public async Task<GeneralServiceResponseDto> SeedRolesAsync()
         {
-            bool isOwnerRoleExists = await _roleManager.RoleExistsAsync(StaticUserRoles.OWNER);
             bool isAdminRoleExists = await _roleManager.RoleExistsAsync(StaticUserRoles.ADMIN);
-            bool isManagerRoleExists = await _roleManager.RoleExistsAsync(StaticUserRoles.MANAGER);
             bool isUserRoleExists = await _roleManager.RoleExistsAsync(StaticUserRoles.USER);
+            bool isDoctorRoleExists = await _roleManager.RoleExistsAsync(StaticUserRoles.DOCTOR);
+            bool isNurseRoleExists = await _roleManager.RoleExistsAsync(StaticUserRoles.NURSE);
+            bool isPatientRoleExists = await _roleManager.RoleExistsAsync(StaticUserRoles.PATIENT);
 
-            if (isOwnerRoleExists && isAdminRoleExists && isManagerRoleExists && isUserRoleExists)
+            if (isAdminRoleExists && isUserRoleExists && isDoctorRoleExists && isNurseRoleExists && isPatientRoleExists)
                 return new GeneralServiceResponseDto()
                 {
                     IsSucceed = true,
@@ -42,10 +43,11 @@ namespace backend.Core.Services
                     Message = "Roles Seeding is Already Done"
                 };
 
-            await _roleManager.CreateAsync(new IdentityRole(StaticUserRoles.OWNER));
             await _roleManager.CreateAsync(new IdentityRole(StaticUserRoles.ADMIN));
-            await _roleManager.CreateAsync(new IdentityRole(StaticUserRoles.MANAGER));
             await _roleManager.CreateAsync(new IdentityRole(StaticUserRoles.USER));
+            await _roleManager.CreateAsync(new IdentityRole(StaticUserRoles.DOCTOR));
+            await _roleManager.CreateAsync(new IdentityRole(StaticUserRoles.NURSE));
+            await _roleManager.CreateAsync(new IdentityRole(StaticUserRoles.PATIENT));
 
             return new GeneralServiceResponseDto()
             {
@@ -142,14 +144,15 @@ namespace backend.Core.Services
                 };
 
             var userRoles = await _userManager.GetRolesAsync(user);
-            // Just The OWNER and ADMIN can update roles
+            // Just ADMIN can update roles
             if (User.IsInRole(StaticUserRoles.ADMIN))
             {
                 // User is admin
-                if (updateRoleDto.NewRole == RoleType.USER || updateRoleDto.NewRole == RoleType.MANAGER)
+                if (updateRoleDto.NewRole == RoleType.USER || updateRoleDto.NewRole == RoleType.DOCTOR || 
+                    updateRoleDto.NewRole == RoleType.NURSE || updateRoleDto.NewRole == RoleType.PATIENT)
                 {
-                    // admin can change the role of everyone except owners and admins
-                    if (userRoles.Any(q => q.Equals(StaticUserRoles.OWNER) || q.Equals(StaticUserRoles.ADMIN)))
+                    // admin can change the role of everyone except admins
+                    if (userRoles.Any(q => q.Equals(StaticUserRoles.ADMIN)))
                     {
                         return new GeneralServiceResponseDto()
                         {
@@ -178,32 +181,12 @@ namespace backend.Core.Services
                     Message = "You are not allowed to change role of this user"
                 };
             }
-            else
+            return new GeneralServiceResponseDto()
             {
-                // user is owner
-                if (userRoles.Any(q => q.Equals(StaticUserRoles.OWNER)))
-                {
-                    return new GeneralServiceResponseDto()
-                    {
-                        IsSucceed = false,
-                        StatusCode = 403,
-                        Message = "You are not allowed to change role of this user"
-                    };
-                }
-                else
-                {
-                    await _userManager.RemoveFromRolesAsync(user, userRoles);
-                    await _userManager.AddToRoleAsync(user, updateRoleDto.NewRole.ToString());
-                    await _logService.SaveNewLog(user.UserName, "User Roles Updated");
-
-                    return new GeneralServiceResponseDto()
-                    {
-                        IsSucceed = true,
-                        StatusCode = 200,
-                        Message = "Role updated successfully"
-                    };
-                }
-            }
+                IsSucceed = false,
+                StatusCode = 403,
+                Message = "You don't have access"
+            };
         }
 
         public async Task<LoginServiceResponseDto?> MeAsync(MeDto meDto)
@@ -336,7 +319,7 @@ namespace backend.Core.Services
             // User is admin
             if (User.IsInRole(StaticUserRoles.ADMIN))
             {
-                if (userRoles.Count > 0 && (userRoles[0].Equals(StaticUserRoles.MANAGER) || userRoles[0].Equals(StaticUserRoles.USER)))
+                if (userRoles.Count > 0 && !userRoles[0].Equals(StaticUserRoles.ADMIN))
                 {
                     var DelUser = await _userManager.DeleteAsync(user);
                     if (!DelUser.Succeeded)
@@ -363,35 +346,7 @@ namespace backend.Core.Services
                     };
                 }
             }
-            else if (User.IsInRole(StaticUserRoles.OWNER))
-            {
-                if (userRoles.Count > 0 && !userRoles[0].Equals(StaticUserRoles.OWNER))
-                {
-                    var DelUser = await _userManager.DeleteAsync(user);
-                    if (!DelUser.Succeeded)
-                    {
-                        var errorString = "User Deletion failed because: ";
-                        foreach (var error in DelUser.Errors)
-                        {
-                            errorString += " # " + error.Description;
-                        }
-                        return new GeneralServiceResponseDto()
-                        {
-                            IsSucceed = false,
-                            StatusCode = 400,
-                            Message = errorString
-                        };
-                    }
-                    await _logService.SaveNewLog(UserName, "Deleted from Website");
-
-                    return new GeneralServiceResponseDto()
-                    {
-                        IsSucceed = true,
-                        StatusCode = 201,
-                        Message = "User Deleted Successfully"
-                    };
-                }
-            }
+            
             return new GeneralServiceResponseDto()
             {
                 IsSucceed = false,

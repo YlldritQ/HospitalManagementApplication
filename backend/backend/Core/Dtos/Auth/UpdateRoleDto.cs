@@ -13,7 +13,9 @@ namespace backend.Core.Dtos.Auth
     public enum RoleType
     {
         ADMIN,
-        MANAGER,
+        DOCTOR,
+        NURSE,
+        PATIENT,
         USER
     }
 }
