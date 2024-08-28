@@ -36,6 +36,13 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IDoctorService, DoctorService>();
 builder.Services.AddScoped<INurseService, NurseService>();
 builder.Services.AddScoped<IPatientService, PatientService>();
+builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+builder.Services.AddScoped<IMedicalStaffService, MedicalStaffService>();
+builder.Services.AddScoped<IMedicalRecordService, MedicalRecordService>();
+builder.Services.AddScoped<IPrescriptionService, PrescriptionService>();
+builder.Services.AddScoped<IRoomService, RoomService>();
+builder.Services.AddScoped<IAppointmentService, AppointmentService>();
+
 
 //Add Identity
 builder.Services
