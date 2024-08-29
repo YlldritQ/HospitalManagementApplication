@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\backend",
+    "\\backend\\backend",
+    "\\backend\\backend\\Migrations",
+    "\\backend\\backend\\Properties"
+  ],
+  "SelectedNode": "\\backend\\backend\\Migrations\\20240823143859_AddDoctorEntity.Designer.cs",
+  "PreviewInSolutionExplorer": false
+}
