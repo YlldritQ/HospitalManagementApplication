@@ -43,7 +43,7 @@ namespace backend.Controllers
 
         // POST: api/doctor
         [HttpPost]
-        [Authorize(Roles = StaticUserRoles.Admin)]
+        [Authorize(Roles = StaticUserRoles.ADMIN)]
         public async Task<ActionResult<DoctorDto>> CreateDoctor([FromBody] DoctorDto doctorDto)
         {
             if (!ModelState.IsValid)
@@ -80,7 +80,7 @@ namespace backend.Controllers
 
         // DELETE: api/doctor/{id}
         [HttpDelete("{id}")]
-        [Authorize(Roles = StaticUserRoles.Admin)]
+        [Authorize(Roles = StaticUserRoles.ADMIN)]
         public async Task<IActionResult> DeleteDoctor(int id)
         {
             var doctor = await _doctorService.GetDoctorByIdAsync(id);

@@ -19,7 +19,7 @@ namespace backend.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = StaticUserRoles.OwnerAdmin)]
+        [Authorize(Roles = StaticUserRoles.ADMIN)]
         public async Task<ActionResult<IEnumerable<GetLogDto>>> GetLogs()
         {
             var logs = await _logService.GetLogsAsync();
