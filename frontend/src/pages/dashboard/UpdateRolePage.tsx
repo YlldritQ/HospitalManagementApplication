@@ -100,12 +100,7 @@ const UpdateRolePage = () => {
 
         <h4 className='text-xl font-bold'>New Role:</h4>
 
-        <select
-          id="role-select"
-          value={role}
-          className="w-80"
-          onChange={(e) => setRole(e.target.value)}
-        >
+        <select value={role} className='w-80' onChange={(e) => setRole(e.target.value)}>
           {allowedRolesForUpdateArray(loggedInUser).map((item) => (
             <option key={item} value={item}>
               {item}

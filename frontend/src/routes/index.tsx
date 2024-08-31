@@ -2,13 +2,8 @@ import { Suspense, lazy } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { PATH_DASHBOARD, PATH_PUBLIC } from "./paths";
 import AuthGuard from "../auth/AuthGuard";
-import {
-  allAccessRoles,
-  adminAccessRoles,
-} from "../auth/auth.utils";
+import { allAccessRoles, adminAccessRoles } from "../auth/auth.utils";
 import Layout from "../components/layout";
-
-//
 
 // Lazy load components
 const AdminPage = lazy(() => import("../pages/dashboard/AdminPage"));
@@ -16,10 +11,9 @@ const DashboardPage = lazy(() => import("../pages/dashboard/DashboardPage"));
 const MyLogsPage = lazy(() => import("../pages/dashboard/MyLogsPage"));
 const SystemLogsPage = lazy(() => import("../pages/dashboard/SystemLogsPage"));
 const UpdateRolePage = lazy(() => import("../pages/dashboard/UpdateRolePage"));
+const DoctorPage = lazy(() => import("../pages/dashboard/DoctorPage"));
 const UserPage = lazy(() => import("../pages/dashboard/UserPage"));
-const UsersManagementPage = lazy(
-  () => import("../pages/dashboard/UsersManagementPage")
-);
+const UsersManagementPage = lazy(() => import("../pages/dashboard/UsersManagementPage"));
 const HomePage = lazy(() => import("../pages/public/HomePage"));
 const LoginPage = lazy(() => import("../pages/public/LoginPage"));
 const NotFoundPage = lazy(() => import("../pages/public/NotFoundPage"));
@@ -64,7 +58,6 @@ const GlobalRouter = () => {
         />
 
         <Route element={<AuthGuard roles={allAccessRoles} />}>
-
           <Route
             path={PATH_DASHBOARD.dashboard}
             element={
@@ -89,12 +82,17 @@ const GlobalRouter = () => {
               </Suspense>
             }
           />
+          <Route
+            path={PATH_DASHBOARD.doctor}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <DoctorPage />
+              </Suspense>
+            }
+          />
         </Route>
 
-        
-
         <Route element={<AuthGuard roles={adminAccessRoles} />}>
-          
           <Route
             path={PATH_DASHBOARD.usersManagement}
             element={
@@ -128,6 +126,7 @@ const GlobalRouter = () => {
             }
           />
         </Route>
+
         <Route
           path={PATH_PUBLIC.notFound}
           element={

@@ -1,4 +1,5 @@
 import { CiLogin, CiUser } from "react-icons/ci";
+import { FaUserCog } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth.hook";
 import Button from "../general/Button";
 import { useNavigate } from "react-router-dom";
@@ -71,6 +72,13 @@ const Sidebar = () => {
         icon={
           <MdOutlineAdminPanelSettings className="w-5 h-5 text-white mr-2" />
         }
+      />
+      <Button
+        label="Doctor Page"
+        onClick={() => handleClick(PATH_DASHBOARD.doctor)}
+        type="button"
+        variant="secondary"
+        icon={<FaUserCog className="w-5 h-5 text-white mr-2" />}
       />
       <hr />
     </div>
