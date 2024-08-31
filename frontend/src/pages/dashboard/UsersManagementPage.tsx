@@ -5,10 +5,10 @@ import { IAuthUser } from "../../types/auth.types";
 
 import { toast } from "react-hot-toast";
 import Spinner from "../../components/general/Spinner";
-import UserCountSection from "./users-management/UserCountSection";
-import LatestUsersSection from "./users-management/LatestUsersSection";
-import UsersTableSection from "./users-management/UsersTableSection";
-import UserChartSection from "./users-management/UserChartSection";
+import LatestUsersSection from '../../components/dashboard/users-management/LatestUsersSection';
+import UserChartSection from '../../components/dashboard/users-management/UserChartSection';
+import UserCountSection from '../../components/dashboard/users-management/UserCountSection';
+import UsersTableSection from '../../components/dashboard/users-management/UsersTableSection';
 
 const UsersManagementPage = () => {
   const [users, setUsers] = useState<IAuthUser[]>([]);

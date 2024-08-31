@@ -12,6 +12,7 @@ interface IProps {
 const AuthGuard = ({ roles }: IProps) => {
   const { isAuthenticated, user, isAuthLoading } = useAuth();
  //access to the requested page?
+ console.log(roles);
   const hasAccess = isAuthenticated && user?.roles?.find((q) => roles.includes(q));
   if (isAuthLoading) {
     return <AuthSpinner />;

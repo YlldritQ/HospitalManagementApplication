@@ -1,5 +1,5 @@
 import { FaUser } from "react-icons/fa";
-import PageAccessTemplate from "./page-access/PageAccessTemplate";
+import PageAccessTemplate from '../../components/dashboard/page-access/PageAccessTemplate';
 
 const UserPage = () => {
   return (

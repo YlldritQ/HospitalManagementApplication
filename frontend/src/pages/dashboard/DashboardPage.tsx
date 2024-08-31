@@ -1,4 +1,4 @@
-import PageAccessTemplate from "./page-access/PageAccessTemplate";
+import PageAccessTemplate from '../../components/dashboard/page-access/PageAccessTemplate';
 import { BsGlobeAmericas } from "react-icons/bs";
 
 const DashboardPage = () => {

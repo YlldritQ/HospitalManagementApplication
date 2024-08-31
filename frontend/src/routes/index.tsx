@@ -93,7 +93,7 @@ const GlobalRouter = () => {
 
         
 
-        <Route element={<AuthGuard roles={allAccessRoles} />}>
+        <Route element={<AuthGuard roles={adminAccessRoles} />}>
           
           <Route
             path={PATH_DASHBOARD.usersManagement}
