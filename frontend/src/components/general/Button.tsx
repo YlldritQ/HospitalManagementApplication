@@ -8,6 +8,7 @@ interface IProps {
   loading?: boolean;
   disabled?: boolean;
   icon?: ReactNode;
+  className?: string;
 }
 
 const Button = ({
@@ -18,6 +19,7 @@ const Button = ({
   loading,
   disabled,
   icon,
+  tooltip,
 }: IProps) => {
   const primaryClasses =
     " text-white bg-[#754eb4] border-[#754eb4] hover:shadow-[0_0_5px_5px_#754eb44c]";
