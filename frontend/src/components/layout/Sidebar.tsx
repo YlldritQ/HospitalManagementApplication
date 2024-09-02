@@ -1,19 +1,10 @@
-import { CiLogin, CiUser } from "react-icons/ci";
-import { FaUserCog } from "react-icons/fa";
-import useAuth from "../../hooks/useAuth.hook";
-import Button from "../general/Button";
+import { CiUser } from "react-icons/ci";
+import { FaClipboardList, FaStethoscope, FaSyringe, FaUserInjured } from "react-icons/fa";
+import { MdAdminPanelSettings, MdOutlineMedicalServices } from "react-icons/md";
+import { TbMessages } from "react-icons/tb";
+import { AiOutlineCalendar } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import { PATH_DASHBOARD } from "../../routes/paths";
-import { TbLogs } from "react-icons/tb";
-import {
-  MdAdminPanelSettings,
-  MdOutlineAdminPanelSettings,
-  MdOutlineProductionQuantityLimits,
-} from "react-icons/md";
-import { GrBladesVertical, GrUserManager } from "react-icons/gr";
-import { FaTruckLoading, FaUserCheck } from "react-icons/fa";
-import { GiHeatHaze, GiMaterialsScience, GiMetalPlate } from "react-icons/gi";
-import { GoProjectRoadmap, GoProjectSymlink } from "react-icons/go";
+import useAuth from "../../hooks/useAuth.hook";
 
 const Sidebar = () => {
   const { user } = useAuth();
@@ -25,64 +16,86 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="shrink-0 bg-[#01204E] w-60 p-2 min-h-[calc(100vh-48px)] flex flex-col items-stretch gap-8">
-      <div className="self-center flex flex-col items-center">
-        <CiUser className="w-10 h-10 text-white" />
-        <h4 className="text-white">
-          {user?.firstName} {user?.lastName}
-        </h4>
+    <div className="bg-white shadow-lg w-64 p-6 min-h-screen">
+      <div className="flex items-center gap-4 p-4">
+        <CiUser className="w-10 h-10 text-blue-600" />
+        <div>
+          <h4 className="text-lg font-semibold text-gray-800">{user?.firstName} {user?.lastName}</h4>
+          <p className="text-sm text-gray-500">{user?.role}</p>
+        </div>
       </div>
 
-      <Button
-        label="Users Management"
-        onClick={() => handleClick(PATH_DASHBOARD.usersManagement)}
-        type="button"
-        variant="secondary"
-        icon={<CiUser className="w-5 h-5 text-white mr-2" />}
-      />
-      <Button
-        label="All Logs"
-        onClick={() => handleClick(PATH_DASHBOARD.systemLogs)}
-        type="button"
-        variant="secondary"
-        icon={<TbLogs className="w-5 h-5 text-white mr-2" />}
-      />
-      <Button
-        label="My Logs"
-        onClick={() => handleClick(PATH_DASHBOARD.myLogs)}
-        type="button"
-        variant="secondary"
-        icon={<CiLogin className="w-5 h-5 text-white mr-2" />}
-      />
-      <hr />
-      <Button
-        label="Admin Page"
-        onClick={() => handleClick(PATH_DASHBOARD.admin)}
-        type="button"
-        variant="secondary"
-        icon={
-          <MdOutlineAdminPanelSettings className="w-5 h-5 text-white mr-2" />
-        }
-      />
-      <Button
-        label="User Page"
-        onClick={() => handleClick(PATH_DASHBOARD.user)}
-        type="button"
-        variant="secondary"
-        icon={
-          <MdOutlineAdminPanelSettings className="w-5 h-5 text-white mr-2" />
-        }
-      />
-      <Button
-        label="Doctor Page"
-        onClick={() => handleClick(PATH_DASHBOARD.doctor)}
-        type="button"
-        variant="secondary"
-        icon={<FaUserCog className="w-5 h-5 text-white mr-2" />}
-      />
-      <hr />
+      <div className="mt-6">
+        <div className="text-xs text-gray-400 uppercase tracking-wider mb-4">Menu</div>
+        <div className="space-y-4">
+          <button 
+            onClick={() => handleClick('/dashboard/admin')} 
+            className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
+          >
+            <MdAdminPanelSettings className="text-blue-600 w-6 h-6" />
+            <span className="font-medium">Admin Dashboard</span>
+          </button>
+
+          <button 
+            onClick={() => handleClick('/user/appointments')} 
+            className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
+          >
+            <AiOutlineCalendar className="text-green-600 w-6 h-6" />
+            <span className="font-medium">Appointments</span>
+          </button>
+
+          <button 
+            onClick={() => handleClick('/user/medical-records')} 
+            className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
+          >
+            <MdOutlineMedicalServices className="text-orange-600 w-6 h-6" />
+            <span className="font-medium">Medical Records</span>
+          </button>
+
+          <button 
+            onClick={() => handleClick('/user/messages')} 
+            className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
+          >
+            <TbMessages className="text-purple-600 w-6 h-6" />
+            <span className="font-medium">Messages</span>
+          </button>
+
+          <button 
+            onClick={() => handleClick('/user/prescriptions')} 
+            className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
+          >
+            <FaClipboardList className="text-red-600 w-6 h-6" />
+            <span className="font-medium">Prescriptions</span>
+          </button>
+
+          <button 
+            onClick={() => handleClick('/dashboard/doctor')} 
+            className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
+          >
+            <FaStethoscope className="text-teal-600 w-6 h-6" />
+            <span className="font-medium">Doctor Dashboard</span>
+          </button>
+
+          <button 
+            onClick={() => handleClick('/dashboard/nurse')} 
+            className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
+          >
+            <FaSyringe className="text-teal-600 w-6 h-6" />
+            <span className="font-medium">Nurse Dashboard</span>
+          </button>
+
+          <button 
+            onClick={() => handleClick('/dashboard/user')} 
+            className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
+          >
+            <FaUserInjured className="text-teal-600 w-6 h-6" />
+            <span className="font-medium">User Dashboard</span>
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default Sidebar;
+

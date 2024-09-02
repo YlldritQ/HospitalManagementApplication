@@ -1,4 +1,3 @@
-import React from 'react';
 import PageAccessTemplate from '../../components/dashboard/page-access/PageAccessTemplate';
 import { FaUserCog, FaCalendarAlt, FaUsers, FaFileMedical } from 'react-icons/fa';
 import { MdNotifications } from 'react-icons/md';

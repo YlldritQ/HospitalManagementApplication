@@ -14,8 +14,9 @@ export const PATH_DASHBOARD = {
   myLogs: "/dashboard/my-logs",
   admin: "/dashboard/admin",
   user: "/dashboard/user",
-  patient: "/dashboard/patient",   // Added path for Patient Page
-  doctor: "/dashboard/doctor",     // Added path for Doctor Page
+  patient: "/dashboard/patient",   
+  doctor: "/dashboard/doctor",
+  doctorList: "/dashboard/doctor-list",     
   nurse: "/dashboard/nurse",
 };
 

@@ -12,6 +12,7 @@ const MyLogsPage = lazy(() => import("../pages/dashboard/MyLogsPage"));
 const SystemLogsPage = lazy(() => import("../pages/dashboard/SystemLogsPage"));
 const UpdateRolePage = lazy(() => import("../pages/dashboard/UpdateRolePage"));
 const DoctorPage = lazy(() => import("../pages/dashboard/DoctorPage"));
+const NursePage = lazy(() => import("../pages/dashboard/NursePage"));
 const UserPage = lazy(() => import("../pages/dashboard/UserPage"));
 const UsersManagementPage = lazy(() => import("../pages/dashboard/UsersManagementPage"));
 const HomePage = lazy(() => import("../pages/public/HomePage"));
@@ -57,6 +58,7 @@ const GlobalRouter = () => {
           }
         />
 
+        {/* Public Routes */}
         <Route element={<AuthGuard roles={allAccessRoles} />}>
           <Route
             path={PATH_DASHBOARD.dashboard}
@@ -90,8 +92,17 @@ const GlobalRouter = () => {
               </Suspense>
             }
           />
+          <Route
+            path={PATH_DASHBOARD.nurse}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <NursePage />
+              </Suspense>
+            }
+          />
         </Route>
 
+        {/* Admin Routes */}
         <Route element={<AuthGuard roles={adminAccessRoles} />}>
           <Route
             path={PATH_DASHBOARD.usersManagement}
