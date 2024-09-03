@@ -1,6 +1,16 @@
 ﻿using backend.Core.Entities;
 using AutoMapper;
-using backend.Core.Dtos.General;
+using backend.Core.Dtos.Doctor;
+using backend.Core.Dtos.DoctorRoom;
+using backend.Core.Dtos.Patient;
+using backend.Core.Dtos.Prescription;
+using backend.Core.Dtos.Nurse;
+using backend.Core.Dtos.Room;
+using backend.Core.Dtos.Records;
+using backend.Core.Dtos.Staff;
+using backend.Core.Dtos.ManyToMany;
+using backend.Core.Dtos.Appointment;
+using backend.Core.Dtos.Department;
 
 namespace backend.Core.AutoMapperConfig
 {
@@ -12,12 +22,21 @@ namespace backend.Core.AutoMapperConfig
             CreateMap<Appointment, AppointmentDto>();
             CreateMap<AppointmentDto, Appointment>();
 
+            CreateMap<Appointment, CUAppointmentDto>();
+            CreateMap<CUAppointmentDto, Appointment>();
+
             CreateMap<Department, DepartmentDto>();
             CreateMap<DepartmentDto, Department>();
+
+            CreateMap<Department, CreateDepartmentDto>();
+            CreateMap<CreateDepartmentDto, Department>();
 
             CreateMap<Doctor, DoctorDto>();
             CreateMap<DoctorDto, Doctor>();
 
+
+            CreateMap<Doctor, CUDoctorDto>();
+            CreateMap<CUDoctorDto, Doctor>();
 
             CreateMap<DoctorRoom, DoctorRoomDto>();
             CreateMap<DoctorRoomDto, DoctorRoom>();
@@ -27,12 +46,19 @@ namespace backend.Core.AutoMapperConfig
             CreateMap<MedicalRecordDto, MedicalRecord>()
                 .ForMember(dest => dest.Patient, opt => opt.MapFrom(src => src.Patient));
 
+            CreateMap<MedicalRecord, CUMedicalRecordDto>()
+                .ForMember(dest => dest.Patient, opt => opt.MapFrom(src => src.Patient));
+            CreateMap<CUMedicalRecordDto, MedicalRecord>()
+                .ForMember(dest => dest.Patient, opt => opt.MapFrom(src => src.Patient));
+
             CreateMap<MedicalStaff, MedicalStaffDto>();
             CreateMap<MedicalStaffDto, MedicalStaff>();
 
             CreateMap<Nurse, NurseDto>();
             CreateMap<NurseDto, Nurse>();
-
+            
+            CreateMap<Nurse, CUNurseDto>();
+            CreateMap<CUNurseDto, Nurse>();
 
             CreateMap<NurseRoom, NurseRoomDto>();
             CreateMap<NurseRoomDto, NurseRoom>();
@@ -40,11 +66,20 @@ namespace backend.Core.AutoMapperConfig
             CreateMap<Patient, PatientDto>();
             CreateMap<PatientDto, Patient>();
 
+            CreateMap<Patient, CUPatientDto>();
+            CreateMap<CUPatientDto, Patient>();
+
             CreateMap<Prescription, PrescriptionDto>();
             CreateMap<PrescriptionDto, Prescription>();
 
+            CreateMap<Prescription, CUPrescriptionDto>();
+            CreateMap<CUPrescriptionDto, Prescription>();
+
             CreateMap<Room, RoomDto>();
             CreateMap<RoomDto, Room>();
+
+            CreateMap<Room, CURoomDto>();
+            CreateMap<CURoomDto, Room>();
 
         }
     }

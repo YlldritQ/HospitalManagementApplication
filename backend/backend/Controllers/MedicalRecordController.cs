@@ -1,5 +1,5 @@
 ﻿using backend.Core.Constants;
-using backend.Core.Dtos.General;
+using backend.Core.Dtos.Records;
 using backend.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -40,20 +40,20 @@ namespace backend.Controllers
 
         // POST: api/medicalrecord
         [HttpPost]
-        public async Task<ActionResult<MedicalRecordDto>> CreateMedicalRecord([FromBody] MedicalRecordDto recordDto)
+        public async Task<ActionResult> CreateMedicalRecord([FromBody] CUMedicalRecordDto recordDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            await _medicalRecordService.CreateMedicalRecordAsync(recordDto);
-            return CreatedAtAction(nameof(GetMedicalRecordById), new { id = recordDto.Id }, recordDto);
+            var record = await _medicalRecordService.CreateMedicalRecordAsync(recordDto);
+            return Ok(record);
         }
 
         // PUT: api/medicalrecord/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateMedicalRecord(int id, [FromBody] MedicalRecordDto recordDto)
+        public async Task<IActionResult> UpdateMedicalRecord(int id, [FromBody] CUMedicalRecordDto recordDto)
         {
             if (!ModelState.IsValid)
             {

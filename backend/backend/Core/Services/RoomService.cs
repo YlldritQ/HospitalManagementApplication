@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using backend.Core.DbContext;
 using backend.Core.Dtos.General;
+using backend.Core.Dtos.Room;
 using backend.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,7 +38,7 @@ public class RoomService : IRoomService
         return _mapper.Map<IEnumerable<RoomDto>>(rooms);
     }
 
-    public async Task CreateRoomAsync(RoomDto roomDto)
+    public async Task<GeneralServiceResponseDto> CreateRoomAsync(CURoomDto roomDto)
     {
         var room = _mapper.Map<Room>(roomDto);
 
@@ -53,10 +54,15 @@ public class RoomService : IRoomService
         await _context.Rooms.AddAsync(room);
         await _context.SaveChangesAsync();
 
-        roomDto.Id = room.Id; // Update the DTO with the generated ID
+        return new GeneralServiceResponseDto()
+        {
+            IsSucceed = true,
+            StatusCode = 200,
+            Message = "Room Inserted"
+        };
     }
 
-    public async Task UpdateRoomAsync(int roomId, RoomDto roomDto)
+    public async Task UpdateRoomAsync(int roomId, CURoomDto roomDto)
     {
         var room = await _context.Rooms.FirstOrDefaultAsync(r => r.Id == roomId);
 

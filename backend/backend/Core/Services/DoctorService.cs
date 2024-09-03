@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using backend.Core.DbContext;
+using backend.Core.Dtos.Doctor;
 using backend.Core.Dtos.General;
 using backend.Core.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -41,7 +42,7 @@ public class DoctorService : IDoctorService
         return _mapper.Map<IEnumerable<DoctorDto>>(doctors);
     }
 
-    public async Task CreateDoctorAsync(DoctorDto doctorDto)
+    public async Task<GeneralServiceResponseDto> CreateDoctorAsync(CUDoctorDto doctorDto)
     {
         var doctor = _mapper.Map<Doctor>(doctorDto);
 
@@ -49,7 +50,10 @@ public class DoctorService : IDoctorService
         var department = await _context.Departments.FindAsync(doctorDto.DepartmentId);
         if (department == null)
         {
-            throw new ArgumentException($"Department with ID {doctorDto.DepartmentId} not found.");
+            return new GeneralServiceResponseDto() {
+                IsSucceed = false ,
+                StatusCode = 400,
+                Message = " Given Department Doesn't exist"};
         }
 
         doctor.Department = department;
@@ -57,11 +61,16 @@ public class DoctorService : IDoctorService
         // Save the doctor entity first
         await _context.Doctors.AddAsync(doctor);
         await _context.SaveChangesAsync();
+        return new GeneralServiceResponseDto()
+        {
+            IsSucceed = true,
+            StatusCode = 201,
+            Message = " Success"
+        };
 
-        doctorDto.Id = doctor.Id;
     }
 
-    public async Task UpdateDoctorAsync(int doctorId, DoctorDto doctorDto)
+    public async Task UpdateDoctorAsync(int doctorId, CUDoctorDto doctorDto)
     {
         var doctor = await _context.Doctors
             .Include(d => d.DoctorRooms)

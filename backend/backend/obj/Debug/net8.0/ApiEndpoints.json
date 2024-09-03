@@ -9,21 +9,11 @@
     "Parameters": [
       {
         "Name": "appointmentDto",
-        "Type": "AppointmentDto",
+        "Type": "backend.Core.Dtos.Appointment.CUAppointmentDto",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "AppointmentDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "backend.Controllers.AppointmentController",
@@ -41,7 +31,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "AppointmentDto",
+        "Type": "backend.Core.Dtos.Appointment.AppointmentDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -66,7 +56,7 @@
       },
       {
         "Name": "appointmentDto",
-        "Type": "AppointmentDto",
+        "Type": "backend.Core.Dtos.Appointment.CUAppointmentDto",
         "IsRequired": true
       }
     ],
@@ -98,7 +88,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[AppointmentDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[backend.Core.Dtos.Appointment.AppointmentDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -298,7 +288,7 @@
     "Parameters": [
       {
         "Name": "departmentDto",
-        "Type": "DepartmentDto",
+        "Type": "backend.Core.Dtos.Department.CreateDepartmentDto",
         "IsRequired": true
       }
     ],
@@ -513,7 +503,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[backend.Core.Dtos.General.DoctorDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[backend.Core.Dtos.Doctor.DoctorDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -533,21 +523,11 @@
     "Parameters": [
       {
         "Name": "doctorDto",
-        "Type": "backend.Core.Dtos.General.DoctorDto",
+        "Type": "backend.Core.Dtos.Doctor.CUDoctorDto",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "backend.Core.Dtos.General.DoctorDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "backend.Controllers.DoctorController",
@@ -564,7 +544,7 @@
       },
       {
         "Name": "doctorRoomDto",
-        "Type": "backend.Core.Dtos.General.DoctorRoomManagementDto",
+        "Type": "backend.Core.Dtos.Doctor.DoctorRoomManagementDto",
         "IsRequired": true
       }
     ],
@@ -585,7 +565,7 @@
       },
       {
         "Name": "doctorRoomDto",
-        "Type": "backend.Core.Dtos.General.DoctorRoomManagementDto",
+        "Type": "backend.Core.Dtos.Doctor.DoctorRoomManagementDto",
         "IsRequired": true
       }
     ],
@@ -607,7 +587,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "backend.Core.Dtos.General.DoctorDto",
+        "Type": "backend.Core.Dtos.Doctor.DoctorDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -632,7 +612,7 @@
       },
       {
         "Name": "doctorDto",
-        "Type": "backend.Core.Dtos.General.DoctorDto",
+        "Type": "backend.Core.Dtos.Doctor.CUDoctorDto",
         "IsRequired": true
       }
     ],
@@ -704,7 +684,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[backend.Core.Dtos.General.MedicalRecordDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[backend.Core.Dtos.Records.MedicalRecordDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -724,21 +704,11 @@
     "Parameters": [
       {
         "Name": "recordDto",
-        "Type": "backend.Core.Dtos.General.MedicalRecordDto",
+        "Type": "backend.Core.Dtos.Records.CUMedicalRecordDto",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "backend.Core.Dtos.General.MedicalRecordDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "backend.Controllers.MedicalRecordController",
@@ -756,7 +726,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "backend.Core.Dtos.General.MedicalRecordDto",
+        "Type": "backend.Core.Dtos.Records.MedicalRecordDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -781,7 +751,7 @@
       },
       {
         "Name": "recordDto",
-        "Type": "backend.Core.Dtos.General.MedicalRecordDto",
+        "Type": "backend.Core.Dtos.Records.CUMedicalRecordDto",
         "IsRequired": true
       }
     ],
@@ -813,7 +783,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[backend.Core.Dtos.General.MedicalStaffDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[backend.Core.Dtos.Staff.MedicalStaffDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -839,7 +809,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "backend.Core.Dtos.General.MedicalStaffDto",
+        "Type": "backend.Core.Dtos.Staff.MedicalStaffDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -864,7 +834,7 @@
       },
       {
         "Name": "staffDto",
-        "Type": "backend.Core.Dtos.General.MedicalStaffDto",
+        "Type": "backend.Core.Dtos.Staff.MedicalStaffDto",
         "IsRequired": true
       }
     ],
@@ -880,7 +850,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[backend.Core.Dtos.General.NurseDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[backend.Core.Dtos.Nurse.NurseDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -900,21 +870,11 @@
     "Parameters": [
       {
         "Name": "nurseDto",
-        "Type": "backend.Core.Dtos.General.NurseDto",
+        "Type": "backend.Core.Dtos.Nurse.CUNurseDto",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "backend.Core.Dtos.General.NurseDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "backend.Controllers.NurseController",
@@ -932,7 +892,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "backend.Core.Dtos.General.NurseDto",
+        "Type": "backend.Core.Dtos.Nurse.NurseDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -957,7 +917,7 @@
       },
       {
         "Name": "nurseDto",
-        "Type": "backend.Core.Dtos.General.NurseDto",
+        "Type": "backend.Core.Dtos.Nurse.CUNurseDto",
         "IsRequired": true
       }
     ],
@@ -994,7 +954,7 @@
       },
       {
         "Name": "assignmentDto",
-        "Type": "backend.Core.Dtos.General.NurseRoomAssignmentDto",
+        "Type": "backend.Core.Dtos.Nurse.NurseRoomAssignmentDto",
         "IsRequired": true
       }
     ],
@@ -1026,7 +986,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[backend.Core.Dtos.General.PatientDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[backend.Core.Dtos.Patient.PatientDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1046,21 +1006,11 @@
     "Parameters": [
       {
         "Name": "patientDto",
-        "Type": "backend.Core.Dtos.General.PatientDto",
+        "Type": "backend.Core.Dtos.Patient.CUPatientDto",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "backend.Core.Dtos.General.PatientDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "backend.Controllers.PatientController",
@@ -1078,7 +1028,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "backend.Core.Dtos.General.PatientDto",
+        "Type": "backend.Core.Dtos.Patient.PatientDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1103,7 +1053,7 @@
       },
       {
         "Name": "patientDto",
-        "Type": "backend.Core.Dtos.General.PatientDto",
+        "Type": "backend.Core.Dtos.Patient.CUPatientDto",
         "IsRequired": true
       }
     ],
@@ -1135,7 +1085,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[backend.Core.Dtos.General.PrescriptionDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[backend.Core.Dtos.Prescription.PrescriptionDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1155,21 +1105,11 @@
     "Parameters": [
       {
         "Name": "prescriptionDto",
-        "Type": "backend.Core.Dtos.General.PrescriptionDto",
+        "Type": "backend.Core.Dtos.Prescription.CUPrescriptionDto",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "backend.Core.Dtos.General.PrescriptionDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "backend.Controllers.PrescriptionController",
@@ -1187,7 +1127,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "backend.Core.Dtos.General.PrescriptionDto",
+        "Type": "backend.Core.Dtos.Prescription.PrescriptionDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1212,7 +1152,7 @@
       },
       {
         "Name": "prescriptionDto",
-        "Type": "backend.Core.Dtos.General.PrescriptionDto",
+        "Type": "backend.Core.Dtos.Prescription.CUPrescriptionDto",
         "IsRequired": true
       }
     ],
@@ -1244,7 +1184,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[backend.Core.Dtos.General.RoomDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[backend.Core.Dtos.Room.RoomDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1264,21 +1204,11 @@
     "Parameters": [
       {
         "Name": "roomDto",
-        "Type": "backend.Core.Dtos.General.RoomDto",
+        "Type": "backend.Core.Dtos.Room.CURoomDto",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "backend.Core.Dtos.General.RoomDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "backend.Controllers.RoomController",
@@ -1296,7 +1226,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "backend.Core.Dtos.General.RoomDto",
+        "Type": "backend.Core.Dtos.Room.RoomDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1321,7 +1251,7 @@
       },
       {
         "Name": "roomDto",
-        "Type": "backend.Core.Dtos.General.RoomDto",
+        "Type": "backend.Core.Dtos.Room.CURoomDto",
         "IsRequired": true
       }
     ],

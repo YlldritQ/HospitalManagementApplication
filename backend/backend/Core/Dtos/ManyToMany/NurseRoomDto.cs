@@ -1,4 +1,4 @@
-﻿namespace backend.Core.Dtos.General
+﻿namespace backend.Core.Dtos.ManyToMany
 {
     public class NurseRoomDto
     {

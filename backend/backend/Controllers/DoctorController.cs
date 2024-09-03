@@ -1,10 +1,10 @@
-﻿using backend.Core.Dtos.General;
-using backend.Core.Interfaces;
+﻿using backend.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using backend.Core.Constants;
+using backend.Core.Dtos.Doctor;
 
 namespace backend.Controllers
 {
@@ -44,23 +44,23 @@ namespace backend.Controllers
         // POST: api/doctor
         [HttpPost]
         [Authorize(Roles = StaticUserRoles.ADMIN)]
-        public async Task<ActionResult<DoctorDto>> CreateDoctor([FromBody] DoctorDto doctorDto)
+        public async Task<ActionResult> CreateDoctor([FromBody] CUDoctorDto doctorDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            await _doctorService.CreateDoctorAsync(doctorDto);
+            var res = await _doctorService.CreateDoctorAsync(doctorDto);
 
             // Return the created doctor, with a 201 Created status and a location header
-            return CreatedAtAction(nameof(GetDoctorById), new { id = doctorDto.Id }, doctorDto);
+            return Ok(res);
         }
 
         // PUT: api/doctor/{id}
         [HttpPut("{id}")]
         [Authorize(Roles = StaticUserRoles.AdminDoctor)]
-        public async Task<IActionResult> UpdateDoctor(int id, [FromBody] DoctorDto doctorDto)
+        public async Task<IActionResult> UpdateDoctor(int id, [FromBody] CUDoctorDto doctorDto)
         {
             if (!ModelState.IsValid)
             {

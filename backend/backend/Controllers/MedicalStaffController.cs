@@ -1,4 +1,4 @@
-﻿using backend.Core.Dtos.General;
+﻿using backend.Core.Dtos.Staff;
 using backend.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

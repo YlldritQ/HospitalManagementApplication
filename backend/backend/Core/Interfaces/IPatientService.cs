@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using backend.Core.Dtos.General;
+using backend.Core.Dtos.Patient;
 
 namespace backend.Core.Interfaces
 {
@@ -8,8 +9,8 @@ namespace backend.Core.Interfaces
     {
         Task<PatientDto> GetPatientByIdAsync(int patientId);
         Task<IEnumerable<PatientDto>> GetAllPatientsAsync();
-        Task<PatientDto> CreatePatientAsync(PatientDto patientDto);
-        Task UpdatePatientAsync(int patientId, PatientDto patientDto);
+        Task<GeneralServiceResponseDto> CreatePatientAsync(CUPatientDto patientDto);
+        Task UpdatePatientAsync(int patientId, CUPatientDto patientDto);
         Task DeletePatientAsync(int patientId);
     }
 }

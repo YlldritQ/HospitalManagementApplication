@@ -1,7 +1,7 @@
 ﻿using backend.Core.Entities;
 using System;
 
-namespace backend.Core.Dtos.General
+namespace backend.Core.Dtos.Room
 {
     public class RoomDto
     {

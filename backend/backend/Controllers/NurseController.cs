@@ -1,8 +1,8 @@
-﻿using backend.Core.Dtos.General;
-using backend.Core.Interfaces;
+﻿using backend.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using backend.Core.Dtos.Nurse;
 
 namespace backend.Controllers
 {
@@ -39,22 +39,22 @@ namespace backend.Controllers
 
         // POST: api/nurse
         [HttpPost]
-        public async Task<ActionResult<NurseDto>> CreateNurse([FromBody] NurseDto nurseDto)
+        public async Task<ActionResult> CreateNurse([FromBody] CUNurseDto nurseDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            await _nurseService.CreateNurseAsync(nurseDto);
+            var res = await _nurseService.CreateNurseAsync(nurseDto);
 
             // Return the created nurse, with a 201 Created status and a location header
-            return CreatedAtAction(nameof(GetNurseById), new { id = nurseDto.Id }, nurseDto);
+            return Ok(res);
         }
 
         // PUT: api/nurse/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateNurse(int id, [FromBody] NurseDto nurseDto)
+        public async Task<IActionResult> UpdateNurse(int id, [FromBody] CUNurseDto nurseDto)
         {
             if (!ModelState.IsValid)
             {

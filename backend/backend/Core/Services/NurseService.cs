@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using backend.Core.DbContext;
 using backend.Core.Dtos.General;
+using backend.Core.Dtos.Nurse;
 using backend.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,7 +42,7 @@ public class NurseService : INurseService
         return _mapper.Map<IEnumerable<NurseDto>>(nurses);
     }
 
-    public async Task CreateNurseAsync(NurseDto nurseDto)
+    public async Task<GeneralServiceResponseDto> CreateNurseAsync(CUNurseDto nurseDto)
     {
         var nurse = _mapper.Map<Nurse>(nurseDto);
 
@@ -56,11 +57,15 @@ public class NurseService : INurseService
 
         await _context.Nurses.AddAsync(nurse);
         await _context.SaveChangesAsync();
-
-        nurseDto.Id = nurse.Id;
+        return new GeneralServiceResponseDto()
+        {
+            IsSucceed = true,
+            StatusCode = 200,
+            Message = "Nurse created successfully"
+        };
     }
 
-    public async Task UpdateNurseAsync(int nurseId, NurseDto nurseDto)
+    public async Task UpdateNurseAsync(int nurseId, CUNurseDto nurseDto)
     {
         var nurse = await _context.Nurses
             .FirstOrDefaultAsync(n => n.Id == nurseId);

@@ -1,4 +1,4 @@
-﻿using backend.Core.Dtos.General;
+﻿using backend.Core.Dtos.Prescription;
 using backend.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,22 +37,21 @@ namespace backend.Controllers
 
         // POST: api/prescription
         [HttpPost]
-        public async Task<ActionResult<PrescriptionDto>> CreatePrescription([FromBody] PrescriptionDto prescriptionDto)
+        public async Task<ActionResult> CreatePrescription([FromBody] CUPrescriptionDto prescriptionDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            await _prescriptionService.CreatePrescriptionAsync(prescriptionDto);
+            var response = await _prescriptionService.CreatePrescriptionAsync(prescriptionDto);
 
-            // Return the created prescription, with a 201 Created status and a location header
-            return CreatedAtAction(nameof(GetPrescriptionById), new { id = prescriptionDto.Id }, prescriptionDto);
+            return Ok(response);
         }
 
         // PUT: api/prescription/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePrescription(int id, [FromBody] PrescriptionDto prescriptionDto)
+        public async Task<IActionResult> UpdatePrescription(int id, [FromBody] CUPrescriptionDto prescriptionDto)
         {
             if (!ModelState.IsValid)
             {

@@ -1,4 +1,5 @@
 ﻿using backend.Core.Constants;
+using backend.Core.Dtos.Appointment;
 using backend.Core.Dtos.General;
 using backend.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -40,20 +41,20 @@ namespace backend.Controllers
 
         // POST: api/appointment
         [HttpPost]
-        public async Task<ActionResult<AppointmentDto>> CreateAppointment([FromBody] AppointmentDto appointmentDto)
+        public async Task<ActionResult> CreateAppointment([FromBody] CUAppointmentDto appointmentDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            await _appointmentService.CreateAppointmentAsync(appointmentDto);
-            return CreatedAtAction(nameof(GetAppointmentById), new { id = appointmentDto.Id }, appointmentDto);
+            var res = await _appointmentService.CreateAppointmentAsync(appointmentDto);
+            return Ok(res);
         }
 
         // PUT: api/appointment/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAppointment(int id, [FromBody] AppointmentDto appointmentDto)
+        public async Task<IActionResult> UpdateAppointment(int id, [FromBody] CUAppointmentDto appointmentDto)
         {
             if (!ModelState.IsValid)
             {

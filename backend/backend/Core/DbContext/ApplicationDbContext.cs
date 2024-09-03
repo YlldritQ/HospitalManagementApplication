@@ -76,13 +76,15 @@ namespace backend.Core.DbContext
             builder.Entity<Doctor>()
                 .HasOne(d => d.Department)
                 .WithMany(dept => dept.Doctors)
-                .HasForeignKey(d => d.DepartmentId);
+                .HasForeignKey(d => d.DepartmentId)
+                .IsRequired(false);
 
             // Department - Nurse (One-to-Many)
             builder.Entity<Nurse>()
                 .HasOne(n => n.Department)
                 .WithMany(dept => dept.Nurses)
-                .HasForeignKey(n => n.DepartmentId);
+                .HasForeignKey(n => n.DepartmentId)
+                .IsRequired(false);
 
             // Doctor - Appointment (One-to-Many)
             builder.Entity<Appointment>()
@@ -125,7 +127,8 @@ namespace backend.Core.DbContext
             builder.Entity<Room>()
                 .HasOne(r => r.Department)
                 .WithMany(d => d.Rooms)
-                .HasForeignKey(r => r.DepartmentId);
+                .HasForeignKey(r => r.DepartmentId)
+                .IsRequired(false);
 
             // Many-to-Many relationships (Doctor - Room, Nurse - Room)
             builder.Entity<DoctorRoom>()

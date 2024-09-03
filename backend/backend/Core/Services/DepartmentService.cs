@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
 using backend.Core.DbContext;
+using backend.Core.Dtos.Department;
 using backend.Core.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 public class DepartmentService : IDepartmentService
 {
@@ -44,7 +41,7 @@ public class DepartmentService : IDepartmentService
         return _mapper.Map<IEnumerable<DepartmentDto>>(departments);
     }
 
-    public async Task CreateDepartmentAsync(DepartmentDto departmentDto)
+    public async Task<int> CreateDepartmentAsync(CreateDepartmentDto departmentDto)
     {
         ValidateDepartmentDto(departmentDto);
 
@@ -52,8 +49,7 @@ public class DepartmentService : IDepartmentService
 
         await _context.Departments.AddAsync(department);
         await _context.SaveChangesAsync();
-
-        departmentDto.Id = department.Id;
+        return department.Id;
     }
 
     public async Task UpdateDepartmentAsync(int departmentId, DepartmentDto departmentDto)
@@ -208,6 +204,13 @@ public class DepartmentService : IDepartmentService
     }
 
     private void ValidateDepartmentDto(DepartmentDto departmentDto)
+    {
+        if (string.IsNullOrWhiteSpace(departmentDto.Name))
+        {
+            throw new ArgumentException("Department name is required.");
+        }
+    }
+    private void ValidateDepartmentDto(CreateDepartmentDto departmentDto)
     {
         if (string.IsNullOrWhiteSpace(departmentDto.Name))
         {

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using backend.Core.DbContext;
 using backend.Core.Dtos.General;
+using backend.Core.Dtos.Patient;
 using backend.Core.Entities;
 using backend.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -41,7 +42,7 @@ namespace backend.Core.Services
             return _mapper.Map<IEnumerable<PatientDto>>(patients);
         }
 
-        public async Task<PatientDto> CreatePatientAsync(PatientDto patientDto)
+        public async Task<GeneralServiceResponseDto> CreatePatientAsync(CUPatientDto patientDto)
         {
             ValidatePatientDto(patientDto);
 
@@ -50,11 +51,14 @@ namespace backend.Core.Services
             await _context.Patients.AddAsync(patient);
             await _context.SaveChangesAsync();
 
-            patientDto.PatientId = patient.PatientId;
-            return patientDto;
+            return new GeneralServiceResponseDto() { 
+                IsSucceed = true,
+                StatusCode = 201,
+                Message = " Patient inserted succesfully"
+            };
         }
 
-        public async Task UpdatePatientAsync(int patientId, PatientDto patientDto)
+        public async Task UpdatePatientAsync(int patientId, CUPatientDto patientDto)
         {
             await ValidatePatientExistsAsync(patientId);
 
@@ -90,6 +94,23 @@ namespace backend.Core.Services
         }
 
         private void ValidatePatientDto(PatientDto patientDto)
+        {
+            if (string.IsNullOrWhiteSpace(patientDto.FirstName))
+            {
+                throw new ArgumentException("First name is required.");
+            }
+
+            if (string.IsNullOrWhiteSpace(patientDto.LastName))
+            {
+                throw new ArgumentException("Last name is required.");
+            }
+
+            if (patientDto.DateOfBirth == default)
+            {
+                throw new ArgumentException("Date of birth is required.");
+            }
+        }
+        private void ValidatePatientDto(CUPatientDto patientDto)
         {
             if (string.IsNullOrWhiteSpace(patientDto.FirstName))
             {

@@ -1,5 +1,5 @@
 ﻿using backend.Core.Constants;
-using backend.Core.Dtos.General;
+using backend.Core.Dtos.Department;
 using backend.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -42,18 +42,25 @@ namespace backend.Controllers
         // POST: api/department
         [HttpPost]
         [Authorize(Roles = StaticUserRoles.ADMIN)]
-        public async Task<ActionResult<DepartmentDto>> CreateDepartment([FromBody] DepartmentDto departmentDto)
+        public async Task<ActionResult<DepartmentDto>> CreateDepartment([FromBody] CreateDepartmentDto departmentDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            await _departmentService.CreateDepartmentAsync(departmentDto);
+            // Create the department and get the newly created entity with its ID
+            var createdDepartmentId = await _departmentService.CreateDepartmentAsync(departmentDto);
+
+            if (createdDepartmentId <= 0)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error creating department");
+            }
 
             // Return the created department, with a 201 Created status and a location header
-            return CreatedAtAction(nameof(GetDepartmentById), new { id = departmentDto.Id }, departmentDto);
+            return CreatedAtAction(nameof(GetDepartmentById), new { id = createdDepartmentId }, departmentDto);
         }
+
 
         // PUT: api/department/{id}
         [HttpPut("{id}")]
@@ -85,7 +92,7 @@ namespace backend.Controllers
             if (department == null)
             {
                 return NotFound();
-            }
+            }   
 
             await _departmentService.DeleteDepartmentAsync(id);
 

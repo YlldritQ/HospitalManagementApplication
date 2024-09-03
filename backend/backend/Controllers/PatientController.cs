@@ -1,4 +1,4 @@
-﻿using backend.Core.Dtos.General;
+﻿using backend.Core.Dtos.Patient;
 using backend.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,22 +37,21 @@ namespace backend.Controllers
 
         // POST: api/patient
         [HttpPost]
-        public async Task<ActionResult<PatientDto>> CreatePatient([FromBody] PatientDto patientDto)
+        public async Task<ActionResult> CreatePatient([FromBody] CUPatientDto patientDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var createdPatient = await _patientService.CreatePatientAsync(patientDto);
+            var response = await _patientService.CreatePatientAsync(patientDto);
 
-            // Return the created patient, with a 201 Created status and a location header
-            return CreatedAtAction(nameof(GetPatientById), new { id = createdPatient.PatientId }, createdPatient);
+            return Ok(response);
         }
 
         // PUT: api/patient/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePatient(int id, [FromBody] PatientDto patientDto)
+        public async Task<IActionResult> UpdatePatient(int id, [FromBody] CUPatientDto patientDto)
         {
             if (!ModelState.IsValid)
             {

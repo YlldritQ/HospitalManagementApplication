@@ -1,6 +1,6 @@
 ﻿using backend.Core.Entities;
 
-namespace backend.Core.Dtos.General
+namespace backend.Core.Dtos.Patient
 {
     public class PatientDto
     {

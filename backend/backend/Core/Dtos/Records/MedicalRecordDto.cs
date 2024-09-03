@@ -1,6 +1,7 @@
-﻿using backend.Core.Entities;
+﻿using backend.Core.Dtos.Patient;
+using backend.Core.Entities;
 
-namespace backend.Core.Dtos.General
+namespace backend.Core.Dtos.Records
 {
     public class MedicalRecordDto
     {

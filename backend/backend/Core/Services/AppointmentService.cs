@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using backend.Core.DbContext;
 using Microsoft.EntityFrameworkCore;
+using backend.Core.Dtos.Appointment;
+using backend.Core.Dtos.General;
 
 namespace backend.Core.Services
 {
@@ -44,7 +46,7 @@ namespace backend.Core.Services
             return _mapper.Map<IEnumerable<AppointmentDto>>(appointments);
         }
 
-        public async Task CreateAppointmentAsync(AppointmentDto appointmentDto)
+        public async Task<GeneralServiceResponseDto> CreateAppointmentAsync(CUAppointmentDto appointmentDto)
         {
             // Validate appointment date
             if (appointmentDto.AppointmentDate < DateTime.UtcNow)
@@ -80,10 +82,14 @@ namespace backend.Core.Services
             await _context.Appointments.AddAsync(appointment);
             await _context.SaveChangesAsync();
 
-            appointmentDto.Id = appointment.Id;
+            return new GeneralServiceResponseDto() { 
+                IsSucceed= true,
+                StatusCode= 201,
+                Message = " Creation succes"
+            };
         }
 
-        public async Task UpdateAppointmentAsync(int appointmentId, AppointmentDto appointmentDto)
+        public async Task<GeneralServiceResponseDto> UpdateAppointmentAsync(int appointmentId, CUAppointmentDto appointmentDto)
         {
             var appointment = await _context.Appointments
                 .Include(a => a.Patient)
@@ -93,7 +99,7 @@ namespace backend.Core.Services
 
             if (appointment == null)
             {
-                throw new ArgumentException($"Appointment with ID {appointmentId} not found.");
+                return new GeneralServiceResponseDto() { IsSucceed = false , StatusCode = 400, };
             }
 
             // Validate appointment date
@@ -128,6 +134,11 @@ namespace backend.Core.Services
             appointment.Room = room;
 
             await _context.SaveChangesAsync();
+            return new GeneralServiceResponseDto() { 
+                IsSucceed = true,
+                StatusCode = 201,
+                Message = "Update saved"
+            };
         }
 
         public async Task DeleteAppointmentAsync(int appointmentId)

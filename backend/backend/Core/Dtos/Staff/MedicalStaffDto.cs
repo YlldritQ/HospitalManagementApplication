@@ -1,8 +1,6 @@
-﻿using backend.Core.Entities;
-
-namespace backend.Core.Dtos.General
+﻿namespace backend.Core.Dtos.Staff
 {
-    public class DoctorDto
+    public class MedicalStaffDto
     {
         public int Id { get; set; }
         public string FirstName { get; set; } = null!;
@@ -11,9 +9,5 @@ namespace backend.Core.Dtos.General
         public string ContactInfo { get; set; } = null!;
         public DateTime DateOfBirth { get; set; }
         public DateTime DateHired { get; set; }
-        public string Specialty { get; set; } = null!;
-        public string Qualifications { get; set; } = null!;
-        public bool IsAvailable { get; set; }
-        public int DepartmentId { get; set; }
     }
 }

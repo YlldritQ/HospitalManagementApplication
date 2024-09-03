@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using backend.Core.DbContext;
-using backend.Core.Dtos.General;
+using backend.Core.Dtos.Staff;
 using backend.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 

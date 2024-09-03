@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using backend.Core.DbContext;
 using backend.Core.Dtos.General;
+using backend.Core.Dtos.Prescription;
 using backend.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -50,7 +51,7 @@ public class PrescriptionService : IPrescriptionService
         }).ToList();
     }
 
-    public async Task CreatePrescriptionAsync(PrescriptionDto prescriptionDto)
+    public async Task<GeneralServiceResponseDto> CreatePrescriptionAsync(CUPrescriptionDto prescriptionDto)
     {
         await ValidatePatientAndDoctorExistsAsync(prescriptionDto.PatientId, prescriptionDto.DoctorId);
 
@@ -59,10 +60,15 @@ public class PrescriptionService : IPrescriptionService
         await _context.Prescriptions.AddAsync(prescription);
         await _context.SaveChangesAsync();
 
-        prescriptionDto.Id = prescription.Id;
+        return new GeneralServiceResponseDto()
+        {
+            IsSucceed = true,
+            StatusCode = 201,
+            Message = "Perscription added Succesfully"
+        };
     }
 
-    public async Task UpdatePrescriptionAsync(int prescriptionId, PrescriptionDto prescriptionDto)
+    public async Task UpdatePrescriptionAsync(int prescriptionId, CUPrescriptionDto prescriptionDto)
     {
         var existingPrescription = await _context.Prescriptions
             .Include(p => p.Patient)

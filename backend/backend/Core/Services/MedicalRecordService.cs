@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using backend.Core.DbContext;
 using backend.Core.Dtos.General;
+using backend.Core.Dtos.Records;
 using backend.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -42,7 +43,7 @@ namespace backend.Core.Services
             return _mapper.Map<IEnumerable<MedicalRecordDto>>(records);
         }
 
-        public async Task CreateMedicalRecordAsync(MedicalRecordDto recordDto)
+        public async Task<GeneralServiceResponseDto> CreateMedicalRecordAsync(CUMedicalRecordDto recordDto)
         {
             // Validate that the patient exists
             await ValidatePatientExistsAsync(recordDto.PatientId);
@@ -51,11 +52,15 @@ namespace backend.Core.Services
 
             await _context.MedicalRecords.AddAsync(record);
             await _context.SaveChangesAsync();
-
-            recordDto.Id = record.Id;
+            return new GeneralServiceResponseDto()
+            {
+                IsSucceed = true,
+                StatusCode = 200,
+                Message = "MedicalRecord Inserted"
+            };
         }
 
-        public async Task UpdateMedicalRecordAsync(int recordId, MedicalRecordDto recordDto)
+        public async Task UpdateMedicalRecordAsync(int recordId, CUMedicalRecordDto recordDto)
         {
             var record = await _context.MedicalRecords
                 .Include(r => r.Patient) // Include patient for validation
