@@ -10,6 +10,6 @@ namespace backend.Core.Entities
         public string RecordDetails { get; set; } = null!;
 
         // Navigation property
-        public Patient Patient { get; set; } = null!;
+        public virtual Patient Patient { get; set; } = null!;
     }
 }

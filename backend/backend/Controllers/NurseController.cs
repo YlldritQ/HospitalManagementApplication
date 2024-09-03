@@ -1,6 +1,8 @@
 ﻿using backend.Core.Dtos.General;
 using backend.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace backend.Controllers
 {
@@ -83,6 +85,46 @@ namespace backend.Controllers
             await _nurseService.DeleteNurseAsync(id);
 
             return NoContent(); // 204 No Content
+        }
+
+        // POST: api/nurse/{nurseId}/rooms
+        [HttpPost("{nurseId}/rooms")]
+        public async Task<IActionResult> AssignRoomsToNurse(int nurseId, [FromBody] NurseRoomAssignmentDto assignmentDto)
+        {
+            if (!ModelState.IsValid || assignmentDto.NurseId != nurseId)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                await _nurseService.AssignRoomsToNurseAsync(assignmentDto);
+                return NoContent(); // 204 No Content
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        // DELETE: api/nurse/{nurseId}/rooms
+        [HttpDelete("{nurseId}/rooms")]
+        public async Task<IActionResult> RemoveRoomsFromNurse(int nurseId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                await _nurseService.RemoveRoomsFromNurseAsync(nurseId);
+                return NoContent(); // 204 No Content
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

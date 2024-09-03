@@ -9,4 +9,6 @@ public interface INurseService
     Task CreateNurseAsync(NurseDto nurseDto);
     Task UpdateNurseAsync(int nurseId, NurseDto nurseDto);
     Task DeleteNurseAsync(int nurseId);
+    Task AssignRoomsToNurseAsync(NurseRoomAssignmentDto assignmentDto);
+    Task RemoveRoomsFromNurseAsync(int nurseId);
 }

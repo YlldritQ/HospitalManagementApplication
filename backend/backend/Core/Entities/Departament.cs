@@ -11,5 +11,6 @@ namespace backend.Core.Entities
         // Navigation property
         public ICollection<Doctor> Doctors { get; set; } = new List<Doctor>();
         public ICollection<Nurse> Nurses { get; set; } = new List<Nurse>();
+        public ICollection<Room> Rooms { get; set; } = new List<Room>();
     }
 }

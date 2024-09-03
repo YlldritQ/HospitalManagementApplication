@@ -9,4 +9,5 @@ public interface IAppointmentService
     Task CreateAppointmentAsync(AppointmentDto appointmentDto);
     Task UpdateAppointmentAsync(int appointmentId, AppointmentDto appointmentDto);
     Task DeleteAppointmentAsync(int appointmentId);
+    
 }

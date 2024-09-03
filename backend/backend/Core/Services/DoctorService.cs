@@ -1,106 +1,143 @@
-﻿using backend.Core.DbContext;
+﻿using AutoMapper;
+using backend.Core.DbContext;
 using backend.Core.Dtos.General;
 using backend.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace backend.Core.Services
+public class DoctorService : IDoctorService
 {
-    public class DoctorService : IDoctorService
+    private readonly ApplicationDbContext _context;
+    private readonly IMapper _mapper;
+
+    public DoctorService(ApplicationDbContext context, IMapper mapper)
     {
-        private readonly ApplicationDbContext _context;
+        _context = context;
+        _mapper = mapper;
+    }
 
-        public DoctorService(ApplicationDbContext context)
+    public async Task<DoctorDto> GetDoctorByIdAsync(int doctorId)
+    {
+        var doctor = await _context.Doctors
+            .AsNoTracking()
+            .Include(d => d.DoctorRooms)
+                .ThenInclude(dr => dr.Room)
+            .Include(d => d.Department)
+            .FirstOrDefaultAsync(d => d.Id == doctorId);
+
+        if (doctor == null) return null;
+
+        return _mapper.Map<DoctorDto>(doctor);
+    }
+
+    public async Task<IEnumerable<DoctorDto>> GetAllDoctorsAsync()
+    {
+        var doctors = await _context.Doctors
+            .AsNoTracking()
+            .Include(d => d.DoctorRooms)
+                .ThenInclude(dr => dr.Room)
+            .Include(d => d.Department)
+            .ToListAsync();
+
+        return _mapper.Map<IEnumerable<DoctorDto>>(doctors);
+    }
+
+    public async Task CreateDoctorAsync(DoctorDto doctorDto)
+    {
+        var doctor = _mapper.Map<Doctor>(doctorDto);
+
+        // Ensure the department exists
+        var department = await _context.Departments.FindAsync(doctorDto.DepartmentId);
+        if (department == null)
         {
-            _context = context;
+            throw new ArgumentException($"Department with ID {doctorDto.DepartmentId} not found.");
         }
 
-        public async Task<DoctorDto> GetDoctorByIdAsync(int doctorId)
-        {
-            var doctor = await _context.Doctors.FindAsync(doctorId);
-            if (doctor == null) return null;
+        doctor.Department = department;
 
-            return new DoctorDto
-            {
-                Id = doctor.Id,
-                FirstName = doctor.FirstName,
-                LastName = doctor.LastName,
-                Gender = doctor.Gender,
-                ContactInfo = doctor.ContactInfo,
-                DateOfBirth = doctor.DateOfBirth,
-                DateHired = doctor.DateHired,
-                Specialty = doctor.Specialty,
-                Qualifications = doctor.Qualifications,
-                IsAvailable = doctor.IsAvailable
-            };
+        // Save the doctor entity first
+        await _context.Doctors.AddAsync(doctor);
+        await _context.SaveChangesAsync();
+
+        doctorDto.Id = doctor.Id;
+    }
+
+    public async Task UpdateDoctorAsync(int doctorId, DoctorDto doctorDto)
+    {
+        var doctor = await _context.Doctors
+            .Include(d => d.DoctorRooms)
+            .FirstOrDefaultAsync(d => d.Id == doctorId);
+
+        if (doctor == null)
+        {
+            throw new ArgumentException($"Doctor with ID {doctorId} not found.");
         }
 
-        public async Task<IEnumerable<DoctorDto>> GetAllDoctorsAsync()
+        _mapper.Map(doctorDto, doctor);
+
+        // Ensure the department exists
+        var department = await _context.Departments.FindAsync(doctorDto.DepartmentId);
+        if (department == null)
         {
-            return await _context.Doctors
-                .Select(doctor => new DoctorDto
-                {
-                    Id = doctor.Id,
-                    FirstName = doctor.FirstName,
-                    LastName = doctor.LastName,
-                    Gender = doctor.Gender,
-                    ContactInfo = doctor.ContactInfo,
-                    DateOfBirth = doctor.DateOfBirth,
-                    DateHired = doctor.DateHired,
-                    Specialty = doctor.Specialty,
-                    Qualifications = doctor.Qualifications,
-                    IsAvailable = doctor.IsAvailable
-                })
-                .ToListAsync();
+            throw new ArgumentException($"Department with ID {doctorDto.DepartmentId} not found.");
         }
 
-        public async Task CreateDoctorAsync(DoctorDto doctorDto)
+        doctor.Department = department;
+
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task DeleteDoctorAsync(int doctorId)
+    {
+        var doctor = await _context.Doctors
+            .Include(d => d.DoctorRooms)
+            .FirstOrDefaultAsync(d => d.Id == doctorId);
+
+        if (doctor == null)
         {
-            var doctor = new Doctor
-            {
-                FirstName = doctorDto.FirstName,
-                LastName = doctorDto.LastName,
-                Gender = doctorDto.Gender,
-                ContactInfo = doctorDto.ContactInfo,
-                DateOfBirth = doctorDto.DateOfBirth,
-                DateHired = doctorDto.DateHired,
-                Specialty = doctorDto.Specialty,
-                Qualifications = doctorDto.Qualifications,
-                IsAvailable = doctorDto.IsAvailable
-            };
-
-            await _context.Doctors.AddAsync(doctor);
-            await _context.SaveChangesAsync();
-
-            doctorDto.Id = doctor.Id;
+            throw new ArgumentException($"Doctor with ID {doctorId} not found.");
         }
 
-        public async Task UpdateDoctorAsync(int doctorId, DoctorDto doctorDto)
+        // Remove the doctor-rooms relationships first
+        _context.DoctorRooms.RemoveRange(doctor.DoctorRooms);
+
+        _context.Doctors.Remove(doctor);
+        await _context.SaveChangesAsync();
+    }
+
+    // Methods to Manage Room Assignments
+
+    public async Task AssignRoomsToDoctorAsync(DoctorRoomManagementDto doctorRoomDto)
+    {
+        var doctor = await _context.Doctors
+            .Include(d => d.DoctorRooms)
+            .FirstOrDefaultAsync(d => d.Id == doctorRoomDto.DoctorId);
+
+        if (doctor == null)
         {
-            var doctor = await _context.Doctors.FindAsync(doctorId);
-            if (doctor == null) return;
-
-            doctor.FirstName = doctorDto.FirstName;
-            doctor.LastName = doctorDto.LastName;
-            doctor.Gender = doctorDto.Gender;
-            doctor.ContactInfo = doctorDto.ContactInfo;
-            doctor.DateOfBirth = doctorDto.DateOfBirth;
-            doctor.DateHired = doctorDto.DateHired;
-            doctor.Specialty = doctorDto.Specialty;
-            doctor.Qualifications = doctorDto.Qualifications;
-            doctor.IsAvailable = doctorDto.IsAvailable;
-
-            await _context.SaveChangesAsync();
+            throw new ArgumentException($"Doctor with ID {doctorRoomDto.DoctorId} not found.");
         }
 
+        // Remove existing room assignments
+        _context.DoctorRooms.RemoveRange(doctor.DoctorRooms);
 
-
-        public async Task DeleteDoctorAsync(int doctorId)
+        // Add new room assignments
+        var doctorRooms = doctorRoomDto.RoomIds.Select(roomId => new DoctorRoom
         {
-            var doctor = await _context.Doctors.FindAsync(doctorId);
-            if (doctor == null) return;
+            DoctorId = doctor.Id,
+            RoomId = roomId
+        }).ToList();
 
-            _context.Doctors.Remove(doctor);
-            await _context.SaveChangesAsync();
-        }
+        await _context.DoctorRooms.AddRangeAsync(doctorRooms);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task RemoveRoomsFromDoctorAsync(DoctorRoomManagementDto doctorRoomDto)
+    {
+        var doctorRoomsToRemove = await _context.DoctorRooms
+            .Where(dr => dr.DoctorId == doctorRoomDto.DoctorId && doctorRoomDto.RoomIds.Contains(dr.RoomId))
+            .ToListAsync();
+
+        _context.DoctorRooms.RemoveRange(doctorRoomsToRemove);
+        await _context.SaveChangesAsync();
     }
 }

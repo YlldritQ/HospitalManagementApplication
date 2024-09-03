@@ -2,6 +2,7 @@ using backend.Core.DbContext;
 using backend.Core.Entities;
 using backend.Core.Interfaces;
 using backend.Core.Services;
+using backend.Core.AutoMapperConfig;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +25,6 @@ builder.Services.AddControllers().
 
 //DbConfig
 
-
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
     options.UseSqlServer(builder.Configuration.GetConnectionString("local"))
@@ -43,6 +43,9 @@ builder.Services.AddScoped<IPrescriptionService, PrescriptionService>();
 builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<IAppointmentService, AppointmentService>();
 
+//Add AutoMapper
+
+builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
 
 //Add Identity
 builder.Services

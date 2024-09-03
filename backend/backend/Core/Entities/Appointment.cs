@@ -7,7 +7,9 @@ public class Appointment
     public int PatientId { get; set; }
     public int DoctorId { get; set; }
     public string Status { get; set; }
+    public int RoomId { get; set; }
 
-    public Patient Patient { get; set; }
-    public Doctor Doctor { get; set; }
+    public virtual Patient Patient { get; set; }
+    public virtual Doctor Doctor { get; set; }
+    public virtual Room Room { get; set; }
 }

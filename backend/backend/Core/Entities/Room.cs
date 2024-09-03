@@ -6,11 +6,14 @@ namespace backend.Core.Entities
     {
         public int Id { get; set; }
         public string RoomNumber { get; set; } = null!;
-        public string RoomType { get; set; } = null!;
-        public bool IsOccupied { get; set; }
-        public int? PatientId { get; set; } // Nullable if room is not currently occupied
+        public bool IsOccupied { get; set; } // Nullable if room is not currently occupied
+        public int? DepartmentId { get; set; }
+        public virtual Department Department { get; set; }
 
         // Navigation property
-        public Patient? Patient { get; set; }
+        public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
+        public ICollection<DoctorRoom> DoctorRooms { get; set; } = new List<DoctorRoom>();
+        public ICollection<NurseRoom> NurseRooms { get; set; } = new List<NurseRoom>();
+
     }
 }

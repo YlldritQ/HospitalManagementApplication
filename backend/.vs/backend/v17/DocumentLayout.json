@@ -3,48 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\controllers\\departmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\controllers\\departmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\controllers\\logscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\controllers\\logscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\controllers\\nursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\controllers\\nursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\controllers\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\controllers\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\controllers\\testcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\controllers\\testcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\constants\\staticuserroles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\constants\\staticuserroles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\controllers\\medicalrecordcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\controllers\\medicalrecordcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\controllers\\appointmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\controllers\\appointmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\dtos\\auth\\updateroledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\dtos\\auth\\updateroledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\dbcontext\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\dbcontext\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,144 +22,56 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 0,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "NurseController.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\NurseController.cs",
+              "RelativeDocumentMoniker": "backend\\Controllers\\NurseController.cs",
+              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\NurseController.cs",
+              "RelativeToolTip": "backend\\Controllers\\NurseController.cs",
+              "ViewState": "AQIAAGkAAAAAAAAAAAAAAHUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-03T02:33:48.819Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "backend\\Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Properties\\launchSettings.json",
-              "RelativeToolTip": "backend\\Properties\\launchSettings.json",
-              "ViewState": "AQIAABUAAAAAAAAAAAAAACYAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-08-30T22:35:58.818Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "LogsController.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\LogsController.cs",
-              "RelativeDocumentMoniker": "backend\\Controllers\\LogsController.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\LogsController.cs",
-              "RelativeToolTip": "backend\\Controllers\\LogsController.cs",
-              "ViewState": "AQIAAAUAAAAAAAAAAAAgwBoAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-30T22:33:08.935Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "TestController.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\TestController.cs",
-              "RelativeDocumentMoniker": "backend\\Controllers\\TestController.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\TestController.cs",
-              "RelativeToolTip": "backend\\Controllers\\TestController.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAAA1wCMAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-30T22:32:17.267Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "MedicalRecordController.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\MedicalRecordController.cs",
-              "RelativeDocumentMoniker": "backend\\Controllers\\MedicalRecordController.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\MedicalRecordController.cs",
-              "RelativeToolTip": "backend\\Controllers\\MedicalRecordController.cs",
-              "ViewState": "AQIAADgAAAAAAAAAAAAowDwAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-28T20:00:08.142Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "DoctorController.cs",
               "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\DoctorController.cs",
               "RelativeDocumentMoniker": "backend\\Controllers\\DoctorController.cs",
               "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\DoctorController.cs",
               "RelativeToolTip": "backend\\Controllers\\DoctorController.cs",
-              "ViewState": "AQIAAD8AAAAAAAAAAAAgwC0AAAAwAAAA",
+              "ViewState": "AQIAAHIAAAAAAAAAAAAAAH8AAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-28T19:43:11.702Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DepartmentService.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\DepartmentService.cs",
-              "RelativeDocumentMoniker": "backend\\Controllers\\DepartmentService.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\DepartmentService.cs",
-              "RelativeToolTip": "backend\\Controllers\\DepartmentService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAF8AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-28T19:39:31.213Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "backend\\Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "backend\\Controllers\\AuthController.cs",
-              "ViewState": "AQIAACMAAAAAAAAAAAAgwDkAAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-28T19:37:56.331Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "UpdateRoleDto.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Auth\\UpdateRoleDto.cs",
-              "RelativeDocumentMoniker": "backend\\Core\\Dtos\\Auth\\UpdateRoleDto.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Auth\\UpdateRoleDto.cs",
-              "RelativeToolTip": "backend\\Core\\Dtos\\Auth\\UpdateRoleDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-28T19:08:46.848Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "StaticUserRoles.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Constants\\StaticUserRoles.cs",
-              "RelativeDocumentMoniker": "backend\\Core\\Constants\\StaticUserRoles.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Constants\\StaticUserRoles.cs",
-              "RelativeToolTip": "backend\\Core\\Constants\\StaticUserRoles.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAABCAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-28T19:06:03.724Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AuthService.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\AuthService.cs",
-              "RelativeDocumentMoniker": "backend\\Core\\Services\\AuthService.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\AuthService.cs",
-              "RelativeToolTip": "backend\\Core\\Services\\AuthService.cs",
-              "ViewState": "AQIAAFYAAAAAAAAAAAAgwAoAAAASAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-28T19:05:34.528Z",
+              "WhenOpened": "2024-09-03T02:31:55.42Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "AppointmentController.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\AppointmentController.cs",
-              "RelativeDocumentMoniker": "backend\\Controllers\\AppointmentController.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\AppointmentController.cs",
-              "RelativeToolTip": "backend\\Controllers\\AppointmentController.cs",
-              "ViewState": "AQIAAAUAAAAAAAAAAAAAABgAAAAyAAAA",
+              "DocumentIndex": 2,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\DbContext\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "backend\\Core\\DbContext\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\DbContext\\ApplicationDbContext.cs",
+              "RelativeToolTip": "backend\\Core\\DbContext\\ApplicationDbContext.cs",
+              "ViewState": "AQIAAIMAAAAAAAAAAAAAAIMAAAA9AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-28T18:59:37.819Z"
+              "WhenOpened": "2024-09-03T02:22:51.925Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             }
           ]
         }

@@ -9,13 +9,13 @@
     "Parameters": [
       {
         "Name": "appointmentDto",
-        "Type": "backend.Core.Dtos.General.AppointmentDto",
+        "Type": "AppointmentDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "backend.Core.Dtos.General.AppointmentDto",
+        "Type": "AppointmentDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -41,7 +41,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "backend.Core.Dtos.General.AppointmentDto",
+        "Type": "AppointmentDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -66,7 +66,7 @@
       },
       {
         "Name": "appointmentDto",
-        "Type": "backend.Core.Dtos.General.AppointmentDto",
+        "Type": "AppointmentDto",
         "IsRequired": true
       }
     ],
@@ -98,7 +98,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[backend.Core.Dtos.General.AppointmentDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[AppointmentDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -278,7 +278,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[backend.Core.Dtos.General.DepartmentDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DepartmentDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -298,13 +298,13 @@
     "Parameters": [
       {
         "Name": "departmentDto",
-        "Type": "backend.Core.Dtos.General.DepartmentDto",
+        "Type": "DepartmentDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "backend.Core.Dtos.General.DepartmentDto",
+        "Type": "DepartmentDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -313,6 +313,132 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "backend.Controllers.DepartmentController",
+    "Method": "AddDoctorsToDepartment",
+    "RelativePath": "api/Department/{departmentId}/doctors",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departmentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "doctorIds",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "backend.Controllers.DepartmentController",
+    "Method": "RemoveDoctorsFromDepartment",
+    "RelativePath": "api/Department/{departmentId}/doctors",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departmentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "doctorIds",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "backend.Controllers.DepartmentController",
+    "Method": "AddNursesToDepartment",
+    "RelativePath": "api/Department/{departmentId}/nurses",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departmentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "nurseIds",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "backend.Controllers.DepartmentController",
+    "Method": "RemoveNursesFromDepartment",
+    "RelativePath": "api/Department/{departmentId}/nurses",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departmentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "nurseIds",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "backend.Controllers.DepartmentController",
+    "Method": "AddRoomsToDepartment",
+    "RelativePath": "api/Department/{departmentId}/rooms",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departmentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "roomIds",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "backend.Controllers.DepartmentController",
+    "Method": "RemoveRoomsFromDepartment",
+    "RelativePath": "api/Department/{departmentId}/rooms",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departmentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "roomIds",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "backend.Controllers.DepartmentController",
@@ -330,7 +456,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "backend.Core.Dtos.General.DepartmentDto",
+        "Type": "DepartmentDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -355,7 +481,7 @@
       },
       {
         "Name": "departmentDto",
-        "Type": "backend.Core.Dtos.General.DepartmentDto",
+        "Type": "DepartmentDto",
         "IsRequired": true
       }
     ],
@@ -422,6 +548,48 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "backend.Controllers.DoctorController",
+    "Method": "AssignRoomsToDoctor",
+    "RelativePath": "api/Doctor/{doctorId}/rooms",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "doctorId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "doctorRoomDto",
+        "Type": "backend.Core.Dtos.General.DoctorRoomManagementDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "backend.Controllers.DoctorController",
+    "Method": "RemoveRoomsFromDoctor",
+    "RelativePath": "api/Doctor/{doctorId}/rooms",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "doctorId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "doctorRoomDto",
+        "Type": "backend.Core.Dtos.General.DoctorRoomManagementDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "backend.Controllers.DoctorController",
@@ -805,6 +973,43 @@
     "Parameters": [
       {
         "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "backend.Controllers.NurseController",
+    "Method": "AssignRoomsToNurse",
+    "RelativePath": "api/Nurse/{nurseId}/rooms",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nurseId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "assignmentDto",
+        "Type": "backend.Core.Dtos.General.NurseRoomAssignmentDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "backend.Controllers.NurseController",
+    "Method": "RemoveRoomsFromNurse",
+    "RelativePath": "api/Nurse/{nurseId}/rooms",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nurseId",
         "Type": "System.Int32",
         "IsRequired": true
       }

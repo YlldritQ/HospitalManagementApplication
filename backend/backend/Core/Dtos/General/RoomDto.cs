@@ -1,13 +1,13 @@
-﻿using System;
+﻿using backend.Core.Entities;
+using System;
 
 namespace backend.Core.Dtos.General
 {
     public class RoomDto
     {
         public int Id { get; set; }
-        public string RoomNumber { get; set; } = null!;
-        public string RoomType { get; set; } = null!;
-        public bool IsOccupied { get; set; }
-        public int? PatientId { get; set; } // Nullable if room is not occupied
+        public string RoomNumber { get; set; }
+        public bool IsOccupied { get; set; } // Nullable if room is not currently occupied
+        public int DepartmentId { get; set; }
     }
 }

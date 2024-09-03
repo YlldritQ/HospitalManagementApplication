@@ -39,6 +39,9 @@ namespace backend.Migrations
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
 
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -48,6 +51,8 @@ namespace backend.Migrations
                     b.HasIndex("DoctorId");
 
                     b.HasIndex("PatientId");
+
+                    b.HasIndex("RoomId");
 
                     b.ToTable("Appointments");
                 });
@@ -304,7 +309,7 @@ namespace backend.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("DepartmentId")
+                    b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("FirstName")
@@ -335,6 +340,21 @@ namespace backend.Migrations
                     b.HasIndex("DepartmentId");
 
                     b.ToTable("Doctors");
+                });
+
+            modelBuilder.Entity("backend.Core.Entities.DoctorRoom", b =>
+                {
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DoctorId", "RoomId");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("DoctorRooms");
                 });
 
             modelBuilder.Entity("backend.Core.Entities.Log", b =>
@@ -411,11 +431,7 @@ namespace backend.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Department")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("DepartmentId")
+                    b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("FirstName")
@@ -442,6 +458,21 @@ namespace backend.Migrations
                     b.HasIndex("DepartmentId");
 
                     b.ToTable("Nurses");
+                });
+
+            modelBuilder.Entity("backend.Core.Entities.NurseRoom", b =>
+                {
+                    b.Property<int>("NurseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.HasKey("NurseId", "RoomId");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("NurseRooms");
                 });
 
             modelBuilder.Entity("backend.Core.Entities.Patient", b =>
@@ -522,23 +553,19 @@ namespace backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsOccupied")
                         .HasColumnType("bit");
-
-                    b.Property<int?>("PatientId")
-                        .HasColumnType("int");
 
                     b.Property<string>("RoomNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoomType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("PatientId");
+                    b.HasIndex("DepartmentId");
 
                     b.ToTable("Rooms");
                 });
@@ -546,20 +573,26 @@ namespace backend.Migrations
             modelBuilder.Entity("Appointment", b =>
                 {
                     b.HasOne("backend.Core.Entities.Doctor", "Doctor")
-                        .WithMany()
+                        .WithMany("Appointments")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("backend.Core.Entities.Patient", "Patient")
-                        .WithMany()
+                        .WithMany("Appointments")
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("backend.Core.Entities.Room", "Room")
+                        .WithMany("Appointments")
+                        .HasForeignKey("RoomId");
+
                     b.Navigation("Doctor");
 
                     b.Navigation("Patient");
+
+                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -615,15 +648,38 @@ namespace backend.Migrations
 
             modelBuilder.Entity("backend.Core.Entities.Doctor", b =>
                 {
-                    b.HasOne("backend.Core.Entities.Department", null)
+                    b.HasOne("backend.Core.Entities.Department", "Department")
                         .WithMany("Doctors")
-                        .HasForeignKey("DepartmentId");
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("backend.Core.Entities.DoctorRoom", b =>
+                {
+                    b.HasOne("backend.Core.Entities.Doctor", "Doctor")
+                        .WithMany("DoctorRooms")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("backend.Core.Entities.Room", "Room")
+                        .WithMany("DoctorRooms")
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("backend.Core.Entities.MedicalRecord", b =>
                 {
                     b.HasOne("backend.Core.Entities.Patient", "Patient")
-                        .WithMany()
+                        .WithMany("MedicalRecords")
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -633,21 +689,44 @@ namespace backend.Migrations
 
             modelBuilder.Entity("backend.Core.Entities.Nurse", b =>
                 {
-                    b.HasOne("backend.Core.Entities.Department", null)
+                    b.HasOne("backend.Core.Entities.Department", "Department")
                         .WithMany("Nurses")
-                        .HasForeignKey("DepartmentId");
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("backend.Core.Entities.NurseRoom", b =>
+                {
+                    b.HasOne("backend.Core.Entities.Nurse", "Nurse")
+                        .WithMany("NurseRooms")
+                        .HasForeignKey("NurseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("backend.Core.Entities.Room", "Room")
+                        .WithMany("NurseRooms")
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Nurse");
+
+                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("backend.Core.Entities.Prescription", b =>
                 {
                     b.HasOne("backend.Core.Entities.Doctor", "Doctor")
-                        .WithMany()
+                        .WithMany("Prescriptions")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("backend.Core.Entities.Patient", "Patient")
-                        .WithMany()
+                        .WithMany("Prescriptions")
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -659,11 +738,13 @@ namespace backend.Migrations
 
             modelBuilder.Entity("backend.Core.Entities.Room", b =>
                 {
-                    b.HasOne("backend.Core.Entities.Patient", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId");
+                    b.HasOne("backend.Core.Entities.Department", "Department")
+                        .WithMany("Rooms")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Patient");
+                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("backend.Core.Entities.Department", b =>
@@ -671,6 +752,40 @@ namespace backend.Migrations
                     b.Navigation("Doctors");
 
                     b.Navigation("Nurses");
+
+                    b.Navigation("Rooms");
+                });
+
+            modelBuilder.Entity("backend.Core.Entities.Doctor", b =>
+                {
+                    b.Navigation("Appointments");
+
+                    b.Navigation("DoctorRooms");
+
+                    b.Navigation("Prescriptions");
+                });
+
+            modelBuilder.Entity("backend.Core.Entities.Nurse", b =>
+                {
+                    b.Navigation("NurseRooms");
+                });
+
+            modelBuilder.Entity("backend.Core.Entities.Patient", b =>
+                {
+                    b.Navigation("Appointments");
+
+                    b.Navigation("MedicalRecords");
+
+                    b.Navigation("Prescriptions");
+                });
+
+            modelBuilder.Entity("backend.Core.Entities.Room", b =>
+                {
+                    b.Navigation("Appointments");
+
+                    b.Navigation("DoctorRooms");
+
+                    b.Navigation("NurseRooms");
                 });
 #pragma warning restore 612, 618
         }

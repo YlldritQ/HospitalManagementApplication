@@ -1,4 +1,6 @@
-﻿namespace backend.Core.Dtos.General
+﻿using backend.Core.Entities;
+
+namespace backend.Core.Dtos.General
 {
     public class NurseDto
     {
@@ -9,8 +11,9 @@
         public string ContactInfo { get; set; } = null!;
         public DateTime DateOfBirth { get; set; }
         public DateTime DateHired { get; set; }
-        public string Department { get; set; } = null!;
         public string Qualifications { get; set; } = null!;
         public bool IsAvailable { get; set; }
+        public int DepartmentId { get; set; }
+        //public List<NurseRoomDto> NurseRooms { get; set; }
     }
 }

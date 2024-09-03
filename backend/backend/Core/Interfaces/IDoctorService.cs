@@ -9,4 +9,6 @@ public interface IDoctorService
     Task CreateDoctorAsync(DoctorDto doctorDto);
     Task UpdateDoctorAsync(int doctorId, DoctorDto doctorDto);
     Task DeleteDoctorAsync(int doctorId);
+    Task AssignRoomsToDoctorAsync(DoctorRoomManagementDto doctorRoomDto);
+    Task RemoveRoomsFromDoctorAsync(DoctorRoomManagementDto doctorRoomDto);
 }

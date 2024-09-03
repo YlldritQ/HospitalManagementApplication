@@ -21,7 +21,7 @@ namespace backend.Controllers
 
         // GET: api/doctor
         [HttpGet]
-        [Authorize(Roles =StaticUserRoles.AdminDoctor)]
+        [Authorize(Roles = StaticUserRoles.AdminDoctor)]
         public async Task<ActionResult<IEnumerable<DoctorDto>>> GetAllDoctors()
         {
             var doctors = await _doctorService.GetAllDoctorsAsync();
@@ -30,7 +30,7 @@ namespace backend.Controllers
 
         // GET: api/doctor/{id}
         [HttpGet("{id}")]
-        [Authorize(Roles =StaticUserRoles.AdminDoctor)]
+        [Authorize(Roles = StaticUserRoles.AdminDoctor)]
         public async Task<ActionResult<DoctorDto>> GetDoctorById(int id)
         {
             var doctor = await _doctorService.GetDoctorByIdAsync(id);
@@ -59,7 +59,7 @@ namespace backend.Controllers
 
         // PUT: api/doctor/{id}
         [HttpPut("{id}")]
-        [Authorize(Roles =StaticUserRoles.AdminDoctor)]
+        [Authorize(Roles = StaticUserRoles.AdminDoctor)]
         public async Task<IActionResult> UpdateDoctor(int id, [FromBody] DoctorDto doctorDto)
         {
             if (!ModelState.IsValid)
@@ -92,6 +92,48 @@ namespace backend.Controllers
             await _doctorService.DeleteDoctorAsync(id);
 
             return NoContent(); // 204 No Content
+        }
+
+        // POST: api/doctor/{doctorId}/rooms
+        [HttpPost("{doctorId}/rooms")]
+        [Authorize(Roles = StaticUserRoles.ADMIN)]
+        public async Task<IActionResult> AssignRoomsToDoctor(int doctorId, [FromBody] DoctorRoomManagementDto doctorRoomDto)
+        {
+            if (!ModelState.IsValid || doctorRoomDto.DoctorId != doctorId)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                await _doctorService.AssignRoomsToDoctorAsync(doctorRoomDto);
+                return NoContent(); // 204 No Content
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        // DELETE: api/doctor/{doctorId}/rooms
+        [HttpDelete("{doctorId}/rooms")]
+        [Authorize(Roles = StaticUserRoles.ADMIN)]
+        public async Task<IActionResult> RemoveRoomsFromDoctor(int doctorId, [FromBody] DoctorRoomManagementDto doctorRoomDto)
+        {
+            if (!ModelState.IsValid || doctorRoomDto.DoctorId != doctorId)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                await _doctorService.RemoveRoomsFromDoctorAsync(doctorRoomDto);
+                return NoContent(); // 204 No Content
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

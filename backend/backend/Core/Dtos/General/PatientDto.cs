@@ -1,4 +1,6 @@
-﻿namespace backend.Core.Dtos.General
+﻿using backend.Core.Entities;
+
+namespace backend.Core.Dtos.General
 {
     public class PatientDto
     {

@@ -10,5 +10,8 @@ namespace backend.Core.Entities
         public DateTime DateOfBirth { get; set; }
         public string Gender { get; set; }
         public string ContactInfo { get; set; }
+        public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
+        public ICollection<Prescription> Prescriptions { get; set; } = new List<Prescription>();
+        public ICollection<MedicalRecord> MedicalRecords { get; set; } = new List<MedicalRecord>();
     }
 }

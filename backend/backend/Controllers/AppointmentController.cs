@@ -3,9 +3,6 @@ using backend.Core.Dtos.General;
 using backend.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
 namespace backend.Controllers
 {
     [Route("api/[controller]")]
@@ -88,5 +85,6 @@ namespace backend.Controllers
 
             return NoContent(); // 204 No Content
         }
+        
     }
 }

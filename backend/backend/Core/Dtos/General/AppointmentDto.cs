@@ -1,11 +1,11 @@
-﻿namespace backend.Core.Dtos.General
+﻿using backend.Core.Dtos.General;
+
+public class AppointmentDto
 {
-    public class AppointmentDto
-    {
-        public int Id { get; set; }
-        public DateTime AppointmentDate { get; set; }
-        public int PatientId { get; set; }
-        public int DoctorId { get; set; }
-        public string Status { get; set; } = null!;
-    }
+    public int Id { get; set; }
+    public DateTime AppointmentDate { get; set; }
+    public int PatientId { get; set; }
+    public int DoctorId { get; set; }
+    public string Status { get; set; }
+    public int RoomId { get; set; }
 }

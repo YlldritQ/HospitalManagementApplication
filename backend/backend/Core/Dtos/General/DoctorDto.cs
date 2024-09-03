@@ -1,4 +1,6 @@
-﻿namespace backend.Core.Dtos.General
+﻿using backend.Core.Entities;
+
+namespace backend.Core.Dtos.General
 {
     public class DoctorDto
     {
@@ -12,5 +14,6 @@
         public string Specialty { get; set; } = null!;
         public string Qualifications { get; set; } = null!;
         public bool IsAvailable { get; set; }
+        public int DepartmentId { get; set; }
     }
 }
