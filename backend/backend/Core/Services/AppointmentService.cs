@@ -94,16 +94,19 @@ namespace backend.Core.Services
                 };
             }
 
-            // Calculate the start and end of the restricted time window
+            // Assuming the appointment lasts 30 minutes
             TimeSpan appointmentDuration = TimeSpan.FromMinutes(30);
+            TimeSpan bufferPeriod = TimeSpan.FromMinutes(30); // 30 minutes buffer period
+
             DateTime appointmentEnd = appointmentDto.AppointmentDate.Add(appointmentDuration);
 
-            // Check if there's an existing appointment that overlaps with the desired time
+            // Check for overlapping appointments or appointments starting too close to existing ones
             bool conflictExists = await _context.Appointments
                 .Where(a => a.DoctorId == appointmentDto.DoctorId) // Assuming conflict per doctor
                 .AnyAsync(a =>
-                   (a.AppointmentDate < appointmentEnd && a.AppointmentDate.Add(appointmentDuration) > appointmentDto.AppointmentDate)
-        );
+                    (a.AppointmentDate < appointmentEnd && a.AppointmentDate.Add(appointmentDuration) > appointmentDto.AppointmentDate) ||
+                    (appointmentDto.AppointmentDate <= a.AppointmentDate && appointmentDto.AppointmentDate >= a.AppointmentDate.Subtract(bufferPeriod))
+                );
 
             if (conflictExists)
             {
@@ -111,7 +114,7 @@ namespace backend.Core.Services
                 {
                     IsSucceed = false,
                     StatusCode = 409,
-                    Message = "An appointment already exists in the specified time window."
+                    Message = "An appointment already exists in the specified time window or too close to an existing appointment."
                 };
             }
 
@@ -132,6 +135,7 @@ namespace backend.Core.Services
                 Message = "Appointment created successfully."
             };
         }
+
 
 
         public async Task<GeneralServiceResponseDto> UpdateAppointmentAsync(int appointmentId, CUAppointmentDto appointmentDto)
