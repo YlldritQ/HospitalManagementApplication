@@ -51,7 +51,12 @@ namespace backend.Core.Services
             // Validate appointment date
             if (appointmentDto.AppointmentDate < DateTime.UtcNow)
             {
-                throw new ArgumentException("Appointment date cannot be in the past.");
+                return new GeneralServiceResponseDto
+                {
+                    IsSucceed = false,
+                    StatusCode = 400,
+                    Message = "Appointment date cannot be in the past."
+                };
             }
 
             // Validate related entities
@@ -61,33 +66,73 @@ namespace backend.Core.Services
 
             if (patient == null)
             {
-                throw new ArgumentException($"Patient with ID {appointmentDto.PatientId} not found.");
+                return new GeneralServiceResponseDto
+                {
+                    IsSucceed = false,
+                    StatusCode = 404,
+                    Message = $"Patient with ID {appointmentDto.PatientId} not found."
+                };
             }
 
             if (doctor == null)
             {
-                throw new ArgumentException($"Doctor with ID {appointmentDto.DoctorId} not found.");
+                return new GeneralServiceResponseDto
+                {
+                    IsSucceed = false,
+                    StatusCode = 404,
+                    Message = $"Doctor with ID {appointmentDto.DoctorId} not found."
+                };
             }
 
             if (room == null)
             {
-                throw new ArgumentException($"Room with ID {appointmentDto.RoomId} not found.");
+                return new GeneralServiceResponseDto
+                {
+                    IsSucceed = false,
+                    StatusCode = 404,
+                    Message = $"Room with ID {appointmentDto.RoomId} not found."
+                };
             }
 
+            // Calculate the start and end of the restricted time window
+            TimeSpan appointmentDuration = TimeSpan.FromMinutes(30);
+            DateTime appointmentEnd = appointmentDto.AppointmentDate.Add(appointmentDuration);
+
+            // Check if there's an existing appointment that overlaps with the desired time
+            bool conflictExists = await _context.Appointments
+                .Where(a => a.DoctorId == appointmentDto.DoctorId) // Assuming conflict per doctor
+                .AnyAsync(a =>
+                   (a.AppointmentDate < appointmentEnd && a.AppointmentDate.Add(appointmentDuration) > appointmentDto.AppointmentDate)
+        );
+
+            if (conflictExists)
+            {
+                return new GeneralServiceResponseDto
+                {
+                    IsSucceed = false,
+                    StatusCode = 409,
+                    Message = "An appointment already exists in the specified time window."
+                };
+            }
+
+            // Map the DTO to the entity
             var appointment = _mapper.Map<Appointment>(appointmentDto);
             appointment.Patient = patient;
             appointment.Doctor = doctor;
             appointment.Room = room;
 
+            // Save the new appointment
             await _context.Appointments.AddAsync(appointment);
             await _context.SaveChangesAsync();
 
-            return new GeneralServiceResponseDto() { 
-                IsSucceed= true,
-                StatusCode= 201,
-                Message = " Creation succes"
+            return new GeneralServiceResponseDto
+            {
+                IsSucceed = true,
+                StatusCode = 201,
+                Message = "Appointment created successfully."
             };
         }
+
 
         public async Task<GeneralServiceResponseDto> UpdateAppointmentAsync(int appointmentId, CUAppointmentDto appointmentDto)
         {
