@@ -14,6 +14,7 @@ namespace backend.Core.Dtos.Nurse
         public string Qualifications { get; set; } = null!;
         public bool IsAvailable { get; set; }
         public int DepartmentId { get; set; }
+        public string UserId { get; set; }
         //public List<NurseRoomDto> NurseRooms { get; set; }
     }
 }

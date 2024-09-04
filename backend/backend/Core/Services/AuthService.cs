@@ -1,7 +1,9 @@
 ﻿using backend.Core.Constants;
+using backend.Core.DbContext;
 using backend.Core.Dtos.Auth;
 using backend.Core.Dtos.General;
 using backend.Core.Entities;
+using backend.Core.Dtos.Patient;
 using backend.Core.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -18,13 +20,15 @@ namespace backend.Core.Services
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogService _logService;
         private readonly IConfiguration _configuration;
+        private readonly ApplicationDbContext _context;
 
-        public AuthService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, ILogService logService, IConfiguration configuration)
+        public AuthService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, ILogService logService, IConfiguration configuration, ApplicationDbContext context)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _logService = logService;
             _configuration = configuration;
+            _context = context;
         }
 
         public async Task<GeneralServiceResponseDto> SeedRolesAsync()
@@ -57,7 +61,7 @@ namespace backend.Core.Services
             };
         }
 
-        public async Task<GeneralServiceResponseDto> RegisterAsync(RegisterDto registerDto)
+       public async Task<GeneralServiceResponseDto> RegisterAsync(RegisterDto registerDto)
         {
             var isExistsUser = await _userManager.FindByNameAsync(registerDto.UserName);
             if (isExistsUser is not null)
@@ -95,15 +99,30 @@ namespace backend.Core.Services
                 };
             }
 
-            //Default USER Role to all users
-            await _userManager.AddToRoleAsync(newUser, StaticUserRoles.USER);
-            await _logService.SaveNewLog(newUser.UserName, "Registered to Website");
+            // Assign the "Patient" role and create a corresponding Patient entry
+            await _userManager.AddToRoleAsync(newUser, StaticUserRoles.PATIENT);
+
+            var newPatient = new Patient()
+            {
+                FirstName = registerDto.FirstName,
+                LastName = registerDto.LastName,
+                DateOfBirth = DateTime.Now, // Adjust as needed
+                Gender = "Unknown", // Adjust as needed
+                ContactInfo = "N/A", // Adjust as needed
+                UserId = newUser.Id
+            };
+            Console.WriteLine(newPatient);
+
+            _context.Patients.Add(newPatient);
+            await _context.SaveChangesAsync();
+
+            await _logService.SaveNewLog(newUser.UserName, "Registered as Patient");
 
             return new GeneralServiceResponseDto()
             {
                 IsSucceed = true,
                 StatusCode = 201,
-                Message = "User Created Successfully"
+                Message = "User Created Successfully as Patient"
             };
         }
 
@@ -144,14 +163,11 @@ namespace backend.Core.Services
                 };
 
             var userRoles = await _userManager.GetRolesAsync(user);
-            // Just ADMIN can update roles
             if (User.IsInRole(StaticUserRoles.ADMIN))
             {
-                // User is admin
-                if (updateRoleDto.NewRole == RoleType.USER || updateRoleDto.NewRole == RoleType.DOCTOR || 
+                if (updateRoleDto.NewRole == RoleType.USER || updateRoleDto.NewRole == RoleType.DOCTOR ||
                     updateRoleDto.NewRole == RoleType.NURSE || updateRoleDto.NewRole == RoleType.PATIENT)
                 {
-                    // admin can change the role of everyone except admins
                     if (userRoles.Any(q => q.Equals(StaticUserRoles.ADMIN)))
                     {
                         return new GeneralServiceResponseDto()
@@ -163,9 +179,160 @@ namespace backend.Core.Services
                     }
                     else
                     {
+                        // Handle transition from one role to another
+                        if (userRoles.Contains(StaticUserRoles.PATIENT) && updateRoleDto.NewRole == RoleType.DOCTOR)
+                        {
+                            // Remove from Patient table
+                            var existingPatient = await _context.Patients.FirstOrDefaultAsync(p => p.UserId == user.Id);
+                            if (existingPatient != null)
+                            {
+                                _context.Patients.Remove(existingPatient);
+                            }
+
+                            // Add to Doctor table
+                            var newDoctor = new Doctor
+                            {
+                                FirstName = user.FirstName,
+                                LastName = user.LastName,
+                                DateOfBirth = DateTime.Now, // Adjust as needed
+                                Gender = "Unknown", // Adjust as needed
+                                ContactInfo = "N/A", // Adjust as needed
+                                UserId = user.Id,
+                                Specialty = "General", // Adjust as needed
+                                Qualifications = "MD", // Adjust as needed
+                                IsAvailable = true // Adjust as needed
+                            };
+
+                            _context.Doctors.Add(newDoctor);
+                            await _context.SaveChangesAsync();
+                        }
+                        else if (userRoles.Contains(StaticUserRoles.DOCTOR) && updateRoleDto.NewRole == RoleType.PATIENT)
+                        {
+                            // Remove from Doctor table
+                            var existingDoctor = await _context.Doctors.FirstOrDefaultAsync(d => d.UserId == user.Id);
+                            if (existingDoctor != null)
+                            {
+                                _context.Doctors.Remove(existingDoctor);
+                            }
+
+                            // Add to Patient table
+                            var newPatient = new Patient
+                            {
+                                FirstName = user.FirstName,
+                                LastName = user.LastName,
+                                DateOfBirth = DateTime.Now, // Adjust as needed
+                                Gender = "Unknown", // Adjust as needed
+                                ContactInfo = "N/A", // Adjust as needed
+                                UserId = user.Id
+                            };
+
+                            _context.Patients.Add(newPatient);
+                            await _context.SaveChangesAsync();
+                        }
+                        else if (userRoles.Contains(StaticUserRoles.NURSE) && updateRoleDto.NewRole == RoleType.PATIENT)
+                        {
+                            // Remove from Nurse table
+                            var existingNurse = await _context.Nurses.FirstOrDefaultAsync(n => n.UserId == user.Id);
+                            if (existingNurse != null)
+                            {
+                                _context.Nurses.Remove(existingNurse);
+                            }
+
+                            // Add to Patient table
+                            var newPatient = new Patient
+                            {
+                                FirstName = user.FirstName,
+                                LastName = user.LastName,
+                                DateOfBirth = DateTime.Now, // Adjust as needed
+                                Gender = "Unknown", // Adjust as needed
+                                ContactInfo = "N/A", // Adjust as needed
+                                UserId = user.Id
+                            };
+
+                            _context.Patients.Add(newPatient);
+                            await _context.SaveChangesAsync();
+                        }
+                        else if (userRoles.Contains(StaticUserRoles.PATIENT) && updateRoleDto.NewRole == RoleType.NURSE)
+                        {
+                            // Remove from Patient table
+                            var existingPatient = await _context.Patients.FirstOrDefaultAsync(p => p.UserId == user.Id);
+                            if (existingPatient != null)
+                            {
+                                _context.Patients.Remove(existingPatient);
+                            }
+
+                            // Add to Nurse table
+                            var newNurse = new Nurse
+                            {
+                                FirstName = user.FirstName,
+                                LastName = user.LastName,
+                                DateOfBirth = DateTime.Now, // Adjust as needed
+                                Gender = "Unknown", // Adjust as needed
+                                ContactInfo = "N/A", // Adjust as needed
+                                UserId = user.Id,
+                                Qualifications = "RN", // Adjust as needed
+                                IsAvailable = true // Adjust as needed
+                            };
+
+                            _context.Nurses.Add(newNurse);
+                            await _context.SaveChangesAsync();
+                        }
+                        else if (userRoles.Contains(StaticUserRoles.DOCTOR) && updateRoleDto.NewRole == RoleType.NURSE)
+                        {
+                            // Remove from Doctor table
+                            var existingDoctor = await _context.Doctors.FirstOrDefaultAsync(d => d.UserId == user.Id);
+                            if (existingDoctor != null)
+                            {
+                                _context.Doctors.Remove(existingDoctor);
+                            }
+
+                            // Add to Nurse table
+                            var newNurse = new Nurse
+                            {
+                                FirstName = user.FirstName,
+                                LastName = user.LastName,
+                                DateOfBirth = DateTime.Now, // Adjust as needed
+                                Gender = "Unknown", // Adjust as needed
+                                ContactInfo = "N/A", // Adjust as needed
+                                UserId = user.Id,
+                                Qualifications = "RN", // Adjust as needed
+                                IsAvailable = true // Adjust as needed
+                            };
+
+                            _context.Nurses.Add(newNurse);
+                            await _context.SaveChangesAsync();
+                        }
+                        else if (userRoles.Contains(StaticUserRoles.NURSE) && updateRoleDto.NewRole == RoleType.DOCTOR)
+                        {
+                            // Remove from Nurse table
+                            var existingNurse = await _context.Nurses.FirstOrDefaultAsync(d => d.UserId == user.Id);
+                            if (existingNurse != null)
+                            {
+                                _context.Nurses.Remove(existingNurse);
+                            }
+
+                            // Add to Doctor table
+                            var newDoctor = new Doctor
+                            {
+                                FirstName = user.FirstName,
+                                LastName = user.LastName,
+                                DateOfBirth = DateTime.Now, // Adjust as needed
+                                Gender = "Unknown", // Adjust as needed
+                                ContactInfo = "N/A", // Adjust as needed
+                                UserId = user.Id,
+                                Specialty = "General",
+                                Qualifications = "RN", // Adjust as needed
+                                IsAvailable = true // Adjust as needed
+                            };
+
+                            _context.Doctors.Add(newDoctor);
+                            await _context.SaveChangesAsync();
+                        }
+
                         await _userManager.RemoveFromRolesAsync(user, userRoles);
                         await _userManager.AddToRoleAsync(user, updateRoleDto.NewRole.ToString());
                         await _logService.SaveNewLog(user.UserName, "User Roles Updated");
+
                         return new GeneralServiceResponseDto()
                         {
                             IsSucceed = true,
@@ -174,18 +341,22 @@ namespace backend.Core.Services
                         };
                     }
                 }
-                else return new GeneralServiceResponseDto()
+                else
                 {
-                    IsSucceed = false,
-                    StatusCode = 403,
-                    Message = "You are not allowed to change role of this user"
-                };
+                    return new GeneralServiceResponseDto()
+                    {
+                        IsSucceed = false,
+                        StatusCode = 403,
+                        Message = "You are not allowed to change the role of this user"
+                    };
+                }
             }
+
             return new GeneralServiceResponseDto()
             {
                 IsSucceed = false,
                 StatusCode = 403,
-                Message = "You don't have access"
+                Message = "You are not authorized to perform this action"
             };
         }
 

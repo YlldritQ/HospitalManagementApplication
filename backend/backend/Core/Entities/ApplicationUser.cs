@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace backend.Core.Entities
@@ -13,5 +15,9 @@ namespace backend.Core.Entities
         [NotMapped]
         public IList<string> Roles { get; set; }
 
+        // Navigation properties for role entities
+        public virtual Patient Patient { get; set; }
+        public virtual Doctor Doctor { get; set; }
+        public virtual Nurse Nurse { get; set; }
     }
 }

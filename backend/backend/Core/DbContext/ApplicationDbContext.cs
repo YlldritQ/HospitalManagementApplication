@@ -73,6 +73,27 @@ namespace backend.Core.DbContext
             {
                 e.ToTable("UserRoles");
             });
+            // One-to-one relationship between ApplicationUser and Patient
+            builder.Entity<ApplicationUser>()
+                .HasOne(a => a.Patient)
+                .WithOne(p => p.User)
+                .HasForeignKey<Patient>(p => p.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // One-to-one relationship between ApplicationUser and Doctor
+            builder.Entity<ApplicationUser>()
+                .HasOne(a => a.Doctor)
+                .WithOne(d => d.User)
+                .HasForeignKey<Doctor>(d => d.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // One-to-one relationship between ApplicationUser and Nurse
+            builder.Entity<ApplicationUser>()
+                .HasOne(a => a.Nurse)
+                .WithOne(n => n.User)
+                .HasForeignKey<Nurse>(n => n.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             builder.Entity<Doctor>()
                 .HasOne(d => d.Department)
                 .WithMany(dept => dept.Doctors)

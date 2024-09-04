@@ -12,7 +12,7 @@ using backend.Core.DbContext;
 namespace backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240903005210_init")]
+    [Migration("20240904205523_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -312,7 +312,7 @@ namespace backend.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DepartmentId")
+                    b.Property<int?>("DepartmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("FirstName")
@@ -338,9 +338,16 @@ namespace backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DepartmentId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Doctors");
                 });
@@ -434,7 +441,7 @@ namespace backend.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DepartmentId")
+                    b.Property<int?>("DepartmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("FirstName")
@@ -456,9 +463,16 @@ namespace backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DepartmentId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Nurses");
                 });
@@ -505,7 +519,14 @@ namespace backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("PatientId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Patients");
                 });
@@ -556,7 +577,7 @@ namespace backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("DepartmentId")
+                    b.Property<int?>("DepartmentId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsOccupied")
@@ -653,11 +674,17 @@ namespace backend.Migrations
                 {
                     b.HasOne("backend.Core.Entities.Department", "Department")
                         .WithMany("Doctors")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("DepartmentId");
+
+                    b.HasOne("backend.Core.Entities.ApplicationUser", "User")
+                        .WithOne("Doctor")
+                        .HasForeignKey("backend.Core.Entities.Doctor", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Department");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("backend.Core.Entities.DoctorRoom", b =>
@@ -694,11 +721,17 @@ namespace backend.Migrations
                 {
                     b.HasOne("backend.Core.Entities.Department", "Department")
                         .WithMany("Nurses")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("DepartmentId");
+
+                    b.HasOne("backend.Core.Entities.ApplicationUser", "User")
+                        .WithOne("Nurse")
+                        .HasForeignKey("backend.Core.Entities.Nurse", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Department");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("backend.Core.Entities.NurseRoom", b =>
@@ -718,6 +751,17 @@ namespace backend.Migrations
                     b.Navigation("Nurse");
 
                     b.Navigation("Room");
+                });
+
+            modelBuilder.Entity("backend.Core.Entities.Patient", b =>
+                {
+                    b.HasOne("backend.Core.Entities.ApplicationUser", "User")
+                        .WithOne("Patient")
+                        .HasForeignKey("backend.Core.Entities.Patient", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("backend.Core.Entities.Prescription", b =>
@@ -743,11 +787,21 @@ namespace backend.Migrations
                 {
                     b.HasOne("backend.Core.Entities.Department", "Department")
                         .WithMany("Rooms")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DepartmentId");
 
                     b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("backend.Core.Entities.ApplicationUser", b =>
+                {
+                    b.Navigation("Doctor")
+                        .IsRequired();
+
+                    b.Navigation("Nurse")
+                        .IsRequired();
+
+                    b.Navigation("Patient")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("backend.Core.Entities.Department", b =>
