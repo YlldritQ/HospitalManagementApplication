@@ -20,6 +20,7 @@ const LoginPage = lazy(() => import("../pages/public/LoginPage"));
 const NotFoundPage = lazy(() => import("../pages/public/NotFoundPage"));
 const RegisterPage = lazy(() => import("../pages/public/RegisterPage"));
 const UnauthorizedPage = lazy(() => import("../pages/public/UnauthorizedPage"));
+const DoctorList = lazy(() => import("../pages/dashboard/DoctorList"));
 
 const GlobalRouter = () => {
   return (
@@ -92,6 +93,16 @@ const GlobalRouter = () => {
               </Suspense>
             }
           />
+
+<Route
+  path={PATH_DASHBOARD.doctorList}
+  element={
+    <Suspense fallback={<div>Loading...</div>}>
+      <DoctorList />
+    </Suspense>
+  }
+/>
+
           <Route
             path={PATH_DASHBOARD.nurse}
             element={
