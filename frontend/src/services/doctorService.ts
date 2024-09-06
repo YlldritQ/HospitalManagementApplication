@@ -1,25 +1,19 @@
-const API_URL = 'http://localhost:7058/api/Doctor';
+import axios from 'axios'; // Import axios for error checking
+import axiosInstance from "../utils/axiosInstance"; // Adjust the import path as needed
 
 export const getDoctors = async () => {
   try {
-    const response = await fetch(API_URL, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    
-    if (!response.ok) {
-      console.error(`API call failed with status ${response.status}: ${response.statusText}`);
-      throw new Error(`Error: ${response.statusText}`);
-    }
+    const response = await axiosInstance.get('/Doctor');
 
-    return await response.json();
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      console.error('Fetch failed:', error.message);
+    // Axios automatically handles JSON parsing
+    return response.data; 
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error(`API call failed with status ${error.response?.status}: ${error.response?.statusText}`);
+      throw new Error(error.response?.statusText || 'API call failed');
     } else {
-      console.error('Unknown error occurred during fetch');
+      console.error('Unknown error occurred during Axios fetch');
+      throw new Error('Unknown error occurred during Axios fetch');
     }
-    throw error;
   }
 };
