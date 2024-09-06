@@ -27,7 +27,7 @@ const AdminPage = () => {
             </p>
             <Button 
               label="View Patients" 
-              onClick={() => handleButtonClick('/patients')} 
+              onClick={() => handleButtonClick('/dashboard/patient-list')} 
               variant="primary" 
               type="button" 
               className="text-white bg-[#3498DB] hover:bg-[#2980B9]"
@@ -78,7 +78,7 @@ const AdminPage = () => {
             </p>
             <Button 
               label="View Nurses" 
-              onClick={() => handleButtonClick('/nurses')} 
+              onClick={() => handleButtonClick('/dashboard/nurse-list')} 
               variant="primary" 
               type="button" 
               className="text-white bg-[#F39C12] hover:bg-[#E67E22]"

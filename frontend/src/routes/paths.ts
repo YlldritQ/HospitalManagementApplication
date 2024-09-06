@@ -15,8 +15,10 @@ export const PATH_DASHBOARD = {
   admin: "/dashboard/admin",
   user: "/dashboard/user",
   patient: "/dashboard/patient",   
+  patientList: "/dashboard/patient-list",
   doctor: "/dashboard/doctor",
-  doctorList: "/dashboard/doctor-list",     
+  doctorList: "/dashboard/doctor-list",
+  nurseList: "/dashboard/nurse-list",     
   nurse: "/dashboard/nurse",
 };
 

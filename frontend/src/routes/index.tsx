@@ -21,6 +21,8 @@ const NotFoundPage = lazy(() => import("../pages/public/NotFoundPage"));
 const RegisterPage = lazy(() => import("../pages/public/RegisterPage"));
 const UnauthorizedPage = lazy(() => import("../pages/public/UnauthorizedPage"));
 const DoctorList = lazy(() => import("../pages/dashboard/DoctorList"));
+const NurseList = lazy(() => import("../pages/dashboard/NurseList"));
+const PatientList = lazy(() => import("../pages/dashboard/PatientList"));
 
 const GlobalRouter = () => {
   return (
@@ -85,6 +87,15 @@ const GlobalRouter = () => {
               </Suspense>
             }
           />
+
+<Route
+  path={PATH_DASHBOARD.patientList}
+  element={
+    <Suspense fallback={<div>Loading...</div>}>
+      <PatientList />
+    </Suspense>
+  }
+/>
           <Route
             path={PATH_DASHBOARD.doctor}
             element={
@@ -111,6 +122,15 @@ const GlobalRouter = () => {
               </Suspense>
             }
           />
+
+<Route
+  path={PATH_DASHBOARD.nurseList}
+  element={
+    <Suspense fallback={<div>Loading...</div>}>
+      <NurseList />
+    </Suspense>
+  }
+/>
         </Route>
 
         {/* Admin Routes */}
