@@ -38,7 +38,7 @@ const NurseList: React.FC = () => {
 
     const handleButtonClick = (id: number) => {
       console.log(`Navigating to /edit-nurse/${id}`);
-      navigate(`/edit-nurse/${id}`);
+      navigate(`/dashboard/edit-nurse/${id}`);
   };
   
 
