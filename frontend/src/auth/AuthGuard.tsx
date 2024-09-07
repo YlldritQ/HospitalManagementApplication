@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, replace } from 'react-router-dom';
 import useAuth from '../hooks/useAuth.hook';
 import AuthSpinner from '../components/general/AuthSpinner';
 import { PATH_PUBLIC } from '../routes/paths';
@@ -17,6 +17,11 @@ const AuthGuard = ({ roles }: IProps) => {
   if (isAuthLoading) {
     return <AuthSpinner />;
   }
-  return hasAccess ? <Outlet /> : <Navigate to={PATH_PUBLIC.unauthorized} />;
+  if (!hasAccess) {
+    window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+    return null;  // Return null since the component should not render anything after redirection
+  }
+
+  return <Outlet />;
 };
 export default AuthGuard;
