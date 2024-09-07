@@ -1,105 +1,105 @@
-import React, { useState, useEffect } from "react";
-import { getNurses } from "../../services/nurseService"; // Ensure correct import path
-
-// Define the Nurse interface to match your backend DTO
-interface Nurse {
-  id: number;
-  firstName: string;
-  lastName: string;
-  gender: string;
-  contactInfo: string;
-  dateOfBirth: Date;
-  dateHired: Date;
-  qualifications: string;
-  isAvailable: boolean;
-  departmentId: number;
-  userId: string;
-}
-
-// Function to transform backend data into the expected format
-const transformNurseData = (data: any): Nurse[] => {
-  return data.map((item: any) => ({
-    id: item.id,
-    firstName: item.firstName,
-    lastName: item.lastName,
-    gender: item.gender,
-    contactInfo: item.contactInfo,
-    dateOfBirth: new Date(item.dateOfBirth),
-    dateHired: new Date(item.dateHired),
-    qualifications: item.qualifications,
-    isAvailable: item.isAvailable,
-    departmentId: item.departmentId,
-    userId: item.userId,
-  }));
-};
+import React, { useEffect, useState } from 'react';
+import { getAllNurses, deleteNurse } from '../../services/nurseService'; // Adjust the import according to your project structure
+import { NurseDto } from '../../types/nurseTypes';
+import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify'; // Import ToastContainer
+import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for toast notifications
 
 const NurseList: React.FC = () => {
-  const [nurses, setNurses] = useState<Nurse[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+    const [nurses, setNurses] = useState<NurseDto[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+    const navigate = useNavigate(); // Hook to navigate programmatically
 
-  useEffect(() => {
-    const fetchNurses = async () => {
-      try {
-        const fetchedNurses = await getNurses();
-        const transformedNurses = transformNurseData(fetchedNurses);
-        setNurses(transformedNurses);
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError("An unexpected error occurred.");
+    useEffect(() => {
+        const fetchNurses = async () => {
+            try {
+                const data = await getAllNurses();
+                setNurses(data);
+            } catch (err) {
+                setError('Failed to fetch nurses');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchNurses();
+    }, []);
+
+    const handleDelete = async (id: number) => {
+        try {
+            await deleteNurse(id);
+            setNurses(nurses.filter(nurse => nurse.id !== id));
+            toast.success('Nurse deleted successfully');
+        } catch (err) {
+            toast.error('Failed to delete nurse');
         }
-      } finally {
-        setLoading(false);
-      }
     };
 
-    fetchNurses();
-  }, []);
+    const handleButtonClick = (id: number) => {
+      console.log(`Navigating to /edit-nurse/${id}`);
+      navigate(`/edit-nurse/${id}`);
+  };
+  
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p className="text-red-600">Error: {error}</p>;
+    if (loading) return <div className="text-center">Loading...</div>;
+    if (error) return <div className="text-center text-red-600">{error}</div>;
 
-  return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold text-center mb-8">Nurse List</h1>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {nurses.map((nurse) => (
-          <div
-            key={nurse.id}
-            className="p-6 border rounded-lg shadow-lg bg-white hover:shadow-xl transition-shadow duration-300"
-          >
-            <h2 className="text-xl font-semibold text-gray-800 mb-2">
-              {nurse.firstName} {nurse.lastName}
-            </h2>
-            <p className="text-sm text-gray-600">ID: {nurse.id}</p>
-            <p className="text-sm text-gray-600">
-              Name: {nurse.firstName} {nurse.lastName}
-            </p>
-            <p className="text-sm text-gray-600">Department ID: {nurse.departmentId}</p>
-            <p className="text-sm text-gray-600">
-              Contact: {nurse.contactInfo}
-            </p>
-            <p className="text-sm text-gray-600">
-              Available:{" "}
-              <span
-                className={
-                  nurse.isAvailable ? "text-green-600" : "text-red-600"
-                }
-              >
-                {nurse.isAvailable ? "Yes" : "No"}
-              </span>
-            </p>
-            <p className="text-sm text-gray-600">
-              Qualifications: {nurse.qualifications}
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+    return (
+        <div className="container mx-auto p-4">
+            <h1 className="text-2xl font-bold mb-4">Nurse List</h1>
+            <div className="mb-4">
+                <button
+                    onClick={() => navigate('/dashboard/edit-nurse/:id')}
+                    className="inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                >
+                    Add New Nurse
+                </button>
+            </div>
+            <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                <thead>
+                    <tr className="w-full bg-gray-200 text-left">
+                        <th className="py-3 px-4 border-b">ID</th>
+                        <th className="py-3 px-4 border-b">Name</th>
+                        <th className="py-3 px-4 border-b">Contact Info</th>
+                        <th className="py-3 px-4 border-b">Available</th>
+                        <th className="py-3 px-4 border-b">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {nurses.map(nurse => (
+                        <tr key={nurse.id} className="border-b">
+                            <td className="py-3 px-4">{nurse.id}</td>
+                            <td className="py-3 px-4">{`${nurse.firstName} ${nurse.lastName}`}</td>
+                            <td className="py-3 px-4">{nurse.contactInfo}</td>
+                            <td className="py-3 px-4">
+                                <span
+                                    className={`inline-block px-3 py-1 rounded-full text-white ${nurse.isAvailable ? 'bg-green-500' : 'bg-red-500'}`}
+                                >
+                                    {nurse.isAvailable ? 'Available' : 'Not Available'}
+                                </span>
+                            </td>
+                            <td className="py-3 px-4">
+                                <button
+                                    onClick={() => handleButtonClick(nurse.id)}  // Correct ID passed here
+                                    className="text-blue-500 hover:underline mr-2"
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    onClick={() => handleDelete(nurse.id)}
+                                    className="text-red-500 hover:underline"
+                                >
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            <ToastContainer /> {/* Include ToastContainer in the component */}
+        </div>
+    );
 };
 
 export default NurseList;

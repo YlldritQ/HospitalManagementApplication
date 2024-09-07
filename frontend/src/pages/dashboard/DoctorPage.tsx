@@ -44,7 +44,7 @@ const DoctorPage = () => {
             </p>
             <Button 
               label="View Appointments" 
-              onClick={() => handleButtonClick('/appointments')} 
+              onClick={() => handleButtonClick('/dashboard/appointment')} 
               variant="primary" 
               type="button" 
               className="text-white bg-[#50E3C2] hover:bg-[#3D8B74]"
