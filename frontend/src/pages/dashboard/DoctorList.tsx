@@ -1,106 +1,107 @@
-import React, { useState, useEffect } from "react";
-import { getDoctors } from "../../services/doctorService"; // Ensure correct import path
-
-// Define the Doctor interface to match your backend DTO
-interface Doctor {
-  id: number;
-  firstName: string;
-  lastName: string;
-  gender: string;
-  contactInfo: string;
-  dateOfBirth: Date;
-  dateHired: Date;
-  specialty: string;
-  qualifications: string;
-  isAvailable: boolean;
-  departmentId: number;
-  userId: string;
-}
-
-// Function to transform backend data into the expected format
-const transformDoctorData = (data: any): Doctor[] => {
-  return data.map((item: any) => ({
-    id: item.id,
-    firstName: item.firstName,
-    lastName: item.lastName,
-    gender: item.gender,
-    contactInfo: item.contactInfo,
-    dateOfBirth: new Date(item.dateOfBirth),
-    dateHired: new Date(item.dateHired),
-    specialty: item.specialty,
-    qualifications: item.qualifications,
-    isAvailable: item.isAvailable,
-    departmentId: item.departmentId,
-    userId: item.userId,
-  }));
-};
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
+import { getDoctors, deleteDoctor } from '../../services/doctorService'; // Ensure correct import path
+import { DoctorDto } from '../../types/doctorTypes';
+import { toast, ToastContainer } from 'react-toastify'; // Import ToastContainer for notifications
+import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for toast notifications
 
 const DoctorList: React.FC = () => {
-  const [doctors, setDoctors] = useState<Doctor[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+    const [doctors, setDoctors] = useState<DoctorDto[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+    const navigate = useNavigate(); // Hook to navigate programmatically
 
-  useEffect(() => {
-    const fetchDoctors = async () => {
-      try {
-        const fetchedDoctors = await getDoctors();
-        const transformedDoctors = transformDoctorData(fetchedDoctors);
-        setDoctors(transformedDoctors);
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError("An unexpected error occurred.");
+    useEffect(() => {
+        const fetchDoctors = async () => {
+            try {
+                const data = await getDoctors();
+                setDoctors(data);
+            } catch (err) {
+                setError('Failed to fetch doctors');
+                toast.error('Failed to fetch doctors');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchDoctors();
+    }, []);
+
+    const handleDelete = async (id: number) => {
+        try {
+            await deleteDoctor(id);
+            setDoctors(doctors.filter(doctor => doctor.id !== id));
+            toast.success('Doctor deleted successfully');
+        } catch (err) {
+            toast.error('Failed to delete doctor');
         }
-      } finally {
-        setLoading(false);
-      }
     };
 
-    fetchDoctors();
-  }, []);
+    const handleButtonClick = (id: number) => {
+        console.log(`Navigating to /edit-doctor/${id}`);
+        navigate(`/dashboard/edit-doctor/${id}`);
+    };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p className="text-red-600">Error: {error}</p>;
-  return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold text-center mb-8">Doctor List</h1>
+    if (loading) return <div className="text-center">Loading...</div>;
+    if (error) return <div className="text-center text-red-600">{error}</div>;
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {doctors.map((doctor) => (
-          <div
-            key={doctor.id}
-            className="p-6 border rounded-lg shadow-lg bg-white hover:shadow-xl transition-shadow duration-300"
-          >
-            <h2 className="text-xl font-semibold text-gray-800 mb-2">
-              {doctor.firstName} {doctor.lastName}
-            </h2>
-            <p className="text-sm text-gray-600">ID: {doctor.id}</p>
-            <p className="text-sm text-gray-600">
-              Name: {doctor.firstName} {doctor.lastName}
-            </p>
-            <p className="text-sm text-gray-600">Department: </p>
-            <p className="text-sm text-gray-600">
-              Specialty: {doctor.specialty}
-            </p>
-            <p className="text-sm text-gray-600">
-              Contact: {doctor.contactInfo}
-            </p>
-            <p className="text-sm text-gray-600">
-              Available:{" "}
-              <span
-                className={
-                  doctor.isAvailable ? "text-green-600" : "text-red-600"
-                }
-              >
-                {doctor.isAvailable ? "Yes" : "No"}
-              </span>
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+    return (
+        <div className="container mx-auto p-4">
+            <h1 className="text-2xl font-bold mb-4">Doctor List</h1>
+            <div className="mb-4">
+                <button
+                    onClick={() => navigate('/dashboard/edit-doctor/new')} // Adjusted path for adding a new doctor
+                    className="inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                >
+                    Add New Doctor
+                </button>
+            </div>
+            <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                <thead>
+                    <tr className="w-full bg-gray-200 text-left">
+                        <th className="py-3 px-4 border-b">ID</th>
+                        <th className="py-3 px-4 border-b">Name</th>
+                        <th className="py-3 px-4 border-b">Specialty</th>
+                        <th className="py-3 px-4 border-b">Contact Info</th>
+                        <th className="py-3 px-4 border-b">Available</th>
+                        <th className="py-3 px-4 border-b">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {doctors.map(doctor => (
+                        <tr key={doctor.id} className="border-b">
+                            <td className="py-3 px-4">{doctor.id}</td>
+                            <td className="py-3 px-4">{`${doctor.firstName} ${doctor.lastName}`}</td>
+                            <td className="py-3 px-4">{doctor.specialty}</td>
+                            <td className="py-3 px-4">{doctor.contactInfo}</td>
+                            <td className="py-3 px-4">
+                                <span
+                                    className={`inline-block px-3 py-1 rounded-full text-white ${doctor.isAvailable ? 'bg-green-500' : 'bg-red-500'}`}
+                                >
+                                    {doctor.isAvailable ? 'Available' : 'Not Available'}
+                                </span>
+                            </td>
+                            <td className="py-3 px-4">
+                                <button
+                                    onClick={() => handleButtonClick(doctor.id)}
+                                    className="text-blue-500 hover:underline mr-2"
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    onClick={() => handleDelete(doctor.id)}
+                                    className="text-red-500 hover:underline"
+                                >
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            <ToastContainer /> {/* Include ToastContainer in the component */}
+        </div>
+    );
 };
 
 export default DoctorList;

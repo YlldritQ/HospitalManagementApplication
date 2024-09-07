@@ -1,5 +1,6 @@
 
 
+
 export const PATH_PUBLIC = {
   home: "/",
   register: "/register",
@@ -23,6 +24,7 @@ export const PATH_DASHBOARD = {
   nurseList: "/dashboard/nurse-list",     
   nurse: "/dashboard/nurse",
   editNurse: "/dashboard/edit-nurse/:id",
+  editDoctor: "/dashboard/edit-doctor/:id",  
   appointment: "/dashboard/appointment",
 };
 

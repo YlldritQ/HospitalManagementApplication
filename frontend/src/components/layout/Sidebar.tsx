@@ -37,7 +37,8 @@ const Sidebar = () => {
           </button>
 
           <button 
-            onClick={() => handleClick('/user/appointments')} 
+            onClick={() => handleClick('/dashboard/appointment')} 
+
             className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
           >
             <AiOutlineCalendar className="text-green-600 w-6 h-6" />

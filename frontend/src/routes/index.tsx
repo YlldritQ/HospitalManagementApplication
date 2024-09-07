@@ -6,6 +6,7 @@ import { allAccessRoles, adminAccessRoles } from "../auth/auth.utils";
 import Layout from "../components/layout";
 
 
+
 // Lazy load components
 const AdminPage = lazy(() => import("../pages/dashboard/AdminPage"));
 const DashboardPage = lazy(() => import("../pages/dashboard/DashboardPage"));
@@ -25,6 +26,7 @@ const DoctorList = lazy(() => import("../pages/dashboard/DoctorList"));
 const NurseList = lazy(() => import("../pages/dashboard/NurseList"));
 const PatientList = lazy(() => import("../pages/dashboard/PatientList"));
 const EditNurse = lazy(() => import("../pages/dashboard/EditNurse"));
+const EditDoctor = lazy(() => import("../pages/dashboard/EditDoctor"));
 const Appointment = lazy(() => import("../pages/dashboard/Appointment"));
 
 const GlobalRouter = () => {
@@ -113,6 +115,15 @@ const GlobalRouter = () => {
   element={
     <Suspense fallback={<div>Loading...</div>}>
       <DoctorList />
+    </Suspense>
+  }
+/>
+
+<Route
+  path={PATH_DASHBOARD.editDoctor}
+  element={
+    <Suspense fallback={<div>Loading...</div>}>
+      <EditDoctor />
     </Suspense>
   }
 />
