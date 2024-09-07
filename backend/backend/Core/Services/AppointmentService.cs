@@ -100,13 +100,16 @@ namespace backend.Core.Services
 
             DateTime appointmentEnd = appointmentDto.AppointmentDate.Add(appointmentDuration);
 
-            // Check for overlapping appointments or appointments starting too close to existing ones
-            bool conflictExists = await _context.Appointments
-                .Where(a => a.DoctorId == appointmentDto.DoctorId) // Assuming conflict per doctor
-                .AnyAsync(a =>
-                    (a.AppointmentDate < appointmentEnd && a.AppointmentDate.Add(appointmentDuration) > appointmentDto.AppointmentDate) ||
-                    (appointmentDto.AppointmentDate <= a.AppointmentDate && appointmentDto.AppointmentDate >= a.AppointmentDate.Subtract(bufferPeriod))
-                );
+            // Fetch potential conflicting appointments from the database
+            var possibleConflicts = await _context.Appointments
+                .Where(a => a.DoctorId == appointmentDto.DoctorId)
+                .ToListAsync(); // Fetch into memory to handle complex time logic in-memory
+
+            // Now check for time conflicts in-memory
+            bool conflictExists = possibleConflicts.Any(a =>
+                (a.AppointmentDate < appointmentEnd && a.AppointmentDate.Add(appointmentDuration) > appointmentDto.AppointmentDate) ||
+                (appointmentDto.AppointmentDate <= a.AppointmentDate && appointmentDto.AppointmentDate >= a.AppointmentDate.Subtract(bufferPeriod))
+            );
 
             if (conflictExists)
             {
