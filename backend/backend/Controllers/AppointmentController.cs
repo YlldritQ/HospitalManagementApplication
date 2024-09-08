@@ -20,7 +20,7 @@ namespace backend.Controllers
         // GET: api/appointment
         [HttpGet]
         [Route ("GetAllAppointments")]
-        [Authorize(Roles = StaticUserRoles.ADMIN)]
+        [Authorize(Roles = StaticUserRoles.AdminDoctor)]
         public async Task<ActionResult<IEnumerable<AppointmentDto>>> GetAllAppointments()
         {
             var appointments = await _appointmentService.GetAllAppointmentsAsync();
@@ -66,10 +66,10 @@ namespace backend.Controllers
             {
                 return NotFound();
             }
-
-            await _appointmentService.UpdateAppointmentAsync(id, appointmentDto);
-
-            return NoContent(); // 204 No Content
+            
+            var res = await _appointmentService.UpdateAppointmentAsync(id, appointmentDto);
+            
+            return Ok(res); // 204 No Content
         }
 
         // DELETE: api/appointment/{id}

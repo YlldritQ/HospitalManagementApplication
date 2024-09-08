@@ -4,9 +4,11 @@ import { NurseDto } from '../../types/nurseTypes';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify'; // Import ToastContainer
 import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for toast notifications
+import { getDepartmentById } from '../../services/departmentService';
 
 const NurseList: React.FC = () => {
     const [nurses, setNurses] = useState<NurseDto[]>([]);
+    const [departments, setDepartments] = useState<Record<number, string>>({}); // Mapping from departmentId to department name
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate(); // Hook to navigate programmatically
@@ -16,6 +18,16 @@ const NurseList: React.FC = () => {
             try {
                 const data = await getAllNurses();
                 setNurses(data);
+                const departmentIds = Array.from(new Set(data.map(doctor => doctor.departmentId).filter(id => id > 0)));
+                const departmentPromises = departmentIds.map(id => getDepartmentById(id));
+                const departmentData = await Promise.all(departmentPromises);
+                const departmentMap: Record<number, string> = {};
+                departmentData.forEach(department => {
+                    if (department) {
+                        departmentMap[department.id] = department.name;
+                    }
+                });
+                setDepartments(departmentMap);
             } catch (err) {
                 setError('Failed to fetch nurses');
             } finally {
@@ -62,6 +74,7 @@ const NurseList: React.FC = () => {
                         <th className="py-3 px-4 border-b">ID</th>
                         <th className="py-3 px-4 border-b">Name</th>
                         <th className="py-3 px-4 border-b">Contact Info</th>
+                        <th className="py-3 px-4 border-b">Department</th>
                         <th className="py-3 px-4 border-b">Available</th>
                         <th className="py-3 px-4 border-b">Actions</th>
                     </tr>
@@ -72,6 +85,9 @@ const NurseList: React.FC = () => {
                             <td className="py-3 px-4">{nurse.id}</td>
                             <td className="py-3 px-4">{`${nurse.firstName} ${nurse.lastName}`}</td>
                             <td className="py-3 px-4">{nurse.contactInfo}</td>
+                            <td className="py-3 px-4">
+                                {nurse.departmentId > 0 ? departments[nurse.departmentId] : 'N/A'}
+                            </td>
                             <td className="py-3 px-4">
                                 <span
                                     className={`inline-block px-3 py-1 rounded-full text-white ${nurse.isAvailable ? 'bg-green-500' : 'bg-red-500'}`}

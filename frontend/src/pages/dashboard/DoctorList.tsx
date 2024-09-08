@@ -1,21 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
-import { getDoctors, deleteDoctor } from '../../services/doctorService'; // Ensure correct import path
+import { useNavigate } from 'react-router-dom';
+import { getDoctors, deleteDoctor } from '../../services/doctorService';
 import { DoctorDto } from '../../types/doctorTypes';
-import { toast, ToastContainer } from 'react-toastify'; // Import ToastContainer for notifications
-import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for toast notifications
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { getDepartmentById } from '../../services/departmentService'; // Import the function to get department by ID
 
 const DoctorList: React.FC = () => {
     const [doctors, setDoctors] = useState<DoctorDto[]>([]);
+    const [departments, setDepartments] = useState<Record<number, string>>({}); // Mapping from departmentId to department name
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const navigate = useNavigate(); // Hook to navigate programmatically
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchDoctors = async () => {
             try {
                 const data = await getDoctors();
                 setDoctors(data);
+                const departmentIds = Array.from(new Set(data.map(doctor => doctor.departmentId).filter(id => id > 0)));
+                const departmentPromises = departmentIds.map(id => getDepartmentById(id));
+                const departmentData = await Promise.all(departmentPromises);
+                const departmentMap: Record<number, string> = {};
+                departmentData.forEach(department => {
+                    if (department) {
+                        departmentMap[department.id] = department.name;
+                    }
+                });
+                setDepartments(departmentMap);
             } catch (err) {
                 setError('Failed to fetch doctors');
                 toast.error('Failed to fetch doctors');
@@ -38,7 +50,6 @@ const DoctorList: React.FC = () => {
     };
 
     const handleButtonClick = (id: number) => {
-        console.log(`Navigating to /edit-doctor/${id}`);
         navigate(`/dashboard/edit-doctor/${id}`);
     };
 
@@ -50,7 +61,7 @@ const DoctorList: React.FC = () => {
             <h1 className="text-2xl font-bold mb-4">Doctor List</h1>
             <div className="mb-4">
                 <button
-                    onClick={() => navigate('/dashboard/edit-doctor/new')} // Adjusted path for adding a new doctor
+                    onClick={() => navigate('/dashboard/edit-doctor/new')}
                     className="inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
                 >
                     Add New Doctor
@@ -63,6 +74,7 @@ const DoctorList: React.FC = () => {
                         <th className="py-3 px-4 border-b">Name</th>
                         <th className="py-3 px-4 border-b">Specialty</th>
                         <th className="py-3 px-4 border-b">Contact Info</th>
+                        <th className="py-3 px-4 border-b">Department</th>
                         <th className="py-3 px-4 border-b">Available</th>
                         <th className="py-3 px-4 border-b">Actions</th>
                     </tr>
@@ -74,6 +86,9 @@ const DoctorList: React.FC = () => {
                             <td className="py-3 px-4">{`${doctor.firstName} ${doctor.lastName}`}</td>
                             <td className="py-3 px-4">{doctor.specialty}</td>
                             <td className="py-3 px-4">{doctor.contactInfo}</td>
+                            <td className="py-3 px-4">
+                                {doctor.departmentId > 0 ? departments[doctor.departmentId] : 'N/A'}
+                            </td>
                             <td className="py-3 px-4">
                                 <span
                                     className={`inline-block px-3 py-1 rounded-full text-white ${doctor.isAvailable ? 'bg-green-500' : 'bg-red-500'}`}
@@ -99,7 +114,7 @@ const DoctorList: React.FC = () => {
                     ))}
                 </tbody>
             </table>
-            <ToastContainer /> {/* Include ToastContainer in the component */}
+            <ToastContainer />
         </div>
     );
 };

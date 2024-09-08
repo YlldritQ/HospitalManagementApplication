@@ -1,3 +1,4 @@
+import EditAppointment from "../pages/dashboard/EditAppointment";
 
 
 
@@ -26,6 +27,7 @@ export const PATH_DASHBOARD = {
   editNurse: "/dashboard/edit-nurse/:id",
   editDoctor: "/dashboard/edit-doctor/:id",  
   appointment: "/dashboard/appointment",
+  editAppointment : "/dashboard/edit-appointment/:id"
 };
 
 

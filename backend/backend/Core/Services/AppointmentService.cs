@@ -143,21 +143,31 @@ namespace backend.Core.Services
 
         public async Task<GeneralServiceResponseDto> UpdateAppointmentAsync(int appointmentId, CUAppointmentDto appointmentDto)
         {
+            var response = new GeneralServiceResponseDto();
+
+            // Fetch the existing appointment
             var appointment = await _context.Appointments
                 .Include(a => a.Patient)
                 .Include(a => a.Doctor)
                 .Include(a => a.Room)
                 .FirstOrDefaultAsync(a => a.Id == appointmentId);
 
+            // Check if the appointment exists
             if (appointment == null)
             {
-                return new GeneralServiceResponseDto() { IsSucceed = false , StatusCode = 400, };
+                response.IsSucceed = false;
+                response.StatusCode = 404;
+                response.Message = "Appointment not found.";
+                return response;
             }
+
+            // Initialize error messages list
+            var errorMessages = new List<string>();
 
             // Validate appointment date
             if (appointmentDto.AppointmentDate < DateTime.UtcNow)
             {
-                throw new ArgumentException("Appointment date cannot be in the past.");
+                errorMessages.Add("Appointment date cannot be in the past.");
             }
 
             // Validate related entities
@@ -167,31 +177,44 @@ namespace backend.Core.Services
 
             if (patient == null)
             {
-                throw new ArgumentException($"Patient with ID {appointmentDto.PatientId} not found.");
+                errorMessages.Add($"Patient with ID {appointmentDto.PatientId} not found.");
             }
 
             if (doctor == null)
             {
-                throw new ArgumentException($"Doctor with ID {appointmentDto.DoctorId} not found.");
+                errorMessages.Add($"Doctor with ID {appointmentDto.DoctorId} not found.");
             }
 
             if (room == null)
             {
-                throw new ArgumentException($"Room with ID {appointmentDto.RoomId} not found.");
+                errorMessages.Add($"Room with ID {appointmentDto.RoomId} not found.");
             }
 
+            // If there are validation errors, return them
+            if (errorMessages.Any())
+            {
+                response.IsSucceed = false;
+                response.StatusCode = 400;
+                response.Message = string.Join(" ", errorMessages);
+                return response;
+            }
+
+            // Map the DTO to the entity and update references
             _mapper.Map(appointmentDto, appointment);
             appointment.Patient = patient;
             appointment.Doctor = doctor;
             appointment.Room = room;
 
+            // Save changes to the database
             await _context.SaveChangesAsync();
-            return new GeneralServiceResponseDto() { 
-                IsSucceed = true,
-                StatusCode = 201,
-                Message = "Update saved"
-            };
+
+            // Return success response
+            response.IsSucceed = true;
+            response.StatusCode = 200;
+            response.Message = "Update saved";
+            return response;
         }
+
 
         public async Task DeleteAppointmentAsync(int appointmentId)
         {

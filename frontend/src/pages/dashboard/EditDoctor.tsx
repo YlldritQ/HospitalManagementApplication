@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getDoctorById, updateDoctor } from '../../services/doctorService';
 import { CUDoctorDto, DoctorDto } from '../../types/doctorTypes';
 import { toast } from 'react-toastify';
+import { DepartmentDto } from '../../types/departmentTypes';
+import { getDepartments } from '../../services/departmentService';
 
 const EditDoctor: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -22,10 +24,22 @@ const EditDoctor: React.FC = () => {
     userId: '',
   });
 
+  const [departments, setDepartments] = useState<DepartmentDto[]>([]);  // State to store departments
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    const fetchDepartments = async () => {
+      try {
+        const departmentData: DepartmentDto[] = await getDepartments();  // Fetch departments from the backend
+        setDepartments(departmentData);
+      } catch (err) {
+        toast.error('Failed to fetch departments');
+      }
+    };
+
+    fetchDepartments();
+
     if (id) {
       const fetchDoctor = async () => {
         try {
@@ -41,7 +55,7 @@ const EditDoctor: React.FC = () => {
               specialty: data.specialty,
               qualifications: data.qualifications,
               isAvailable: data.isAvailable,
-              departmentId: data.departmentId,
+              departmentId: data.departmentId ?? 0, // Use nullish coalescing to handle potential null values
               userId: data.userId,
             });
           } else {
@@ -110,8 +124,7 @@ const EditDoctor: React.FC = () => {
     <div className="max-w-2xl mx-auto p-4 bg-white rounded shadow-md">
       <h1 className="text-2xl font-semibold mb-4">{id ? 'Edit Doctor' : 'Add New Doctor'}</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* First Name */}
-        <div>
+      <div>
           <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
             First Name
           </label>
@@ -261,39 +274,27 @@ const EditDoctor: React.FC = () => {
             Available
           </label>
         </div>
-
-        {/* Department ID */}
+        
+        {/* Department Dropdown */}
         <div>
           <label htmlFor="departmentId" className="block text-sm font-medium text-gray-700">
-            Department ID
+            Department
           </label>
-          <input
-            type="number"
+          <select
             name="departmentId"
             id="departmentId"
             value={doctor.departmentId}
             onChange={handleChange}
-            placeholder="Enter department ID"
             className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
             required
-          />
-        </div>
-
-        {/* User ID */}
-        <div>
-          <label htmlFor="userId" className="block text-sm font-medium text-gray-700">
-            User ID
-          </label>
-          <input
-            type="text"
-            name="userId"
-            id="userId"
-            value={doctor.userId}
-            onChange={handleChange}
-            placeholder="Enter user ID"
-            className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            required
-          />
+          >
+            <option value="">Select a Department</option>
+            {departments.map((dept) => (
+              <option key={dept.id} value={dept.id}>
+                {dept.name}
+              </option>
+            ))}
+          </select>
         </div>
 
         {/* Submit Button */}

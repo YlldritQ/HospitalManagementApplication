@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getNurseById, updateNurse } from '../../services/nurseService';
 import { CUNurseDto, NurseDto } from '../../types/nurseTypes';
 import { toast } from 'react-toastify';
+import { DepartmentDto } from '../../types/departmentTypes';
+import { getDepartments } from '../../services/departmentService';
 
 const EditNurse: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -20,11 +22,23 @@ const EditNurse: React.FC = () => {
     departmentId: 0,
     userId: '',
   });
-
+  
+  const [departments, setDepartments] = useState<DepartmentDto[]>([]);  // State to store departments
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    const fetchDepartments = async () => {
+      try {
+        const departmentData: DepartmentDto[] = await getDepartments();  // Fetch departments from the backend
+        setDepartments(departmentData);
+      } catch (err) {
+        toast.error('Failed to fetch departments');
+      }
+    };
+
+    fetchDepartments();
+    
     if (id) {
       const fetchNurse = async () => {
         try {
@@ -240,38 +254,26 @@ const EditNurse: React.FC = () => {
           </label>
         </div>
 
-        {/* Department ID */}
+        {/* Department Dropdown */}
         <div>
           <label htmlFor="departmentId" className="block text-sm font-medium text-gray-700">
-            Department ID
+            Department
           </label>
-          <input
-            type="number"
+          <select
             name="departmentId"
             id="departmentId"
             value={nurse.departmentId}
             onChange={handleChange}
-            placeholder="Enter department ID"
             className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
             required
-          />
-        </div>
-
-        {/* User ID */}
-        <div>
-          <label htmlFor="userId" className="block text-sm font-medium text-gray-700">
-            User ID
-          </label>
-          <input
-            type="text"
-            name="userId"
-            id="userId"
-            value={nurse.userId}
-            onChange={handleChange}
-            placeholder="Enter user ID"
-            className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            required
-          />
+          >
+            <option value="">Select a Department</option>
+            {departments.map((dept) => (
+              <option key={dept.id} value={dept.id}>
+                {dept.name}
+              </option>
+            ))}
+          </select>
         </div>
 
         {/* Submit Button */}
