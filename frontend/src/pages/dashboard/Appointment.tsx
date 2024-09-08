@@ -20,7 +20,7 @@ import { PatientDto } from "../../types/patientTypes";
 const Appointment: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [rooms, setRooms] = useState<RoomDto[]>([]); // For storing rooms related to the selected doctor
+  const [rooms, setRooms] = useState<RoomDto[]>([]);
   const [patients, setPatients] = useState<PatientDto[]>([]);
   const [doctors, setDoctors] = useState<DoctorDto[]>([]);
   const [appointments, setAppointments] = useState<AppointmentDto[]>([]);
@@ -29,15 +29,13 @@ const Appointment: React.FC = () => {
   const [isCreatingAppointment, setIsCreatingAppointment] =
     useState<boolean>(false);
   const [formData, setFormData] = useState<CUAppointmentDto>({
-    appointmentDate: new Date(), // Assuming Date is used
+    appointmentDate: new Date(),
     patientId: 0,
     doctorId: 0,
     status: "Scheduled",
     roomId: 0,
   });
   const [appointmentTime, setAppointmentTime] = useState<string>('');
-
-  //const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -80,13 +78,10 @@ const Appointment: React.FC = () => {
 
     fetchPatients();
     fetchDoctors();
-    // fetchDepartments();
     fetchAppointments();
-    //fetchDoctor();
   }, [id]);
 
   const handleCreateAppointment = async () => {
-    // Ensure appointmentDate is a Date object
     if (!(formData.appointmentDate instanceof Date) || !appointmentTime) {
       toast.error('Invalid date or time.');
       return;
@@ -95,20 +90,17 @@ const Appointment: React.FC = () => {
     const [year, month, day] = formData.appointmentDate.toISOString().split("T")[0].split("-");
     const [hours, minutes] = appointmentTime.split(":");
   
-    // Convert to integer to avoid type errors
     const yearNum = parseInt(year, 10);
-    const monthNum = parseInt(month, 10) - 1; // Months are 0-indexed
+    const monthNum = parseInt(month, 10) - 1;
     const dayNum = parseInt(day, 10);
     const hoursNum = parseInt(hours, 10);
     const minutesNum = parseInt(minutes, 10);
   
-    // Create a new Date object with combined date and time
     const appointmentDateTime = new Date(yearNum, monthNum, dayNum, hoursNum, minutesNum);
   
-    // Call the API with appointmentDateTime as a Date object
     const response = await createAppointment({
       ...formData,
-      appointmentDate: appointmentDateTime, // Ensure this is a Date object
+      appointmentDate: appointmentDateTime,
     });
   
     if (response.isSucceed) {
@@ -128,7 +120,6 @@ const Appointment: React.FC = () => {
       toast.error(`Insert failed: ${response.message}`);
     }
   };
-  
 
   const handleDeleteAppointment = async (id: number) => {
     try {
@@ -147,12 +138,11 @@ const Appointment: React.FC = () => {
     const doctorId = Number(e.target.value);
     setFormData((prev) => ({ ...prev, doctorId }));
 
-    // Fetch the rooms for the selected doctor
     if (doctorId) {
       try {
         const doctorRooms = await getRoomsAssignedToDoctor(doctorId);
         setRooms(doctorRooms);
-        setFormData((prev) => ({ ...prev, roomId: 0 })); // Reset roomId when changing doctor
+        setFormData((prev) => ({ ...prev, roomId: 0 }));
       } catch (err) {
         toast.error("Failed to fetch rooms for the selected doctor");
       }
@@ -189,7 +179,6 @@ const Appointment: React.FC = () => {
         setSelectedAppointment(transformedAppointment);
       }
     } catch (error: unknown) {
-      console.log(error);
       if (error instanceof Error) {
         setError(error.message);
       } else {
@@ -228,7 +217,7 @@ const Appointment: React.FC = () => {
               type="date"
               id="appointmentDate"
               name="appointmentDate"
-              value={formData.appointmentDate.toISOString().split("T")[0]} // Format to YYYY-MM-DD
+              value={formData.appointmentDate.toISOString().split("T")[0]} 
               onChange={handleDateChange}
               placeholder="Select date"
               title="Select the appointment date"
@@ -296,26 +285,30 @@ const Appointment: React.FC = () => {
             </select>
 
             {/* Room Dropdown */}
-            <label
-              className="block text-sm font-medium text-gray-700 mb-1"
-              htmlFor="roomId"
-            >
-              Select Room
-            </label>
-            <select
-              id="roomId"
-              name="roomId"
-              value={formData.roomId}
-              onChange={handleInputChange}
-              className="border rounded p-2 mb-4 w-full"
-            >
-              <option value="">Select a room</option>
-              {rooms.map((room) => (
-                <option key={room.id} value={room.id}>
-                  {room.roomNumber}
-                </option>
-              ))}
-            </select>
+            {formData.doctorId && (
+              <>
+                <label
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                  htmlFor="roomId"
+                >
+                  Select Room
+                </label>
+                <select
+                  id="roomId"
+                  name="roomId"
+                  value={formData.roomId}
+                  onChange={handleInputChange}
+                  className="border rounded p-2 mb-4 w-full"
+                >
+                  <option value="">Select a room</option>
+                  {rooms.map((room) => (
+                    <option key={room.id} value={room.id}>
+                      {room.roomNumber}
+                    </option>
+                  ))}
+                </select>
+              </>
+            )}
 
             <label
               className="block text-sm font-medium text-gray-700 mb-1"
