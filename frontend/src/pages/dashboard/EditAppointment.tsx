@@ -86,9 +86,7 @@ const EditAppointment: React.FC = () => {
   
     try {
       if (id) {
-        const response = await updateAppointment(Number(id), appointment);
-        console.log(response);
-        
+        const response = await updateAppointment(Number(id), appointment);        
         if (response.isSucceed) {
           toast.success(`Appointment updated successfully: ${response.message}`);
         } else {

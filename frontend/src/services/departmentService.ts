@@ -1,6 +1,7 @@
-import axios from 'axios'; // Import axios for error checking
+import axios, { AxiosResponse } from 'axios'; // Import axios for error checking
 import axiosInstance from '../utils/axiosInstance'; // Import the centralized Axios instance
 import { DepartmentDto, CreateDepartmentDto } from '../types/departmentTypes'; // Import types from departmentTypes
+import { GeneralServiceResponseDto } from '../types/generalTypes';
 
 // Get all departments
 export const getDepartments = async (): Promise<DepartmentDto[]> => {
@@ -36,9 +37,18 @@ export const createDepartment = async (departmentDto: CreateDepartmentDto): Prom
 };
 
 // Update department
-export const updateDepartment = async (id: number, departmentDto: DepartmentDto): Promise<void> => {
+export const updateDepartment = async (id: number, departmentDto: DepartmentDto): Promise<GeneralServiceResponseDto> => {
   try {
-    await axiosInstance.put(`/Department/${id}`, departmentDto);
+    const response: AxiosResponse<any> = await axiosInstance.put(`/Department/${id}`, departmentDto);
+
+    // Assuming the response data contains the necessary properties, map them to GeneralServiceResponseDto
+    const result: GeneralServiceResponseDto = {
+      isSucceed: response.data.isSucceed,
+      statusCode: response.data.statusCode,
+      message: response.data.message
+    };
+
+    return result;
   } catch (error) {
     handleError(error);
     throw error; // Rethrow the error after logging it

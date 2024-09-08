@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getPatients } from "../../services/patientService";
+import { getAllPatients } from "../../services/patientService";
 
 interface Patient {
   patientId: number;
@@ -33,7 +33,7 @@ const PatientList: React.FC = () => {
   useEffect(() => {
     const fetchPatients = async () => {
       try {
-        const fetchedPatients = await getPatients();
+        const fetchedPatients = await getAllPatients();
         console.log(fetchedPatients); // Log to inspect
         const transformedPatients = transformPatientData(fetchedPatients);
         setPatients(transformedPatients);

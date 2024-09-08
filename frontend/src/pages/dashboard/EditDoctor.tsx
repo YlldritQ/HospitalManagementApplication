@@ -106,10 +106,14 @@ const EditDoctor: React.FC = () => {
 
     try {
       if (id) {
-        await updateDoctor(Number(id), updatedDoctor);
-        toast.success('Doctor updated successfully');
-      } else {
-        toast.success('Doctor created successfully');
+        const response = await updateDoctor(Number(id), updatedDoctor);
+        if(response.isSucceed)
+        {
+          toast.success(`Doctor updated successfully: ${response.message}`);
+        }else
+        {
+          toast.error(`Failed to update Doctor: ${response.message}`);
+        }
       }
       navigate('/dashboard/doctor-list');
     } catch (err) {

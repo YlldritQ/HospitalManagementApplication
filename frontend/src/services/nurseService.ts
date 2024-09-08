@@ -1,6 +1,7 @@
 import axiosInstance from '../utils/axiosInstance';
 import { NurseDto, CUNurseDto, NurseRoomAssignmentDto } from '../types/nurseTypes'; // Adjust import if necessary
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+import { GeneralServiceResponseDto } from '../types/generalTypes';
 
 // Fetch all nurses
 export const getAllNurses = async (): Promise<NurseDto[]> => {
@@ -51,17 +52,21 @@ export const createNurse = async (nurseDto: CUNurseDto): Promise<NurseDto> => {
 };
 
 // Update a nurse
-export const updateNurse = async (id: number, nurseDto: CUNurseDto): Promise<void> => {
+export const updateNurse = async (id: number, nurseDto: CUNurseDto): Promise<GeneralServiceResponseDto> => {
   try {
-    await axiosInstance.put(`/nurse/${id}`, nurseDto);
+    const response: AxiosResponse<any> = await axiosInstance.put(`/nurse/${id}`, nurseDto);
+
+    // Assuming the response data contains the necessary properties, map them to GeneralServiceResponseDto
+    const result: GeneralServiceResponseDto = {
+      isSucceed: response.data.isSucceed,
+      statusCode: response.data.statusCode,
+      message: response.data.message
+    };
+
+    return result;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.error(`API call failed with status ${error.response?.status}: ${error.response?.statusText}`);
-      throw new Error(error.response?.statusText || 'Failed to update nurse');
-    } else {
-      console.error('Unknown error occurred during Axios fetch');
-      throw new Error('Unknown error occurred during Axios fetch');
-    }
+    handleError(error);
+    throw error; // Rethrow the error after logging it
   }
 };
 
@@ -107,5 +112,14 @@ export const removeRoomsFromNurse = async (nurseId: number): Promise<void> => {
       console.error('Unknown error occurred during Axios fetch');
       throw new Error('Unknown error occurred during Axios fetch');
     }
+  }
+};
+const handleError = (error: any) => {
+  if (axios.isAxiosError(error)) {
+    console.error(`API call failed with status ${error.response?.status}: ${error.response?.statusText}`);
+    throw new Error(error.response?.statusText || 'API call failed');
+  } else {
+    console.error('Unknown error occurred during Axios fetch');
+    throw new Error('Unknown error occurred during Axios fetch');
   }
 };

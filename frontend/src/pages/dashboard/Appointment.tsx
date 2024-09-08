@@ -1,69 +1,49 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
-  getDoctorById,
   getDoctors,
   getRoomsAssignedToDoctor,
-  updateDoctor,
 } from "../../services/doctorService";
-import { CUDoctorDto, DoctorDto } from "../../types/doctorTypes";
-import { toast } from "react-toastify";
-import { DepartmentDto } from "../../types/departmentTypes";
-import { getDepartments } from "../../services/departmentService";
+import { DoctorDto } from "../../types/doctorTypes";
+import { toast } from "react-hot-toast";
 import {
   getAppointments,
   deleteAppointment,
   getAppointmentById,
   createAppointment,
-  updateAppointment,
 } from "../../services/appointmentService";
 import { AppointmentDto, CUAppointmentDto } from "../../types/appointmentTypes";
 import { getAllPatients } from "../../services/patientService";
 import { RoomDto } from "../../types/roomTypes";
 import { PatientDto } from "../../types/patientTypes";
 
-const EditDoctor: React.FC = () => {
+const Appointment: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-
-  const [doctor, setDoctor] = useState<CUDoctorDto>({
-    firstName: "",
-    lastName: "",
-    gender: "",
-    contactInfo: "",
-    dateOfBirth: new Date(),
-    dateHired: new Date(),
-    specialty: "",
-    qualifications: "",
-    isAvailable: false,
-    departmentId: 0,
-    userId: "",
-  });
-  
   const [rooms, setRooms] = useState<RoomDto[]>([]); // For storing rooms related to the selected doctor
-  const [patient, setPatients] = useState<PatientDto[]>([]);
-
-  const [departments, setDepartments] = useState<DepartmentDto[]>([]);
+  const [patients, setPatients] = useState<PatientDto[]>([]);
+  const [doctors, setDoctors] = useState<DoctorDto[]>([]);
   const [appointments, setAppointments] = useState<AppointmentDto[]>([]);
   const [selectedAppointment, setSelectedAppointment] =
     useState<AppointmentDto | null>(null);
   const [isCreatingAppointment, setIsCreatingAppointment] =
     useState<boolean>(false);
   const [formData, setFormData] = useState<CUAppointmentDto>({
-    appointmentDate: new Date(),
+    appointmentDate: new Date(), // Assuming Date is used
     patientId: 0,
     doctorId: 0,
     status: "Scheduled",
     roomId: 0,
   });
+  const [appointmentTime, setAppointmentTime] = useState<string>('');
 
-  const [loading, setLoading] = useState<boolean>(true);
+  //const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchPatients = async () => {
       try {
-        const patientsData = await getAllPatients(); // Assuming this fetches all patients
+        const patientsData = await getAllPatients();
         setPatients(patientsData);
       } catch (err) {
         toast.error("Failed to fetch patients");
@@ -72,19 +52,10 @@ const EditDoctor: React.FC = () => {
 
     const fetchDoctors = async () => {
       try {
-        const doctorsData = await getDoctors(); // Assuming this fetches all doctors
+        const doctorsData = await getDoctors();
         setDoctors(doctorsData);
       } catch (err) {
         toast.error("Failed to fetch doctors");
-      }
-    };
-
-    const fetchDepartments = async () => {
-      try {
-        const departmentData = await getDepartments();
-        setDepartments(departmentData);
-      } catch (err) {
-        toast.error("Failed to fetch departments");
       }
     };
 
@@ -107,92 +78,40 @@ const EditDoctor: React.FC = () => {
       }
     };
 
-    const fetchDoctor = async () => {
-      if (id) {
-        try {
-          const data: DoctorDto | null = await getDoctorById(Number(id));
-          if (data) {
-            setDoctor({
-              firstName: data.firstName,
-              lastName: data.lastName,
-              gender: data.gender,
-              contactInfo: data.contactInfo,
-              dateOfBirth: new Date(data.dateOfBirth),
-              dateHired: new Date(data.dateHired),
-              specialty: data.specialty,
-              qualifications: data.qualifications,
-              isAvailable: data.isAvailable,
-              departmentId: data.departmentId ?? 0,
-              userId: data.userId,
-            });
-          } else {
-            setError("Doctor not found");
-          }
-        } catch (err) {
-          setError("Failed to fetch doctor details");
-        } finally {
-          setLoading(false);
-        }
-      } else {
-        setLoading(false);
-      }
-    };
-
     fetchPatients();
     fetchDoctors();
-    fetchDepartments();
+    // fetchDepartments();
     fetchAppointments();
-    fetchDoctor();
+    //fetchDoctor();
   }, [id]);
 
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value, type } = event.target;
-
-    if (type === "checkbox") {
-      setDoctor((prevState) => ({
-        ...prevState,
-        [name]: (event.target as HTMLInputElement).checked,
-      }));
-    } else if (type === "date") {
-      setDoctor((prevState) => ({
-        ...prevState,
-        [name]: new Date(value),
-      }));
-    } else {
-      setDoctor((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
-    }
-  };
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const updatedDoctor: CUDoctorDto = {
-      ...doctor,
-      dateOfBirth: new Date(doctor.dateOfBirth),
-      dateHired: new Date(doctor.dateHired),
-    };
-
-    try {
-      if (id) {
-        await updateDoctor(Number(id), updatedDoctor);
-        toast.success("Doctor updated successfully");
-      } else {
-        toast.success("Doctor created successfully");
-      }
-      navigate("/dashboard/doctor-list");
-    } catch (err) {
-      toast.error("Failed to save doctor");
-    }
-  };
-
   const handleCreateAppointment = async () => {
-    try {
-      await createAppointment(formData);
+    // Ensure appointmentDate is a Date object
+    if (!(formData.appointmentDate instanceof Date) || !appointmentTime) {
+      toast.error('Invalid date or time.');
+      return;
+    }
+  
+    const [year, month, day] = formData.appointmentDate.toISOString().split("T")[0].split("-");
+    const [hours, minutes] = appointmentTime.split(":");
+  
+    // Convert to integer to avoid type errors
+    const yearNum = parseInt(year, 10);
+    const monthNum = parseInt(month, 10) - 1; // Months are 0-indexed
+    const dayNum = parseInt(day, 10);
+    const hoursNum = parseInt(hours, 10);
+    const minutesNum = parseInt(minutes, 10);
+  
+    // Create a new Date object with combined date and time
+    const appointmentDateTime = new Date(yearNum, monthNum, dayNum, hoursNum, minutesNum);
+  
+    // Call the API with appointmentDateTime as a Date object
+    const response = await createAppointment({
+      ...formData,
+      appointmentDate: appointmentDateTime, // Ensure this is a Date object
+    });
+  
+    if (response.isSucceed) {
       setIsCreatingAppointment(false);
       const updatedAppointments = await getAppointments();
       const transformedAppointments = updatedAppointments.map((item: any) => ({
@@ -204,28 +123,12 @@ const EditDoctor: React.FC = () => {
         roomId: item.roomId,
       }));
       setAppointments(transformedAppointments);
-    } catch (err) {
-      toast.error("Failed to create appointment");
+      toast.success(`Appointment created: ${response.message}`);
+    } else {
+      toast.error(`Insert failed: ${response.message}`);
     }
   };
-
-  const handleUpdateAppointment = async (id: number) => {
-    try {
-      await updateAppointment(id, formData);
-      const updatedAppointments = await getAppointments();
-      const transformedAppointments = updatedAppointments.map((item: any) => ({
-        id: item.id,
-        appointmentDate: new Date(item.appointmentDate),
-        patientId: item.patientId,
-        doctorId: item.doctorId,
-        status: item.status,
-        roomId: item.roomId,
-      }));
-      setAppointments(transformedAppointments);
-    } catch (err) {
-      toast.error("Failed to update appointment");
-    }
-  };
+  
 
   const handleDeleteAppointment = async (id: number) => {
     try {
@@ -247,15 +150,18 @@ const EditDoctor: React.FC = () => {
     // Fetch the rooms for the selected doctor
     if (doctorId) {
       try {
-        const doctorRooms = await getRoomsAssignedToDoctor(doctorId); // Assuming this fetches rooms for a doctor
+        const doctorRooms = await getRoomsAssignedToDoctor(doctorId);
         setRooms(doctorRooms);
+        setFormData((prev) => ({ ...prev, roomId: 0 })); // Reset roomId when changing doctor
       } catch (err) {
         toast.error("Failed to fetch rooms for the selected doctor");
       }
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -292,7 +198,6 @@ const EditDoctor: React.FC = () => {
     }
   };
 
-  if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
   return (
@@ -329,6 +234,22 @@ const EditDoctor: React.FC = () => {
               title="Select the appointment date"
               className="border rounded p-2 mb-4 w-full"
             />
+            <label
+              className="block text-sm font-medium text-gray-700 mb-1"
+              htmlFor="appointmentTime"
+            >
+              Appointment Time
+            </label>
+            <input
+              type="time"
+              id="appointmentTime"
+              name="appointmentTime"
+              value={appointmentTime}
+              onChange={(e) => setAppointmentTime(e.target.value)}
+              placeholder="Select time"
+              title="Select the appointment time"
+              className="border rounded p-2 mb-4 w-full"
+            />
 
             {/* Patient Dropdown */}
             <label
@@ -346,28 +267,55 @@ const EditDoctor: React.FC = () => {
             >
               <option value="">Select a patient</option>
               {patients.map((patient) => (
-                <option key={patient.id} value={patient.id}>
+                <option key={patient.patientId} value={patient.patientId}>
                   {patient.firstName} {patient.lastName}
                 </option>
               ))}
             </select>
 
+            {/* Doctor Dropdown */}
             <label
               className="block text-sm font-medium text-gray-700 mb-1"
               htmlFor="doctorId"
             >
-              Doctor ID
+              Select Doctor
             </label>
-            <input
-              type="number"
+            <select
               id="doctorId"
               name="doctorId"
               value={formData.doctorId}
-              onChange={handleInputChange}
-              placeholder="Enter Doctor ID"
-              title="Enter Doctor ID"
+              onChange={handleDoctorChange}
               className="border rounded p-2 mb-4 w-full"
-            />
+            >
+              <option value="">Select a doctor</option>
+              {doctors.map((doctor) => (
+                <option key={doctor.id} value={doctor.id}>
+                  {doctor.firstName} {doctor.lastName}
+                </option>
+              ))}
+            </select>
+
+            {/* Room Dropdown */}
+            <label
+              className="block text-sm font-medium text-gray-700 mb-1"
+              htmlFor="roomId"
+            >
+              Select Room
+            </label>
+            <select
+              id="roomId"
+              name="roomId"
+              value={formData.roomId}
+              onChange={handleInputChange}
+              className="border rounded p-2 mb-4 w-full"
+            >
+              <option value="">Select a room</option>
+              {rooms.map((room) => (
+                <option key={room.id} value={room.id}>
+                  {room.roomNumber}
+                </option>
+              ))}
+            </select>
 
             <label
               className="block text-sm font-medium text-gray-700 mb-1"
@@ -383,23 +331,6 @@ const EditDoctor: React.FC = () => {
               onChange={handleInputChange}
               placeholder="Enter Status"
               title="Enter Appointment Status"
-              className="border rounded p-2 mb-4 w-full"
-            />
-
-            <label
-              className="block text-sm font-medium text-gray-700 mb-1"
-              htmlFor="roomId"
-            >
-              Room ID
-            </label>
-            <input
-              type="number"
-              id="roomId"
-              name="roomId"
-              value={formData.roomId}
-              onChange={handleInputChange}
-              placeholder="Enter Room ID"
-              title="Enter Room ID"
               className="border rounded p-2 mb-4 w-full"
             />
 
@@ -431,6 +362,11 @@ const EditDoctor: React.FC = () => {
               <p className="text-sm text-gray-600">
                 Date: {appointment.appointmentDate.toDateString()}
               </p>
+              <p className="text-sm text-gray-600">
+                Date and Time:{" "}
+                {new Date(appointment.appointmentDate).toLocaleString()}
+              </p>
+
               <p className="text-sm text-gray-600">
                 Patient ID: {appointment.patientId}
               </p>
@@ -506,4 +442,4 @@ const EditDoctor: React.FC = () => {
   );
 };
 
-export default EditDoctor;
+export default Appointment;

@@ -101,10 +101,14 @@ const EditNurse: React.FC = () => {
 
     try {
       if (id) {
-        await updateNurse(Number(id), updatedNurse);
-        toast.success('Nurse updated successfully');
-      } else {
-        toast.success('Nurse created successfully');
+        const response = await updateNurse(Number(id), updatedNurse);
+        if(response.isSucceed)
+        {
+          toast.success(`Nurse updated successfully: ${response.message}`);
+        }else
+        {
+          toast.error(`Failed to update Nurse: ${response.message}`);
+        }
       }
       navigate('/dashboard/nurse-list');
     } catch (err) {
