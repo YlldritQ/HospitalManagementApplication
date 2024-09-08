@@ -8,6 +8,6 @@ public interface IMedicalRecordService
     Task<MedicalRecordDto> GetMedicalRecordByIdAsync(int recordId);
     Task<IEnumerable<MedicalRecordDto>> GetAllMedicalRecordsAsync();
     Task<GeneralServiceResponseDto> CreateMedicalRecordAsync(CUMedicalRecordDto recordDto);
-    Task UpdateMedicalRecordAsync(int recordId, CUMedicalRecordDto recordDto);
+    Task<GeneralServiceResponseDto> UpdateMedicalRecordAsync(int recordId, CUMedicalRecordDto recordDto);
     Task DeleteMedicalRecordAsync(int recordId);
 }

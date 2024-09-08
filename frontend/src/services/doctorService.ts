@@ -1,6 +1,7 @@
 import axios from 'axios'; // Import axios for error checking
 import axiosInstance from '../utils/axiosInstance';
 import { DoctorDto, CUDoctorDto, DoctorRoomManagementDto } from '../types/doctorTypes'; // Import types from doctorTypes
+import { RoomDto } from '../types/roomTypes';
 
 // Get all doctors
 export const getDoctors = async (): Promise<DoctorDto[]> => {
@@ -72,6 +73,16 @@ export const removeRoomsFromDoctor = async (doctorId: number, doctorRoomDto: Doc
   } catch (error) {
     handleError(error);
     throw error; // Rethrow the error after logging it
+  }
+};
+
+export const getRoomsAssignedToDoctor = async (doctorId: number): Promise<RoomDto[]> => {
+  try {
+    const response = await axiosInstance.get(`/Doctor/${doctorId}/rooms`);
+    return response.data as RoomDto[];
+  } catch (error) {
+    handleError(error);
+    return []; // Return an empty array in case of an error
   }
 };
 

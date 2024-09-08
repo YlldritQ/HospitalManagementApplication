@@ -57,22 +57,53 @@ namespace backend.Core.Services
                 Message = " Patient inserted succesfully"
             };
         }
-
-        public async Task UpdatePatientAsync(int patientId, CUPatientDto patientDto)
+        public async Task<GeneralServiceResponseDto> UpdatePatientAsync(int patientId, CUPatientDto patientDto)
         {
-            await ValidatePatientExistsAsync(patientId);
-
-            var patient = await _context.Patients
+            // Validate if the patient exists
+            var existingPatient = await _context.Patients
                 .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.PatientId == patientId);
 
-            if (patient == null) return;
+            // If the patient is not found, return a failure response
+            if (existingPatient == null)
+            {
+                return new GeneralServiceResponseDto
+                {
+                    IsSucceed = false,
+                    StatusCode = 404,
+                    Message = $"Patient with ID {patientId} not found."
+                };
+            }
 
-            patient = _mapper.Map<Patient>(patientDto);
+            // Map the DTO to a new Patient entity
+            var patient = _mapper.Map<Patient>(patientDto);
             patient.PatientId = patientId; // Ensure the ID is set correctly
 
+            // Update the patient in the database
             _context.Patients.Update(patient);
-            await _context.SaveChangesAsync();
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                // Handle database update exceptions
+                return new GeneralServiceResponseDto
+                {
+                    IsSucceed = false,
+                    StatusCode = 500,
+                    Message = "An error occurred while updating the patient."
+                };
+            }
+
+            // Return a successful response if everything went well
+            return new GeneralServiceResponseDto
+            {
+                IsSucceed = true,
+                StatusCode = 200,
+                Message = $"Patient with ID {patientId} has been updated successfully."
+            };
         }
 
         public async Task DeletePatientAsync(int patientId)

@@ -67,16 +67,24 @@ namespace backend.Controllers
                 return BadRequest(ModelState);
             }
 
-            var doctor = await _doctorService.GetDoctorByIdAsync(id);
-            if (doctor == null)
+            var response = await _doctorService.UpdateDoctorAsync(id, doctorDto);
+
+            if (!response.IsSucceed)
             {
-                return NotFound();
+                if (response.StatusCode == 404)
+                {
+                    return NotFound(response.Message);
+                }
+                if (response.StatusCode == 400)
+                {
+                    return BadRequest(response.Message);
+                }
+                return StatusCode(response.StatusCode, response.Message);
             }
 
-            await _doctorService.UpdateDoctorAsync(id, doctorDto);
-
-            return NoContent(); // 204 No Content
+            return NoContent(); // 204 No Content for successful update with no content
         }
+
 
         // DELETE: api/doctor/{id}
         [HttpDelete("{id}")]
@@ -133,6 +141,24 @@ namespace backend.Controllers
             catch (ArgumentException ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("{doctorId}/rooms")]
+        public async Task<IActionResult> GetRoomsAssignedToDoctor(int doctorId)
+        {
+            try
+            {
+                var rooms = await _doctorService.GetRoomsAssignedToDoctorAsync(doctorId);
+                return Ok(rooms);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (you might use a logging framework here)
+                Console.WriteLine($"An error occurred while getting rooms for doctor with ID {doctorId}: {ex.Message}");
+
+                // Return a 500 Internal Server Error response
+                return StatusCode(500, "Internal server error");
             }
         }
     }

@@ -60,24 +60,67 @@ namespace backend.Core.Services
             };
         }
 
-        public async Task UpdateMedicalRecordAsync(int recordId, CUMedicalRecordDto recordDto)
+        public async Task<GeneralServiceResponseDto> UpdateMedicalRecordAsync(int recordId, CUMedicalRecordDto recordDto)
         {
+            // Fetch the existing medical record from the database, including the associated patient.
             var record = await _context.MedicalRecords
                 .Include(r => r.Patient) // Include patient for validation
                 .FirstOrDefaultAsync(r => r.Id == recordId);
 
+            // Check if the record exists; if not, return a failure response.
             if (record == null)
             {
-                throw new ArgumentException($"Medical record with ID {recordId} not found.");
+                return new GeneralServiceResponseDto
+                {
+                    IsSucceed = false,
+                    StatusCode = 404,
+                    Message = $"Medical record with ID {recordId} not found."
+                };
             }
 
-            // Validate that the patient exists
-            await ValidatePatientExistsAsync(recordDto.PatientId);
+            // Validate that the patient specified in the incoming DTO exists.
+            try
+            {
+                await ValidatePatientExistsAsync(recordDto.PatientId);
+            }
+            catch (ArgumentException ex)
+            {
+                return new GeneralServiceResponseDto
+                {
+                    IsSucceed = false,
+                    StatusCode = 404,
+                    Message = ex.Message
+                };
+            }
 
+            // Map the incoming DTO to the existing record entity.
             _mapper.Map(recordDto, record);
 
-            await _context.SaveChangesAsync();
+            // Save the changes to the database.
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                // Handle exceptions related to the database update and return a failure response.
+                return new GeneralServiceResponseDto
+                {
+                    IsSucceed = false,
+                    StatusCode = 500,
+                    Message = "An error occurred while updating the medical record."
+                };
+            }
+
+            // Return a successful response.
+            return new GeneralServiceResponseDto
+            {
+                IsSucceed = true,
+                StatusCode = 200,
+                Message = $"Medical record with ID {recordId} has been updated successfully."
+            };
         }
+
 
         public async Task DeleteMedicalRecordAsync(int recordId)
         {

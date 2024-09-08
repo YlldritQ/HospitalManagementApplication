@@ -10,7 +10,7 @@ namespace backend.Core.Interfaces
         Task<PatientDto> GetPatientByIdAsync(int patientId);
         Task<IEnumerable<PatientDto>> GetAllPatientsAsync();
         Task<GeneralServiceResponseDto> CreatePatientAsync(CUPatientDto patientDto);
-        Task UpdatePatientAsync(int patientId, CUPatientDto patientDto);
+        Task<GeneralServiceResponseDto> UpdatePatientAsync(int patientId, CUPatientDto patientDto);
         Task DeletePatientAsync(int patientId);
     }
 }

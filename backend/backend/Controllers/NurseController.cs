@@ -56,20 +56,31 @@ namespace backend.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateNurse(int id, [FromBody] CUNurseDto nurseDto)
         {
+            // Validate the model state
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+            // Check if the nurse exists
             var nurse = await _nurseService.GetNurseByIdAsync(id);
             if (nurse == null)
             {
-                return NotFound();
+                return NotFound(new { Message = $"Nurse with ID {id} not found." });
             }
 
-            await _nurseService.UpdateNurseAsync(id, nurseDto);
+            // Call the service to update the nurse
+            var response = await _nurseService.UpdateNurseAsync(id, nurseDto);
 
-            return NoContent(); // 204 No Content
+            // Handle the response based on the service result
+            if (!response.IsSucceed)
+            {
+                // Return appropriate status code based on the response
+                return StatusCode(response.StatusCode, new { Message = response.Message });
+            }
+
+            // If successful, return No Content (204)
+            return NoContent();
         }
 
         // DELETE: api/nurse/{id}

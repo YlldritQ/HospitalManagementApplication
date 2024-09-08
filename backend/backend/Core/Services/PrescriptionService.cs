@@ -67,26 +67,65 @@ public class PrescriptionService : IPrescriptionService
             Message = "Perscription added Succesfully"
         };
     }
-
-    public async Task UpdatePrescriptionAsync(int prescriptionId, CUPrescriptionDto prescriptionDto)
+    public async Task<GeneralServiceResponseDto> UpdatePrescriptionAsync(int prescriptionId, CUPrescriptionDto prescriptionDto)
     {
         var existingPrescription = await _context.Prescriptions
             .Include(p => p.Patient)
             .Include(p => p.Doctor)
             .FirstOrDefaultAsync(p => p.Id == prescriptionId);
 
+        // If the prescription is not found, return a failure response
         if (existingPrescription == null)
         {
-            throw new ArgumentException($"Prescription with ID {prescriptionId} not found.");
+            return new GeneralServiceResponseDto
+            {
+                IsSucceed = false,
+                StatusCode = 404,
+                Message = $"Prescription with ID {prescriptionId} not found."
+            };
         }
 
-        await ValidatePatientAndDoctorExistsAsync(prescriptionDto.PatientId, prescriptionDto.DoctorId);
+        try
+        {
+            // Validate if the patient and doctor exist
+            await ValidatePatientAndDoctorExistsAsync(prescriptionDto.PatientId, prescriptionDto.DoctorId);
 
-        _mapper.Map(prescriptionDto, existingPrescription);
-        existingPrescription.Id = prescriptionId;
+            // Map the DTO to the existing prescription entity
+            _mapper.Map(prescriptionDto, existingPrescription);
+            existingPrescription.Id = prescriptionId; // Ensure the ID is set correctly
 
-        _context.Prescriptions.Update(existingPrescription);
-        await _context.SaveChangesAsync();
+            // Update the prescription and save changes
+            _context.Prescriptions.Update(existingPrescription);
+            await _context.SaveChangesAsync();
+        }
+        catch (ArgumentException ex)
+        {
+            // Handle validation exceptions
+            return new GeneralServiceResponseDto
+            {
+                IsSucceed = false,
+                StatusCode = 404,
+                Message = ex.Message
+            };
+        }
+        catch (DbUpdateException)
+        {
+            // Handle database update exceptions
+            return new GeneralServiceResponseDto
+            {
+                IsSucceed = false,
+                StatusCode = 500,
+                Message = "An error occurred while updating the prescription."
+            };
+        }
+
+        // Return a successful response if everything went well
+        return new GeneralServiceResponseDto
+        {
+            IsSucceed = true,
+            StatusCode = 200,
+            Message = $"Prescription with ID {prescriptionId} has been updated successfully."
+        };
     }
 
     public async Task DeletePrescriptionAsync(int prescriptionId)

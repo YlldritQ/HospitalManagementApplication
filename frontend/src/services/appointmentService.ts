@@ -1,6 +1,8 @@
 import axiosInstance from "../utils/axiosInstance";
-import axios from 'axios';
-import { AppointmentDto, CUAppointmentDto, GeneralServiceResponseDto } from '../types/appointmentTypes'; // Import necessary types
+import axios, { AxiosResponse } from 'axios';
+import { AppointmentDto, CUAppointmentDto } from '../types/appointmentTypes'; // Import necessary types
+import { GeneralServiceResponseDto } from "../types/generalTypes";
+
 
 // Get all appointments
 export const getAppointments = async (): Promise<AppointmentDto[]> => {

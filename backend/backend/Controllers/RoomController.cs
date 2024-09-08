@@ -54,20 +54,31 @@ namespace backend.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateRoom(int id, [FromBody] CURoomDto roomDto)
         {
+            // Validate the model state
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var room = await _roomService.GetRoomByIdAsync(id);
-            if (room == null)
+            // Fetch the existing room to ensure it exists
+            var existingRoom = await _roomService.GetRoomByIdAsync(id);
+            if (existingRoom == null)
             {
-                return NotFound();
+                return NotFound(new { Message = $"Room with ID {id} not found." });
             }
 
-            await _roomService.UpdateRoomAsync(id, roomDto);
+            // Call the service to update the room
+            var response = await _roomService.UpdateRoomAsync(id, roomDto);
 
-            return NoContent(); // 204 No Content
+            // Handle the response based on the service result
+            if (!response.IsSucceed)
+            {
+                // Return appropriate status code and message based on the response
+                return StatusCode(response.StatusCode, new { Message = response.Message });
+            }
+
+            // If successful, return No Content (204)
+            return NoContent();
         }
 
         // DELETE: api/room/{id}

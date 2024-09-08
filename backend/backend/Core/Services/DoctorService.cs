@@ -2,6 +2,7 @@
 using backend.Core.DbContext;
 using backend.Core.Dtos.Doctor;
 using backend.Core.Dtos.General;
+using backend.Core.Dtos.Room;
 using backend.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -70,30 +71,55 @@ public class DoctorService : IDoctorService
 
     }
 
-    public async Task UpdateDoctorAsync(int doctorId, CUDoctorDto doctorDto)
+    public async Task<GeneralServiceResponseDto> UpdateDoctorAsync(int doctorId, CUDoctorDto doctorDto)
     {
+        var response = new GeneralServiceResponseDto();
+
         var doctor = await _context.Doctors
             .Include(d => d.DoctorRooms)
             .FirstOrDefaultAsync(d => d.Id == doctorId);
 
         if (doctor == null)
         {
-            throw new ArgumentException($"Doctor with ID {doctorId} not found.");
+            response.IsSucceed = false;
+            response.StatusCode = 404; // Not Found
+            response.Message = $"Doctor with ID {doctorId} not found.";
+            return response;
         }
-
-        _mapper.Map(doctorDto, doctor);
 
         // Ensure the department exists
         var department = await _context.Departments.FindAsync(doctorDto.DepartmentId);
         if (department == null)
         {
-            throw new ArgumentException($"Department with ID {doctorDto.DepartmentId} not found.");
+            response.IsSucceed = false;
+            response.StatusCode = 404; // Not Found
+            response.Message = $"Department with ID {doctorDto.DepartmentId} not found.";
+            return response;
         }
 
-        doctor.Department = department;
+        try
+        {
+            // Map the incoming DTO to the doctor entity
+            _mapper.Map(doctorDto, doctor);
+            doctor.Department = department;
 
-        await _context.SaveChangesAsync();
+            // Save changes to the database
+            await _context.SaveChangesAsync();
+
+            response.IsSucceed = true;
+            response.StatusCode = 200; // OK
+            response.Message = "Doctor updated successfully.";
+            return response;
+        }
+        catch (Exception ex)
+        {
+            response.IsSucceed = false;
+            response.StatusCode = 500; // Internal Server Error
+            response.Message = $"An error occurred while updating the doctor: {ex.Message}";
+            return response;
+        }
     }
+
 
     public async Task DeleteDoctorAsync(int doctorId)
     {
@@ -148,5 +174,15 @@ public class DoctorService : IDoctorService
 
         _context.DoctorRooms.RemoveRange(doctorRoomsToRemove);
         await _context.SaveChangesAsync();
+    }
+    public async Task<IEnumerable<RoomDto>> GetRoomsAssignedToDoctorAsync(int doctorId)
+    {
+        var rooms = await _context.DoctorRooms
+            .Where(dr => dr.DoctorId == doctorId)
+            .Include(dr => dr.Room)
+            .Select(dr => dr.Room)
+            .ToListAsync();
+
+        return _mapper.Map<IEnumerable<RoomDto>>(rooms);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using backend.Core.DbContext;
 using backend.Core.Dtos.Department;
+using backend.Core.Dtos.General;
 using backend.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -52,22 +53,46 @@ public class DepartmentService : IDepartmentService
         return department.Id;
     }
 
-    public async Task UpdateDepartmentAsync(int departmentId, DepartmentDto departmentDto)
+    public async Task<GeneralServiceResponseDto> UpdateDepartmentAsync(int departmentId, DepartmentDto departmentDto)
     {
+        var response = new GeneralServiceResponseDto();
+
         var department = await _context.Departments
             .FirstOrDefaultAsync(d => d.Id == departmentId);
 
         if (department == null)
         {
-            throw new ArgumentException($"Department with ID {departmentId} not found.");
+            response.IsSucceed = false;
+            response.StatusCode = 404; // Not Found
+            response.Message = $"Department with ID {departmentId} not found.";
+            return response;
         }
 
-        ValidateDepartmentDto(departmentDto);
+        try
+        {
+            // Assuming ValidateDepartmentDto is a method that validates the departmentDto.
+            ValidateDepartmentDto(departmentDto);
 
-        _mapper.Map(departmentDto, department);
+            // Map the changes from departmentDto to the existing department entity.
+            _mapper.Map(departmentDto, department);
 
-        await _context.SaveChangesAsync();
+            // Save changes to the database.
+            await _context.SaveChangesAsync();
+
+            response.IsSucceed = true;
+            response.StatusCode = 200; // Success
+            response.Message = "Department updated successfully.";
+            return response;
+        }
+        catch (Exception ex)
+        {
+            response.IsSucceed = false;
+            response.StatusCode = 500; // Internal Server Error
+            response.Message = $"Error updating department: {ex.Message}";
+            return response;
+        }
     }
+
 
     public async Task DeleteDepartmentAsync(int departmentId)
     {

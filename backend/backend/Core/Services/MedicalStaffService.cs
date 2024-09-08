@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using backend.Core.DbContext;
+using backend.Core.Dtos.General;
 using backend.Core.Dtos.Staff;
 using backend.Core.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -46,24 +47,53 @@ namespace backend.Core.Services
             return _mapper.Map<IEnumerable<MedicalStaffDto>>(allStaff);
         }
 
-        public async Task UpdateMedicalStaffAsync(int staffId, MedicalStaffDto staffDto)
+        public async Task<GeneralServiceResponseDto> UpdateMedicalStaffAsync(int staffId, MedicalStaffDto staffDto)
         {
-            // Check for doctor and nurse in a single method
+            // Check for doctor and nurse in a single query using Union
             var staff = await _context.Doctors
                 .Where(d => d.Id == staffId)
                 .Cast<MedicalStaff>()
                 .Union(_context.Nurses.Where(n => n.Id == staffId).Cast<MedicalStaff>())
                 .FirstOrDefaultAsync();
 
+            // If the staff member is not found, return a response indicating failure.
             if (staff == null)
             {
-                throw new ArgumentException($"Staff member with ID {staffId} not found.");
+                return new GeneralServiceResponseDto
+                {
+                    IsSucceed = false,
+                    StatusCode = 404,
+                    Message = $"Staff member with ID {staffId} not found."
+                };
             }
 
-            // Update the staff details
+            // Update the staff details using AutoMapper
             _mapper.Map(staffDto, staff);
 
-            await _context.SaveChangesAsync();
+            // Save the changes to the database
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                // Handle exceptions related to the database update and return a failure response.
+                return new GeneralServiceResponseDto
+                {
+                    IsSucceed = false,
+                    StatusCode = 500,
+                    Message = "An error occurred while updating the staff member."
+                };
+            }
+
+            // Return a successful response if everything went well.
+            return new GeneralServiceResponseDto
+            {
+                IsSucceed = true,
+                StatusCode = 200,
+                Message = $"Staff member with ID {staffId} has been updated successfully."
+            };
         }
+
     }
 }

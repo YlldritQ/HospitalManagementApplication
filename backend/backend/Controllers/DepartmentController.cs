@@ -72,15 +72,22 @@ namespace backend.Controllers
                 return BadRequest(ModelState);
             }
 
-            var department = await _departmentService.GetDepartmentByIdAsync(id);
-            if (department == null)
+            var response = await _departmentService.UpdateDepartmentAsync(id, departmentDto);
+
+            if (!response.IsSucceed)
             {
-                return NotFound();
+                if (response.StatusCode == 404)
+                {
+                    return NotFound(response.Message);
+                }
+                if (response.StatusCode == 400)
+                {
+                    return BadRequest(response.Message);
+                }
+                return StatusCode(response.StatusCode, response.Message);
             }
 
-            await _departmentService.UpdateDepartmentAsync(id, departmentDto);
-
-            return NoContent(); // 204 No Content
+            return NoContent(); // 204 No Content for successful update
         }
 
         // DELETE: api/department/{id}

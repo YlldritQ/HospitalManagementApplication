@@ -61,30 +61,63 @@ public class RoomService : IRoomService
             Message = "Room Inserted"
         };
     }
-
-    public async Task UpdateRoomAsync(int roomId, CURoomDto roomDto)
+    public async Task<GeneralServiceResponseDto> UpdateRoomAsync(int roomId, CURoomDto roomDto)
     {
-        var room = await _context.Rooms.FirstOrDefaultAsync(r => r.Id == roomId);
-
-        if (room == null)
+        try
         {
-            throw new ArgumentException($"Room with ID {roomId} not found.");
-        }
+            // Fetch the existing room
+            var room = await _context.Rooms.FirstOrDefaultAsync(r => r.Id == roomId);
 
-        // Validate Department
-        var department = await _context.Departments.FindAsync(roomDto.DepartmentId);
-        if (department == null)
+            if (room == null)
+            {
+                return new GeneralServiceResponseDto
+                {
+                    IsSucceed = false,
+                    StatusCode = 404,
+                    Message = $"Room with ID {roomId} not found."
+                };
+            }
+
+            // Validate the department exists
+            var department = await _context.Departments.FindAsync(roomDto.DepartmentId);
+            if (department == null)
+            {
+                return new GeneralServiceResponseDto
+                {
+                    IsSucceed = false,
+                    StatusCode = 404,
+                    Message = $"Department with ID {roomDto.DepartmentId} not found."
+                };
+            }
+
+            // Update the room details
+            room.RoomNumber = roomDto.RoomNumber;
+            room.IsOccupied = roomDto.IsOccupied;
+            room.DepartmentId = roomDto.DepartmentId;
+            room.Department = department;
+
+            // Update the room in the database
+            _context.Rooms.Update(room);
+            await _context.SaveChangesAsync();
+
+            // Return a success response
+            return new GeneralServiceResponseDto
+            {
+                IsSucceed = true,
+                StatusCode = 200,
+                Message = $"Room with ID {roomId} has been updated successfully."
+            };
+        }
+        catch (DbUpdateException)
         {
-            throw new ArgumentException($"Department with ID {roomDto.DepartmentId} not found.");
+            // Handle database update exceptions
+            return new GeneralServiceResponseDto
+            {
+                IsSucceed = false,
+                StatusCode = 500,
+                Message = "An error occurred while updating the room."
+            };
         }
-
-        room.RoomNumber = roomDto.RoomNumber;
-        room.IsOccupied = roomDto.IsOccupied;
-        room.DepartmentId = roomDto.DepartmentId;
-        room.Department = department;
-
-        _context.Rooms.Update(room);
-        await _context.SaveChangesAsync();
     }
 
     public async Task DeleteRoomAsync(int roomId)

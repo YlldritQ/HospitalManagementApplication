@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getAppointmentById, updateAppointment } from '../../services/appointmentService';
 import { CUAppointmentDto, AppointmentDto } from '../../types/appointmentTypes';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 import { DepartmentDto } from '../../types/departmentTypes';
 import { getDepartments } from '../../services/departmentService';
+
 
 
 const EditAppointment: React.FC = () => {
@@ -93,11 +94,7 @@ const EditAppointment: React.FC = () => {
         } else {
           toast.error(`Failed to update appointment: ${response.message}`);
         }
-      } else {
-        // Handle the case for creating a new appointment if applicable
       }
-      toast.success('Appointment created successfully');
-      
       navigate('/dashboard/appointment');
         } catch (err) {
       toast.error('An unexpected error occurred. Please try again.');

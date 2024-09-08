@@ -55,21 +55,33 @@ namespace backend.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateMedicalRecord(int id, [FromBody] CUMedicalRecordDto recordDto)
         {
+            // Validate the model state.
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+            // Check if the record exists before updating.
             var existingRecord = await _medicalRecordService.GetMedicalRecordByIdAsync(id);
             if (existingRecord == null)
             {
-                return NotFound();
+                return NotFound(new { Message = $"Medical record with ID {id} not found." });
             }
 
-            await _medicalRecordService.UpdateMedicalRecordAsync(id, recordDto);
+            // Call the service to update the medical record.
+            var response = await _medicalRecordService.UpdateMedicalRecordAsync(id, recordDto);
 
-            return NoContent(); // 204 No Content
+            // Handle the response based on the service result.
+            if (!response.IsSucceed)
+            {
+                // Return appropriate status code based on the response.
+                return StatusCode(response.StatusCode, new { Message = response.Message });
+            }
+
+            // If successful, return No Content (204).
+            return NoContent();
         }
+
 
         // DELETE: api/medicalrecord/{id}
         [HttpDelete("{id}")]
