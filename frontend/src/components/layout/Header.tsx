@@ -55,7 +55,7 @@ const Header = () => {
           <div className="flex items-center gap-2">
             <Button
               label="Dashboard"
-              onClick={() => navigate(PATH_DASHBOARD.dashboard)}
+              onClick={() => navigate(PATH_DASHBOARD.usersManagement)}
               type="button"
               variant="light"
             />
