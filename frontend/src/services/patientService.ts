@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import axiosInstance from '../utils/axiosInstance'; // Import the centralized Axios instance
 import { CUPatientDto, PatientDto } from '../types/patientTypes'; // Import types from patientTypes
 import { GeneralServiceResponseDto } from '../types/generalTypes';
@@ -39,8 +39,15 @@ export const createPatient = async (patientDto: CUPatientDto): Promise<GeneralSe
 // Update patient
 export const updatePatient = async (patientId: number, patientDto: CUPatientDto): Promise<GeneralServiceResponseDto> => {
   try {
-    const response = await axiosInstance.put(`/Patient/${patientId}`, patientDto);
-    return response.data as GeneralServiceResponseDto;
+    console.log(patientDto);
+    const response : AxiosResponse<any> = await axiosInstance.put(`/Patient/${patientId}`, patientDto);
+    console.log(response);
+    const result : GeneralServiceResponseDto = {
+      isSucceed: response.data.isSucceed,
+        statusCode: response.data.statusCode,
+        message: response.data.message
+    };
+    return result;
   } catch (error) {
     handleError(error);
     throw error; // Rethrow the error after logging it
@@ -59,6 +66,7 @@ export const deletePatient = async (patientId: number): Promise<void> => {
 
 // Handle Axios Errors
 const handleError = (error: any) => {
+  console.log(error);
   if (axios.isAxiosError(error)) {
     console.error(`API call failed with status ${error.response?.status}: ${error.response?.statusText}`);
     throw new Error(error.response?.statusText || 'API call failed');

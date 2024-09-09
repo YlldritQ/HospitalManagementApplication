@@ -17,9 +17,3 @@ export interface AppointmentDto {
     roomId: number;
   }
   
-  export interface GeneralServiceResponseDto {
-    isSucceed: boolean;
-    statusCode: number;
-    message: string;
-  }
-  

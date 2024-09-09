@@ -289,13 +289,13 @@ namespace backend.Core.Services
                             // Add to Nurse table
                             var newNurse = new Nurse
                             {
-                                FirstName = user.FirstName,
-                                LastName = user.LastName,
-                                DateOfBirth = DateTime.Now, // Adjust as needed
-                                Gender = "Unknown", // Adjust as needed
-                                ContactInfo = "N/A", // Adjust as needed
+                                FirstName = existingDoctor.FirstName,
+                                LastName = existingDoctor.LastName,
+                                DateOfBirth = existingDoctor.DateOfBirth, // Adjust as needed
+                                Gender = existingDoctor.Gender, // Adjust as needed
+                                ContactInfo = existingDoctor.ContactInfo, // Adjust as needed
                                 UserId = user.Id,
-                                Qualifications = "RN", // Adjust as needed
+                                Qualifications = existingDoctor.Qualifications, // Adjust as needed
                                 IsAvailable = true // Adjust as needed
                             };
 
@@ -314,14 +314,14 @@ namespace backend.Core.Services
                             // Add to Doctor table
                             var newDoctor = new Doctor
                             {
-                                FirstName = user.FirstName,
-                                LastName = user.LastName,
-                                DateOfBirth = DateTime.Now, // Adjust as needed
-                                Gender = "Unknown", // Adjust as needed
-                                ContactInfo = "N/A", // Adjust as needed
+                                FirstName = existingNurse.FirstName,
+                                LastName = existingNurse.LastName,
+                                DateOfBirth = existingNurse.DateOfBirth, // Adjust as needed
+                                Gender = existingNurse.Gender, // Adjust as needed
+                                ContactInfo = existingNurse.ContactInfo, // Adjust as needed
                                 UserId = user.Id,
                                 Specialty = "General",
-                                Qualifications = "RN", // Adjust as needed
+                                Qualifications = existingNurse.Qualifications, // Adjust as needed
                                 IsAvailable = true // Adjust as needed
                             };
 

@@ -14,14 +14,14 @@ const UsersTableSection = ({ usersList }: IProps) => {
   const navigate = useNavigate();
 
   const RoleClassNameCreator = (Roles: string[]) => {
-    let className = "px-3 py-1 text-white rounded-3xl";
-    if (Roles.includes(RolesEnum.OWNER)) {
+    let className = "px-3 py-1 text-black rounded-3xl";
+    if (Roles.includes(RolesEnum.PATIENT)) {
       className += "bg-[#3b3549]";
     } else if (Roles.includes(RolesEnum.ADMIN)) {
       className += "bg-[#9333ea]";
-    } else if (Roles.includes(RolesEnum.MANAGER)) {
+    } else if (Roles.includes(RolesEnum.NURSE)) {
       className += "bg-[#0b96bc]";
-    } else if (Roles.includes(RolesEnum.USER)) {
+    } else if (Roles.includes(RolesEnum.DOCTOR)) {
       className += "bg-[#fec223]";
     }
     return className;
@@ -34,6 +34,7 @@ const UsersTableSection = ({ usersList }: IProps) => {
         <div>User Name</div>
         <div>First Name</div>
         <div>Last Name</div>
+        <div>Created At</div>
         <div className="flex justify-center">Roles</div>
         <div>Operations</div>
       </div>

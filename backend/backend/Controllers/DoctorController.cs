@@ -82,7 +82,7 @@ namespace backend.Controllers
                 return StatusCode(response.StatusCode, response.Message);
             }
 
-            return NoContent(); // 204 No Content for successful update with no content
+            return Ok(response); // 204 No Content for successful update with no content
         }
 
 

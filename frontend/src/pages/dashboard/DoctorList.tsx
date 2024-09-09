@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getDoctors, deleteDoctor } from '../../services/doctorService';
-import { DoctorDto } from '../../types/doctorTypes';
+import { getDoctors, deleteDoctor, assignRoomsToDoctor, removeRoomsFromDoctor } from '../../services/doctorService';
+import { DoctorDto} from '../../types/doctorTypes';
 import { toast, Toaster } from 'react-hot-toast';
-//import 'react-toastify/dist/ReactToastify.css';
-import { getDepartmentById } from '../../services/departmentService'; // Import the function to get department by ID
+import { getDepartmentById } from '../../services/departmentService';
 
 const DoctorList: React.FC = () => {
     const [doctors, setDoctors] = useState<DoctorDto[]>([]);
-    const [departments, setDepartments] = useState<Record<number, string>>({}); // Mapping from departmentId to department name
+    const [departments, setDepartments] = useState<Record<number, string>>({});
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
@@ -53,12 +52,32 @@ const DoctorList: React.FC = () => {
         navigate(`/dashboard/edit-doctor/${id}`);
     };
 
+    const handleAssignRooms = async (doctorId: number, roomIds: number[]) => {
+        try {
+            await assignRoomsToDoctor(doctorId, { doctorId, roomIds });
+            toast.success('Rooms assigned successfully');
+            // Optionally, refresh doctor data or update the UI
+        } catch (err) {
+            toast.error('Failed to assign rooms');
+        }
+    };
+
+    const handleRemoveRooms = async (doctorId: number, roomIds: number[]) => {
+        try {
+            await removeRoomsFromDoctor(doctorId, { doctorId, roomIds });
+            toast.success('Rooms removed successfully');
+            // Optionally, refresh doctor data or update the UI
+        } catch (err) {
+            toast.error('Failed to remove rooms');
+        }
+    };
+
     if (loading) return <div className="text-center">Loading...</div>;
     if (error) return <div className="text-center text-red-600">{error}</div>;
 
     return (
         <div className="container mx-auto p-4">
-        <h1 className="text-2xl font-bold mb-4">Doctor List</h1>
+            <h1 className="text-2xl font-bold mb-4">Doctor List</h1>
             <div className="mb-4">
                 <button
                     onClick={() => navigate('/dashboard/edit-doctor/new')}
@@ -105,9 +124,21 @@ const DoctorList: React.FC = () => {
                                 </button>
                                 <button
                                     onClick={() => handleDelete(doctor.id)}
-                                    className="text-red-500 hover:underline"
+                                    className="text-red-500 hover:underline mr-2"
                                 >
                                     Delete
+                                </button>
+                                <button
+                                    onClick={() => handleAssignRooms(doctor.id, [1, 2])} // Example room IDs, replace with actual logic
+                                    className="text-green-500 hover:underline mr-2"
+                                >
+                                    Assign Rooms
+                                </button>
+                                <button
+                                    onClick={() => handleRemoveRooms(doctor.id, [1, 2])} // Example room IDs, replace with actual logic
+                                    className="text-yellow-500 hover:underline"
+                                >
+                                    Remove Rooms
                                 </button>
                             </td>
                         </tr>

@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios'; // Import axios for error checking
+import axios from 'axios'; // Import axios for error checking
 import axiosInstance from '../utils/axiosInstance';
 import { DoctorDto, CUDoctorDto, DoctorRoomManagementDto } from '../types/doctorTypes'; // Import types from doctorTypes
 import { RoomDto } from '../types/roomTypes';
@@ -41,13 +41,13 @@ export const createDoctor = async (doctorDto: CUDoctorDto): Promise<DoctorDto> =
 export const updateDoctor = async (id: number, doctorDto: CUDoctorDto): Promise<GeneralServiceResponseDto> => {
       
   try {
-      const response: AxiosResponse<any> = await axiosInstance.put(`/Doctor/${id}`, doctorDto);
-  
+      const response = await axiosInstance.put(`/Doctor/${id}`, doctorDto);
+      console.log(response);
       // Assuming the response data contains the necessary properties, map them to GeneralServiceResponseDto
       const result: GeneralServiceResponseDto = {
-        isSucceed: response.data.isSucceed,
-        statusCode: response.data.statusCode,
-        message: response.data.message
+          isSucceed: response.data.isSucceed,
+          statusCode: response.data.statusCode,
+          message: response.data.message
       };
   
       return result;

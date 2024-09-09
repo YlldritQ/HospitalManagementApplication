@@ -4,6 +4,7 @@ export interface CUPatientDto {
     dateOfBirth: Date; // Use Date type in TypeScript
     gender: string;
     contactInfo: string;
+    userId : string;
 }
 
 export interface PatientDto {

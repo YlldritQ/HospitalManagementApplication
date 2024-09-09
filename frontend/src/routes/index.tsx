@@ -5,8 +5,6 @@ import AuthGuard from "../auth/AuthGuard";
 import { allAccessRoles, adminAccessRoles } from "../auth/auth.utils";
 import Layout from "../components/layout";
 
-
-
 // Lazy load components
 const AdminPage = lazy(() => import("../pages/dashboard/AdminPage"));
 const DashboardPage = lazy(() => import("../pages/dashboard/DashboardPage"));
@@ -16,7 +14,9 @@ const UpdateRolePage = lazy(() => import("../pages/dashboard/UpdateRolePage"));
 const DoctorPage = lazy(() => import("../pages/dashboard/DoctorPage"));
 const NursePage = lazy(() => import("../pages/dashboard/NursePage"));
 const UserPage = lazy(() => import("../pages/dashboard/UserPage"));
-const UsersManagementPage = lazy(() => import("../pages/dashboard/UsersManagementPage"));
+const UsersManagementPage = lazy(
+  () => import("../pages/dashboard/UsersManagementPage")
+);
 const HomePage = lazy(() => import("../pages/public/HomePage"));
 const LoginPage = lazy(() => import("../pages/public/LoginPage"));
 const NotFoundPage = lazy(() => import("../pages/public/NotFoundPage"));
@@ -25,10 +25,13 @@ const UnauthorizedPage = lazy(() => import("../pages/public/UnauthorizedPage"));
 const DoctorList = lazy(() => import("../pages/dashboard/DoctorList"));
 const NurseList = lazy(() => import("../pages/dashboard/NurseList"));
 const PatientList = lazy(() => import("../pages/dashboard/PatientList"));
+const EditPatient = lazy(() => import("../pages/dashboard/EditPatient"));
 const EditNurse = lazy(() => import("../pages/dashboard/EditNurse"));
 const EditDoctor = lazy(() => import("../pages/dashboard/EditDoctor"));
 const Appointment = lazy(() => import("../pages/dashboard/Appointment"));
-const EditAppointment = lazy(() => import("../pages/dashboard/EditAppointment"));
+const EditAppointment = lazy(
+  () => import("../pages/dashboard/EditAppointment")
+);
 
 const GlobalRouter = () => {
   return (
@@ -94,14 +97,22 @@ const GlobalRouter = () => {
             }
           />
 
-<Route
-  path={PATH_DASHBOARD.patientList}
-  element={
-    <Suspense fallback={<div>Loading...</div>}>
-      <PatientList />
-    </Suspense>
-  }
-/>
+          <Route
+            path={PATH_DASHBOARD.patientList}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <PatientList />
+              </Suspense>
+            }
+          />
+          <Route
+            path={PATH_DASHBOARD.editPatient}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <EditPatient />
+              </Suspense>
+            }
+          />
           <Route
             path={PATH_DASHBOARD.doctor}
             element={
@@ -111,23 +122,23 @@ const GlobalRouter = () => {
             }
           />
 
-<Route
-  path={PATH_DASHBOARD.doctorList}
-  element={
-    <Suspense fallback={<div>Loading...</div>}>
-      <DoctorList />
-    </Suspense>
-  }
-/>
+          <Route
+            path={PATH_DASHBOARD.doctorList}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <DoctorList />
+              </Suspense>
+            }
+          />
 
-<Route
-  path={PATH_DASHBOARD.editDoctor}
-  element={
-    <Suspense fallback={<div>Loading...</div>}>
-      <EditDoctor />
-    </Suspense>
-  }
-/>
+          <Route
+            path={PATH_DASHBOARD.editDoctor}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <EditDoctor />
+              </Suspense>
+            }
+          />
 
           <Route
             path={PATH_DASHBOARD.nurse}
@@ -138,42 +149,40 @@ const GlobalRouter = () => {
             }
           />
 
-<Route
-  path={PATH_DASHBOARD.editNurse}
-  element={
-    <Suspense fallback={<div>Loading...</div>}>
-      <EditNurse />
-    </Suspense>
-  }
-/>
+          <Route
+            path={PATH_DASHBOARD.editNurse}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <EditNurse />
+              </Suspense>
+            }
+          />
 
+          <Route
+            path={PATH_DASHBOARD.nurseList}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <NurseList />
+              </Suspense>
+            }
+          />
 
-<Route
-  path={PATH_DASHBOARD.nurseList}
-  element={
-    <Suspense fallback={<div>Loading...</div>}>
-      <NurseList />
-    </Suspense>
-  }
-/>
-
-<Route
-  path={PATH_DASHBOARD.appointment}
-  element={
-    <Suspense fallback={<div>Loading...</div>}>
-      <Appointment />
-    </Suspense>
-  }
-/>
-<Route
-  path={PATH_DASHBOARD.editAppointment}
-  element={
-    <Suspense fallback={<div>Loading...</div>}>
-      <EditAppointment />
-    </Suspense>
-  }
-/>
-
+          <Route
+            path={PATH_DASHBOARD.appointment}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Appointment />
+              </Suspense>
+            }
+          />
+          <Route
+            path={PATH_DASHBOARD.editAppointment}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <EditAppointment />
+              </Suspense>
+            }
+          />
         </Route>
 
         {/* Admin Routes */}

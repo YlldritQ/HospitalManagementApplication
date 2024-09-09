@@ -25,15 +25,15 @@ interface IProps {
 
 const UserChartSection = ({ usersList }: IProps) => {
   const chartLabels = [
-    RolesEnum.OWNER,
+    RolesEnum.PATIENT,
     RolesEnum.ADMIN,
-    RolesEnum.MANAGER,
-    RolesEnum.USER,
+    RolesEnum.NURSE,
+    RolesEnum.DOCTOR,
   ];
   const chartValues = [];
 
   const ownersCount = usersList.filter((q) =>
-    q.roles.includes(RolesEnum.OWNER)
+    q.roles.includes(RolesEnum.PATIENT)
   ).length;
   chartValues.push(ownersCount);
   const adminsCount = usersList.filter((q) =>
@@ -42,12 +42,12 @@ const UserChartSection = ({ usersList }: IProps) => {
   chartValues.push(adminsCount);
 
   const managersCount = usersList.filter((q) =>
-    q.roles.includes(RolesEnum.MANAGER)
+    q.roles.includes(RolesEnum.NURSE)
   ).length;
   chartValues.push(managersCount);
 
   const usersCount = usersList.filter((q) =>
-    q.roles.includes(RolesEnum.USER)
+    q.roles.includes(RolesEnum.DOCTOR)
   ).length;
   chartValues.push(usersCount);
 

@@ -87,7 +87,7 @@ namespace backend.Controllers
                 return StatusCode(response.StatusCode, response.Message);
             }
 
-            return NoContent(); // 204 No Content for successful update
+            return Ok(response); // 204 No Content for successful update
         }
 
         // DELETE: api/department/{id}

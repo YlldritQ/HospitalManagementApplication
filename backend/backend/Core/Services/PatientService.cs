@@ -76,19 +76,14 @@ namespace backend.Core.Services
             }
 
             // Map the DTO to a new Patient entity
-            var patient = _mapper.Map<Patient>(patientDto);
-            patient.PatientId = patientId; // Ensure the ID is set correctly
-
-            // Update the patient in the database
-            _context.Patients.Update(patient);
-
             try
             {
+                _mapper.Map(patientDto, existingPatient);
+                _context.Patients.Update(existingPatient);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException ex)
             {
-                // Handle database update exceptions
                 return new GeneralServiceResponseDto
                 {
                     IsSucceed = false,

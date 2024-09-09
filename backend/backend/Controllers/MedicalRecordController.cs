@@ -79,7 +79,7 @@ namespace backend.Controllers
             }
 
             // If successful, return No Content (204).
-            return NoContent();
+            return Ok(response);
         }
 
 

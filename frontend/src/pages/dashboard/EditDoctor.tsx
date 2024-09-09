@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getDoctorById, updateDoctor } from '../../services/doctorService';
 import { CUDoctorDto, DoctorDto } from '../../types/doctorTypes';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 import { DepartmentDto } from '../../types/departmentTypes';
 import { getDepartments } from '../../services/departmentService';
 
@@ -106,7 +106,9 @@ const EditDoctor: React.FC = () => {
 
     try {
       if (id) {
+        console.log(updatedDoctor);
         const response = await updateDoctor(Number(id), updatedDoctor);
+        console.log(response);
         if(response.isSucceed)
         {
           toast.success(`Doctor updated successfully: ${response.message}`);
