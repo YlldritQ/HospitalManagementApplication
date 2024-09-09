@@ -35,6 +35,14 @@ namespace backend.Controllers
             return Ok(room);
         }
 
+        // GET: api/room/unassigned
+        [HttpGet("unassigned")]
+        public async Task<ActionResult<IEnumerable<RoomDto>>> GetUnassignedRooms()
+        {
+            var unassignedRooms = await _roomService.GetUnassignedRoomsAsync();
+            return Ok(unassignedRooms);
+        }
+
         // POST: api/room
         [HttpPost]
         public async Task<ActionResult> CreateRoom([FromBody] CURoomDto roomDto)

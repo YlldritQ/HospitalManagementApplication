@@ -440,3 +440,4 @@ C:\Users\PC\OneDrive\Desktop\HospitalApp\HospitalManagementApplication\backend\b
 C:\Users\PC\OneDrive\Desktop\HospitalApp\HospitalManagementApplication\backend\backend\obj\Debug\net8.0\backend.genruntimeconfig.cache
 C:\Users\PC\OneDrive\Desktop\HospitalApp\HospitalManagementApplication\backend\backend\obj\Debug\net8.0\ref\backend.dll
 C:\Users\PC\OneDrive\Desktop\HospitalApp\HospitalManagementApplication\backend\backend\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\Blerton\OneDrive\Documents\OneDrive\Desktop\HM\HospitalManagementApplication\backend\backend\bin\Debug\net8.0\AutoMapper.dll
