@@ -29,9 +29,9 @@ const EditPatient = lazy(() => import("../pages/dashboard/EditPatient"));
 const EditNurse = lazy(() => import("../pages/dashboard/EditNurse"));
 const EditDoctor = lazy(() => import("../pages/dashboard/EditDoctor"));
 const Appointment = lazy(() => import("../pages/dashboard/Appointment"));
-const EditAppointment = lazy(
-  () => import("../pages/dashboard/EditAppointment")
-);
+const EditAppointment = lazy(() => import("../pages/dashboard/EditAppointment"));
+const Rooms = lazy(() => import("../pages/dashboard/RoomList"));
+const Department = lazy(() => import("../pages/dashboard/DepartmentList"));
 
 const GlobalRouter = () => {
   return (
@@ -183,6 +183,22 @@ const GlobalRouter = () => {
               </Suspense>
             }
           />
+            <Route
+              path={PATH_DASHBOARD.roomList}
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Rooms />
+                </Suspense>
+              }
+            />
+            <Route
+              path={PATH_DASHBOARD.departmentList}
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Department />
+                </Suspense>
+              }
+            />
         </Route>
 
         {/* Admin Routes */}
@@ -195,6 +211,7 @@ const GlobalRouter = () => {
               </Suspense>
             }
           />
+          
           <Route
             path={PATH_DASHBOARD.updateRole}
             element={

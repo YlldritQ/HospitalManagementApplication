@@ -38,7 +38,7 @@ public class RoomService : IRoomService
         return _mapper.Map<IEnumerable<RoomDto>>(rooms);
     }
 
-    public async Task<IEnumerable<RoomDto>> GetUnassignedRoomsAsync()
+    public async Task<IEnumerable<RoomDto>> GetUnassignedRoomsToDoctorsAsync()
     {
         // Fetch rooms that are not linked to any doctor in the DoctorRooms table
         var unassignedRooms = await _context.Rooms
@@ -145,4 +145,5 @@ public class RoomService : IRoomService
         _context.Rooms.Remove(room);
         await _context.SaveChangesAsync();
     }
+
 }

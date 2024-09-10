@@ -71,7 +71,9 @@ export const deleteDoctor = async (id: number): Promise<void> => {
 // Assign rooms to a doctor
 export const assignRoomsToDoctor = async (doctorId: number, doctorRoomDto: DoctorRoomManagementDto): Promise<void> => {
   try {
-    await axiosInstance.post(`${doctorId}/rooms`, doctorRoomDto);
+
+    console.log(doctorId);
+    await axiosInstance.post(`/Doctor/${doctorId}/rooms`, doctorRoomDto);
   } catch (error) {
     handleError(error);
     throw error; // Rethrow the error after logging it
@@ -81,7 +83,7 @@ export const assignRoomsToDoctor = async (doctorId: number, doctorRoomDto: Docto
 // Remove rooms from a doctor
 export const removeRoomsFromDoctor = async (doctorId: number, doctorRoomDto: DoctorRoomManagementDto): Promise<void> => {
   try {
-    await axiosInstance.delete(`${doctorId}/rooms`, { data: doctorRoomDto });
+    await axiosInstance.delete(`/Doctor/${doctorId}/rooms`, { data: doctorRoomDto });
   } catch (error) {
     handleError(error);
     throw error; // Rethrow the error after logging it

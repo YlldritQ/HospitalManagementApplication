@@ -31,5 +31,5 @@ export interface CUNurseDto {
 
 export interface NurseRoomAssignmentDto {
     nurseId: number;
-    // Define other properties as needed
+    roomIds: number[];
 }

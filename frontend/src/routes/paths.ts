@@ -1,8 +1,3 @@
-import EditAppointment from "../pages/dashboard/EditAppointment";
-import EditPatient from "../pages/dashboard/EditPatient";
-
-
-
 export const PATH_PUBLIC = {
   home: "/",
   register: "/register",
@@ -29,7 +24,9 @@ export const PATH_DASHBOARD = {
   editNurse: "/dashboard/edit-nurse/:id",
   editDoctor: "/dashboard/edit-doctor/:id",  
   appointment: "/dashboard/appointment",
-  editAppointment : "/dashboard/edit-appointment/:id"
+  editAppointment : "/dashboard/edit-appointment/:id",
+  roomList: "/dashboard/room-list",
+  departmentList: "/dashboard/department-list"
 };
 
 

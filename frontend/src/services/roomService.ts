@@ -47,6 +47,27 @@ export const updateRoom = async (id: number, roomDto: CURoomDto): Promise<Genera
     }
 };
 
+export const getUnassignedRoomsForDoctors = async (): Promise<RoomDto[]> => {
+    try {
+        const response = await axiosInstance.get('/room/unassignedDocs');
+        return response.data as RoomDto[];
+    } catch (error) {
+        handleError(error);
+        return []; // Return an empty array in case of an error
+    }
+};
+
+export const getUnassignedRoomsForNurses = async (): Promise<RoomDto[]> => {
+    try {
+        const response = await axiosInstance.get('/room/unassignedNurse');
+        return response.data as RoomDto[];
+    } catch (error) {
+        handleError(error);
+        return []; // Return an empty array in case of an error
+    }
+};
+
+
 // Delete a room
 export const deleteRoom = async (id: number): Promise<void> => {
     try {

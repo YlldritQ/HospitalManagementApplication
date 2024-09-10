@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getDoctors, deleteDoctor, assignRoomsToDoctor, removeRoomsFromDoctor } from '../../services/doctorService';
-import { DoctorDto} from '../../types/doctorTypes';
+import { DoctorDto, DoctorRoomManagementDto } from '../../types/doctorTypes';
 import { toast, Toaster } from 'react-hot-toast';
 import { getDepartmentById } from '../../services/departmentService';
+import RoomAssignmentModal from '../../components/modals/RoomAssignmentModal'; // Adjust the import path as needed
 
 const DoctorList: React.FC = () => {
     const [doctors, setDoctors] = useState<DoctorDto[]>([]);
     const [departments, setDepartments] = useState<Record<number, string>>({});
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const [selectedDoctor, setSelectedDoctor] = useState<number | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -52,24 +55,31 @@ const DoctorList: React.FC = () => {
         navigate(`/dashboard/edit-doctor/${id}`);
     };
 
-    const handleAssignRooms = async (doctorId: number, roomIds: number[]) => {
+    const handleAssignRooms = async (dto: DoctorRoomManagementDto) => {
         try {
-            await assignRoomsToDoctor(doctorId, { doctorId, roomIds });
+            await assignRoomsToDoctor(dto.doctorId, dto);
             toast.success('Rooms assigned successfully');
+            setIsModalOpen(false);
             // Optionally, refresh doctor data or update the UI
         } catch (err) {
             toast.error('Failed to assign rooms');
         }
     };
 
-    const handleRemoveRooms = async (doctorId: number, roomIds: number[]) => {
+    const handleRemoveRooms = async (dto: DoctorRoomManagementDto) => {
         try {
-            await removeRoomsFromDoctor(doctorId, { doctorId, roomIds });
+            await removeRoomsFromDoctor(dto.doctorId, dto);
             toast.success('Rooms removed successfully');
+            setIsModalOpen(false);
             // Optionally, refresh doctor data or update the UI
         } catch (err) {
             toast.error('Failed to remove rooms');
         }
+    };
+
+    const handleAssignRoomsClick = (doctorId: number) => {
+        setSelectedDoctor(doctorId);
+        setIsModalOpen(true);
     };
 
     if (loading) return <div className="text-center">Loading...</div>;
@@ -118,27 +128,21 @@ const DoctorList: React.FC = () => {
                             <td className="py-3 px-4">
                                 <button
                                     onClick={() => handleButtonClick(doctor.id)}
-                                    className="text-blue-500 hover:underline mr-2"
+                                    className="text-blue-500 hover:underline mr-3"
                                 >
                                     Edit
                                 </button>
                                 <button
                                     onClick={() => handleDelete(doctor.id)}
-                                    className="text-red-500 hover:underline mr-2"
+                                    className="text-red-500 hover:underline mr-3"
                                 >
                                     Delete
                                 </button>
                                 <button
-                                    onClick={() => handleAssignRooms(doctor.id, [1, 2])} // Example room IDs, replace with actual logic
-                                    className="text-green-500 hover:underline mr-2"
+                                    onClick={() => handleAssignRoomsClick(doctor.id)}
+                                    className="text-green-500 hover:underline mr-3"
                                 >
-                                    Assign Rooms
-                                </button>
-                                <button
-                                    onClick={() => handleRemoveRooms(doctor.id, [1, 2])} // Example room IDs, replace with actual logic
-                                    className="text-yellow-500 hover:underline"
-                                >
-                                    Remove Rooms
+                                    Manage Rooms
                                 </button>
                             </td>
                         </tr>
@@ -146,6 +150,13 @@ const DoctorList: React.FC = () => {
                 </tbody>
             </table>
             <Toaster />
+            <RoomAssignmentModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                doctorId={selectedDoctor ?? 0}
+                onAssign={handleAssignRooms}
+                onRemove={handleRemoveRooms}
+            />
         </div>
     );
 };
