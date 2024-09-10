@@ -1,4 +1,4 @@
-export const PATH_PUBLIC = {
+  export const PATH_PUBLIC = {
   home: "/",
   register: "/register",
   login: "/login",
@@ -26,7 +26,9 @@ export const PATH_DASHBOARD = {
   appointment: "/dashboard/appointment",
   editAppointment : "/dashboard/edit-appointment/:id",
   roomList: "/dashboard/room-list",
-  departmentList: "/dashboard/department-list"
+  departmentList: "/dashboard/department-list",
+  editDepartment: "/dashboard/edit-department/:id",
+  newDepartment: "/dashboard/edit-department/new"
 };
 
 

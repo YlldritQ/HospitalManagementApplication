@@ -382,8 +382,7 @@
               "RelativeToolTip": "backend\\Core\\Interfaces\\IDoctorService.cs",
               "ViewState": "AQIAAAYAAAAAAAAAAAAAAA8AAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-08T08:43:24.948Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-08T08:43:24.948Z"
             },
             {
               "$type": "Document",
@@ -393,7 +392,7 @@
               "RelativeDocumentMoniker": "backend\\Controllers\\DepartmentController.cs",
               "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\DepartmentController.cs",
               "RelativeToolTip": "backend\\Controllers\\DepartmentController.cs",
-              "ViewState": "AQIAAEMAAAAAAAAAAAAAwE0AAAANAAAA",
+              "ViewState": "AQIAAEMAAAAAAAAAAAAxwE0AAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-08T08:40:22.833Z",
               "EditorCaption": ""
@@ -623,8 +622,7 @@
               "RelativeToolTip": "backend\\Core\\Entities\\Doctor.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAA4wBgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-04T19:16:45.975Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-04T19:16:45.975Z"
             },
             {
               "$type": "Document",
@@ -660,8 +658,7 @@
               "RelativeToolTip": "backend\\Controllers\\DoctorController.cs",
               "ViewState": "AQIAAGYAAAAAAAAAAAAYwGkAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-03T18:09:02.152Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-03T18:09:02.152Z"
             },
             {
               "$type": "Document",
@@ -673,8 +670,7 @@
               "RelativeToolTip": "backend\\Core\\Services\\DoctorService.cs",
               "ViewState": "AQIAAH8AAAAAAAAAAAAmwLEAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-03T18:08:29.311Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-03T18:08:29.311Z"
             },
             {
               "$type": "Document",
@@ -698,8 +694,7 @@
               "RelativeToolTip": "backend\\Core\\Interfaces\\IRoomService.cs",
               "ViewState": "AQIAAAUAAAAAAAAAAAAxwAkAAABHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-03T17:59:56.091Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-03T17:59:56.091Z"
             },
             {
               "$type": "Document",
@@ -711,8 +706,7 @@
               "RelativeToolTip": "backend\\Core\\Services\\RoomService.cs",
               "ViewState": "AQIAADkAAAAAAAAAAAAowEIAAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-03T17:59:53.713Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-03T17:59:53.713Z"
             },
             {
               "$type": "Document",
@@ -724,8 +718,7 @@
               "RelativeToolTip": "backend\\Controllers\\RoomController.cs",
               "ViewState": "AQIAAAgAAAAAAAAAAAAYwCYAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-03T17:59:50.448Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-03T17:59:50.448Z"
             },
             {
               "$type": "Document",

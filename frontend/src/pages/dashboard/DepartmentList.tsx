@@ -1,250 +1,112 @@
-import React, { useState, useEffect } from 'react';
-import {
-  getDepartments,
-  createDepartment,
-  updateDepartment,
-  deleteDepartment,
-  addDoctorsToDepartment,
-  removeDoctorsFromDepartment,
-  addNursesToDepartment,
-  removeNursesFromDepartment,
-  addRoomsToDepartment,
-  removeRoomsFromDepartment
-} from '../../services/departmentService';
-import { getDoctors } from '../../services/doctorService';
-import { getAllNurses } from '../../services/nurseService';
-import { getAllRooms } from '../../services/roomService';
-import { DepartmentDto, CreateDepartmentDto } from '../../types/departmentTypes';
-import { DoctorDto } from '../../types/doctorTypes';
-import { NurseDto } from '../../types/nurseTypes';
-import { RoomDto, CURoomDto } from '../../types/roomTypes';
-import CreateDepartmentModal from '../../components/modals/CreateDepartmentModal';
-import EditDepartmentModal from '../../components/modals/EditDepartmentModal';
-import AssignStaffRoomsModal from '../../components/modals/AssignStaffRoomsModal';
-import RoomEditModal from '../../components/modals/RoomEditModal'; // Import RoomEditModal
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getDepartments, deleteDepartment } from '../../services/departmentService';
+import { DepartmentDto } from '../../types/departmentTypes';
+import { toast, Toaster } from 'react-hot-toast';
+import DepartmentModal from '../../components/modals/DepartmentModal'; // Adjust the import path as needed
 
 const DepartmentList: React.FC = () => {
-  const [departments, setDepartments] = useState<DepartmentDto[]>([]);
-  const [doctors, setDoctors] = useState<DoctorDto[]>([]);
-  const [nurses, setNurses] = useState<NurseDto[]>([]);
-  const [rooms, setRooms] = useState<RoomDto[]>([]);
-  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [isAssignModalOpen, setIsAssignModalOpen] = useState(false);
-  const [isRoomEditModalOpen, setIsRoomEditModalOpen] = useState(false);
-  const [currentDepartment, setCurrentDepartment] = useState<DepartmentDto | null>(null);
-  const [currentRoom, setCurrentRoom] = useState<RoomDto | null>(null);
+    const [departments, setDepartments] = useState<DepartmentDto[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+    const [selectedDepartment, setSelectedDepartment] = useState<number | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [departmentsData, doctorsData, nursesData, roomsData] = await Promise.all([
-          getDepartments(),
-          getDoctors(),
-          getAllNurses(),
-          getAllRooms()
-        ]);
+    useEffect(() => {
+        const fetchDepartments = async () => {
+            try {
+                const data = await getDepartments();
+                setDepartments(data);
+            } catch (err) {
+                setError('Failed to fetch departments');
+                toast.error('Failed to fetch departments');
+            } finally {
+                setLoading(false);
+            }
+        };
 
-        setDepartments(departmentsData);
-        setDoctors(doctorsData);
-        setNurses(nursesData);
-        setRooms(roomsData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
+        fetchDepartments();
+    }, []);
+
+    const handleDelete = async (id: number) => {
+        try {
+            await deleteDepartment(id);
+            setDepartments(departments.filter(department => department.id !== id));
+            toast.success('Department deleted successfully');
+        } catch (err) {
+            toast.error('Failed to delete department');
+        }
     };
 
-    fetchData();
-  }, []);
+    const handleButtonClick = (id: number) => {
+        navigate(`/dashboard/edit-department/${id}`);
+    };
 
-  const handleCreateDepartment = async (newDepartment: CreateDepartmentDto) => {
-    try {
-      const department = await createDepartment(newDepartment);
-      setDepartments([...departments, department]);
-      setIsCreateModalOpen(false);
-    } catch (error) {
-      console.error('Error creating department:', error);
-    }
-  };
+    const handleAddDepartmentClick = () => {
+        setSelectedDepartment(null);
+        setIsModalOpen(true);
+    };
 
-  const handleUpdateDepartment = async (id: number, updatedDepartment: DepartmentDto) => {
-    try {
-      const response = await updateDepartment(id, updatedDepartment);
-      if (response.isSucceed) {
-        setDepartments(departments.map(department =>
-          department.id === id ? { ...department, ...updatedDepartment } : department
-        ));
-        setIsEditModalOpen(false);
-      }
-    } catch (error) {
-      console.error('Error updating department:', error);
-    }
-  };
+    const handleModalClose = () => {
+        setIsModalOpen(false);
+    };
 
-  const handleDeleteDepartment = async (id: number) => {
-    try {
-      await deleteDepartment(id);
-      setDepartments(departments.filter(department => department.id !== id));
-      setIsEditModalOpen(false);
-    } catch (error) {
-      console.error('Error deleting department:', error);
-    }
-  };
+    if (loading) return <div className="text-center">Loading...</div>;
+    if (error) return <div className="text-center text-red-600">{error}</div>;
 
-  const handleAssignDoctors = async (departmentId: number, doctorIds: number[]) => {
-    try {
-      await addDoctorsToDepartment(departmentId, doctorIds);
-      setIsAssignModalOpen(false);
-    } catch (error) {
-      console.error('Error assigning doctors:', error);
-    }
-  };
-
-  const handleRemoveDoctors = async (departmentId: number, doctorIds: number[]) => {
-    try {
-      await removeDoctorsFromDepartment(departmentId, doctorIds);
-    } catch (error) {
-      console.error('Error removing doctors:', error);
-    }
-  };
-
-  const handleAssignNurses = async (departmentId: number, nurseIds: number[]) => {
-    try {
-      await addNursesToDepartment(departmentId, nurseIds);
-      setIsAssignModalOpen(false);
-    } catch (error) {
-      console.error('Error assigning nurses:', error);
-    }
-  };
-
-  const handleRemoveNurses = async (departmentId: number, nurseIds: number[]) => {
-    try {
-      await removeNursesFromDepartment(departmentId, nurseIds);
-    } catch (error) {
-      console.error('Error removing nurses:', error);
-    }
-  };
-
-  const handleAssignRooms = async (departmentId: number, roomIds: number[]) => {
-    try {
-      await addRoomsToDepartment(departmentId, roomIds);
-      setIsAssignModalOpen(false);
-    } catch (error) {
-      console.error('Error assigning rooms:', error);
-    }
-  };
-
-  const handleRemoveRooms = async (departmentId: number, roomIds: number[]) => {
-    try {
-      await removeRoomsFromDepartment(departmentId, roomIds);
-    } catch (error) {
-      console.error('Error removing rooms:', error);
-    }
-  };
-
-  const openCreateModal = () => setIsCreateModalOpen(true);
-  const closeCreateModal = () => setIsCreateModalOpen(false);
-
-  const openEditModal = (department: DepartmentDto) => {
-    setCurrentDepartment(department);
-    setIsEditModalOpen(true);
-  };
-  const closeEditModal = () => setIsEditModalOpen(false);
-
-  const openAssignModal = (department: DepartmentDto) => {
-    setCurrentDepartment(department);
-    setIsAssignModalOpen(true);
-  };
-  const closeAssignModal = () => setIsAssignModalOpen(false);
-
-  const openRoomEditModal = (room: RoomDto | null) => {
-    setCurrentRoom(room);
-    setIsRoomEditModalOpen(true);
-  };
-  const closeRoomEditModal = () => setIsRoomEditModalOpen(false);
-
-  return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Department List</h1>
-      <button onClick={openCreateModal} className="bg-blue-500 text-white p-2 rounded">
-        Create New Department
-      </button>
-
-      <div>
-        {departments.map(department => (
-          <div key={department.id} className="border p-4 mb-4 rounded">
-            <h2 className="text-xl font-semibold">{department.name}</h2>
-            <p>{department.description}</p>
-            <button
-              onClick={() => openEditModal(department)}
-              className="bg-yellow-500 text-white p-2 rounded mr-2"
-            >
-              Edit
-            </button>
-            <button
-              onClick={() => handleDeleteDepartment(department.id)}
-              className="bg-red-500 text-white p-2 rounded"
-            >
-              Delete
-            </button>
-            <button
-              onClick={() => openAssignModal(department)}
-              className="bg-green-500 text-white p-2 rounded ml-2"
-            >
-              Assign/Remove Staff & Rooms
-            </button>
-            {/* Add button to open Room Edit Modal */}
-            <button
-              onClick={() => openRoomEditModal(null)}
-              className="bg-blue-500 text-white p-2 rounded ml-2"
-            >
-              Manage Rooms
-            </button>
-          </div>
-        ))}
-      </div>
-
-      <CreateDepartmentModal
-        isOpen={isCreateModalOpen}
-        onRequestClose={closeCreateModal}
-        onCreateDepartment={handleCreateDepartment}
-      />
-
-      <EditDepartmentModal
-        isOpen={isEditModalOpen && currentDepartment !== null}
-        onRequestClose={closeEditModal}
-        department={currentDepartment}
-        onUpdateDepartment={handleUpdateDepartment}
-      />
-
-      <AssignStaffRoomsModal
-        isOpen={isAssignModalOpen && currentDepartment !== null}
-        onRequestClose={closeAssignModal}
-        department={currentDepartment}
-        doctors={doctors}
-        nurses={nurses}
-        rooms={rooms}
-        onAssignDoctors={handleAssignDoctors}
-        onRemoveDoctors={handleRemoveDoctors}
-        onAssignNurses={handleAssignNurses}
-        onRemoveNurses={handleRemoveNurses}
-        onAssignRooms={handleAssignRooms}
-        onRemoveRooms={handleRemoveRooms}
-      />
-
-      <RoomEditModal
-        isOpen={isRoomEditModalOpen}
-        onClose={closeRoomEditModal}
-        room={currentRoom}
-        onUpdate={async (roomDto: CURoomDto) => {
-          // Implement your update logic here
-        }}
-        onCreate={async (roomDto: CURoomDto) => {
-          // Implement your create logic here
-        }}
-      />
-    </div>
-  );
+    return (
+        <div className="container mx-auto p-4">
+            <h1 className="text-2xl font-bold mb-4">Department List</h1>
+            <div className="mb-4">
+                <button
+                    onClick={handleAddDepartmentClick}
+                    className="inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                >
+                    Add New Department
+                </button>
+            </div>
+            <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                <thead>
+                    <tr className="w-full bg-gray-200 text-left">
+                        <th className="py-3 px-4 border-b">ID</th>
+                        <th className="py-3 px-4 border-b">Name</th>
+                        <th className="py-3 px-4 border-b">Description</th>
+                        <th className="py-3 px-4 border-b">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {departments.map(department => (
+                        <tr key={department.id} className="border-b">
+                            <td className="py-3 px-4">{department.id}</td>
+                            <td className="py-3 px-4">{department.name}</td>
+                            <td className="py-3 px-4">{department.description}</td>
+                            <td className="py-3 px-4">
+                                <button
+                                    onClick={() => handleButtonClick(department.id)}
+                                    className="text-blue-500 hover:underline mr-3"
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    onClick={() => handleDelete(department.id)}
+                                    className="text-red-500 hover:underline mr-3"
+                                >
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            <Toaster />
+            <DepartmentModal
+                isOpen={isModalOpen}
+                onClose={handleModalClose}
+                departmentId={selectedDepartment ?? 0}
+            />
+        </div>
+    );
 };
 
 export default DepartmentList;
