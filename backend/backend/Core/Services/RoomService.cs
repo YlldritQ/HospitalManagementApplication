@@ -50,6 +50,18 @@ public class RoomService : IRoomService
         return _mapper.Map<IEnumerable<RoomDto>>(unassignedRooms);
     }
 
+    public async Task<IEnumerable<RoomDto>> GetUnassignedRoomsToNursesAsync()
+    {
+        // Fetch rooms that are not linked to any nurse in the NurseRooms table
+        var unassignedRooms = await _context.Rooms
+            .AsNoTracking()
+            .Include(r => r.Department)
+            .Where(r => !_context.NurseRooms.Any(nr => nr.RoomId == r.Id))
+            .ToListAsync();
+
+        return _mapper.Map<IEnumerable<RoomDto>>(unassignedRooms);
+    }
+
 
     public async Task<GeneralServiceResponseDto> CreateRoomAsync(CURoomDto roomDto)
     {

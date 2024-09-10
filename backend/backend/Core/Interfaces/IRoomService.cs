@@ -9,6 +9,8 @@ public interface IRoomService
     Task<IEnumerable<RoomDto>> GetAllRoomsAsync();
     Task<GeneralServiceResponseDto> CreateRoomAsync(CURoomDto roomDto);
     Task<IEnumerable<RoomDto>> GetUnassignedRoomsToDoctorsAsync();
+
+    Task<IEnumerable<RoomDto>> GetUnassignedRoomsToNursesAsync();
     Task<GeneralServiceResponseDto> UpdateRoomAsync(int roomId, CURoomDto roomDto);
     Task DeleteRoomAsync(int roomId);
 }

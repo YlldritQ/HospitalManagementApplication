@@ -1292,7 +1292,27 @@
   {
     "ContainingType": "backend.Controllers.RoomController",
     "Method": "GetUnassignedRooms",
-    "RelativePath": "api/Room/unassigned",
+    "RelativePath": "api/Room/unassignedDocs",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[backend.Core.Dtos.Room.RoomDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "backend.Controllers.RoomController",
+    "Method": "GetUnassignedRoomsToNurses",
+    "RelativePath": "api/Room/unassignedNurses",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
