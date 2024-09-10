@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createDepartment, updateDepartment, getDepartmentById } from '../../services/departmentService';
-import { DepartmentDto, CreateDepartmentDto } from '../../types/departmentTypes';
+import { DepartmentDto } from '../../types/departmentTypes';
 import { toast } from 'react-hot-toast';
 
 interface DepartmentModalProps {

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getDepartments, deleteDepartment } from '../../services/departmentService';
-import { DepartmentDto } from '../../types/departmentTypes';
 import { toast, Toaster } from 'react-hot-toast';
-import DepartmentModal from '../../components/modals/DepartmentModal'; // Adjust the import path as needed
+import { DepartmentDto } from '../../types/departmentTypes';
+import DepartmentModal from '../../components/modals/DepartmentModal';
+import ManageDepartmentModal from '../../components/modals/ManageDepartmentModal'; // Add import for ManageDepartmentModal
+import { getDepartments, deleteDepartment } from '../../services/departmentService';
 
 const DepartmentList: React.FC = () => {
     const [departments, setDepartments] = useState<DepartmentDto[]>([]);
@@ -11,6 +12,8 @@ const DepartmentList: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [selectedDepartment, setSelectedDepartment] = useState<number | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [isManageModalOpen, setIsManageModalOpen] = useState<boolean>(false); // Add state for ManageDepartmentModal
+    const [actionType, setActionType] = useState<'assign' | 'remove' | null>(null); // Add state for action type
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -48,8 +51,21 @@ const DepartmentList: React.FC = () => {
         setIsModalOpen(true);
     };
 
+    const handleManageClick = (id: number) => {
+        console.log("true");
+        setSelectedDepartment(id);
+        setIsManageModalOpen(true);
+    };
+
     const handleModalClose = () => {
         setIsModalOpen(false);
+        setIsManageModalOpen(false); // Close the manage modal
+        setActionType(null); // Reset action type
+    };
+
+    const handleActionSelect = (action: 'assign' | 'remove') => {
+        setActionType(action);
+        // Logic to open appropriate sub-modal can be added here if needed
     };
 
     if (loading) return <div className="text-center">Loading...</div>;
@@ -94,6 +110,12 @@ const DepartmentList: React.FC = () => {
                                 >
                                     Delete
                                 </button>
+                                <button
+                                    onClick={() => handleManageClick(department.id)}
+                                    className="text-green-500 hover:underline"
+                                >
+                                    Manage
+                                </button>
                             </td>
                         </tr>
                     ))}
@@ -104,6 +126,13 @@ const DepartmentList: React.FC = () => {
                 isOpen={isModalOpen}
                 onClose={handleModalClose}
                 departmentId={selectedDepartment ?? 0}
+            />
+            <ManageDepartmentModal
+                isOpen={isManageModalOpen}
+                onClose={handleModalClose}
+                departmentId={selectedDepartment ?? 0}
+                onActionSelect={handleActionSelect}
+                actionType={actionType}
             />
         </div>
     );
