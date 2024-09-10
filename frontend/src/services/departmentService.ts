@@ -7,6 +7,7 @@ import { GeneralServiceResponseDto } from '../types/generalTypes';
 export const getDepartments = async (): Promise<DepartmentDto[]> => {
   try {
     const response = await axiosInstance.get('/Department');
+    console.log(response);
     return response.data as DepartmentDto[];
   } catch (error) {
     handleError(error);

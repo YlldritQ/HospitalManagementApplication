@@ -1,7 +1,5 @@
 ﻿using backend.Core.Constants;
 using backend.Core.Dtos.Appointment;
-using backend.Core.Dtos.General;
-using backend.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace backend.Controllers

@@ -41,15 +41,11 @@ namespace backend.Core.AutoMapperConfig
             CreateMap<DoctorRoom, DoctorRoomDto>();
             CreateMap<DoctorRoomDto, DoctorRoom>();
 
-            CreateMap<MedicalRecord, MedicalRecordDto>()
-                .ForMember(dest => dest.Patient, opt => opt.MapFrom(src => src.Patient));
-            CreateMap<MedicalRecordDto, MedicalRecord>()
-                .ForMember(dest => dest.Patient, opt => opt.MapFrom(src => src.Patient));
+            CreateMap<MedicalRecord, MedicalRecordDto>();
+            CreateMap<MedicalRecordDto, MedicalRecord>();
 
-            CreateMap<MedicalRecord, CUMedicalRecordDto>()
-                .ForMember(dest => dest.Patient, opt => opt.MapFrom(src => src.Patient));
-            CreateMap<CUMedicalRecordDto, MedicalRecord>()
-                .ForMember(dest => dest.Patient, opt => opt.MapFrom(src => src.Patient));
+            CreateMap<MedicalRecord, CUMedicalRecordDto>();
+            CreateMap<CUMedicalRecordDto, MedicalRecord>();
 
             CreateMap<MedicalStaff, MedicalStaffDto>();
             CreateMap<MedicalStaffDto, MedicalStaff>();

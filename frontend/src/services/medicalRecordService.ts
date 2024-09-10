@@ -1,53 +1,31 @@
-import axios from 'axios';
-import { MedicalRecordDto, CUMedicalRecordDto } from '../types/medicalRecordTypes';
+import axiosInstance from '../utils/axiosInstance'; // Adjust the import path based on your project structure
+import { CUMedicalRecordDto, MedicalRecordDto } from '../types/medicalRecordTypes'; // Adjust the import path as necessary
 
-const API_URL = '/api/medical-records';
+const API_BASE_URL = 'MedicalRecord';
 
-// Fetch all medical records
-export const getMedicalRecords = async (): Promise<MedicalRecordDto[]> => {
-    try {
-        const response = await axios.get<MedicalRecordDto[]>(API_URL);
+const medicalRecordService = {
+    async getAllMedicalRecords(): Promise<MedicalRecordDto[]> {
+        const response = await axiosInstance.get<MedicalRecordDto[]>(API_BASE_URL);
         return response.data;
-    } catch (error) {
-        throw new Error('Failed to fetch medical records');
-    }
-};
+    },
 
-// Fetch a single medical record by ID
-export const getMedicalRecordById = async (id: number): Promise<MedicalRecordDto> => {
-    try {
-        const response = await axios.get<MedicalRecordDto>(`${API_URL}/${id}`);
+    async getMedicalRecordById(id: number): Promise<MedicalRecordDto> {
+        const response = await axiosInstance.get<MedicalRecordDto>(`${API_BASE_URL}/${id}`);
         return response.data;
-    } catch (error) {
-        throw new Error('Failed to fetch medical record');
-    }
-};
+    },
 
-// Create a new medical record
-export const createMedicalRecord = async (record: CUMedicalRecordDto): Promise<MedicalRecordDto> => {
-    try {
-        const response = await axios.post<MedicalRecordDto>(API_URL, record);
+    async createMedicalRecord(recordDto: CUMedicalRecordDto): Promise<MedicalRecordDto> {
+        const response = await axiosInstance.post<MedicalRecordDto>(API_BASE_URL, recordDto);
         return response.data;
-    } catch (error) {
-        throw new Error('Failed to create medical record');
+    },
+
+    async updateMedicalRecord(id: number, recordDto: CUMedicalRecordDto): Promise<void> {
+        await axiosInstance.put<void>(`${API_BASE_URL}/${id}`, recordDto);
+    },
+
+    async deleteMedicalRecord(id: number): Promise<void> {
+        await axiosInstance.delete<void>(`${API_BASE_URL}/${id}`);
     }
 };
 
-// Update an existing medical record
-export const updateMedicalRecord = async (id: number, record: CUMedicalRecordDto): Promise<MedicalRecordDto> => {
-    try {
-        const response = await axios.put<MedicalRecordDto>(`${API_URL}/${id}`, record);
-        return response.data;
-    } catch (error) {
-        throw new Error('Failed to update medical record');
-    }
-};
-
-// Delete a medical record by ID
-export const deleteMedicalRecord = async (id: number): Promise<void> => {
-    try {
-        await axios.delete(`${API_URL}/${id}`);
-    } catch (error) {
-        throw new Error('Failed to delete medical record');
-    }
-};
+export default medicalRecordService;

@@ -21,7 +21,6 @@ namespace backend.Core.Services
         public async Task<MedicalRecordDto> GetMedicalRecordByIdAsync(int recordId)
         {
             var record = await _context.MedicalRecords
-                .Include(r => r.Patient) // Include patient for detailed DTO
                 .AsNoTracking()
                 .FirstOrDefaultAsync(r => r.Id == recordId);
 

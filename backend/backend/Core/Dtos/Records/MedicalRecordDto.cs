@@ -10,6 +10,5 @@ namespace backend.Core.Dtos.Records
         public DateTime RecordDate { get; set; }
         public string RecordDetails { get; set; }
 
-        public PatientDto? Patient { get; set; }
     }
 }

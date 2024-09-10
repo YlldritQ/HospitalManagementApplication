@@ -29,15 +29,12 @@ const EditPatient = lazy(() => import("../pages/dashboard/EditPatient"));
 const EditNurse = lazy(() => import("../pages/dashboard/EditNurse"));
 const EditDoctor = lazy(() => import("../pages/dashboard/EditDoctor"));
 const Appointment = lazy(() => import("../pages/dashboard/Appointment"));
-const EditAppointment = lazy(
-  () => import("../pages/dashboard/EditAppointment")
-);
+const EditAppointment = lazy(() => import("../pages/dashboard/EditAppointment"));
 const Rooms = lazy(() => import("../pages/dashboard/RoomList"));
 const Department = lazy(() => import("../pages/dashboard/DepartmentList"));
-const MedicalRecordsList = lazy(
-  () => import("../pages/dashboard/MedicalRecordsList")
-);
 const EditDepartment = lazy(() => import("../pages/dashboard/EditDepartment"));
+const MedicalRecord = lazy(() => import("../pages/dashboard/MedicalRecordsPage"));
+
 
 const GlobalRouter = () => {
   return (
@@ -206,20 +203,21 @@ const GlobalRouter = () => {
             }
           />
 
-          <Route
-            path={PATH_DASHBOARD.medicalRecordsList}
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <MedicalRecordsList />
-              </Suspense>
-            }
-          />
 
           <Route
             path={PATH_DASHBOARD.editDepartment}
             element={
               <Suspense fallback={<div>Loading...</div>}>
                 <EditDepartment />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path={PATH_DASHBOARD.medicalRecordList}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <MedicalRecord />
               </Suspense>
             }
           />
