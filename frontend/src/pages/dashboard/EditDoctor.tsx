@@ -24,14 +24,14 @@ const EditDoctor: React.FC = () => {
     userId: '',
   });
 
-  const [departments, setDepartments] = useState<DepartmentDto[]>([]);  // State to store departments
+  const [departments, setDepartments] = useState<DepartmentDto[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchDepartments = async () => {
       try {
-        const departmentData: DepartmentDto[] = await getDepartments();  // Fetch departments from the backend
+        const departmentData: DepartmentDto[] = await getDepartments();
         setDepartments(departmentData);
       } catch (err) {
         toast.error('Failed to fetch departments');
@@ -55,7 +55,7 @@ const EditDoctor: React.FC = () => {
               specialty: data.specialty,
               qualifications: data.qualifications,
               isAvailable: data.isAvailable,
-              departmentId: data.departmentId ?? 0, // Use nullish coalescing to handle potential null values
+              departmentId: data.departmentId ?? 0,
               userId: data.userId,
             });
           } else {
@@ -106,14 +106,10 @@ const EditDoctor: React.FC = () => {
 
     try {
       if (id) {
-        console.log(updatedDoctor);
         const response = await updateDoctor(Number(id), updatedDoctor);
-        console.log(response);
-        if(response.isSucceed)
-        {
+        if (response.isSucceed) {
           toast.success(`Doctor updated successfully: ${response.message}`);
-        }else
-        {
+        } else {
           toast.error(`Failed to update Doctor: ${response.message}`);
         }
       }
@@ -127,114 +123,116 @@ const EditDoctor: React.FC = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="max-w-2xl mx-auto p-4 bg-white rounded shadow-md">
-      <h1 className="text-2xl font-semibold mb-4">{id ? 'Edit Doctor' : 'Add New Doctor'}</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
-          <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
-            First Name
-          </label>
-          <input
-            type="text"
-            name="firstName"
-            id="firstName"
-            value={doctor.firstName}
-            onChange={handleChange}
-            placeholder="Enter first name"
-            className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            required
-          />
+    <div className="max-w-5xl mx-auto p-8 bg-gray-100 rounded-md shadow-md">
+      <h1 className="text-3xl font-bold mb-6 text-blue-600">
+        {id ? 'Edit Doctor Information' : 'Add New Doctor'}
+      </h1>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label htmlFor="firstName" className="block text-sm font-semibold text-gray-700">
+              First Name
+            </label>
+            <input
+              type="text"
+              name="firstName"
+              id="firstName"
+              value={doctor.firstName}
+              onChange={handleChange}
+              placeholder="Enter first name"
+              className="mt-1 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              required
+            />
+          </div>
+
+          <div>
+            <label htmlFor="lastName" className="block text-sm font-semibold text-gray-700">
+              Last Name
+            </label>
+            <input
+              type="text"
+              name="lastName"
+              id="lastName"
+              value={doctor.lastName}
+              onChange={handleChange}
+              placeholder="Enter last name"
+              className="mt-1 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              required
+            />
+          </div>
         </div>
 
-        {/* Last Name */}
-        <div>
-          <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
-            Last Name
-          </label>
-          <input
-            type="text"
-            name="lastName"
-            id="lastName"
-            value={doctor.lastName}
-            onChange={handleChange}
-            placeholder="Enter last name"
-            className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            required
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label htmlFor="gender" className="block text-sm font-semibold text-gray-700">
+              Gender
+            </label>
+            <select
+              name="gender"
+              id="gender"
+              value={doctor.gender}
+              onChange={handleChange}
+              className="mt-1 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              required
+            >
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div>
+            <label htmlFor="contactInfo" className="block text-sm font-semibold text-gray-700">
+              Contact Info
+            </label>
+            <input
+              type="text"
+              name="contactInfo"
+              id="contactInfo"
+              value={doctor.contactInfo}
+              onChange={handleChange}
+              placeholder="Enter contact info"
+              className="mt-1 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              required
+            />
+          </div>
         </div>
 
-        {/* Gender */}
-        <div>
-          <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
-            Gender
-          </label>
-          <select
-            name="gender"
-            id="gender"
-            value={doctor.gender}
-            onChange={handleChange}
-            className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            required
-          >
-            <option value="">Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label htmlFor="dateOfBirth" className="block text-sm font-semibold text-gray-700">
+              Date of Birth
+            </label>
+            <input
+              type="date"
+              name="dateOfBirth"
+              id="dateOfBirth"
+              value={doctor.dateOfBirth.toISOString().substring(0, 10)}
+              onChange={handleChange}
+              className="mt-1 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              required
+            />
+          </div>
+
+          <div>
+            <label htmlFor="dateHired" className="block text-sm font-semibold text-gray-700">
+              Date Hired
+            </label>
+            <input
+              type="date"
+              name="dateHired"
+              id="dateHired"
+              value={doctor.dateHired.toISOString().substring(0, 10)}
+              onChange={handleChange}
+              className="mt-1 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              required
+            />
+          </div>
         </div>
 
-        {/* Contact Info */}
         <div>
-          <label htmlFor="contactInfo" className="block text-sm font-medium text-gray-700">
-            Contact Info
-          </label>
-          <input
-            type="text"
-            name="contactInfo"
-            id="contactInfo"
-            value={doctor.contactInfo}
-            onChange={handleChange}
-            placeholder="Enter contact info"
-            className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            required
-          />
-        </div>
-
-        {/* Date of Birth */}
-        <div>
-          <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700">
-            Date of Birth
-          </label>
-          <input
-            type="date"
-            name="dateOfBirth"
-            id="dateOfBirth"
-            value={doctor.dateOfBirth.toISOString().substring(0, 10)}
-            onChange={handleChange}
-            className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            required
-          />
-        </div>
-
-        {/* Date Hired */}
-        <div>
-          <label htmlFor="dateHired" className="block text-sm font-medium text-gray-700">
-            Date Hired
-          </label>
-          <input
-            type="date"
-            name="dateHired"
-            id="dateHired"
-            value={doctor.dateHired.toISOString().substring(0, 10)}
-            onChange={handleChange}
-            className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            required
-          />
-        </div>
-
-        {/* Specialty */}
-        <div>
-          <label htmlFor="specialty" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="specialty" className="block text-sm font-semibold text-gray-700">
             Specialty
           </label>
           <input
@@ -244,14 +242,13 @@ const EditDoctor: React.FC = () => {
             value={doctor.specialty}
             onChange={handleChange}
             placeholder="Enter specialty"
-            className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            className="mt-1 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
             required
           />
         </div>
 
-        {/* Qualifications */}
         <div>
-          <label htmlFor="qualifications" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="qualifications" className="block text-sm font-semibold text-gray-700">
             Qualifications
           </label>
           <input
@@ -261,55 +258,54 @@ const EditDoctor: React.FC = () => {
             value={doctor.qualifications}
             onChange={handleChange}
             placeholder="Enter qualifications"
-            className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            className="mt-1 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
             required
           />
         </div>
 
-        {/* Is Available */}
-        <div className="flex items-center">
-          <input
-            type="checkbox"
-            name="isAvailable"
-            id="isAvailable"
-            checked={doctor.isAvailable}
-            onChange={handleChange}
-            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-          />
-          <label htmlFor="isAvailable" className="ml-2 block text-sm text-gray-700">
-            Available
-          </label>
-        </div>
-        
-        {/* Department Dropdown */}
-        <div>
-          <label htmlFor="departmentId" className="block text-sm font-medium text-gray-700">
-            Department
-          </label>
-          <select
-            name="departmentId"
-            id="departmentId"
-            value={doctor.departmentId}
-            onChange={handleChange}
-            className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            required
-          >
-            <option value="">Select a Department</option>
-            {departments.map((dept) => (
-              <option key={dept.id} value={dept.id}>
-                {dept.name}
-              </option>
-            ))}
-          </select>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label htmlFor="departmentId" className="block text-sm font-semibold text-gray-700">
+              Department
+            </label>
+            <select
+              name="departmentId"
+              id="departmentId"
+              value={doctor.departmentId}
+              onChange={handleChange}
+              className="mt-1 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              required
+            >
+              <option value="">Select Department</option>
+              {departments.map((dept) => (
+                <option key={dept.id} value={dept.id}>
+                  {dept.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label htmlFor="isAvailable" className="block text-sm font-semibold text-gray-700">
+              Availability
+            </label>
+            <input
+              type="checkbox"
+              name="isAvailable"
+              id="isAvailable"
+              checked={doctor.isAvailable}
+              onChange={handleChange}
+              className="mt-1 h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+            />
+          </div>
         </div>
 
-        {/* Submit Button */}
-        <div>
+        <div className="flex justify-end mt-6">
           <button
             type="submit"
-            className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white text-sm font-semibold rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
-            Save
+            Save Doctor
           </button>
         </div>
       </form>

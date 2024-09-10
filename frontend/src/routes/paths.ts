@@ -28,7 +28,8 @@ export const PATH_DASHBOARD = {
   roomList: "/dashboard/room-list",
   departmentList: "/dashboard/department-list",
   editDepartment: "/dashboard/edit-department/:id",
-  newDepartment: "/dashboard/edit-department/new"
+  newDepartment: "/dashboard/edit-department/new",
+  medicalRecordsList: '/dashboard/medical-records-list'
 };
 
 

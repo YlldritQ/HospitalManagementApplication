@@ -32,6 +32,12 @@ const Appointment = lazy(() => import("../pages/dashboard/Appointment"));
 const EditAppointment = lazy(() => import("../pages/dashboard/EditAppointment"));
 const Rooms = lazy(() => import("../pages/dashboard/RoomList"));
 const Department = lazy(() => import("../pages/dashboard/DepartmentList"));
+const MedicalRecordsList = lazy(() => import("../pages/dashboard/MedicalRecordsList"));
+
+
+
+
+
 
 const GlobalRouter = () => {
   return (
@@ -199,6 +205,16 @@ const GlobalRouter = () => {
                 </Suspense>
               }
             />
+
+<Route
+            path={PATH_DASHBOARD.medicalRecordsList}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <MedicalRecordsList />
+              </Suspense>
+            }
+          />
+        
         </Route>
 
         {/* Admin Routes */}

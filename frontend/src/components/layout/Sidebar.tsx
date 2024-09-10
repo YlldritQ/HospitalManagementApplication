@@ -62,6 +62,14 @@ const Sidebar = () => {
             <span className="font-medium">My Logs</span>
           </button>
 
+          <button
+            onClick={() => handleClick(PATH_DASHBOARD.medicalRecordsList)}
+            className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
+          >
+            <MdOutlineMedicalServices className="text-orange-600 w-6 h-6" />
+            <span className="font-medium">Medical Records List</span>
+          </button>
+
         </>
       );
     }
@@ -122,6 +130,8 @@ const Sidebar = () => {
             <FaClipboardList className="text-red-600 w-6 h-6" />
             <span className="font-medium">Patient List</span>
           </button>
+
+          
         </>
       );
     }
