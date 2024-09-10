@@ -158,4 +158,29 @@ public class RoomService : IRoomService
         await _context.SaveChangesAsync();
     }
 
+    //get rooms by department id
+    public async Task<IEnumerable<RoomDto>> GetRoomsByDepartmentIdAsync(int departmentId)
+    {
+        var rooms = await _context.Rooms
+            .AsNoTracking()
+            .Where(r => r.DepartmentId == departmentId)
+            .ToListAsync();
+
+        return _mapper.Map<IEnumerable<RoomDto>>(rooms);
+    }
+
+    //get rooms with no department
+    public async Task<IEnumerable<RoomDto>> GetRoomsWithNoDepartmentAsync()
+    {
+        // Fetch rooms where DepartmentId is null
+        var roomsWithNoDepartment = await _context.Rooms
+            .AsNoTracking()
+            .Where(r => r.DepartmentId == null)
+            .ToListAsync();
+
+        return _mapper.Map<IEnumerable<RoomDto>>(roomsWithNoDepartment);
+    }
+
+
+
 }

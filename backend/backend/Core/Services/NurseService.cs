@@ -181,4 +181,32 @@ public class NurseService : INurseService
         nurse.NurseRooms.Clear();
         await _context.SaveChangesAsync();
     }
+
+    //get nurse by departament id
+    public async Task<IEnumerable<NurseDto>> GetNursesByDepartmentIdAsync(int departmentId)
+    {
+        // Fetch all nurses where the DepartmentId matches the provided departmentId
+        var nurses = await _context.Nurses
+            .AsNoTracking()
+            .Include(n => n.Department)
+            .Where(n => n.DepartmentId == departmentId)
+            .ToListAsync();
+
+        // Map the result to NurseDto
+        return _mapper.Map<IEnumerable<NurseDto>>(nurses);
+    }
+
+    //get nurses with no department 
+    public async Task<IEnumerable<NurseDto>> GetNursesWithNoDepartmentAsync()
+    {
+        // Fetch nurses where DepartmentId is null or unassigned
+        var nursesWithNoDepartment = await _context.Nurses
+            .AsNoTracking()
+            .Where(n => n.DepartmentId == null)
+            .ToListAsync();
+
+        return _mapper.Map<IEnumerable<NurseDto>>(nursesWithNoDepartment);
+    }
+
+
 }

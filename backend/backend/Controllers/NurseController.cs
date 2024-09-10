@@ -137,5 +137,29 @@ namespace backend.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        // GET: api/nurse/department/{departmentId}
+        [HttpGet("department/{departmentId}")]
+        public async Task<ActionResult<IEnumerable<NurseDto>>> GetNursesByDepartmentId(int departmentId)
+        {
+            var nurses = await _nurseService.GetNursesByDepartmentIdAsync(departmentId);
+
+            // Check if any nurses were found
+            if (nurses == null || !nurses.Any())
+            {
+                return NotFound(new { Message = $"No nurses found for Department ID {departmentId}." });
+            }
+
+            return Ok(nurses);
+        }
+
+        // GET: api/nurse/noDepartment
+        [HttpGet("noDepartment")]
+        public async Task<ActionResult<IEnumerable<NurseDto>>> GetNursesWithNoDepartment()
+        {
+            var nurses = await _nurseService.GetNursesWithNoDepartmentAsync();
+            return Ok(nurses);
+        }
+
     }
 }

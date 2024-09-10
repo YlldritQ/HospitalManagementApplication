@@ -8,8 +8,12 @@ public interface IDoctorService
 {
     Task<DoctorDto> GetDoctorByIdAsync(int doctorId);
     Task<IEnumerable<DoctorDto>> GetAllDoctorsAsync();
+    Task<IEnumerable<DoctorDto>> GetDoctorsByDepartmentIdAsync(int departmentId);
+    Task<IEnumerable<DoctorDto>> GetDoctorsWithNoDepartmentAsync();
+
     Task<GeneralServiceResponseDto> CreateDoctorAsync(CUDoctorDto doctorDto);
     Task<GeneralServiceResponseDto> UpdateDoctorAsync(int doctorId, CUDoctorDto doctorDto);
+
     Task DeleteDoctorAsync(int doctorId);
     Task AssignRoomsToDoctorAsync(DoctorRoomManagementDto doctorRoomDto);
     Task RemoveRoomsFromDoctorAsync(DoctorRoomManagementDto doctorRoomDto);

@@ -43,6 +43,29 @@ public class DoctorService : IDoctorService
         return _mapper.Map<IEnumerable<DoctorDto>>(doctors);
     }
 
+    //get doctors by department id
+    public async Task<IEnumerable<DoctorDto>> GetDoctorsByDepartmentIdAsync(int departmentId)
+    {
+        var doctors = await _context.Doctors
+            .AsNoTracking()
+            .Where(d => d.DepartmentId == departmentId)
+            .ToListAsync();
+
+        return _mapper.Map<IEnumerable<DoctorDto>>(doctors);
+    }
+
+    //get doctors with no departament
+    public async Task<IEnumerable<DoctorDto>> GetDoctorsWithNoDepartmentAsync()
+    {
+        // Fetch doctors where DepartmentId is null or unassigned
+        var doctorsWithNoDepartment = await _context.Doctors
+            .AsNoTracking()
+            .Where(d => d.DepartmentId == null)
+            .ToListAsync();
+
+        return _mapper.Map<IEnumerable<DoctorDto>>(doctorsWithNoDepartment);
+    }
+
     public async Task<GeneralServiceResponseDto> CreateDoctorAsync(CUDoctorDto doctorDto)
     {
         var doctor = _mapper.Map<Doctor>(doctorDto);

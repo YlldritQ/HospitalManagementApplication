@@ -51,6 +51,15 @@ namespace backend.Controllers
             return Ok(unassignedRooms);
         }
 
+        // GET: api/room/byDepartment/{departmentId}
+        [HttpGet("byDepartment/{departmentId}")]
+        public async Task<ActionResult<IEnumerable<RoomDto>>> GetRoomsByDepartmentId(int departmentId)
+        {
+            var rooms = await _roomService.GetRoomsByDepartmentIdAsync(departmentId);
+            return Ok(rooms);
+        }
+
+
         // POST: api/room
         [HttpPost]
         public async Task<ActionResult> CreateRoom([FromBody] CURoomDto roomDto)
@@ -111,5 +120,14 @@ namespace backend.Controllers
 
             return NoContent(); // 204 No Content
         }
+
+        // GET: api/room/noDepartment
+        [HttpGet("noDepartment")]
+        public async Task<ActionResult<IEnumerable<RoomDto>>> GetRoomsWithNoDepartment()
+        {
+            var rooms = await _roomService.GetRoomsWithNoDepartmentAsync();
+            return Ok(rooms);
+        }
+
     }
 }

@@ -161,5 +161,27 @@ namespace backend.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+
+        // GET: api/doctor/department/{departmentId}
+        [HttpGet("department/{departmentId}")]
+        [Authorize(Roles = StaticUserRoles.AdminDoctor)]
+        public async Task<ActionResult<IEnumerable<DoctorDto>>> GetDoctorsByDepartmentId(int departmentId)
+        {
+            var doctors = await _doctorService.GetDoctorsByDepartmentIdAsync(departmentId);
+            if (doctors == null || !doctors.Any())
+            {
+                return NotFound(new { Message = "No doctors found for this department." });
+            }
+            return Ok(doctors);
+        }
+
+        // GET: api/doctor/noDepartment
+        [HttpGet("noDepartment")]
+        public async Task<ActionResult<IEnumerable<DoctorDto>>> GetDoctorsWithNoDepartment()
+        {
+            var doctors = await _doctorService.GetDoctorsWithNoDepartmentAsync();
+            return Ok(doctors);
+        }
+
     }
 }
