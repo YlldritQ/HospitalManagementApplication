@@ -5,8 +5,16 @@ import {
   addNursesToDepartment,
   removeNursesFromDepartment,
   addRoomsToDepartment,
-  removeRoomsFromDepartment,
+  removeRoomsFromDepartment
 } from '../../services/departmentService'; // Ensure correct paths for all service functions
+import { getDoctorsNoDepartmentId, getDoctorsByDepartmentId } from '../../services/doctorService';
+import { getNurseNoDepartmentId, getNurseByepartmentId } from '../../services/nurseService';
+import { getRoomNoDepartmentId, getRoomByDepartmentId } from '../../services/roomService';
+import { DoctorDto } from '../../types/doctorTypes';
+import { NurseDto } from '../../types/nurseTypes';
+import { RoomDto } from '../../types/roomTypes';
+
+// Import DTOs
 
 interface AssignRemoveModalProps {
   type: 'assign' | 'remove';
@@ -23,18 +31,42 @@ const AssignRemoveModal: React.FC<AssignRemoveModalProps> = ({
   onClose,
   departmentId,
 }) => {
-  const [items, setItems] = useState<number[]>([]);
+  const [items, setItems] = useState<(DoctorDto | NurseDto | RoomDto)[]>([]);
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchItems = async () => {
-      // Fetch existing items (rooms, doctors, or nurses) if necessary
-      // Replace with actual item data fetching logic
-      setItems([]); // Replace with actual data fetching based on itemType
+      setLoading(true);
+      try {
+        let fetchedItems: (DoctorDto | NurseDto | RoomDto)[] = [];
+        switch (itemType) {
+          case 'rooms':
+            fetchedItems = type === 'assign'
+              ? await getRoomNoDepartmentId() || []
+              : await getRoomByDepartmentId(departmentId) || [];
+            break;
+          case 'doctors':
+            fetchedItems = type === 'assign'
+              ? await getDoctorsNoDepartmentId() || []
+              : await getDoctorsByDepartmentId(departmentId) || [];
+            break;
+          case 'nurses':
+            fetchedItems = type === 'assign'
+              ? await getNurseNoDepartmentId() || []
+              : await getNurseByepartmentId(departmentId) || [];
+            break;
+        }
+        setItems(fetchedItems);
+        setLoading(false);
+      } catch (error) {
+        console.error('Failed to fetch items:', error);
+        setLoading(false);
+      }
     };
 
     fetchItems();
-  }, [departmentId, itemType]);
+  }, [departmentId, itemType, type]);
 
   const handleItemSelection = (itemId: number) => {
     setSelectedItems((prevState) =>
@@ -79,23 +111,26 @@ const AssignRemoveModal: React.FC<AssignRemoveModalProps> = ({
         <h3 className="text-lg font-semibold mb-4">
           {type === 'assign' ? 'Assign' : 'Remove'} {itemType.charAt(0).toUpperCase() + itemType.slice(1)}
         </h3>
-        <div>
-          {/* Render list of items (rooms, doctors, or nurses) */}
-          {items.map((itemId) => (
-            <div key={itemId} className="flex items-center mb-2">
-              <input
-                id={`item-${itemId}`}
-                type="checkbox"
-                checked={selectedItems.includes(itemId)}
-                onChange={() => handleItemSelection(itemId)}
-                className="mr-2"
-              />
-              <label htmlFor={`item-${itemId}`} className="cursor-pointer">
-                {itemType.charAt(0).toUpperCase() + itemType.slice(1)} {itemId}
-              </label>
-            </div>
-          ))}
-        </div>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div>
+            {items.map((item) => (
+              <div key={(item as any).id} className="flex items-center mb-2">
+                <input
+                  id={`item-${(item as any).id}`}
+                  type="checkbox"
+                  checked={selectedItems.includes((item as any).id)}
+                  onChange={() => handleItemSelection((item as any).id)}
+                  className="mr-2"
+                />
+                <label htmlFor={`item-${(item as any).id}`} className="cursor-pointer">
+                  {itemType.charAt(0).toUpperCase() + itemType.slice(1)} {(item as any).id}
+                </label>
+              </div>
+            ))}
+          </div>
+        )}
         <button
           onClick={handleAction}
           className="inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 mt-4"

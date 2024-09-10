@@ -30,6 +30,26 @@ export const getNurseById = async (id: number): Promise<NurseDto> => {
   }
 };
 
+export const getNurseByepartmentId = async (id: number): Promise<NurseDto[]> => {
+  try {
+    const response = await axiosInstance.get<NurseDto[]>(`/nurse/department/${id}`);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
+};
+
+export const getNurseNoDepartmentId = async (): Promise<NurseDto[]> => {
+  try {
+    const response = await axiosInstance.get<NurseDto[]>(`/nurse/noDepartment`);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
+};
+
 // Create a new nurse
 export const createNurse = async (nurseDto: CUNurseDto): Promise<NurseDto> => {
   try {

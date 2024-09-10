@@ -1,6 +1,11 @@
 import { CiUser } from "react-icons/ci";
-import { FaClipboardList, FaStethoscope, FaSyringe, FaUserInjured } from "react-icons/fa";
-import {  MdOutlineMedicalServices } from "react-icons/md";
+import {
+  FaClipboardList,
+  FaStethoscope,
+  FaSyringe,
+  FaUserInjured,
+} from "react-icons/fa";
+import { MdOutlineMedicalServices } from "react-icons/md";
 import { TbMessages } from "react-icons/tb";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
@@ -61,15 +66,21 @@ const Sidebar = () => {
             <AiOutlineCalendar className="text-green-600 w-6 h-6" />
             <span className="font-medium">My Logs</span>
           </button>
-{/* 
+
           <button
-            onClick={() => handleClick(PATH_DASHBOARD.medicalRecordsList)}
+            onClick={() => handleClick(PATH_DASHBOARD.medicalRecordList)}
             className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
           >
             <MdOutlineMedicalServices className="text-orange-600 w-6 h-6" />
             <span className="font-medium">Medical Records List</span>
-          </button> */}
-
+          </button>
+          <button
+            onClick={() => handleClick(PATH_DASHBOARD.departmentList)}
+            className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
+          >
+            <FaClipboardList className="text-red-600 w-6 h-6" />
+            <span className="font-medium">Department List</span>
+          </button>
         </>
       );
     }
@@ -130,8 +141,6 @@ const Sidebar = () => {
             <FaClipboardList className="text-red-600 w-6 h-6" />
             <span className="font-medium">Patient List</span>
           </button>
-
-          
         </>
       );
     }
@@ -148,7 +157,7 @@ const Sidebar = () => {
           </button>
 
           <button
-            onClick={() => handleClick('/user/medical-records')}
+            onClick={() => handleClick("/user/medical-records")}
             className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
           >
             <MdOutlineMedicalServices className="text-orange-600 w-6 h-6" />
@@ -156,7 +165,7 @@ const Sidebar = () => {
           </button>
 
           <button
-            onClick={() => handleClick('/user/messages')}
+            onClick={() => handleClick("/user/messages")}
             className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
           >
             <TbMessages className="text-purple-600 w-6 h-6" />
@@ -174,16 +183,18 @@ const Sidebar = () => {
       <div className="flex items-center gap-4 p-4">
         <CiUser className="w-10 h-10 text-blue-600" />
         <div>
-          <h4 className="text-lg font-semibold text-gray-800">{user?.firstName} {user?.lastName}</h4>
+          <h4 className="text-lg font-semibold text-gray-800">
+            {user?.firstName} {user?.lastName}
+          </h4>
           <p className="text-sm text-gray-500">{user?.roles?.[0]}</p>
         </div>
       </div>
 
       <div className="mt-6">
-        <div className="text-xs text-gray-400 uppercase tracking-wider mb-4">Menu</div>
-        <div className="space-y-4">
-          {renderLinksByRole()}
+        <div className="text-xs text-gray-400 uppercase tracking-wider mb-4">
+          Menu
         </div>
+        <div className="space-y-4">{renderLinksByRole()}</div>
       </div>
     </div>
   );

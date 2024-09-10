@@ -25,6 +25,26 @@ export const getRoomById = async (id: number): Promise<RoomDto | null> => {
     }
 };
 
+export const getRoomByDepartmentId = async (id: number): Promise<RoomDto[] | null> => {
+    try {
+        const response = await axiosInstance.get(`/room/${id}`);
+        return response.data as RoomDto[];
+    } catch (error) {
+        handleError(error);
+        return null; // Return null in case of an error
+    }
+};
+
+export const getRoomNoDepartmentId = async (): Promise<RoomDto[] | null> => {
+    try {
+        const response = await axiosInstance.get(`/room/noDepartment`);
+        return response.data as RoomDto[];
+    } catch (error) {
+        handleError(error);
+        return null; // Return null in case of an error
+    }
+};
+
 // Create a new room
 export const createRoom = async (roomDto: CURoomDto): Promise<RoomDto> => {
     try {

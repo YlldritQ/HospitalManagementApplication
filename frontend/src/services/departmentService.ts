@@ -7,7 +7,6 @@ import { GeneralServiceResponseDto } from '../types/generalTypes';
 export const getDepartments = async (): Promise<DepartmentDto[]> => {
   try {
     const response = await axiosInstance.get('/Department');
-    console.log(response);
     return response.data as DepartmentDto[];
   } catch (error) {
     handleError(error);
@@ -69,60 +68,60 @@ export const deleteDepartment = async (id: number): Promise<void> => {
 // Assign doctors to a department
 export const addDoctorsToDepartment = async (departmentId: number, doctorIds: number[]): Promise<void> => {
   try {
-    await axiosInstance.post(`/Department/${departmentId}/doctors`, { doctorIds });
+    await axiosInstance.post(`/Department/${departmentId}/doctors`, doctorIds);
   } catch (error) {
     handleError(error);
-    throw error; // Rethrow the error after logging it
+    throw error;
   }
 };
 
 // Remove doctors from a department
 export const removeDoctorsFromDepartment = async (departmentId: number, doctorIds: number[]): Promise<void> => {
   try {
-    await axiosInstance.delete(`/Department/${departmentId}/doctors`, { data: { doctorIds } });
+    await axiosInstance.delete(`/Department/${departmentId}/doctors`, { data: doctorIds });
   } catch (error) {
     handleError(error);
-    throw error; // Rethrow the error after logging it
+    throw error;
   }
 };
 
 // Assign nurses to a department
 export const addNursesToDepartment = async (departmentId: number, nurseIds: number[]): Promise<void> => {
   try {
-    await axiosInstance.post(`/Department/${departmentId}/nurses`, { nurseIds });
+    await axiosInstance.post(`/Department/${departmentId}/nurses`, nurseIds);
   } catch (error) {
     handleError(error);
-    throw error; // Rethrow the error after logging it
+    throw error;
   }
 };
 
 // Remove nurses from a department
 export const removeNursesFromDepartment = async (departmentId: number, nurseIds: number[]): Promise<void> => {
   try {
-    await axiosInstance.delete(`/Department/${departmentId}/nurses`, { data: { nurseIds } });
+    await axiosInstance.delete(`/Department/${departmentId}/nurses`, { data: nurseIds });
   } catch (error) {
     handleError(error);
-    throw error; // Rethrow the error after logging it
+    throw error;
   }
 };
 
 // Assign rooms to a department
 export const addRoomsToDepartment = async (departmentId: number, roomIds: number[]): Promise<void> => {
   try {
-    await axiosInstance.post(`/Department/${departmentId}/rooms`, { roomIds });
+    await axiosInstance.post(`/Department/${departmentId}/rooms`, roomIds);
   } catch (error) {
     handleError(error);
-    throw error; // Rethrow the error after logging it
+    throw error;
   }
 };
 
 // Remove rooms from a department
 export const removeRoomsFromDepartment = async (departmentId: number, roomIds: number[]): Promise<void> => {
   try {
-    await axiosInstance.delete(`/Department/${departmentId}/rooms`, { data: { roomIds } });
+    await axiosInstance.delete(`/Department/${departmentId}/rooms`, { data: roomIds });
   } catch (error) {
     handleError(error);
-    throw error; // Rethrow the error after logging it
+    throw error;
   }
 };
 
@@ -132,6 +131,7 @@ const handleError = (error: any) => {
     console.error(`API call failed with status ${error.response?.status}: ${error.response?.statusText}`);
     throw new Error(error.response?.statusText || 'API call failed');
   } else {
+    console.log(error);
     console.error('Unknown error occurred during Axios fetch');
     throw new Error('Unknown error occurred during Axios fetch');
   }
