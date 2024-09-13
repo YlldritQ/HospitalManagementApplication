@@ -29,17 +29,20 @@ export const getDoctorById = async (id: number): Promise<DoctorDto | null> => {
 export const getDoctorsByDepartmentId = async (id: number): Promise<DoctorDto[] | null> => {
   try {
     const response = await axiosInstance.get(`/Doctor/department/${id}`);
-    return response.data as DoctorDto[];
+    console.log(response);
+    const data = await response.data;
+    return Array.isArray(data) ? data : [];
   } catch (error) {
+    console.log(error);
     handleError(error);
     return null; // Return null in case of an error
   }
 };
 
-export const getDoctorsNoDepartmentId = async (): Promise<RoomDto[]> => {
+export const getDoctorsNoDepartmentId = async (): Promise<DoctorDto[]> => {
   try {
-    const response = await fetch('/api/rooms/no-department-id');
-    const data = await response.json();
+    const response = await axiosInstance.get('/Doctor/noDepartment');
+    const data = await response.data;
     return Array.isArray(data) ? data : [];
   } catch (error) {
     console.error('Error fetching rooms without department ID:', error);

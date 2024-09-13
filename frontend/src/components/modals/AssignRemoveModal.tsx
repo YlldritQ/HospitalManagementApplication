@@ -67,15 +67,16 @@ const AssignRemoveModal: React.FC<AssignRemoveModalProps> = ({
 
     fetchItems();
   }, [departmentId, itemType, type]);
-
+  
   const handleItemSelection = (itemId: number) => {
     setSelectedItems((prevState) =>
       prevState.includes(itemId)
         ? prevState.filter((id) => id !== itemId)
         : [...prevState, itemId]
-    );
-  };
-
+      );
+    };
+    console.log(departmentId);
+  
   const handleAction = async () => {
     try {
       if (itemType === 'rooms') {
@@ -104,7 +105,6 @@ const AssignRemoveModal: React.FC<AssignRemoveModalProps> = ({
   };
 
   if (!isOpen) return null;
-
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
       <div className="bg-white p-6 rounded shadow-lg max-w-md w-full">

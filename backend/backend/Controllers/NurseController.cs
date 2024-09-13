@@ -144,12 +144,6 @@ namespace backend.Controllers
         {
             var nurses = await _nurseService.GetNursesByDepartmentIdAsync(departmentId);
 
-            // Check if any nurses were found
-            if (nurses == null || !nurses.Any())
-            {
-                return NotFound(new { Message = $"No nurses found for Department ID {departmentId}." });
-            }
-
             return Ok(nurses);
         }
 
