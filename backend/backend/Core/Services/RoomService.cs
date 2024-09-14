@@ -38,25 +38,23 @@ public class RoomService : IRoomService
         return _mapper.Map<IEnumerable<RoomDto>>(rooms);
     }
 
-    public async Task<IEnumerable<RoomDto>> GetUnassignedRoomsToDoctorsAsync()
+    public async Task<IEnumerable<RoomDto>> GetUnassignedRoomsToDoctorsAsync(int departmentId)
     {
         // Fetch rooms that are not linked to any doctor in the DoctorRooms table
         var unassignedRooms = await _context.Rooms
-            .AsNoTracking()
             .Include(r => r.Department)
-            .Where(r => !_context.DoctorRooms.Any(dr => dr.RoomId == r.Id))
+            .Where(r => !_context.DoctorRooms.Any(dr => dr.RoomId == r.Id) && r.DepartmentId == departmentId )
             .ToListAsync();
 
         return _mapper.Map<IEnumerable<RoomDto>>(unassignedRooms);
     }
 
-    public async Task<IEnumerable<RoomDto>> GetUnassignedRoomsToNursesAsync()
+    public async Task<IEnumerable<RoomDto>> GetUnassignedRoomsToNursesAsync(int departmentId)
     {
         // Fetch rooms that are not linked to any nurse in the NurseRooms table
         var unassignedRooms = await _context.Rooms
-            .AsNoTracking()
             .Include(r => r.Department)
-            .Where(r => !_context.NurseRooms.Any(nr => nr.RoomId == r.Id))
+            .Where(r => !_context.NurseRooms.Any(nr => nr.RoomId == r.Id) && r.DepartmentId == departmentId)
             .ToListAsync();
 
         return _mapper.Map<IEnumerable<RoomDto>>(unassignedRooms);

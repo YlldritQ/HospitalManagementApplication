@@ -19,6 +19,7 @@ const NurseList: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedNurseId, setSelectedNurseId] = useState<number | null>(null);
+  const [selectedDepartmentId, setSelectedDepartmentId] = useState<number | null>(null);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
@@ -68,8 +69,9 @@ const NurseList: React.FC = () => {
     navigate(`/dashboard/edit-nurse/${id}`);
   };
 
-  const openRoomAssignmentModal = (nurseId: number) => {
+  const openRoomAssignmentModal = (nurseId: number, departmentId: number) => {
     setSelectedNurseId(nurseId);
+    setSelectedDepartmentId(departmentId);
     setModalOpen(true);
   };
 
@@ -154,7 +156,7 @@ const NurseList: React.FC = () => {
                   Delete
                 </button>
                 <button
-                  onClick={() => openRoomAssignmentModal(nurse.id)}
+                  onClick={() => openRoomAssignmentModal(nurse.id , nurse.departmentId)}
                   className="text-green-500 hover:underline mr-3"
                 >
                   Manage Rooms
@@ -165,11 +167,12 @@ const NurseList: React.FC = () => {
         </tbody>
       </table>
       <Toaster />
-      {selectedNurseId !== null && (
+      {selectedNurseId !== null && selectedDepartmentId !== null && (
         <NurseRoomAssignmentModal
           isOpen={modalOpen}
           onClose={() => setModalOpen(false)}
-          nurseId={selectedNurseId}
+          nurseId={selectedNurseId ?? 0}
+          departmentId={selectedDepartmentId ?? 0}
           onAssign={handleAssign}
           onRemove={handleRemove}
         />

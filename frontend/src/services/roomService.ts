@@ -69,9 +69,9 @@ export const updateRoom = async (id: number, roomDto: CURoomDto): Promise<Genera
     }
 };
 
-export const getUnassignedRoomsForDoctors = async (): Promise<RoomDto[]> => {
+export const getUnassignedRoomsForDoctorsByDepartment = async (departmentId: number): Promise<RoomDto[]> => {
     try {
-        const response = await axiosInstance.get('/room/unassignedDocs');
+        const response = await axiosInstance.get(`/room/unassignedDocs/${departmentId}`);
         return response.data as RoomDto[];
     } catch (error) {
         handleError(error);
@@ -79,9 +79,9 @@ export const getUnassignedRoomsForDoctors = async (): Promise<RoomDto[]> => {
     }
 };
 
-export const getUnassignedRoomsForNurses = async (): Promise<RoomDto[]> => {
+export const getUnassignedRoomsForNurses = async (departmentId: number): Promise<RoomDto[]> => {
     try {
-        const response = await axiosInstance.get('/room/unassignedNurse');
+        const response = await axiosInstance.get(`/room/unassignedNurses/${departmentId}`);
         return response.data as RoomDto[];
     } catch (error) {
         handleError(error);

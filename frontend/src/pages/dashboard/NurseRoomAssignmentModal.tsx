@@ -9,11 +9,12 @@ interface NurseRoomAssignmentModalProps {
     isOpen: boolean;
     onClose: () => void;
     nurseId: number;
+    departmentId: number;
     onAssign: (dto: NurseRoomAssignmentDto) => void;
     onRemove: (dto: NurseRoomAssignmentDto) => void;
 }
 
-const NurseRoomAssignmentModal: React.FC<NurseRoomAssignmentModalProps> = ({ isOpen, onClose, nurseId, onAssign, onRemove }) => {
+const NurseRoomAssignmentModal: React.FC<NurseRoomAssignmentModalProps> = ({ isOpen, onClose, nurseId, departmentId, onAssign, onRemove }) => {
     const [unassignedRooms, setUnassignedRooms] = useState<RoomDto[]>([]);
     const [assignedRooms, setAssignedRooms] = useState<RoomDto[]>([]);
     const [selectedAssignRoomIds, setSelectedAssignRoomIds] = useState<number[]>([]);
@@ -26,7 +27,7 @@ const NurseRoomAssignmentModal: React.FC<NurseRoomAssignmentModalProps> = ({ isO
             const fetchRooms = async () => {
                 setLoading(true);
                 try {
-                    const unassignedData = await getUnassignedRoomsForNurses();
+                    const unassignedData = await getUnassignedRoomsForNurses(departmentId);
                     setUnassignedRooms(unassignedData);
                     const assignedData = await getRoomsAssignedToNurse(nurseId);
                     setAssignedRooms(assignedData);
@@ -102,7 +103,7 @@ const NurseRoomAssignmentModal: React.FC<NurseRoomAssignmentModalProps> = ({ isO
                                                 onChange={() => handleRoomToggleAssign(room.id)}
                                                 className="mr-2"
                                             />
-                                            <label htmlFor={`assign-room-${room.id}`}>{room.roomNumber}</label>
+                                            <label htmlFor={`assign-room-${room.id}`}>{room.id}</label>
                                         </li>
                                     ))}
                                 </ul>
@@ -122,7 +123,7 @@ const NurseRoomAssignmentModal: React.FC<NurseRoomAssignmentModalProps> = ({ isO
                                                 onChange={() => handleRoomToggleRemove(room.id)}
                                                 className="mr-2"
                                             />
-                                            <label htmlFor={`remove-room-${room.id}`}>{room.roomNumber}</label>
+                                            <label htmlFor={`remove-room-${room.id}`}>{room.id}</label>
                                         </li>
                                     ))}
                                 </ul>

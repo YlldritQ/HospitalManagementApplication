@@ -36,18 +36,18 @@ namespace backend.Controllers
         }
 
         // GET: api/room/unassignedDocs
-        [HttpGet("unassignedDocs")]
-        public async Task<ActionResult<IEnumerable<RoomDto>>> GetUnassignedRooms()
+        [HttpGet("unassignedDocs/{departmentId}")]
+        public async Task<ActionResult<IEnumerable<RoomDto>>> GetUnassignedRooms(int departmentId)
         {
-            var unassignedRooms = await _roomService.GetUnassignedRoomsToDoctorsAsync();
+            var unassignedRooms = await _roomService.GetUnassignedRoomsToDoctorsAsync(departmentId);
             return Ok(unassignedRooms);
         }
 
         // GET: api/room/unassignedNurses
-        [HttpGet("unassignedNurses")]
-        public async Task<ActionResult<IEnumerable<RoomDto>>> GetUnassignedRoomsToNurses()
+        [HttpGet("unassignedNurses/{departmentId}")]
+        public async Task<ActionResult<IEnumerable<RoomDto>>> GetUnassignedRoomsToNurses(int departmentId)
         {
-            var unassignedRooms = await _roomService.GetUnassignedRoomsToNursesAsync();
+            var unassignedRooms = await _roomService.GetUnassignedRoomsToNursesAsync(departmentId);
             return Ok(unassignedRooms);
         }
 

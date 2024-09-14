@@ -12,6 +12,7 @@ const DoctorList: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [selectedDoctor, setSelectedDoctor] = useState<number | null>(null);
+    const [selectedDepartment, setSelectedDepartment] = useState<number | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const navigate = useNavigate();
 
@@ -77,8 +78,9 @@ const DoctorList: React.FC = () => {
         }
     };
 
-    const handleAssignRoomsClick = (doctorId: number) => {
+    const handleAssignRoomsClick = (doctorId: number, departmentId: number) => {
         setSelectedDoctor(doctorId);
+        setSelectedDepartment(departmentId);
         setIsModalOpen(true);
     };
 
@@ -139,7 +141,7 @@ const DoctorList: React.FC = () => {
                                     Delete
                                 </button>
                                 <button
-                                    onClick={() => handleAssignRoomsClick(doctor.id)}
+                                    onClick={() => handleAssignRoomsClick(doctor.id, doctor.departmentId)}
                                     className="text-green-500 hover:underline mr-3"
                                 >
                                     Manage Rooms
@@ -150,13 +152,16 @@ const DoctorList: React.FC = () => {
                 </tbody>
             </table>
             <Toaster />
+            {selectedDoctor !== null && selectedDepartment !== null &&
             <RoomAssignmentModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 doctorId={selectedDoctor ?? 0}
+                departmentId={selectedDepartment ?? 0}
                 onAssign={handleAssignRooms}
                 onRemove={handleRemoveRooms}
             />
+}
         </div>
     );
 };

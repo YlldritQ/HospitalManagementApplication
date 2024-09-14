@@ -138,6 +138,22 @@ namespace backend.Controllers
             }
         }
 
+        // GET: api/nurse/{nurseId}/rooms
+        [HttpGet("{nurseId}/rooms")]
+        public async Task<IActionResult> GetRoomsAssignedToNurse(int nurseId)
+        {
+            try
+            {
+                var rooms = await _nurseService.GetRoomsAssignedToNurseAsync(nurseId);
+                return Ok(rooms);
+            }
+            catch (Exception ex)
+            {
+                // Return a 500 Internal Server Error response
+                return BadRequest(ex.Message);
+            }
+        }
+
         // GET: api/nurse/department/{departmentId}
         [HttpGet("department/{departmentId}")]
         public async Task<ActionResult<IEnumerable<NurseDto>>> GetNursesByDepartmentId(int departmentId)

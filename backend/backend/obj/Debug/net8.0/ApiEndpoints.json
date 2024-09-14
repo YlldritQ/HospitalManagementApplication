@@ -1040,6 +1040,22 @@
   },
   {
     "ContainingType": "backend.Controllers.NurseController",
+    "Method": "GetRoomsAssignedToNurse",
+    "RelativePath": "api/Nurse/{nurseId}/rooms",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nurseId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "backend.Controllers.NurseController",
     "Method": "GetNursesByDepartmentId",
     "RelativePath": "api/Nurse/department/{departmentId}",
     "HttpMethod": "GET",
@@ -1430,11 +1446,17 @@
   {
     "ContainingType": "backend.Controllers.RoomController",
     "Method": "GetUnassignedRooms",
-    "RelativePath": "api/Room/unassignedDocs",
+    "RelativePath": "api/Room/unassignedDocs/{departmentId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "departmentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[backend.Core.Dtos.Room.RoomDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
@@ -1450,11 +1472,17 @@
   {
     "ContainingType": "backend.Controllers.RoomController",
     "Method": "GetUnassignedRoomsToNurses",
-    "RelativePath": "api/Room/unassignedNurses",
+    "RelativePath": "api/Room/unassignedNurses/{departmentId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "departmentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[backend.Core.Dtos.Room.RoomDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",

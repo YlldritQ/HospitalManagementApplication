@@ -2,6 +2,7 @@
 using backend.Core.DbContext;
 using backend.Core.Dtos.General;
 using backend.Core.Dtos.Nurse;
+using backend.Core.Dtos.Room;
 using backend.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -157,7 +158,6 @@ public class NurseService : INurseService
         }
 
         // Clear current assignments and add new ones
-        nurse.NurseRooms.Clear();
         nurse.NurseRooms = rooms.Select(room => new NurseRoom
         {
             NurseId = nurse.Id,
@@ -208,5 +208,14 @@ public class NurseService : INurseService
         return _mapper.Map<IEnumerable<NurseDto>>(nursesWithNoDepartment);
     }
 
+    public async Task<IEnumerable<RoomDto>> GetRoomsAssignedToNurseAsync(int nurseId)
+    {
+        var rooms = await _context.NurseRooms
+            .Where(nr => nr.NurseId == nurseId)
+            .Include(nr => nr.Room)
+            .Select(nr => nr.Room)
+            .ToListAsync();
 
+        return _mapper.Map<IEnumerable<RoomDto>>(rooms);
+    }
 }

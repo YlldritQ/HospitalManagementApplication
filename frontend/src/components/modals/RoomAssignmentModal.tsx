@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getUnassignedRoomsForDoctors } from '../../services/roomService'; // Adjust the import path as needed
+import { getUnassignedRoomsForDoctorsByDepartment } from '../../services/roomService'; // Adjust the import path as needed
 import { RoomDto } from '../../types/roomTypes';
 import { toast } from 'react-hot-toast';
 import { DoctorRoomManagementDto } from '../../types/doctorTypes'; // Adjust the import path as needed
@@ -9,11 +9,12 @@ interface RoomAssignmentModalProps {
     isOpen: boolean;
     onClose: () => void;
     doctorId: number;
+    departmentId: number;
     onAssign: (dto: DoctorRoomManagementDto) => void;
     onRemove: (dto: DoctorRoomManagementDto) => void;
 }
 
-const RoomAssignmentModal: React.FC<RoomAssignmentModalProps> = ({ isOpen, onClose, doctorId, onAssign, onRemove }) => {
+const RoomAssignmentModal: React.FC<RoomAssignmentModalProps> = ({ isOpen, onClose, doctorId, departmentId,onAssign, onRemove }) => {
     const [unassignedRooms, setUnassignedRooms] = useState<RoomDto[]>([]);
     const [assignedRooms, setAssignedRooms] = useState<RoomDto[]>([]);
     const [selectedAssignRoomIds, setSelectedAssignRoomIds] = useState<number[]>([]);
@@ -26,7 +27,7 @@ const RoomAssignmentModal: React.FC<RoomAssignmentModalProps> = ({ isOpen, onClo
             const fetchRooms = async () => {
                 setLoading(true);
                 try {
-                    const unassignedData = await getUnassignedRoomsForDoctors();
+                    const unassignedData = await getUnassignedRoomsForDoctorsByDepartment(departmentId);
                     setUnassignedRooms(unassignedData);
                     const assignedData = await getRoomsAssignedToDoctor(doctorId);
                     setAssignedRooms(assignedData);
@@ -100,7 +101,7 @@ const RoomAssignmentModal: React.FC<RoomAssignmentModalProps> = ({ isOpen, onClo
                                                 onChange={() => handleRoomToggleAssign(room.id)}
                                                 className="mr-2"
                                             />
-                                            <label htmlFor={`assign-room-${room.id}`}>{room.roomNumber}</label>
+                                            <label htmlFor={`assign-room-${room.id}`}>{room.id}</label>
                                         </li>
                                     ))}
                                 </ul>
@@ -120,7 +121,7 @@ const RoomAssignmentModal: React.FC<RoomAssignmentModalProps> = ({ isOpen, onClo
                                                 onChange={() => handleRoomToggleRemove(room.id)}
                                                 className="mr-2"
                                             />
-                                            <label htmlFor={`remove-room-${room.id}`}>{room.roomNumber}</label>
+                                            <label htmlFor={`remove-room-${room.id}`}>{room.id}</label>
                                         </li>
                                     ))}
                                 </ul>

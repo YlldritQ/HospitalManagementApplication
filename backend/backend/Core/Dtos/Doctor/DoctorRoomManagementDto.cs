@@ -3,7 +3,7 @@
     public class DoctorRoomManagementDto
     {
         public int DoctorId { get; set; }
-        public IEnumerable<int> RoomIds { get; set; } = new List<int>();
+        public List<int> RoomIds { get; set; } = new List<int>();
 
     }
 }

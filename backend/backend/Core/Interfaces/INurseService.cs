@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using backend.Core.Dtos.General;
 using backend.Core.Dtos.Nurse;
+using backend.Core.Dtos.Room;
 
 public interface INurseService
 {
@@ -15,5 +16,6 @@ public interface INurseService
 
     Task<IEnumerable<NurseDto>> GetNursesByDepartmentIdAsync(int departmentId);
     Task<IEnumerable<NurseDto>> GetNursesWithNoDepartmentAsync();
+    Task<IEnumerable<RoomDto>> GetRoomsAssignedToNurseAsync(int nurseId);
 
 }

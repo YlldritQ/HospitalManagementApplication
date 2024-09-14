@@ -175,8 +175,12 @@ public class DoctorService : IDoctorService
             throw new ArgumentException($"Doctor with ID {doctorRoomDto.DoctorId} not found.");
         }
 
-        // Remove existing room assignments
-        _context.DoctorRooms.RemoveRange(doctor.DoctorRooms);
+        var rooms = await _context.Rooms.Where(r => doctorRoomDto.RoomIds.Contains(r.Id)).ToListAsync();
+        if (rooms.Count != doctorRoomDto.RoomIds.Count)
+        {
+            throw new ArgumentException("Some rooms could not be found.");
+        }
+
 
         // Add new room assignments
         var doctorRooms = doctorRoomDto.RoomIds.Select(roomId => new DoctorRoom
