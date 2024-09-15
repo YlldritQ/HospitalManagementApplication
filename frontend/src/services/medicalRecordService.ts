@@ -1,11 +1,11 @@
 import axiosInstance from '../utils/axiosInstance'; // Adjust the import path based on your project structure
 import { CUMedicalRecordDto, MedicalRecordDto } from '../types/medicalRecordTypes'; // Adjust the import path as necessary
 
-const API_BASE_URL = 'MedicalRecord';
+const API_BASE_URL = 'MedicalRecord'; // Adjust the base URL if needed
 
 const medicalRecordService = {
     async getAllMedicalRecords(): Promise<MedicalRecordDto[]> {
-        const response = await axiosInstance.get<MedicalRecordDto[]>(API_BASE_URL);
+        const response = await axiosInstance.get<MedicalRecordDto[]>(`${API_BASE_URL}`);
         return response.data;
     },
 
@@ -15,7 +15,7 @@ const medicalRecordService = {
     },
 
     async createMedicalRecord(recordDto: CUMedicalRecordDto): Promise<MedicalRecordDto> {
-        const response = await axiosInstance.post<MedicalRecordDto>(API_BASE_URL, recordDto);
+        const response = await axiosInstance.post<MedicalRecordDto>(`${API_BASE_URL}`, recordDto);
         return response.data;
     },
 

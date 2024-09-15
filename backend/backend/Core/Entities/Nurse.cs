@@ -21,5 +21,7 @@ namespace backend.Core.Entities
 
         public virtual Department Department { get; set; }
         public ICollection<NurseRoom> NurseRooms { get; set; } = new List<NurseRoom>();
+
+        public ICollection<MedicalRecord> MedicalRecords { get; set; } 
     }
 }

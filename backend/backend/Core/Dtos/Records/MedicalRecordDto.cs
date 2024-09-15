@@ -10,5 +10,10 @@ namespace backend.Core.Dtos.Records
         public DateTime RecordDate { get; set; }
         public string RecordDetails { get; set; }
 
+        // Foreign keys
+        public int? DoctorId { get; set; }
+        public int? NurseId { get; set; }
+        public int? PrescriptionId { get; set; }
+
     }
 }

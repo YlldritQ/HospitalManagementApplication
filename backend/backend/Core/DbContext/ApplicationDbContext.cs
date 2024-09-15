@@ -137,6 +137,27 @@ namespace backend.Core.DbContext
                 .WithMany(p => p.MedicalRecords)
                 .HasForeignKey(mr => mr.PatientId);
 
+            // MedicalRecord - Doctor (Many-to-One, optional)
+            builder.Entity<MedicalRecord>()
+                .HasOne(mr => mr.Doctor)
+                .WithMany(d => d.MedicalRecords)
+                .HasForeignKey(mr => mr.DoctorId)
+                .IsRequired(false);
+
+            // MedicalRecord - Nurse (Many-to-One, optional)
+            builder.Entity<MedicalRecord>()
+                .HasOne(mr => mr.Nurse)
+                .WithMany(n => n.MedicalRecords)
+                .HasForeignKey(mr => mr.NurseId)
+                .IsRequired(false);
+
+            // MedicalRecord - Prescription (One-to-One, optional)
+            builder.Entity<MedicalRecord>()
+                .HasOne(mr => mr.Prescription)
+                .WithOne(p => p.MedicalRecord)
+                .HasForeignKey<MedicalRecord>(mr => mr.PrescriptionId)
+                .IsRequired(false);
+
             // Room - Appointment (Optional Many-to-One)
             builder.Entity<Appointment>()
                 .HasOne(a => a.Room)

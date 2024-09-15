@@ -403,7 +403,16 @@ namespace backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("NurseId")
+                        .HasColumnType("int");
+
                     b.Property<int>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PrescriptionId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("RecordDate")
@@ -415,7 +424,15 @@ namespace backend.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("NurseId");
+
                     b.HasIndex("PatientId");
+
+                    b.HasIndex("PrescriptionId")
+                        .IsUnique()
+                        .HasFilter("[PrescriptionId] IS NOT NULL");
 
                     b.ToTable("MedicalRecords");
                 });
@@ -705,13 +722,31 @@ namespace backend.Migrations
 
             modelBuilder.Entity("backend.Core.Entities.MedicalRecord", b =>
                 {
+                    b.HasOne("backend.Core.Entities.Doctor", "Doctor")
+                        .WithMany("MedicalRecords")
+                        .HasForeignKey("DoctorId");
+
+                    b.HasOne("backend.Core.Entities.Nurse", "Nurse")
+                        .WithMany("MedicalRecords")
+                        .HasForeignKey("NurseId");
+
                     b.HasOne("backend.Core.Entities.Patient", "Patient")
                         .WithMany("MedicalRecords")
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("backend.Core.Entities.Prescription", "Prescription")
+                        .WithOne("MedicalRecord")
+                        .HasForeignKey("backend.Core.Entities.MedicalRecord", "PrescriptionId");
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Nurse");
+
                     b.Navigation("Patient");
+
+                    b.Navigation("Prescription");
                 });
 
             modelBuilder.Entity("backend.Core.Entities.Nurse", b =>
@@ -816,11 +851,15 @@ namespace backend.Migrations
 
                     b.Navigation("DoctorRooms");
 
+                    b.Navigation("MedicalRecords");
+
                     b.Navigation("Prescriptions");
                 });
 
             modelBuilder.Entity("backend.Core.Entities.Nurse", b =>
                 {
+                    b.Navigation("MedicalRecords");
+
                     b.Navigation("NurseRooms");
                 });
 
@@ -831,6 +870,12 @@ namespace backend.Migrations
                     b.Navigation("MedicalRecords");
 
                     b.Navigation("Prescriptions");
+                });
+
+            modelBuilder.Entity("backend.Core.Entities.Prescription", b =>
+                {
+                    b.Navigation("MedicalRecord")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("backend.Core.Entities.Room", b =>

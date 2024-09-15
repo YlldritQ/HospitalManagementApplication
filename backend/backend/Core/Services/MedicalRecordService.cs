@@ -36,6 +36,9 @@ namespace backend.Core.Services
         {
             var records = await _context.MedicalRecords
                 .Include(r => r.Patient) // Include patient for detailed DTO
+                .Include(r => r.Doctor)
+                .Include(r => r.Nurse)
+                .Include(r => r.Prescription)
                 .AsNoTracking()
                 .ToListAsync();
 
@@ -46,6 +49,12 @@ namespace backend.Core.Services
         {
             // Validate that the patient exists
             await ValidatePatientExistsAsync(recordDto.PatientId);
+            if (recordDto.DoctorId.HasValue)
+                await ValidateDoctorExistsAsync(recordDto.DoctorId.Value);
+            if (recordDto.NurseId.HasValue)
+                await ValidateNurseExistsAsync(recordDto.NurseId.Value);
+            if (recordDto.PrescriptionId.HasValue)
+                await ValidatePrescriptionExistsAsync(recordDto.PrescriptionId.Value);
 
             var record = _mapper.Map<MedicalRecord>(recordDto);
 
@@ -64,6 +73,9 @@ namespace backend.Core.Services
             // Fetch the existing medical record from the database, including the associated patient.
             var record = await _context.MedicalRecords
                 .Include(r => r.Patient) // Include patient for validation
+                .Include(r => r.Doctor)
+                .Include(r => r.Nurse)
+                .Include(r => r.Prescription)
                 .FirstOrDefaultAsync(r => r.Id == recordId);
 
             // Check if the record exists; if not, return a failure response.
@@ -81,6 +93,12 @@ namespace backend.Core.Services
             try
             {
                 await ValidatePatientExistsAsync(recordDto.PatientId);
+                if (recordDto.DoctorId.HasValue)
+                    await ValidateDoctorExistsAsync(recordDto.DoctorId.Value);
+                if (recordDto.NurseId.HasValue)
+                    await ValidateNurseExistsAsync(recordDto.NurseId.Value);
+                if (recordDto.PrescriptionId.HasValue)
+                    await ValidatePrescriptionExistsAsync(recordDto.PrescriptionId.Value);
             }
             catch (ArgumentException ex)
             {
@@ -142,5 +160,33 @@ namespace backend.Core.Services
                 throw new ArgumentException($"Patient with ID {patientId} not found.");
             }
         }
+
+        private async Task ValidateDoctorExistsAsync(int doctorId)
+        {
+            var doctorExists = await _context.Doctors.AnyAsync(d => d.Id == doctorId);
+            if (!doctorExists)
+            {
+                throw new ArgumentException($"Doctor with ID {doctorId} not found.");
+            }
+        }
+
+        private async Task ValidateNurseExistsAsync(int nurseId)
+        {
+            var nurseExists = await _context.Nurses.AnyAsync(n => n.Id == nurseId);
+            if (!nurseExists)
+            {
+                throw new ArgumentException($"Nurse with ID {nurseId} not found.");
+            }
+        }
+
+        private async Task ValidatePrescriptionExistsAsync(int prescriptionId)
+        {
+            var prescriptionExists = await _context.Prescriptions.AnyAsync(p => p.Id == prescriptionId);
+            if (!prescriptionExists)
+            {
+                throw new ArgumentException($"Prescription with ID {prescriptionId} not found.");
+            }
+        }
+
     }
 }
