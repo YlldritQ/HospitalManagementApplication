@@ -2,6 +2,7 @@
 using backend.Core.DbContext;
 using backend.Core.Dtos.Doctor;
 using backend.Core.Dtos.General;
+using backend.Core.Dtos.Nurse;
 using backend.Core.Dtos.Room;
 using backend.Core.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +32,19 @@ public class DoctorService : IDoctorService
         return _mapper.Map<DoctorDto>(doctor);
     }
 
+    public async Task<DoctorDto> GetDoctorByUserIdAsync(string userId)
+    {
+        var doc = await _context.Doctors
+            .AsNoTracking()
+            .Include(n => n.DoctorRooms)  // You may still include this for internal use
+                .ThenInclude(nr => nr.Room)
+            .Include(n => n.Department)
+            .FirstOrDefaultAsync(n => n.UserId == userId);
+
+        if (doc == null) return null;
+
+        return _mapper.Map<DoctorDto>(doc);
+    }
     public async Task<IEnumerable<DoctorDto>> GetAllDoctorsAsync()
     {
         var doctors = await _context.Doctors

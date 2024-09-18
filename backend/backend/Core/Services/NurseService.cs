@@ -31,6 +31,20 @@ public class NurseService : INurseService
         return _mapper.Map<NurseDto>(nurse);
     }
 
+    public async Task<NurseDto> GetNurseByUserIdAsync(string userId)
+    {
+        var nurse = await _context.Nurses
+            .AsNoTracking()
+            .Include(n => n.NurseRooms)  // You may still include this for internal use
+                .ThenInclude(nr => nr.Room)
+            .Include(n => n.Department)
+            .FirstOrDefaultAsync(n => n.UserId == userId);
+
+        if (nurse == null) return null;
+
+        return _mapper.Map<NurseDto>(nurse);
+    }
+
     public async Task<IEnumerable<NurseDto>> GetAllNursesAsync()
     {
         var nurses = await _context.Nurses

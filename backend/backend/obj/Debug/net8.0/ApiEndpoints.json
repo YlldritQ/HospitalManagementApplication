@@ -697,6 +697,32 @@
     ]
   },
   {
+    "ContainingType": "backend.Controllers.DoctorController",
+    "Method": "GetDoctorByUserId",
+    "RelativePath": "api/Doctor/user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "backend.Core.Dtos.Doctor.DoctorDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "backend.Controllers.LogsController",
     "Method": "GetLogs",
     "RelativePath": "api/Logs",
@@ -1091,6 +1117,32 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[backend.Core.Dtos.Nurse.NurseDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "backend.Controllers.NurseController",
+    "Method": "GetNurseByUserId",
+    "RelativePath": "api/Nurse/user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "backend.Core.Dtos.Nurse.NurseDto",
         "MediaTypes": [
           "text/plain",
           "application/json",

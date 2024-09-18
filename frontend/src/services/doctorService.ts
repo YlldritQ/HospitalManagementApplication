@@ -124,6 +124,19 @@ export const getRoomsAssignedToDoctor = async (doctorId: number): Promise<RoomDt
   }
 };
 
+
+export const getDoctorByUserId = async (id: string | undefined): Promise<DoctorDto> => {
+  try {
+    console.log(id);
+    const response = await axiosInstance.get<DoctorDto>(`/Doctor/user/${id}`);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
+};
+
+
 // Handle Axios Errors
 const handleError = (error: any) => {
   if (axios.isAxiosError(error)) {

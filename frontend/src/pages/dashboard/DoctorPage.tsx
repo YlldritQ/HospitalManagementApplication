@@ -1,11 +1,49 @@
 import PageAccessTemplate from '../../components/dashboard/page-access/PageAccessTemplate';
-import { FaUserCog, FaCalendarAlt, FaUsers, FaFileMedical } from 'react-icons/fa';
+import { FaUserCog, FaCalendarAlt, FaUsers, FaFileMedical, FaBed } from 'react-icons/fa';
 import { MdNotifications } from 'react-icons/md';
 import Button from '../../components/general/Button';
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { DoctorDto } from '../../types/doctorTypes';
+import { RoomDto } from '../../types/roomTypes';
+import useAuth from '../../hooks/useAuth.hook';
+import { getDoctorByUserId, getRoomsAssignedToDoctor } from '../../services/doctorService';
 
-const DoctorPage = () => {
+const DoctorPage: React.FC = () => {
   const navigate = useNavigate();
+  const [doctor, setDoctor] = useState<DoctorDto | null>(null);
+  const [rooms, setRooms] = useState<RoomDto[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const { user: loggedInUser } = useAuth();
+  const userId = loggedInUser?.id; // Replace with actual logged-in user ID or retrieve from context
+
+  useEffect(() => {
+    const fetchNurseAndRooms = async () => {
+      try {
+        // Fetch the nurse details
+        const doctorData = await getDoctorByUserId(userId);
+        if (doctorData !== null) {
+          const doctor = doctorData;
+          setDoctor(doctor);
+
+          // Fetch rooms assigned to the nurse
+          const assignedRooms = await getRoomsAssignedToDoctor(doctor.id);
+          setRooms(assignedRooms);
+        } else {
+          setError('Doctor not found');
+        }
+      } catch (err) {
+        console.error("Error fetching nurse or rooms:", err);
+        setError('Failed to fetch data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNurseAndRooms();
+  }, [userId]);
+
 
   const handleButtonClick = (path: string) => {
     navigate(path);
@@ -83,6 +121,24 @@ const DoctorPage = () => {
               type="button" 
               className="text-white bg-[#D0021B] hover:bg-[#B72D1F]"
             />
+          </div>
+
+          {/* Assigned Rooms Section */}
+          <div className="bg-white p-6 rounded-lg shadow-lg border-t-4 border-[#7D3F5C]">
+            <h2 className="text-2xl font-bold mb-4 flex items-center text-[#7D3F5C]">
+              <FaBed className="mr-3 text-3xl" /> Assigned Rooms
+            </h2>
+            {rooms.length > 0 ? (
+              <ul className="list-disc pl-6 text-gray-700">
+                {rooms.map(room => (
+                  <li key={room.id} className="mb-2">
+                    Room {room.roomNumber} (ID: {room.id})
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-gray-700">No rooms assigned.</p>
+            )}
           </div>
         </div>
       </div>

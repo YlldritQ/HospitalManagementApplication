@@ -41,6 +41,13 @@ namespace backend.Controllers
             return Ok(doctor);
         }
 
+        [HttpGet("user/{userId}")]
+        public async Task<ActionResult<DoctorDto>> GetDoctorByUserId(string userId)
+        {
+            var doc = await _doctorService.GetDoctorByUserIdAsync(userId);
+
+            return Ok(doc);
+        }
         // POST: api/doctor
         [HttpPost]
         [Authorize(Roles = StaticUserRoles.ADMIN)]

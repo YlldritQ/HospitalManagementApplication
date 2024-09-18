@@ -13,7 +13,7 @@ public interface IDoctorService
 
     Task<GeneralServiceResponseDto> CreateDoctorAsync(CUDoctorDto doctorDto);
     Task<GeneralServiceResponseDto> UpdateDoctorAsync(int doctorId, CUDoctorDto doctorDto);
-
+    Task<DoctorDto> GetDoctorByUserIdAsync(string userId);
     Task DeleteDoctorAsync(int doctorId);
     Task AssignRoomsToDoctorAsync(DoctorRoomManagementDto doctorRoomDto);
     Task RemoveRoomsFromDoctorAsync(DoctorRoomManagementDto doctorRoomDto);

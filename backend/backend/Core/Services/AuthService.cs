@@ -194,9 +194,9 @@ namespace backend.Core.Services
                             {
                                 FirstName = user.FirstName,
                                 LastName = user.LastName,
-                                DateOfBirth = DateTime.Now, // Adjust as needed
-                                Gender = "Unknown", // Adjust as needed
-                                ContactInfo = "N/A", // Adjust as needed
+                                DateOfBirth = existingPatient.DateOfBirth, // Adjust as needed
+                                Gender =existingPatient.Gender, // Adjust as needed
+                                ContactInfo = existingPatient.ContactInfo, // Adjust as needed
                                 UserId = user.Id,
                                 Specialty = "General", // Adjust as needed
                                 Qualifications = "MD", // Adjust as needed
@@ -220,9 +220,9 @@ namespace backend.Core.Services
                             {
                                 FirstName = user.FirstName,
                                 LastName = user.LastName,
-                                DateOfBirth = DateTime.Now, // Adjust as needed
-                                Gender = "Unknown", // Adjust as needed
-                                ContactInfo = "N/A", // Adjust as needed
+                                DateOfBirth = existingDoctor.DateOfBirth, // Adjust as needed
+                                Gender = existingDoctor.Gender, // Adjust as needed
+                                ContactInfo = existingDoctor.ContactInfo, // Adjust as needed
                                 UserId = user.Id
                             };
 
@@ -243,9 +243,9 @@ namespace backend.Core.Services
                             {
                                 FirstName = user.FirstName,
                                 LastName = user.LastName,
-                                DateOfBirth = DateTime.Now, // Adjust as needed
-                                Gender = "Unknown", // Adjust as needed
-                                ContactInfo = "N/A", // Adjust as needed
+                                DateOfBirth = existingNurse.DateOfBirth, // Adjust as needed
+                                Gender = existingNurse.Gender, // Adjust as needed
+                                ContactInfo = existingNurse.ContactInfo, // Adjust as needed
                                 UserId = user.Id
                             };
 
@@ -266,9 +266,9 @@ namespace backend.Core.Services
                             {
                                 FirstName = user.FirstName,
                                 LastName = user.LastName,
-                                DateOfBirth = DateTime.Now, // Adjust as needed
-                                Gender = "Unknown", // Adjust as needed
-                                ContactInfo = "N/A", // Adjust as needed
+                                DateOfBirth = existingPatient.DateOfBirth, // Adjust as needed
+                                Gender = existingPatient.Gender, // Adjust as needed
+                                ContactInfo = existingPatient.ContactInfo, // Adjust as needed
                                 UserId = user.Id,
                                 Qualifications = "RN", // Adjust as needed
                                 IsAvailable = true // Adjust as needed

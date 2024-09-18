@@ -145,12 +145,38 @@ const MedicalRecordsPage: React.FC = () => {
         const direction = sortColumn === column && sortDirection === 'asc' ? 'desc' : 'asc';
         setSortColumn(column);
         setSortDirection(direction);
+    
         setRecords(records.slice().sort((a, b) => {
-            if (a[column] < b[column]) return direction === 'asc' ? -1 : 1;
-            if (a[column] > b[column]) return direction === 'asc' ? 1 : -1;
-            return 0;
+            const aValue = a[column];
+            const bValue = b[column];
+    
+            // Handle undefined or null values
+            if (aValue === undefined || aValue === null) return direction === 'asc' ? 1 : -1;
+            if (bValue === undefined || bValue === null) return direction === 'asc' ? -1 : 1;
+    
+            // Handle string comparison
+            if (typeof aValue === 'string' && typeof bValue === 'string') {
+                return direction === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+            }
+    
+            // Handle number comparison
+            if (typeof aValue === 'number' && typeof bValue === 'number') {
+                return direction === 'asc' ? aValue - bValue : bValue - aValue;
+            }
+    
+            // Handle Date comparison (assuming values are either Date objects or date strings)
+            const aDate = new Date(aValue as string); // Cast string to Date
+            const bDate = new Date(bValue as string);
+    
+            if (!isNaN(aDate.getTime()) && !isNaN(bDate.getTime())) {
+                return direction === 'asc' ? aDate.getTime() - bDate.getTime() : bDate.getTime() - aDate.getTime();
+            }
+    
+            return 0; // Default case for other types
         }));
     };
+    
+    
 
     const generatePDF = () => {
         if (selectedPatientId === null) {

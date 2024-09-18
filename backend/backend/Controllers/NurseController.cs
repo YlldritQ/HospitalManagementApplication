@@ -163,6 +163,14 @@ namespace backend.Controllers
             return Ok(nurses);
         }
 
+        [HttpGet("user/{userId}")]
+        public async Task<ActionResult<NurseDto>> GetNurseByUserId(string userId)
+        {
+            var nurse = await _nurseService.GetNurseByUserIdAsync(userId);
+
+            return Ok(nurse);
+        }
+
         // GET: api/nurse/noDepartment
         [HttpGet("noDepartment")]
         public async Task<ActionResult<IEnumerable<NurseDto>>> GetNursesWithNoDepartment()

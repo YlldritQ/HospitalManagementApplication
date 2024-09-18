@@ -15,6 +15,7 @@ public interface INurseService
     Task RemoveRoomsFromNurseAsync(int nurseId);
 
     Task<IEnumerable<NurseDto>> GetNursesByDepartmentIdAsync(int departmentId);
+    Task<NurseDto> GetNurseByUserIdAsync(string userId);
     Task<IEnumerable<NurseDto>> GetNursesWithNoDepartmentAsync();
     Task<IEnumerable<RoomDto>> GetRoomsAssignedToNurseAsync(int nurseId);
 
