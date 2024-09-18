@@ -4,6 +4,7 @@ import {
   FaStethoscope,
   FaSyringe,
   FaUserInjured,
+  FaBed
 } from "react-icons/fa";
 import { MdOutlineMedicalServices } from "react-icons/md";
 import { TbMessages } from "react-icons/tb";
@@ -32,7 +33,7 @@ const Sidebar = () => {
             className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
           >
             <MdOutlineMedicalServices className="text-orange-600 w-6 h-6" />
-            <span className="font-medium">User Management</span>
+            <span className="font-medium">User</span>
           </button>
 
           <button
@@ -40,7 +41,7 @@ const Sidebar = () => {
             className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
           >
             <FaClipboardList className="text-red-600 w-6 h-6" />
-            <span className="font-medium">Patients List</span>
+            <span className="font-medium">Patients</span>
           </button>
 
           <button
@@ -48,7 +49,7 @@ const Sidebar = () => {
             className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
           >
             <FaStethoscope className="text-teal-600 w-6 h-6" />
-            <span className="font-medium">Doctors List</span>
+            <span className="font-medium">Doctors</span>
           </button>
 
           <button
@@ -56,7 +57,7 @@ const Sidebar = () => {
             className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
           >
             <FaSyringe className="text-teal-600 w-6 h-6" />
-            <span className="font-medium">Nurse List</span>
+            <span className="font-medium">Nurses</span>
           </button>
 
           <button
@@ -72,14 +73,21 @@ const Sidebar = () => {
             className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
           >
             <MdOutlineMedicalServices className="text-orange-600 w-6 h-6" />
-            <span className="font-medium">Medical Records List</span>
+            <span className="font-medium">Medical Records</span>
           </button>
           <button
             onClick={() => handleClick(PATH_DASHBOARD.departmentList)}
             className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
           >
             <FaClipboardList className="text-red-600 w-6 h-6" />
-            <span className="font-medium">Department List</span>
+            <span className="font-medium">Department</span>
+          </button>
+          <button
+            onClick={() => handleClick(PATH_DASHBOARD.roomList)}
+            className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
+          >
+            <FaBed className="text-red-600 w-6 h-6" />
+            <span className="font-medium">Rooms</span>
           </button>
         </>
       );
