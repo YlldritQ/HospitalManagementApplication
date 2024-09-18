@@ -37,16 +37,16 @@ namespace backend.Controllers
 
         // POST: api/prescription
         [HttpPost]
-        public async Task<ActionResult> CreatePrescription([FromBody] CUPrescriptionDto prescriptionDto)
+        public async Task<PrescriptionDto> CreatePrescription([FromBody] CUPrescriptionDto prescriptionDto)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return null;
             }
 
             var response = await _prescriptionService.CreatePrescriptionAsync(prescriptionDto);
 
-            return Ok(response);
+            return response;
         }
 
         // PUT: api/prescription/{id}

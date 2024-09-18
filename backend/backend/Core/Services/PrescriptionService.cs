@@ -3,6 +3,7 @@ using backend.Core.DbContext;
 using backend.Core.Dtos.General;
 using backend.Core.Dtos.Prescription;
 using backend.Core.Entities;
+using backend.Core.Services;
 using Microsoft.EntityFrameworkCore;
 
 public class PrescriptionService : IPrescriptionService
@@ -51,21 +52,26 @@ public class PrescriptionService : IPrescriptionService
         }).ToList();
     }
 
-    public async Task<GeneralServiceResponseDto> CreatePrescriptionAsync(CUPrescriptionDto prescriptionDto)
+    public async Task<PrescriptionDto> CreatePrescriptionAsync(CUPrescriptionDto prescriptionDto)
     {
         await ValidatePatientAndDoctorExistsAsync(prescriptionDto.PatientId, prescriptionDto.DoctorId);
 
+
+        var patientIns = new PatientService(_context, _mapper);
+        var patient = await patientIns.GetPatientByIdAsync(prescriptionDto.PatientId);
+        var doctorIns = new DoctorService(_context, _mapper);
+        var doctor = await doctorIns.GetDoctorByIdAsync(prescriptionDto.DoctorId);
+
+        prescriptionDto.DoctorName = doctor.FirstName;
+        prescriptionDto.PatientName = patient.FirstName;
+
         var prescription = _mapper.Map<Prescription>(prescriptionDto);
 
-        await _context.Prescriptions.AddAsync(prescription);
+        var response = await _context.Prescriptions.AddAsync(prescription);
         await _context.SaveChangesAsync();
 
-        return new GeneralServiceResponseDto()
-        {
-            IsSucceed = true,
-            StatusCode = 201,
-            Message = "Perscription added Succesfully"
-        };
+        var retEntity = response.Entity;
+        return _mapper.Map<PrescriptionDto>(retEntity);
     }
     public async Task<GeneralServiceResponseDto> UpdatePrescriptionAsync(int prescriptionId, CUPrescriptionDto prescriptionDto)
     {
@@ -89,6 +95,7 @@ public class PrescriptionService : IPrescriptionService
         {
             // Validate if the patient and doctor exist
             await ValidatePatientAndDoctorExistsAsync(prescriptionDto.PatientId, prescriptionDto.DoctorId);
+
 
             // Map the DTO to the existing prescription entity
             _mapper.Map(prescriptionDto, existingPrescription);
@@ -155,4 +162,5 @@ public class PrescriptionService : IPrescriptionService
             throw new ArgumentException($"Doctor with ID {doctorId} not found.");
         }
     }
+
 }

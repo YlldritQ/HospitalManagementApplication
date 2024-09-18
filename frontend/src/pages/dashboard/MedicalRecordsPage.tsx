@@ -11,12 +11,14 @@ import { getAllPrescriptions } from '../../services/prescriptionService'; // Imp
 import { PrescriptionDto } from '../../types/prescriptionTypes'; // Import types for prescriptions
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import NewMedicalRecordModal from '../../components/modals/NewMedicalRecordModal';
 
 const MedicalRecordsPage: React.FC = () => {
     const [records, setRecords] = useState<MedicalRecordDto[]>([]);
     const [patients, setPatients] = useState<PatientDto[]>([]);
     const [doctors, setDoctors] = useState<DoctorDto[]>([]);
     const [nurses, setNurses] = useState<NurseDto[]>([]);
+    const [isModalOpen, setModalOpen] = useState(false);
     const [prescriptions, setPrescriptions] = useState<PrescriptionDto[]>([]);
     const [selectedPatientId, setSelectedPatientId] = useState<number | null>(null);
     const [newRecord, setNewRecord] = useState<CUMedicalRecordDto>({
@@ -93,27 +95,15 @@ const MedicalRecordsPage: React.FC = () => {
         fetchPrescriptions();
     }, []);
 
-    const handleCreate = async () => {
-        try {
-            if (!newRecord.patientId || !newRecord.recordDate || !newRecord.recordDetails || !newRecord.doctorId || !newRecord.nurseId) {
-                setError('Please fill out all required fields.');
-                return;
-            }
-
-            const createdRecord = await medicalRecordService.createMedicalRecord(newRecord);
-            setRecords(prevRecords => [...prevRecords, createdRecord]);
-            setNewRecord({
-                patientId: 0,
-                recordDate: '',
-                recordDetails: '',
-                doctorId: 0,
-                nurseId: 0,
-                prescriptionId: 0
-            });
-            setShowCreateForm(false);
-        } catch (error) {
-            setError('Failed to create record.');
-        }
+    const handleCreate = async (recordDto: CUMedicalRecordDto) => {
+         try {
+            console.log(recordDto);
+      const newRecord = await medicalRecordService.createMedicalRecord(recordDto);
+      setRecords([...records, newRecord]);
+      setModalOpen(false); // Close modal after successful creation
+    } catch (err) {
+      setError('Failed to create new medical record.');
+    }
     };
 
     const handleUpdate = async () => {
@@ -240,9 +230,9 @@ const MedicalRecordsPage: React.FC = () => {
                 </select>
 
                 <button
-                    onClick={() => setShowCreateForm(true)}
-                    className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
-                >
+        onClick={() => setModalOpen(true)}
+        className="bg-blue-600 text-white px-4 py-2 rounded-md mb-4"
+      >
                     Create New Record
                 </button>
                 <button
@@ -336,104 +326,6 @@ const MedicalRecordsPage: React.FC = () => {
                 </table>
             </div>
 
-            {showCreateForm && (
-                <div className="bg-white p-6 rounded-lg shadow-lg mt-6">
-                    <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
-                        <h2 className="text-2xl font-semibold mb-4">Create Medical Record</h2>
-                        {error && <p className="text-red-500 mb-4">{error}</p>}
-                        <div className="mb-4">
-                            <label htmlFor="patientId" className="block text-gray-700">Patient</label>
-                            <select
-                                id="patientId"
-                                value={newRecord.patientId}
-                                onChange={(e) => setNewRecord({ ...newRecord, patientId: Number(e.target.value) })}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            >
-                                <option value="0">Select a patient</option>
-                                {patients.map(patient => (
-                                    <option key={patient.patientId} value={patient.patientId}>
-                                        {patient.firstName} {patient.lastName}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        <div className="mb-4">
-                            <label htmlFor="recordDate" className="block text-gray-700">Record Date</label>
-                            <input
-                                id="recordDate"
-                                type="date"
-                                value={newRecord.recordDate}
-                                onChange={(e) => setNewRecord({ ...newRecord, recordDate: e.target.value })}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label htmlFor="recordDetails" className="block text-gray-700">Record Details</label>
-                            <textarea
-                                id="recordDetails"
-                                value={newRecord.recordDetails}
-                                onChange={(e) => setNewRecord({ ...newRecord, recordDetails: e.target.value })}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label htmlFor="doctorId" className="block text-gray-700">Doctor</label>
-                            <select
-                                id="doctorId"
-                                value={newRecord.doctorId}
-                                onChange={(e) => setNewRecord({ ...newRecord, doctorId: Number(e.target.value) })}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            >
-                                <option value="0">Select a doctor</option>
-                                {doctors.map(doctor => (
-                                    <option key={doctor.id} value={doctor.id}>
-                                        {doctor.firstName} {doctor.lastName}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        <div className="mb-4">
-                            <label htmlFor="nurseId" className="block text-gray-700">Nurse</label>
-                            <select
-                                id="nurseId"
-                                value={newRecord.nurseId}
-                                onChange={(e) => setNewRecord({ ...newRecord, nurseId: Number(e.target.value) })}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            >
-                                <option value="0">Select a nurse</option>
-                                {nurses.map(nurse => (
-                                    <option key={nurse.id} value={nurse.id}>
-                                        {nurse.firstName} {nurse.lastName}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        <div className="mb-4">
-                            <label htmlFor="prescriptionId" className="block text-gray-700">Prescription ID</label>
-                            <input
-                                id="prescriptionId"
-                                type="number"
-                                value={newRecord.prescriptionId || ''}
-                                onChange={(e) => setNewRecord({ ...newRecord, prescriptionId: Number(e.target.value) })}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            />
-                        </div>
-                        <button
-                            onClick={handleCreate}
-                            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition mr-2"
-                        >
-                            Create
-                        </button>
-                        <button
-                            onClick={() => setShowCreateForm(false)}
-                            className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition"
-                        >
-                            Cancel
-                        </button>
-                    </div>
-                </div>
-            )}
-
             {showEditForm && editingRecord && (
                 <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
                     <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
@@ -514,6 +406,11 @@ const MedicalRecordsPage: React.FC = () => {
                     </div>
                 </div>
             )}
+            <NewMedicalRecordModal
+        isOpen={isModalOpen}
+        onClose={() => setModalOpen(false)}
+        onSubmit={handleCreate}
+      />
         </div>
     );
 };

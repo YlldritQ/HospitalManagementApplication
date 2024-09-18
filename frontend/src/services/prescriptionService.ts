@@ -28,7 +28,9 @@ export const getPrescriptionById = async (id: number): Promise<PrescriptionDto |
 // Create a new prescription
 export const createPrescription = async (prescriptionDto: CUPrescriptionDto): Promise<PrescriptionDto> => {
   try {
+    console.log(prescriptionDto);
     const response = await axiosInstance.post('/Prescription', prescriptionDto);
+    console.log(response);
     return response.data as PrescriptionDto;
   } catch (error) {
     handleError(error);
