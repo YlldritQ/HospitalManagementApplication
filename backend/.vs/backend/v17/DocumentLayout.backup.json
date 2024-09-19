@@ -3,20 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\services\\medicalrecordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\services\\medicalrecordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\controllers\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\controllers\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\interfaces\\imedicalrecordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\interfaces\\imedicalrecordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\constants\\staticuserroles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\constants\\staticuserroles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\controllers\\medicalrecordcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\controllers\\medicalrecordcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\constants\\staticuserroles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\constants\\staticuserroles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\dbcontext\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\dbcontext\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\dtos\\doctor\\doctordto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\dtos\\doctor\\doctordto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\services\\medicalrecordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\services\\medicalrecordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\interfaces\\imedicalrecordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\interfaces\\imedicalrecordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -29,10 +41,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\services\\prescriptionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\services\\prescriptionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\controllers\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\controllers\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\interfaces\\iprescriptionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -79,10 +87,6 @@
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\dbcontext\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\dbcontext\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\entities\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\entities\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -110,23 +114,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "StaticUserRoles.cs",
-              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Constants\\StaticUserRoles.cs",
-              "RelativeDocumentMoniker": "backend\\Core\\Constants\\StaticUserRoles.cs",
-              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Constants\\StaticUserRoles.cs",
-              "RelativeToolTip": "backend\\Core\\Constants\\StaticUserRoles.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T15:21:18.257Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "backend\\Controllers\\AuthController.cs",
@@ -144,13 +136,14 @@
               "RelativeDocumentMoniker": "backend\\Controllers\\MedicalRecordController.cs",
               "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Controllers\\MedicalRecordController.cs",
               "RelativeToolTip": "backend\\Controllers\\MedicalRecordController.cs",
-              "ViewState": "AgIAABgAAAAAmpmZmZkpwCYAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAwwEwAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T21:21:28.597Z"
+              "WhenOpened": "2024-09-14T21:21:28.597Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "DoctorService.cs",
               "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\DoctorService.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Services\\DoctorService.cs",
@@ -162,19 +155,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 0,
               "Title": "DoctorController.cs",
               "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Controllers\\DoctorController.cs",
               "RelativeDocumentMoniker": "backend\\Controllers\\DoctorController.cs",
               "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Controllers\\DoctorController.cs",
               "RelativeToolTip": "backend\\Controllers\\DoctorController.cs",
-              "ViewState": "AQIAACIAAAAAAAAAAAAgwC4AAABBAAAA",
+              "ViewState": "AgIAACoAAABAzczMzMwmwEUAAABTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-15T23:27:48.358Z"
+              "WhenOpened": "2024-09-15T23:27:48.358Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "IMedicalRecordService.cs",
               "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IMedicalRecordService.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Interfaces\\IMedicalRecordService.cs",
@@ -186,7 +180,45 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\DbContext\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "backend\\Core\\DbContext\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\DbContext\\ApplicationDbContext.cs",
+              "RelativeToolTip": "backend\\Core\\DbContext\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-14T19:16:20.799Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "StaticUserRoles.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Constants\\StaticUserRoles.cs",
+              "RelativeDocumentMoniker": "backend\\Core\\Constants\\StaticUserRoles.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Constants\\StaticUserRoles.cs",
+              "RelativeToolTip": "backend\\Core\\Constants\\StaticUserRoles.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T15:21:18.257Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DoctorDto.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Doctor\\DoctorDto.cs",
+              "RelativeDocumentMoniker": "backend\\Core\\Dtos\\Doctor\\DoctorDto.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Doctor\\DoctorDto.cs",
+              "RelativeToolTip": "backend\\Core\\Dtos\\Doctor\\DoctorDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T17:12:41.834Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "MedicalRecordService.cs",
               "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\MedicalRecordService.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Services\\MedicalRecordService.cs",
@@ -194,12 +226,11 @@
               "RelativeToolTip": "backend\\Core\\Services\\MedicalRecordService.cs",
               "ViewState": "AgIAAJsAAAAAAAAAAAAowK0AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T20:17:51.172Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-14T20:17:51.172Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "IDoctorService.cs",
               "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IDoctorService.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Interfaces\\IDoctorService.cs",
@@ -211,7 +242,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "PrescriptionController.cs",
               "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Controllers\\PrescriptionController.cs",
               "RelativeDocumentMoniker": "backend\\Controllers\\PrescriptionController.cs",
@@ -223,7 +254,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "IPrescriptionService.cs",
               "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IPrescriptionService.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Interfaces\\IPrescriptionService.cs",
@@ -235,7 +266,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "CUPrescriptionDto.cs",
               "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Prescription\\CUPrescriptionDto.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Dtos\\Prescription\\CUPrescriptionDto.cs",
@@ -247,7 +278,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "PrescriptionService.cs",
               "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\PrescriptionService.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Services\\PrescriptionService.cs",
@@ -259,7 +290,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 18,
               "Title": "NurseService.cs",
               "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\NurseService.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Services\\NurseService.cs",
@@ -271,7 +302,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "INurseService.cs",
               "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\INurseService.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Interfaces\\INurseService.cs",
@@ -283,7 +314,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "NurseController.cs",
               "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Controllers\\NurseController.cs",
               "RelativeDocumentMoniker": "backend\\Controllers\\NurseController.cs",
@@ -295,7 +326,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 20,
               "Title": "AuthService.cs",
               "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\AuthService.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Services\\AuthService.cs",
@@ -307,7 +338,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "Doctor.cs",
               "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\Doctor.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Entities\\Doctor.cs",
@@ -319,19 +350,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\DbContext\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "backend\\Core\\DbContext\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\DbContext\\ApplicationDbContext.cs",
-              "RelativeToolTip": "backend\\Core\\DbContext\\ApplicationDbContext.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T19:16:20.799Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "20240914212952_InitialCreate.cs",
               "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Migrations\\20240914212952_InitialCreate.cs",
               "RelativeDocumentMoniker": "backend\\Migrations\\20240914212952_InitialCreate.cs",
@@ -343,7 +362,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "Prescription.cs",
               "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\Prescription.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Entities\\Prescription.cs",
@@ -355,7 +374,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "Nurse.cs",
               "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\Nurse.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Entities\\Nurse.cs",
@@ -367,7 +386,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "MedicalRecord.cs",
               "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\MedicalRecord.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Entities\\MedicalRecord.cs",
@@ -379,7 +398,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "MedicalStaff.cs",
               "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\MedicalStaff.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Entities\\MedicalStaff.cs",
@@ -391,7 +410,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "CUMedicalRecordDto.cs",
               "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Records\\CUMedicalRecordDto.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Dtos\\Records\\CUMedicalRecordDto.cs",
@@ -403,7 +422,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "MedicalRecordDto.cs",
               "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Records\\MedicalRecordDto.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Dtos\\Records\\MedicalRecordDto.cs",
