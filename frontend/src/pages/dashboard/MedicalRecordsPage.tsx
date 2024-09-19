@@ -12,8 +12,19 @@ import { PrescriptionDto } from '../../types/prescriptionTypes'; // Import types
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import NewMedicalRecordModal from '../../components/modals/NewMedicalRecordModal';
+import useAuth from "../../hooks/useAuth.hook";
+
+import { RolesEnum } from '../../types/auth.types';
 
 const MedicalRecordsPage: React.FC = () => {
+
+    const { user } = useAuth();
+
+  // Check if the user is a nurse
+  if (!user || !user.roles.includes(RolesEnum.NURSE)) {
+    return <div>You do not have permission to access this page.</div>;
+  }
+    
     const [records, setRecords] = useState<MedicalRecordDto[]>([]);
     const [patients, setPatients] = useState<PatientDto[]>([]);
     const [doctors, setDoctors] = useState<DoctorDto[]>([]);

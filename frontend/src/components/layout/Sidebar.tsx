@@ -135,11 +135,11 @@ const Sidebar = () => {
           </button>
 
           <button
-            onClick={() => handleClick(PATH_DASHBOARD.appointment)}
+            onClick={() => handleClick(PATH_DASHBOARD.medicalRecordList)}
             className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
           >
-            <AiOutlineCalendar className="text-green-600 w-6 h-6" />
-            <span className="font-medium">Appointments</span>
+            <MdOutlineMedicalServices className="text-orange-600 w-6 h-6" />
+            <span className="font-medium">Medical Records</span>
           </button>
 
           <button

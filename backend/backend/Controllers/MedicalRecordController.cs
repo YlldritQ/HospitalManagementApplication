@@ -3,6 +3,7 @@ using backend.Core.Dtos.Records;
 using backend.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace backend.Controllers
 {
@@ -19,7 +20,7 @@ namespace backend.Controllers
 
         // GET: api/medicalrecord
         [HttpGet]
-        [Authorize(Roles = StaticUserRoles.AdminDoctorNurseUser)]
+        [Authorize(Roles = StaticUserRoles.AdminDoctorNursePatient)]
         public async Task<ActionResult<IEnumerable<MedicalRecordDto>>> GetAllMedicalRecords()
         {
             var records = await _medicalRecordService.GetAllMedicalRecordsAsync();
@@ -40,8 +41,12 @@ namespace backend.Controllers
 
         // POST: api/medicalrecord
         [HttpPost]
+        [Authorize(Roles = StaticUserRoles.AdminDoctorNurse)]
         public async Task<ActionResult> CreateMedicalRecord([FromBody] CUMedicalRecordDto recordDto)
         {
+            // Log the user's role to verify that nurses are correctly authenticated
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+            Console.WriteLine($"User Role: {userRole}");
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
