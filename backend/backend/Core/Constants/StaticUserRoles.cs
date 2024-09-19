@@ -10,7 +10,8 @@
         public const string PATIENT = "Patient";
 
         public const string AdminDoctor = "Admin,Doctor";
-        public const string AdminDoctorNurseUser = "Admin,Doctor,Nurse,User";
+        public const string AdminDoctorNursePatient = "Admin,Doctor,Nurse,Patient";
+        public const string AdminDoctorNurse = "Admin,Doctor,Nurse";
 
     }
 }
