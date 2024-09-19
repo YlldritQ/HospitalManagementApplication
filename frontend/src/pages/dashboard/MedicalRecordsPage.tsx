@@ -173,41 +173,86 @@ const MedicalRecordsPage: React.FC = () => {
             setError('Please select a patient.');
             return;
         }
-
+    
         const patientRecords = records.filter(record => record.patientId === selectedPatientId);
         const patient = patients.find(p => p.patientId === selectedPatientId);
-
+    
         if (!patient) {
             setError('Selected patient not found.');
             return;
         }
-
+    
         const doc = new jsPDF();
-        doc.text(`Medical Records for ${patient.firstName} ${patient.lastName}`, 14, 16);
-        doc.autoTable({
-            startY: 20,
-            head: [['ID', 'Patient ID', 'Name', 'Date', 'Details', 'Doctor Name', 'Nurse Name', 'Prescription']],
-            body: patientRecords.map(record => {
-                const doctor = doctors.find(d => d.id === record.doctorId);
-                const nurse = nurses.find(n => n.id === record.nurseId);
-                const prescription = prescriptions.find(p => p.id === record.prescriptionId);
+    
+        // Center the title and make it bold
+        doc.setFontSize(20);
+        doc.setFont('helvetica', 'bold');
+        doc.text(`Medical Records for ${patient.firstName} ${patient.lastName}`, doc.internal.pageSize.getWidth() / 2, 20, { align: 'center' });
+    
+        // Add a horizontal line under the title
+        doc.setLineWidth(0.5);
+        doc.line(15, 25, doc.internal.pageSize.getWidth() - 15, 25);
+    
+        // Patient Information Section
+        doc.setFontSize(14);
+        doc.text(`Patient Details:`, 14, 35);
+        doc.setFontSize(12);
+        doc.text(`ID: ${patient.patientId}`, 16, 42);
+        doc.text(`Name: ${patient.firstName} ${patient.lastName}`, 16, 48);
+        doc.text(`Date of Birth: ${new Date(patient.dateOfBirth).toLocaleDateString()}`, 16, 54);
+        doc.text(`Gender: ${patient.gender || 'Unknown'}`, 16, 60);
+        doc.text(`Contact: ${patient.contactInfo || 'N/A'}`, 16, 66);
+    
+        // Add space between patient details and medical records
+        doc.setLineWidth(0.5);
+        doc.line(15, 72, doc.internal.pageSize.getWidth() - 15, 72);
+        doc.setFont('helvetica', 'bold');
+        doc.text(`Medical Records:`, 14, 80);
+        doc.setFont('helvetica', 'normal');
+    
+        let yPosition = 90; // Starting Y position for medical records
+    
+        patientRecords.forEach((record, index) => {
+            const doctor = doctors.find(d => d.id === record.doctorId);
+            const nurse = nurses.find(n => n.id === record.nurseId);
+            const recordPrescriptions = record.prescriptionId !== undefined
+    ? prescriptions.find(p => p.id === record.prescriptionId)
+        ? `${prescriptions.find(p => p.id === record.prescriptionId)?.medicationName} (${prescriptions.find(p => p.id === record.prescriptionId)?.dosage})`
+        : 'N/A'
+    : 'N/A';
 
-                return [
-                    record.id.toString(),
-                    record.patientId.toString(),
-                    `${patient.firstName} ${patient.lastName}`,
-                    record.recordDate,
-                    record.recordDetails,
-                    doctor ? `${doctor.firstName} ${doctor.lastName}` : 'N/A',
-                    nurse ? `${nurse.firstName} ${nurse.lastName}` : 'N/A',
-                    prescription ? `${prescription.medicationName} (${prescription.dosage})` : 'N/A',
-                ];
-            })
+    
+            // Record Heading
+            doc.setFont('helvetica', 'bold');
+            doc.text(`Record ${index + 1}:`, 14, yPosition);
+            yPosition += 8;
+    
+            // Record Details in block format
+            doc.setFont('helvetica', 'normal');
+            doc.text(`Date: ${new Date(record.recordDate).toLocaleString()}`, 16, yPosition);
+            yPosition += 6;
+            doc.text(`Details: ${record.recordDetails}`, 16, yPosition);
+            yPosition += 6;
+            doc.text(`Doctor: ${doctor ? `${doctor.firstName} ${doctor.lastName} (Specialty: ${doctor.specialty})` : 'N/A'}`, 16, yPosition);
+            yPosition += 6;
+            doc.text(`Nurse: ${nurse ? `${nurse.firstName} ${nurse.lastName}` : 'N/A'}`, 16, yPosition);
+            yPosition += 6;
+            doc.text(`Prescriptions: ${recordPrescriptions || 'N/A'}`, 16, yPosition);
+            yPosition += 10; // Add some extra space between records
+    
+            // Add a line between records
+            doc.setLineWidth(0.1);
+            doc.line(15, yPosition - 2, doc.internal.pageSize.getWidth() - 15, yPosition - 2);
+            yPosition += 6;
         });
-
-        doc.save(`medical-records-${patient.firstName}-${patient.lastName}.pdf`);
+    
+        // Footer with generated date
+        doc.setFontSize(10);
+        doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, doc.internal.pageSize.height - 10);
+    
+        // Save the PDF with a descriptive name
+        doc.save(`medical-records-${patient.firstName}-${patient.lastName}-${new Date().getTime()}.pdf`);
     };
-
     return (
         <div className="container mx-auto px-4 py-6">
             <h1 className="text-3xl font-semibold mb-6">Medical Records</h1>
