@@ -9,23 +9,28 @@ import { toast } from 'react-hot-toast';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { PATH_DASHBOARD, PATH_PUBLIC } from '../../routes/paths';
+import { GenderEnum } from '../../types/auth.types';
 
 const RegisterPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const { register , isAuthenticated } = useAuth();
+  const { register, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if(isAuthenticated)
-      navigate(PATH_DASHBOARD.dashboard);
-  });
+    if (isAuthenticated) navigate(PATH_DASHBOARD.dashboard);
+  }, [isAuthenticated, navigate]);
 
   const registerSchema = Yup.object().shape({
     firstName: Yup.string().required('First Name is required'),
     lastName: Yup.string().required('Last Name is required'),
     userName: Yup.string().required('User Name is required'),
-    email: Yup.string().required('Email is required').email('Input text must be a valid email'),
-    password: Yup.string().required('Password is required').min(8, 'Password must be at least 8 character'),
+    gender: Yup.string().required('Gender is required'),
+    email: Yup.string()
+      .required('Email is required')
+      .email('Input text must be a valid email'),
+    password: Yup.string()
+      .required('Password is required')
+      .min(8, 'Password must be at least 8 characters'),
     address: Yup.string().required('Address Is required'),
   });
 
@@ -40,6 +45,7 @@ const RegisterPage = () => {
       firstName: '',
       lastName: '',
       userName: '',
+      gender: '',
       email: '',
       password: '',
       address: '',
@@ -49,9 +55,11 @@ const RegisterPage = () => {
   const onSubmitRegisterForm = async (data: IRegisterDto) => {
     try {
       setLoading(true);
-      await register(data.firstName, data.lastName, data.userName, data.email, data.password, data.address);
+      console.log(data);
+      await register(data.firstName, data.lastName, data.userName, data.email, data.gender, data.password, data.address);
       setLoading(false);
     } catch (error) {
+      console.log(error);
       setLoading(false);
       const err = error as { data: string; status: number };
       const { status, data } = err;
@@ -65,9 +73,6 @@ const RegisterPage = () => {
 
   return (
     <div className='pageTemplate1'>
-      {/* <div>Left</div> */}
-      
-      {/* <div>Right</div> */}
       <form
         onSubmit={handleSubmit(onSubmitRegisterForm)}
         className='flex-1 min-h-[600px] h-4/5 bg-[#f0ecf7] flex flex-col justify-center items-center rounded-r-2xl'
@@ -86,6 +91,19 @@ const RegisterPage = () => {
           error={errors.password?.message}
         />
         <InputField control={control} label='Address' inputName='address' error={errors.address?.message} />
+
+        {/* Gender Selection - Using InputField for Dropdown */}
+        <InputField
+          control={control}
+          label='Gender'
+          inputName='gender'
+          error={errors.gender?.message}
+          isSelect={true} // Enable dropdown
+          options={[
+            { value: GenderEnum.MALE, label: 'Male' },
+            { value: GenderEnum.FEMALE, label: 'Female' },
+          ]}
+        />
 
         <div className='px-4 mt-2 mb-6 w-9/12 flex gap-2'>
           <h1>Already Have an account?</h1>

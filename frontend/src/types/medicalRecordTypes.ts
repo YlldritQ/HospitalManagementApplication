@@ -12,7 +12,6 @@ export interface MedicalRecordDto {
 
 export interface CUMedicalRecordDto {
     patientId: number;
-    recordDate: string;
     recordDetails: string;
     doctorId: number;
     nurseId?: number;

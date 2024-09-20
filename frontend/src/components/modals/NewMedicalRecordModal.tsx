@@ -18,7 +18,6 @@ interface NewMedicalRecordModalProps {
 const NewMedicalRecordModal: React.FC<NewMedicalRecordModalProps> = ({ isOpen, onClose, onSubmit }) => {
   const [formData, setFormData] = useState<CUMedicalRecordDto>({
     patientId: 0,
-    recordDate: '',
     recordDetails: '',
     doctorId: 0,
     nurseId: undefined,
@@ -141,21 +140,6 @@ const NewMedicalRecordModal: React.FC<NewMedicalRecordModalProps> = ({ isOpen, o
                     </option>
                   ))}
                 </select>
-              </div>
-
-              <div>
-                <label htmlFor="recordDate" className="block text-sm font-medium text-gray-700">
-                  Record Date
-                </label>
-                <input
-                  type="date"
-                  name="recordDate"
-                  id="recordDate"
-                  value={formData.recordDate}
-                  onChange={handleInputChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                  required
-                />
               </div>
 
               <div>

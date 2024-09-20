@@ -111,6 +111,7 @@ const AuthContextProvider = ({ children }: IProps) => {
       lastName: string,
       userName: string,
       email: string,
+      gender: string,
       password: string,
       address: string
     ) => {
@@ -119,6 +120,7 @@ const AuthContextProvider = ({ children }: IProps) => {
         lastName,
         userName,
         email,
+        gender,
         password,
         address,
       });

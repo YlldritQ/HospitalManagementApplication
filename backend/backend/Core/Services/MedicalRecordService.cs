@@ -57,6 +57,7 @@ namespace backend.Core.Services
                 await ValidatePrescriptionExistsAsync(recordDto.PrescriptionId.Value);
 
             var record = _mapper.Map<MedicalRecord>(recordDto);
+            record.RecordDate = DateTime.Now;
 
             await _context.MedicalRecords.AddAsync(record);
             await _context.SaveChangesAsync();

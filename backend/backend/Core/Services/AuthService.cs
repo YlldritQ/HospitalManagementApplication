@@ -79,6 +79,7 @@ namespace backend.Core.Services
                 Email = registerDto.Email,
                 UserName = registerDto.UserName,
                 Address = registerDto.Address,
+                Gender = registerDto.Gender,
                 SecurityStamp = Guid.NewGuid().ToString()
             };
 
@@ -107,8 +108,8 @@ namespace backend.Core.Services
                 FirstName = registerDto.FirstName,
                 LastName = registerDto.LastName,
                 DateOfBirth = DateTime.Now, // Adjust as needed
-                Gender = "Unknown", // Adjust as needed
-                ContactInfo = "N/A", // Adjust as needed
+                Gender = registerDto.Gender, // Adjust as needed
+                ContactInfo = registerDto.Address, // Adjust as needed
                 UserId = newUser.Id
             };
             Console.WriteLine(newPatient);

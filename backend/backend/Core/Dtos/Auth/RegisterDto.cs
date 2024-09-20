@@ -10,6 +10,7 @@ namespace backend.Core.Dtos.Auth
         [Required(ErrorMessage = "UserName is required")]
         public string UserName { get; set; }
         public string Email { get; set; }
+        public string Gender { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }

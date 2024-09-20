@@ -2,6 +2,7 @@ export interface IRegisterDto {
     firstName: string;
     lastName: string;
     userName: string;
+    gender: string;
     email: string;
     password: string;
     address: string;
@@ -59,6 +60,7 @@ export interface IRegisterDto {
       lastName: string,
       userName: string,
       email: string,
+      gender: string,
       password: string,
       address: string
     ) => Promise<void>;
@@ -71,4 +73,9 @@ export interface IRegisterDto {
     NURSE = 'Nurse',
     PATIENT = 'Patient',
     USER = 'User',
+  }
+
+  export enum GenderEnum {
+    FEMALE = 'Female',
+    MALE = 'Male',
   }
