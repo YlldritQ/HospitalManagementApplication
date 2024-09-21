@@ -181,6 +181,8 @@ const MedicalRecordsPage: React.FC = () => {
     );
   };
 
+
+  
   const generatePDF = () => {
     if (selectedPatientId === null) {
       setError("Please select a patient.");
@@ -312,6 +314,146 @@ const MedicalRecordsPage: React.FC = () => {
       }-${new Date().getTime()}.pdf`
     );
   };
+
+  const generatePrescriptionPDF = () => {
+    if (selectedPatientId === null) {
+      setError("Please select a patient.");
+      return;
+    }
+  
+    const patientRecords = records.filter(
+      (record) => record.patientId === selectedPatientId
+    );
+    const patient = patients.find((p) => p.patientId === selectedPatientId);
+  
+    if (!patient) {
+      setError("Selected patient not found.");
+      return;
+    }
+  
+    const doc = new jsPDF();
+  
+    // Title
+    doc.setFontSize(20);
+    doc.setFont("helvetica", "bold");
+    doc.text(
+      `Prescription Details for ${patient.firstName} ${patient.lastName}`,
+      doc.internal.pageSize.getWidth() / 2,
+      20,
+      { align: "center" }
+    );
+  
+    // Add a horizontal line under the title
+    doc.setLineWidth(0.5);
+    doc.line(15, 25, doc.internal.pageSize.getWidth() - 15, 25);
+  
+    // Patient Information Section
+    doc.setFontSize(14);
+    doc.text(`Patient Details:`, 14, 35);
+    doc.setFontSize(12);
+    doc.text(`Name: ${patient.firstName} ${patient.lastName}`, 16, 48);
+    doc.text(
+      `Date of Birth: ${new Date(patient.dateOfBirth).toLocaleDateString()}`,
+      16,
+      54
+    );
+  
+    // Add space before records
+    doc.setLineWidth(0.5);
+    doc.line(15, 60, doc.internal.pageSize.getWidth() - 15, 60);
+    doc.setFont("helvetica", "bold");
+    doc.text(`Prescription Records:`, 14, 70);
+    doc.setFont("helvetica", "normal");
+  
+    let yPosition = 80; // Starting Y position for records
+  
+    patientRecords.forEach((record) => {
+      const doctor = doctors.find((d) => d.id === record.doctorId);
+      const prescription = prescriptions.find(
+        (p) => p.id === record.prescriptionId
+      );
+  
+    
+  
+      // Record Details in block format
+      doc.setFont("helvetica", "normal");
+      doc.text(
+        `Doctor: ${
+          doctor ? `${doctor.firstName} ${doctor.lastName}` : "N/A"
+        }`,
+        16,
+        yPosition
+      );
+      yPosition += 10;
+      doc.text(
+        `Prescription: ${
+          prescription
+            ? `${prescription.medicationName}`
+            : "N/A"
+        }`,
+        16,
+        yPosition
+      );
+      yPosition += 10; // Add space between records
+      doc.text(
+        `Dosage: ${
+          prescription
+            ? `${prescription.dosage}`
+            : "N/A"
+        }`,
+        16,
+        yPosition
+      );
+      yPosition += 10;
+      doc.text(
+        `Instructions: ${
+          prescription
+            ? `${prescription.instructions}`
+            : "N/A"
+        }`,
+        16,
+        yPosition
+      );
+      yPosition += 10;
+      
+      doc.text(
+        `Date Issued: ${
+          prescription
+            ? `${prescription.dateIssued}`
+            : "N/A"
+        }`,
+        16,
+        yPosition
+      );
+      yPosition += 10;
+      // Add a line between records
+      doc.setLineWidth(0.1);
+      doc.line(
+        15,
+        yPosition - 2,
+        doc.internal.pageSize.getWidth() - 15,
+        yPosition - 2
+      );
+      yPosition += 6;
+    });
+  
+    // Footer with generated date
+    doc.setFontSize(10);
+    doc.text(
+      `Generated on: ${new Date().toLocaleDateString()}`,
+      14,
+      doc.internal.pageSize.height - 10
+    );
+  
+    // Save the PDF
+    doc.save(
+      `prescription-records-${patient.firstName}-${
+        patient.lastName
+      }-${new Date().getTime()}.pdf`
+    );
+  };
+  
+
   return (
     <div className="container mx-auto px-4 py-6">
       <h1 className="text-3xl font-semibold mb-6">Medical Records</h1>
@@ -350,6 +492,13 @@ const MedicalRecordsPage: React.FC = () => {
         >
           Download PDF
         </button>
+        <button
+  onClick={generatePrescriptionPDF}
+  className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition"
+>
+  Download Prescription PDF
+</button>
+
       </div>
 
       <div className="bg-white p-6 rounded-lg shadow-lg">

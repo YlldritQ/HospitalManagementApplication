@@ -119,7 +119,7 @@ const EditNurse: React.FC = () => {
   return (
     <div className="max-w-5xl mx-auto p-8 bg-gray-100 rounded-md shadow-md">
       <h1 className="text-3xl font-bold mb-6 text-blue-600">
-        {id ? 'Edit Nurse Information' : 'Add New Nurse'}
+        <p>Edit Nurse Information</p>
       </h1>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

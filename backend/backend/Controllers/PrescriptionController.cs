@@ -1,5 +1,7 @@
-﻿using backend.Core.Dtos.Prescription;
+﻿using backend.Core.Constants;
+using backend.Core.Dtos.Prescription;
 using backend.Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
@@ -17,6 +19,7 @@ namespace backend.Controllers
 
         // GET: api/prescription
         [HttpGet]
+        [Authorize(Roles = StaticUserRoles.AdminDoctorNursePatient)]
         public async Task<ActionResult<IEnumerable<PrescriptionDto>>> GetAllPrescriptions()
         {
             var prescriptions = await _prescriptionService.GetAllPrescriptionsAsync();

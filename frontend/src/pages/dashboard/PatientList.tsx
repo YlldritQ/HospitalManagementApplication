@@ -73,43 +73,49 @@ const PatientList: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold text-center mb-8">Patient List</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {patients.map((patient) => (
-          <div
-            key={patient.patientId}
-            className="p-6 border rounded-lg shadow-lg bg-white hover:shadow-xl transition-shadow duration-300"
-          >
-            <h2 className="text-xl font-semibold text-gray-800 mb-2">
-              {patient.firstName} {patient.lastName}
-            </h2>
-            <p className="text-sm text-gray-600">ID: {patient.patientId}</p>
-            <p className="text-sm text-gray-600">Gender: {patient.gender}</p>
-            <p className="text-sm text-gray-600">
-              Contact Info: {patient.contactInfo}
-            </p>
-            <p className="text-sm text-gray-600">
-              Date of Birth: {patient.dateOfBirth.toDateString()}
-            </p>
-            <div className="flex justify-between mt-4">
-              <button
-                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
-                onClick={() => handleDelete(patient.patientId)}
-              >
-                Delete
-              </button>
-              <button
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
-                onClick={() => handleEdit(patient.patientId)}
-              >
-                Edit
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+        <h1 className="text-2xl font-bold mb-4">Patient List</h1>
+        <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+            <thead>
+                <tr className="w-full bg-gray-200 text-left">
+                    <th className="py-3 px-4 border-b">ID</th>
+                    <th className="py-3 px-4 border-b">Name</th>
+                    <th className="py-3 px-4 border-b">Gender</th>
+                    <th className="py-3 px-4 border-b">Contact Info</th>
+                    <th className="py-3 px-4 border-b">Date of birth</th>
+                    <th className="py-3 px-4 border-b">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {patients.map((patient) => (
+                    <tr key={patient.patientId} className="border-b">
+                        <td className="py-3 px-4">{patient.patientId}</td>
+                        <td className="py-3 px-4">{`${patient.firstName} ${patient.lastName}`}</td>
+                        <td className="py-3 px-4">{patient.gender}</td>
+                        <td className="py-3 px-4">{patient.contactInfo}</td>
+                        <td className="py-3 px-4">
+                            {patient.dateOfBirth.toDateString()}
+                        </td>
+                        <td className="py-3 px-4">
+                            <button
+                                onClick={() => handleEdit(patient.patientId)}
+                                className="text-blue-500 hover:underline mr-3"
+                            >
+                                Edit
+                            </button>
+                            <button
+                                onClick={() => handleDelete(patient.patientId)}
+                                className="text-red-500 hover:underline mr-3"
+                            >
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+        
     </div>
-  );
+);
 };
 
 export default PatientList;

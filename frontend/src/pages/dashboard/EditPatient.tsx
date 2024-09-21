@@ -77,73 +77,105 @@ const EditPatient: React.FC = () => {
   if (!patient) return <p>No patient data available.</p>;
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold text-center mb-8">Edit Patient</h1>
-      <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-white p-6 rounded shadow-md">
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="firstName">First Name</label>
-          <input
-            type="text"
-            id="firstName"
-            name="firstName"
-            value={patient.firstName}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
-          />
+    <div className="max-w-5xl mx-auto p-8 bg-gray-100 rounded-md shadow-md">
+      <h1 className="text-3xl font-bold mb-6 text-blue-600">
+        <p>Edit Patient Information</p>
+      </h1>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label htmlFor="firstName" className="block text-sm font-semibold text-gray-700">
+              First Name
+            </label>
+            <input
+              type="text"
+              name="firstName"
+              id="firstName"
+              value={patient.firstName}
+              onChange={handleChange}
+              placeholder="Enter first name"
+              className="mt-1 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              required
+            />
+          </div>
+
+          <div>
+            <label htmlFor="lastName" className="block text-sm font-semibold text-gray-700">
+              Last Name
+            </label>
+            <input
+              type="text"
+              name="lastName"
+              id="lastName"
+              value={patient.lastName}
+              onChange={handleChange}
+              placeholder="Enter last name"
+              className="mt-1 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              required
+            />
+          </div>
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="lastName">Last Name</label>
-          <input
-            type="text"
-            id="lastName"
-            name="lastName"
-            value={patient.lastName}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
-          />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label htmlFor="gender" className="block text-sm font-semibold text-gray-700">
+              Gender
+            </label>
+            <select
+              name="gender"
+              id="gender"
+              value={patient.gender}
+              onChange={handleChange}
+              className="mt-1 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              required
+            >
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div>
+            <label htmlFor="contactInfo" className="block text-sm font-semibold text-gray-700">
+              Contact Info
+            </label>
+            <input
+              type="text"
+              name="contactInfo"
+              id="contactInfo"
+              value={patient.contactInfo}
+              onChange={handleChange}
+              placeholder="Enter contact info"
+              className="mt-1 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              required
+            />
+          </div>
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="dateOfBirth">Date of Birth</label>
-          <input
-            type="date"
-            id="dateOfBirth"
-            name="dateOfBirth"
-            value={patient.dateOfBirth.toISOString().substr(0, 10)}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="gender">Gender</label>
-          <select
-            id="gender"
-            name="gender"
-            value={patient.gender}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
-          >
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="contactInfo">Contact Info</label>
-          <input
-            type="text"
-            id="contactInfo"
-            name="contactInfo"
-            value={patient.contactInfo}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
-          />
-        </div>
-        <div className="flex justify-end mt-4">
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label htmlFor="dateOfBirth" className="block text-sm font-semibold text-gray-700">
+              Date of Birth
+            </label>
+            <input
+              type="date"
+              name="dateOfBirth"
+              id="dateOfBirth"
+              value={patient.dateOfBirth.toISOString().substring(0, 10)}
+              onChange={handleChange}
+              className="mt-1 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              required
+            />
+          </div>
+</div>
+
+        <div className="flex justify-end mt-6">
           <button
             type="submit"
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white text-sm font-semibold rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
-            Save
+            Save Patient
           </button>
         </div>
       </form>

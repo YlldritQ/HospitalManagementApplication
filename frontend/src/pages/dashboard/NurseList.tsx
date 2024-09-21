@@ -103,14 +103,6 @@ const NurseList: React.FC = () => {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Nurse List</h1>
-      <div className="mb-4">
-        <button
-          onClick={() => navigate("/dashboard/edit-nurse/:id")}
-          className="inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-        >
-          Add New Nurse
-        </button>
-      </div>
       <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
         <thead>
           <tr className="w-full bg-gray-200 text-left">
