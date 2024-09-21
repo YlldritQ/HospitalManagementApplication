@@ -36,6 +36,20 @@ namespace backend.Controllers
             return StatusCode(registerResult.StatusCode, registerResult.Message);
         }
 
+        [HttpPost]
+        [Route("update")]
+        public async Task<IActionResult> Update(string id, [FromBody] UpdateDto update)
+        {
+            var updateResult = await _authService.UpdateUserAsync(id, update);
+            if (updateResult.IsSucceed)
+            {
+                return Ok(updateResult.Message);
+            }
+            else
+            {
+                return StatusCode(updateResult.StatusCode, updateResult.Message);
+            }
+        }
         // Route -> Login
         [HttpPost]
         [Route("login")]

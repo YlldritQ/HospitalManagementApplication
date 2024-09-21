@@ -178,6 +178,27 @@
   },
   {
     "ContainingType": "backend.Controllers.AuthController",
+    "Method": "Update",
+    "RelativePath": "api/Auth/update",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "update",
+        "Type": "backend.Core.Dtos.Auth.UpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "backend.Controllers.AuthController",
     "Method": "UpdateRole",
     "RelativePath": "api/Auth/update-role",
     "HttpMethod": "POST",

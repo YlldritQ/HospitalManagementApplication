@@ -11,6 +11,7 @@ using backend.Core.Dtos.Staff;
 using backend.Core.Dtos.ManyToMany;
 using backend.Core.Dtos.Appointment;
 using backend.Core.Dtos.Department;
+using backend.Core.Dtos.Auth;
 
 namespace backend.Core.AutoMapperConfig
 {
@@ -77,6 +78,8 @@ namespace backend.Core.AutoMapperConfig
             CreateMap<Room, CURoomDto>();
             CreateMap<CURoomDto, Room>();
 
+            CreateMap<UpdateDto, ApplicationUser>();
+            CreateMap<ApplicationUser, UpdateDto>();
         }
     }
 }

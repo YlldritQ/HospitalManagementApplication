@@ -13,6 +13,7 @@ namespace backend.Core.Interfaces
         Task<LoginServiceResponseDto?> MeAsync(MeDto meDto);
         Task<IEnumerable<UserInfoResult>> GetUsersListAsync();
         Task<UserInfoResult?> GetUserDetailsByUserNameAsync(string userName);
+        Task<GeneralServiceResponseDto> UpdateUserAsync(string id, UpdateDto update);
         Task<IEnumerable<string>> GetUsernamesListAsync();
         Task<GeneralServiceResponseDto> DeleteUserAsync(ClaimsPrincipal User, string UserName);
     }

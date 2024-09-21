@@ -23,6 +23,7 @@ import {
   PATH_AFTER_LOGOUT,
   PATH_AFTER_REGISTER,
   REGISTER_URL,
+  UPDATE_URL,
 } from "../utils/globalConfig";
 
 // reducer function for useReducer hook
@@ -131,6 +132,26 @@ const AuthContextProvider = ({ children }: IProps) => {
     []
   );
 
+  const update = useCallback(
+    async(
+      userName: string,
+      email: string,
+      password: string,
+      address: string,
+    ) => {
+      const resopnse = await axiosInstance.post(UPDATE_URL, {
+        userName,
+        email,
+        password,
+        address,
+      });
+      console.log("Update Result:", resopnse);
+      toast.success("Update Was Successfull.");
+      navigate(PATH_AFTER_LOGIN);
+    },
+    []
+  );
+
   // Login Method
   const login = useCallback(async (userName: string, password: string) => {
     const response = await axiosInstance.post<ILoginResponseDto>(LOGIN_URL, {
@@ -163,6 +184,7 @@ const AuthContextProvider = ({ children }: IProps) => {
     isAuthLoading: state.isAuthLoading,
     user: state.user,
     register,
+    update,
     login,
     logout,
   };

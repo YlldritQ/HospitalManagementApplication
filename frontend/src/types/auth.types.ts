@@ -18,11 +18,18 @@ export interface IRegisterDto {
     newRole: string;
   }
   
+  export interface IUpdateDto {
+    userName: string,
+    email: string,
+    password: string,
+    address: string,
+  }
   export interface IAuthUser {
     id: string;
     firstName: string;
     lastName: string;
     userName: string;
+    gender: string;
     email: string;
     createdAt: string;
     roles: string[];

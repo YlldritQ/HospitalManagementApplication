@@ -69,6 +69,14 @@ const Sidebar = () => {
           </button>
 
           <button
+            onClick={() => handleClick(PATH_DASHBOARD.systemLogs)}
+            className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
+          >
+            <AiOutlineCalendar className="text-green-600 w-6 h-6" />
+            <span className="font-medium">System Logs</span>
+          </button>
+
+          <button
             onClick={() => handleClick(PATH_DASHBOARD.medicalRecordList)}
             className="flex items-center gap-4 text-gray-700 hover:bg-blue-100 p-3 rounded-lg w-full"
           >

@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using AutoMapper;
 
 namespace backend.Core.Services
 {
@@ -21,14 +22,16 @@ namespace backend.Core.Services
         private readonly ILogService _logService;
         private readonly IConfiguration _configuration;
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public AuthService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, ILogService logService, IConfiguration configuration, ApplicationDbContext context)
+        public AuthService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, ILogService logService, IConfiguration configuration, ApplicationDbContext context , IMapper mapper)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _logService = logService;
             _configuration = configuration;
             _context = context;
+            _mapper = mapper;
         }
 
         public async Task<GeneralServiceResponseDto> SeedRolesAsync()
@@ -70,6 +73,15 @@ namespace backend.Core.Services
                     IsSucceed = false,
                     StatusCode = 409,
                     Message = "UserName Already Exists"
+                };
+
+            var isExistsEmail = await _userManager.FindByEmailAsync(registerDto.Email);
+            if (isExistsEmail is not null)
+                return new GeneralServiceResponseDto()
+                {
+                    IsSucceed = false,
+                    StatusCode = 409,
+                    Message = "Email Already Exists"
                 };
 
             ApplicationUser newUser = new ApplicationUser()
@@ -390,6 +402,60 @@ namespace backend.Core.Services
                 NewToken = newToken,
                 UserInfo = userInfo
             };
+        }
+
+        public async Task<GeneralServiceResponseDto> UpdateUserAsync(string id, UpdateDto update)
+        {
+            ApplicationUser user = await _userManager.FindByIdAsync(id);
+            if(user == null)
+            {
+                return new GeneralServiceResponseDto()
+                {
+                    IsSucceed = false,
+                    StatusCode = 409,
+                    Message = "User doesnt exist"
+                };
+            }
+            var isExistsUser = await _userManager.FindByNameAsync(update.UserName);
+            if (isExistsUser is not null)
+                return new GeneralServiceResponseDto()
+                {
+                    IsSucceed = false,
+                    StatusCode = 409,
+                    Message = "UserName Already Exists"
+                };
+            var isExistsEmail = await _userManager.FindByEmailAsync(update.UserName);
+            if (isExistsEmail is not null)
+                return new GeneralServiceResponseDto()
+                {
+                    IsSucceed = false,
+                    StatusCode = 409,
+                    Message = "Email Already Exists"
+                };
+            try 
+            { 
+                _mapper.Map(update, user);
+                user.Id = id;
+                user.SecurityStamp = Guid.NewGuid().ToString();
+                await _userManager.UpdateAsync(user);
+            } 
+            catch (Exception ex) 
+            {
+                return new GeneralServiceResponseDto()
+                {
+                    IsSucceed = false,
+                    StatusCode = 500,
+                    Message = ex.Message,
+                };
+            }
+
+            return new GeneralServiceResponseDto()
+            {
+                IsSucceed = true,
+                StatusCode = 200,
+                Message = "User Updated Succesfully"
+            };
+
         }
 
         public async Task<IEnumerable<UserInfoResult>> GetUsersListAsync()
