@@ -30,6 +30,7 @@ export interface IRegisterDto {
     lastName: string;
     userName: string;
     gender: string;
+    address: string;
     email: string;
     createdAt: string;
     roles: string[];
@@ -72,6 +73,13 @@ export interface IRegisterDto {
       address: string
     ) => Promise<void>;
     logout: () => void;
+    update: (
+      id: string,
+      userName: string,
+      email: string,
+      password: string,
+      address: string
+    ) => Promise<void>; 
   }
   
   export enum RolesEnum {

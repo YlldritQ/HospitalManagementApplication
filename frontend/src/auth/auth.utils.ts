@@ -5,6 +5,7 @@ export const setSession = (accessToken: string | null) => {
     if (accessToken) {
       localStorage.setItem('accessToken', accessToken);
       axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+      console.log("Success from token");
     } else {
       localStorage.removeItem('accessToken');
       delete axiosInstance.defaults.headers.common.Authorization;

@@ -133,25 +133,43 @@ const AuthContextProvider = ({ children }: IProps) => {
   );
 
   const update = useCallback(
-    async(
+    async (
+      id: string,
       userName: string,
       email: string,
       password: string,
       address: string,
     ) => {
-      const resopnse = await axiosInstance.post(UPDATE_URL, {
-        userName,
-        email,
-        password,
-        address,
-      });
-      console.log("Update Result:", resopnse);
-      toast.success("Update Was Successfull.");
-      navigate(PATH_AFTER_LOGIN);
+      try {
+        // Send the update request
+        const response = await axiosInstance.put(`${UPDATE_URL}${id}`, {
+          userName,
+          email,
+          password,
+          address,
+        });
+        toast.success("Update Successful");
+  
+        const { newToken,userInfo } = response.data;
+  
+        // Update session and context
+        setSession(newToken);
+        dispatch({
+          type: IAuthContextActionTypes.LOGIN,
+          payload: userInfo,
+        });
+          // Navigate after a short delay to ensure the state is updated
+          navigate("/dashboard/profile");
+      } catch (error) {
+        console.error("Update Error:", error);
+        toast.error("Update Failed. Please try again.");
+      }
     },
     []
   );
-
+  
+  
+    
   // Login Method
   const login = useCallback(async (userName: string, password: string) => {
     const response = await axiosInstance.post<ILoginResponseDto>(LOGIN_URL, {

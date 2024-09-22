@@ -17,7 +17,6 @@ const UserPage = lazy(() => import("../pages/dashboard/UserPage"));
 const UsersManagementPage = lazy(
   () => import("../pages/dashboard/UsersManagementPage")
 );
-
 const LoginPage = lazy(() => import("../pages/public/LoginPage"));
 const NotFoundPage = lazy(() => import("../pages/public/NotFoundPage"));
 const RegisterPage = lazy(() => import("../pages/public/RegisterPage"));
@@ -34,6 +33,8 @@ const Rooms = lazy(() => import("../pages/dashboard/RoomList"));
 const Department = lazy(() => import("../pages/dashboard/DepartmentList"));
 const EditDepartment = lazy(() => import("../pages/dashboard/EditDepartment"));
 const MedicalRecord = lazy(() => import("../pages/dashboard/MedicalRecordsPage"));
+const ProfilePage = lazy(() => import("../pages/dashboard/ProfilePage"));
+const UpdateProfile = lazy(() => import("../pages/dashboard/UpdateProfilePage"));
 
 
 const GlobalRouter = () => {
@@ -81,6 +82,22 @@ const GlobalRouter = () => {
             element={
               <Suspense fallback={<div>Loading...</div>}>
                 <MyLogsPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={PATH_DASHBOARD.profilePage}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <ProfilePage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={PATH_DASHBOARD.updateProfile}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <UpdateProfile />
               </Suspense>
             }
           />

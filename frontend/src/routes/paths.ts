@@ -1,6 +1,5 @@
 
   export const PATH_PUBLIC = {
-
   register: "/register",
   login: "/",
   unauthorized: "/unauthorized",
@@ -30,7 +29,9 @@ export const PATH_DASHBOARD = {
   departmentList: "/dashboard/department-list",
   editDepartment: "/dashboard/edit-department/:id",
   newDepartment: "/dashboard/edit-department/new",
-  medicalRecordList: "/dashboard/medicalRecord-list"
+  medicalRecordList: "/dashboard/medicalRecord-list",
+  profilePage: "/dashboard/profile",
+  updateProfile: "/dashboard/updateProfile/:id"
 };
 
 

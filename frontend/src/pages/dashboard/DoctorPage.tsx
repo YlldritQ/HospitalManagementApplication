@@ -4,16 +4,13 @@ import { MdNotifications } from 'react-icons/md';
 import Button from '../../components/general/Button';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { DoctorDto } from '../../types/doctorTypes';
 import { RoomDto } from '../../types/roomTypes';
 import useAuth from '../../hooks/useAuth.hook';
 import { getDoctorByUserId, getRoomsAssignedToDoctor } from '../../services/doctorService';
 
 const DoctorPage: React.FC = () => {
   const navigate = useNavigate();
-  const [doctor, setDoctor] = useState<DoctorDto | null>(null);
   const [rooms, setRooms] = useState<RoomDto[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const { user: loggedInUser } = useAuth();
   const userId = loggedInUser?.id; // Replace with actual logged-in user ID or retrieve from context
@@ -25,7 +22,6 @@ const DoctorPage: React.FC = () => {
         const doctorData = await getDoctorByUserId(userId);
         if (doctorData !== null) {
           const doctor = doctorData;
-          setDoctor(doctor);
 
           // Fetch rooms assigned to the nurse
           const assignedRooms = await getRoomsAssignedToDoctor(doctor.id);
@@ -36,9 +32,7 @@ const DoctorPage: React.FC = () => {
       } catch (err) {
         console.error("Error fetching nurse or rooms:", err);
         setError('Failed to fetch data');
-      } finally {
-        setLoading(false);
-      }
+      } 
     };
 
     fetchNurseAndRooms();
@@ -48,6 +42,10 @@ const DoctorPage: React.FC = () => {
   const handleButtonClick = (path: string) => {
     navigate(path);
   };
+
+  if (error) {
+    return <div>{error}</div>; // Display error message
+  }
 
   return (
     <div className="pageTemplate2 bg-[#F0F4F8]">

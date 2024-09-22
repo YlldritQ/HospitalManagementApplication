@@ -36,19 +36,16 @@ namespace backend.Controllers
             return StatusCode(registerResult.StatusCode, registerResult.Message);
         }
 
-        [HttpPost]
-        [Route("update")]
-        public async Task<IActionResult> Update(string id, [FromBody] UpdateDto update)
+        [HttpPut]
+        [Route("update/{id}")]
+        public async Task<ActionResult<LoginServiceResponseDto>> Update(string id, [FromBody] UpdateDto update)
         {
             var updateResult = await _authService.UpdateUserAsync(id, update);
-            if (updateResult.IsSucceed)
+            if (updateResult is null)
             {
-                return Ok(updateResult.Message);
+                return Unauthorized("Your credentials are invalid.");
             }
-            else
-            {
-                return StatusCode(updateResult.StatusCode, updateResult.Message);
-            }
+            return Ok(updateResult);
         }
         // Route -> Login
         [HttpPost]
@@ -82,6 +79,21 @@ namespace backend.Controllers
             {
                 return StatusCode(updateRoleResult.StatusCode, updateRoleResult.Message);
             }
+        }
+
+        [HttpGet]
+        [Route("usersId/{userId}")]
+        [Authorize(Roles = StaticUserRoles.AdminDoctorNursePatient)] // Optional: restrict access to specific roles
+        public async Task<ActionResult<UserInfoResult>> GetUserByIdAsync(string userId)
+        {
+            var userInfoResult = await _authService.GetUserByIdAsync(userId);
+
+            if (userInfoResult == null)
+            {
+                return NotFound(); // Return 404 if the user is not found
+            }
+
+            return Ok(userInfoResult); // Return the result with a 200 status code
         }
 
         // Route -> getting data of a user from it's JWT

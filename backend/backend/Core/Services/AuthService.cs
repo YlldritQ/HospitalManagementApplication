@@ -155,6 +155,7 @@ namespace backend.Core.Services
             var newToken = await GenerateJWTTokenAsync(user);
             var roles = await _userManager.GetRolesAsync(user);
             var userInfo = GenerateUserInfoObject(user, roles);
+            Console.WriteLine(userInfo);
             await _logService.SaveNewLog(user.UserName, "New Login");
 
             return new LoginServiceResponseDto()
@@ -404,34 +405,19 @@ namespace backend.Core.Services
             };
         }
 
-        public async Task<GeneralServiceResponseDto> UpdateUserAsync(string id, UpdateDto update)
+        public async Task<LoginServiceResponseDto> UpdateUserAsync(string id, UpdateDto update)
         {
             ApplicationUser user = await _userManager.FindByIdAsync(id);
             if(user == null)
             {
-                return new GeneralServiceResponseDto()
-                {
-                    IsSucceed = false,
-                    StatusCode = 409,
-                    Message = "User doesnt exist"
-                };
+                return null;
             }
             var isExistsUser = await _userManager.FindByNameAsync(update.UserName);
             if (isExistsUser is not null)
-                return new GeneralServiceResponseDto()
-                {
-                    IsSucceed = false,
-                    StatusCode = 409,
-                    Message = "UserName Already Exists"
-                };
+                return null;
             var isExistsEmail = await _userManager.FindByEmailAsync(update.UserName);
             if (isExistsEmail is not null)
-                return new GeneralServiceResponseDto()
-                {
-                    IsSucceed = false,
-                    StatusCode = 409,
-                    Message = "Email Already Exists"
-                };
+                return null;
             try 
             { 
                 _mapper.Map(update, user);
@@ -441,19 +427,16 @@ namespace backend.Core.Services
             } 
             catch (Exception ex) 
             {
-                return new GeneralServiceResponseDto()
-                {
-                    IsSucceed = false,
-                    StatusCode = 500,
-                    Message = ex.Message,
-                };
+                throw new Exception(ex.Message);
             }
-
-            return new GeneralServiceResponseDto()
+            var newToken = await GenerateJWTTokenAsync(user);
+            var roles = await _userManager.GetRolesAsync(user);
+            var userInfo = GenerateUserInfoObject(user, roles);
+            
+            return new LoginServiceResponseDto()
             {
-                IsSucceed = true,
-                StatusCode = 200,
-                Message = "User Updated Succesfully"
+                NewToken = newToken,
+                UserInfo = userInfo
             };
 
         }
@@ -474,6 +457,13 @@ namespace backend.Core.Services
             return userInfoResults;
         }
 
+        public async Task<UserInfoResult> GetUserByIdAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            var roles = await _userManager.GetRolesAsync(user);
+            var userInfoResult = GenerateUserInfoObject(user, roles);
+            return userInfoResult;
+        }
         public async Task<UserInfoResult?> GetUserDetailsByUserNameAsync(string userName)
         {
             var user = await _userManager.FindByNameAsync(userName);
@@ -538,6 +528,8 @@ namespace backend.Core.Services
                 LastName = user.LastName,
                 UserName = user.UserName,
                 Email = user.Email,
+                Gender = user.Gender,
+                Address = user.Address,
                 CreatedAt = user.CreatedAt,
                 Roles = Roles
             };

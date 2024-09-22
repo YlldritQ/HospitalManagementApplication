@@ -6,13 +6,11 @@ import Button from '../../components/general/Button';
 import { useNavigate } from 'react-router-dom';
 import { getNurseByUserId } from '../../services/nurseService'; // Ensure correct path
 import { getRoomsAssignedToNurse } from '../../services/nurseService'; // Ensure correct path
-import { NurseDto } from '../../types/nurseTypes'; // Ensure correct path
 import { RoomDto } from '../../types/roomTypes'; // Ensure correct path
 import useAuth from '../../hooks/useAuth.hook';
 
 const NursePage: React.FC = () => {
   const navigate = useNavigate();
-  const [nurse, setNurse] = useState<NurseDto | null>(null);
   const [rooms, setRooms] = useState<RoomDto[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -26,7 +24,7 @@ const NursePage: React.FC = () => {
         const nurseData = await getNurseByUserId(userId);
         if (nurseData !== null) {
           const nurse = nurseData;
-          setNurse(nurse);
+          //setNurse(nurse);
 
           // Fetch rooms assigned to the nurse
           const assignedRooms = await getRoomsAssignedToNurse(nurse.id);

@@ -14,14 +14,11 @@ const AuthGuard = ({ roles }: IProps) => {
  //access to the requested page?
  console.log(roles);
   const hasAccess = isAuthenticated && user?.roles?.find((q) => roles.includes(q));
+  console.log(user);
   if (isAuthLoading) {
     return <AuthSpinner />;
   }
-  if (!hasAccess) {
-    window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
-    return null;  // Return null since the component should not render anything after redirection
-  }
+  return hasAccess ? <Outlet /> : <Navigate to={PATH_PUBLIC.unauthorized} />;
 
-  return <Outlet />;
 };
 export default AuthGuard;

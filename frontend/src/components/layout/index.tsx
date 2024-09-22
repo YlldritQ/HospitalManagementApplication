@@ -1,7 +1,7 @@
 import useAuth from '../../hooks/useAuth.hook';
-import Header from './Header';
 import { Outlet, useLocation } from 'react-router-dom';
 import Sidebar from './Sidebar';
+import Header from './Header';
 
 const Layout = () => {
   const { isAuthenticated } = useAuth();
