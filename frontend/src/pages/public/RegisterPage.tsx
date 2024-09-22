@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { PATH_DASHBOARD, PATH_PUBLIC } from '../../routes/paths';
 import { GenderEnum } from '../../types/auth.types';
+import { TbActivityHeartbeat } from "react-icons/tb";
 
 const RegisterPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -55,11 +56,9 @@ const RegisterPage = () => {
   const onSubmitRegisterForm = async (data: IRegisterDto) => {
     try {
       setLoading(true);
-      console.log(data);
       await register(data.firstName, data.lastName, data.userName, data.email, data.gender, data.password, data.address);
       setLoading(false);
     } catch (error) {
-      console.log(error);
       setLoading(false);
       const err = error as { data: string; status: number };
       const { status, data } = err;
@@ -72,54 +71,59 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className='pageTemplate1'>
-      <form
-        onSubmit={handleSubmit(onSubmitRegisterForm)}
-        className='flex-1 min-h-[600px] h-4/5 bg-[#f0ecf7] flex flex-col justify-center items-center rounded-r-2xl'
-      >
-        <h1 className='text-4xl font-bold mb-2 text-[#754eb4]'>Register</h1>
-
-        <InputField control={control} label='First Name' inputName='firstName' error={errors.firstName?.message} />
-        <InputField control={control} label='Last Name' inputName='lastName' error={errors.lastName?.message} />
-        <InputField control={control} label='User Name' inputName='userName' error={errors.userName?.message} />
-        <InputField control={control} label='Email' inputName='email' error={errors.email?.message} />
-        <InputField
-          control={control}
-          label='Password'
-          inputName='password'
-          inputType='password'
-          error={errors.password?.message}
-        />
-        <InputField control={control} label='Address' inputName='address' error={errors.address?.message} />
-
-        {/* Gender Selection - Using InputField for Dropdown */}
-        <InputField
-          control={control}
-          label='Gender'
-          inputName='gender'
-          error={errors.gender?.message}
-          isSelect={true} // Enable dropdown
-          options={[
-            { value: GenderEnum.MALE, label: 'Male' },
-            { value: GenderEnum.FEMALE, label: 'Female' },
-          ]}
-        />
-
-        <div className='px-4 mt-2 mb-6 w-9/12 flex gap-2'>
-          <h1>Already Have an account?</h1>
-          <Link
-            to={PATH_PUBLIC.login}
-            className='text-[#754eb4] border border-[#754eb4] hover:shadow-[0_0_5px_2px_#754eb44c] px-3 rounded-2xl duration-200'
-          >
-            Log in
-          </Link>
+    <div className='fixed inset-0 flex justify-center items-center bg-cover bg-center'>
+      <div className='bg-white bg-opacity-60 shadow-lg rounded-lg p-4 w-96 max-h-[600px] overflow-y-auto'>
+        {/* Logo Section */}
+        <div className='flex flex-col items-center mb-4'>
+          <div className='bg-blue-600 text-white w-16 h-16 flex justify-center items-center rounded-full'>
+            <TbActivityHeartbeat className="text-white-400 w-12 h-12" />
+          </div>
+          <h1 className='mt-4 text-3xl font-bold text-blue-800'>Register</h1>
         </div>
 
-        <div className='flex justify-center items-center gap-4 mt-6'>
-          <Button variant='light' type='button' label='Reset' onClick={() => reset()} />
-          <Button variant='primary' type='submit' label='Register' onClick={() => {}} loading={loading} />
-        </div>
-      </form>
+        {/* Register Form */}
+        <form onSubmit={handleSubmit(onSubmitRegisterForm)} className='grid grid-cols-2 gap-2'>
+          <InputField control={control} label='First Name' inputName='firstName' error={errors.firstName?.message} />
+          <InputField control={control} label='Last Name' inputName='lastName' error={errors.lastName?.message} />
+          <InputField control={control} label='User Name' inputName='userName' error={errors.userName?.message} />
+          <InputField control={control} label='Email' inputName='email' error={errors.email?.message} />
+          <InputField
+            control={control}
+            label='Password'
+            inputName='password'
+            inputType='password'
+            error={errors.password?.message}
+          />
+          <InputField control={control} label='Address' inputName='address' error={errors.address?.message} />
+
+          {/* Gender Selection */}
+          <InputField
+            control={control}
+            label='Gender'
+            inputName='gender'
+            error={errors.gender?.message}
+            isSelect={true}
+            options={[
+              { value: GenderEnum.MALE, label: 'Male' },
+              { value: GenderEnum.FEMALE, label: 'Female' },
+            ]}
+          />
+
+          {/* Login Link */}
+          <div className='col-span-2 flex justify-between items-center gap-4'>
+            <span>Already Have an account?</span>
+            <Link to={PATH_PUBLIC.login} className='text-blue-600 font-semibold hover:underline'>
+              Log in
+            </Link>
+          </div>
+
+          <div className='col-span-2 flex justify-center items-center gap-4 mt-6'>
+            <Button variant='secondary' type='button' label='Reset' onClick={() => reset()} />
+            <Button variant='primary' type='submit' label='Register' loading={loading} onClick={() => {}} />
+
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

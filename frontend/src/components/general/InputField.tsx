@@ -8,6 +8,7 @@ interface IProps {
   error?: string;
   isSelect?: boolean; // New prop to check if the field is a select dropdown
   options?: { value: string; label: string }[]; // New prop to provide dropdown options
+  icon?: string;
 }
 
 const InputField = ({

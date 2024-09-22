@@ -15,4 +15,4 @@ export const MY_LOGS_URL = "/Logs/mine";
 // Auth Routes
 export const PATH_AFTER_REGISTER = PATH_PUBLIC.login;
 export const PATH_AFTER_LOGIN = PATH_DASHBOARD.dashboard;
-export const PATH_AFTER_LOGOUT = PATH_PUBLIC.home;
+export const PATH_AFTER_LOGOUT = PATH_PUBLIC.login;

@@ -18,12 +18,12 @@ const Layout = () => {
 
   return (
     <div>
-      <Header />
+      {!isAuthenticated && <Header />}
 
-      {/* Using Outlet, We render all routes that are inside of this Layout */}
-      <div className='flex'>
-        {sideBarRenderer()}
-        <Outlet />
+{/* Using Outlet, we render all routes that are inside of this Layout */}
+<div className='flex'>
+  {sideBarRenderer()}
+  <Outlet />
       </div>
     </div>
   );

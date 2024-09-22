@@ -17,7 +17,7 @@ const UserPage = lazy(() => import("../pages/dashboard/UserPage"));
 const UsersManagementPage = lazy(
   () => import("../pages/dashboard/UsersManagementPage")
 );
-const HomePage = lazy(() => import("../pages/public/HomePage"));
+
 const LoginPage = lazy(() => import("../pages/public/LoginPage"));
 const NotFoundPage = lazy(() => import("../pages/public/NotFoundPage"));
 const RegisterPage = lazy(() => import("../pages/public/RegisterPage"));
@@ -40,14 +40,7 @@ const GlobalRouter = () => {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route
-          index
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <HomePage />
-            </Suspense>
-          }
-        />
+        
         <Route
           path={PATH_PUBLIC.register}
           element={
