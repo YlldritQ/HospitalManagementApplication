@@ -48,6 +48,7 @@ namespace backend.Core.Services
 
             var patient = _mapper.Map<Patient>(patientDto);
 
+
             await _context.Patients.AddAsync(patient);
             await _context.SaveChangesAsync();
 

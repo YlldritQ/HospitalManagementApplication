@@ -413,10 +413,10 @@ namespace backend.Core.Services
                 return null;
             }
             var isExistsUser = await _userManager.FindByNameAsync(update.UserName);
-            if (isExistsUser is not null)
+            if (isExistsUser is not null && isExistsUser.Id != id)
                 return null;
-            var isExistsEmail = await _userManager.FindByEmailAsync(update.UserName);
-            if (isExistsEmail is not null)
+            var isExistsEmail = await _userManager.FindByEmailAsync(update.Email);
+            if (isExistsEmail is not null && isExistsUser.Id != id)
                 return null;
             try 
             { 

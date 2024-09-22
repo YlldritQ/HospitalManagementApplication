@@ -82,7 +82,6 @@ public class DoctorService : IDoctorService
 
     public async Task<GeneralServiceResponseDto> CreateDoctorAsync(CUDoctorDto doctorDto)
     {
-        var doctor = _mapper.Map<Doctor>(doctorDto);
 
         // Ensure the department exists
         var department = await _context.Departments.FindAsync(doctorDto.DepartmentId);
@@ -94,6 +93,27 @@ public class DoctorService : IDoctorService
                 Message = " Given Department Doesn't exist"};
         }
 
+        if(doctorDto.DateHired > DateTime.UtcNow)
+        {
+            return new GeneralServiceResponseDto()
+            {
+                IsSucceed = false,
+                StatusCode = 400,
+                Message = "Date Hired cannot be in the future"
+            };
+        }
+        if (doctorDto.DateOfBirth > DateTime.UtcNow.AddYears(-18))
+        {
+            return new GeneralServiceResponseDto()
+            {
+                IsSucceed = false,
+                StatusCode = 400,
+                Message = "Cannot be younger than 18"
+            };
+        }
+
+
+        var doctor = _mapper.Map<Doctor>(doctorDto);
         doctor.Department = department;
 
         // Save the doctor entity first

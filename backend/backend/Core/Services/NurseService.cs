@@ -67,6 +67,24 @@ public class NurseService : INurseService
         {
             throw new ArgumentException($"Department with ID {nurseDto.DepartmentId} not found.");
         }
+        if(nurse.DateHired > DateTime.UtcNow)
+        {
+            return new GeneralServiceResponseDto()
+            {
+                IsSucceed = false,
+                StatusCode = 401,
+                Message = "Date Hired Cannot be in future"
+            };
+        }
+        if (nurse.DateOfBirth > DateTime.UtcNow.AddYears(-18))
+        {
+            return new GeneralServiceResponseDto()
+            {
+                IsSucceed = false,
+                StatusCode = 401,
+                Message = "Cannot be in younger than 18"
+            };
+        }
 
         nurse.Department = department;
 
@@ -93,6 +111,24 @@ public class NurseService : INurseService
                 IsSucceed = false,
                 StatusCode = 404,
                 Message = $"Nurse with ID {nurseId} not found."
+            };
+        }
+        if (nurseDto.DateHired > DateTime.UtcNow)
+        {
+            return new GeneralServiceResponseDto()
+            {
+                IsSucceed = false,
+                StatusCode = 401,
+                Message = "Date Hired Cannot be in future"
+            };
+        }
+        if (nurseDto.DateOfBirth > DateTime.UtcNow.AddYears(-18))
+        {
+            return new GeneralServiceResponseDto()
+            {
+                IsSucceed = false,
+                StatusCode = 401,
+                Message = "Cannot be in younger than 18"
             };
         }
 
