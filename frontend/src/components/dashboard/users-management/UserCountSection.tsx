@@ -1,4 +1,3 @@
-// import { color } from "chart.js/helpers";
 import { IAuthUser, RolesEnum } from "../../../types/auth.types";
 import UserCountCard from "./UserCountCard";
 import { FaUser, FaUserCog, FaUserShield, FaUserTie } from "react-icons/fa";
@@ -26,23 +25,14 @@ const UserCountSection = ({ usersList }: IProps) => {
   });
 
   const userCountData = [
-    { count: patients, role: RolesEnum.PATIENT, icon: FaUserCog, color: "#3b3549" },
-    {
-      count: admin,
-      role: RolesEnum.ADMIN,
-      icon: FaUserShield,
-      color: "#9333ea",
-    },
-    {
-      count: nurses,
-      role: RolesEnum.NURSE,
-      icon: FaUserTie,
-      color: "#0b96bc",
-    },
-    { count: doctors, role: RolesEnum.DOCTOR, icon: FaUser, color: "#fec223" },
+    { count: patients, role: RolesEnum.PATIENT, icon: FaUserCog, color: "#4A90E2" },
+    { count: admin, role: RolesEnum.ADMIN, icon: FaUserShield, color: "#56CCF2" }, 
+    { count: nurses, role: RolesEnum.NURSE, icon: FaUserTie, color: "#81C784" }, 
+    { count: doctors, role: RolesEnum.DOCTOR, icon: FaUser, color: "#A0AEC0" },
   ];
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-4">
+    <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-4 gap-y-4">
       {userCountData.map((item, index) => (
         <UserCountCard
           key={index}

@@ -36,6 +36,7 @@ const UserChartSection = ({ usersList }: IProps) => {
     q.roles.includes(RolesEnum.PATIENT)
   ).length;
   chartValues.push(ownersCount);
+  
   const adminsCount = usersList.filter((q) =>
     q.roles.includes(RolesEnum.ADMIN)
   ).length;
@@ -59,6 +60,12 @@ const UserChartSection = ({ usersList }: IProps) => {
       },
       y: {
         ticks: { stepSize: 5 },
+        grid: { color: '#E2E8F0' }, // Light grey grid lines for better visibility
+      },
+    },
+    plugins: {
+      legend: {
+        display: false,
       },
     },
   };
@@ -67,24 +74,22 @@ const UserChartSection = ({ usersList }: IProps) => {
     labels: chartLabels,
     datasets: [
       {
-        label: "count",
+        label: "User Count",
         data: chartValues,
-        borderColor: "#754eb475",
-        backgroundColor: "#754eb4",
-        pointBorderColor: "transparent",
-        tension: 0.25,
+        borderColor: "#4A90E2",  // Primary blue for the line
+        backgroundColor: "rgba(86, 204, 242, 0.4)",  // Light teal with transparency for the fill
+        pointBorderColor: "#81C784",  // Soft green for the points
+        tension: 0.4,  // Soft curve for a modern feel
       },
     ],
   };
 
   return (
-    <div className="col-span1 lg:col-span-3 bg-white p-2 rounded-md">
-      <h1 className="text-xl font-bold mb-2">Users Chart</h1>
-      <Line
-        options={chartOptions}
-        data={chartData}
-        className="bg-white p-2 rounded-md"
-      />
+    <div className="col-span-1 lg:col-span-3 bg-gradient-to-r from-blue-500 to-blue-300 p-6 rounded-lg shadow-lg">
+      <h1 className="text-2xl font-semibold text-white mb-4">Users Chart</h1>
+      <div className="bg-white p-4 rounded-lg shadow-inner">
+        <Line options={chartOptions} data={chartData} />
+      </div>
     </div>
   );
 };
