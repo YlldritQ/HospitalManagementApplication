@@ -1,4 +1,4 @@
-import { Navigate, Outlet, replace } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import useAuth from '../hooks/useAuth.hook';
 import AuthSpinner from '../components/general/AuthSpinner';
 import { PATH_PUBLIC } from '../routes/paths';
@@ -14,7 +14,6 @@ const AuthGuard = ({ roles }: IProps) => {
  //access to the requested page?
  console.log(roles);
   const hasAccess = isAuthenticated && user?.roles?.find((q) => roles.includes(q));
-  console.log(user);
   if (isAuthLoading) {
     return <AuthSpinner />;
   }

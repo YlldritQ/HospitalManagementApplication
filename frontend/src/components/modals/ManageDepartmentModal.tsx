@@ -26,79 +26,82 @@ const ManageDepartmentModal: React.FC<ManageDepartmentModalProps> = ({
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-            <div className="bg-white p-6 rounded shadow-lg max-w-md w-full">
-                <h2 className="text-xl font-bold mb-4">Manage Department</h2>
-
-                <div className="mb-4 flex flex-col items-center">
-                    <div className="mb-2">
-                        <button
-                            onClick={() => handleActionClick('assign', 'rooms')}
-                            className="inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 mr-2"
-                        >
-                            Assign Rooms
-                        </button>
-                        <button
-                            onClick={() => handleActionClick('remove', 'rooms')}
-                            className="inline-block bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
-                        >
-                            Remove Rooms
-                        </button>
-                    </div>
-                    <div className="mb-2">
-                        <button
-                            onClick={() => handleActionClick('assign', 'doctors')}
-                            className="inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 mr-2"
-                        >
-                            Assign Doctors
-                        </button>
-                        <button
-                            onClick={() => handleActionClick('remove', 'doctors')}
-                            className="inline-block bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
-                        >
-                            Remove Doctors
-                        </button>
-                    </div>
-                    <div>
-                        <button
-                            onClick={() => handleActionClick('assign', 'nurses')}
-                            className="inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 mr-2"
-                        >
-                            Assign Nurses
-                        </button>
-                        <button
-                            onClick={() => handleActionClick('remove', 'nurses')}
-                            className="inline-block bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
-                        >
-                            Remove Nurses
-                        </button>
-                    </div>
-                </div>
-
-                {actionType && itemType && (
-                    <AssignRemoveModal
-                        type={actionType}
-                        itemType={itemType} // Pass the selected item type
-                        isOpen={true}
-                        onClose={() => {
-                            onClose();
-                            setItemType(null); // Reset item type when modal is closed
-                        }}
-                        departmentId={departmentId}
-                    />
-                )}
-
-                <div className="mt-4 flex justify-end">
-                    <button
-                        onClick={onClose}
-                        className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600"
-                    >
-                        Close
-                    </button>
-                </div>
+        <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm bg-gray-900 bg-opacity-75 p-4">
+          <div className="w-full max-w-lg bg-gray-800 p-8 rounded-lg shadow-xl border border-gray-700">
+            <h2 className="text-2xl font-bold text-white mb-6 text-center">Manage Department</h2>
+      
+            <div className="mb-8 flex flex-col items-center space-y-4">
+              <div className="flex space-x-4">
+                <button
+                  onClick={() => handleActionClick('assign', 'rooms')}
+                  className="py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                  Assign Rooms
+                </button>
+                <button
+                  onClick={() => handleActionClick('remove', 'rooms')}
+                  className="py-3 px-6 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                >
+                  Remove Rooms
+                </button>
+              </div>
+      
+              <div className="flex space-x-4">
+                <button
+                  onClick={() => handleActionClick('assign', 'doctors')}
+                  className="py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                  Assign Doctors
+                </button>
+                <button
+                  onClick={() => handleActionClick('remove', 'doctors')}
+                  className="py-3 px-6 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                >
+                  Remove Doctors
+                </button>
+              </div>
+      
+              <div className="flex space-x-4">
+                <button
+                  onClick={() => handleActionClick('assign', 'nurses')}
+                  className="py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                  Assign Nurses
+                </button>
+                <button
+                  onClick={() => handleActionClick('remove', 'nurses')}
+                  className="py-3 px-6 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                >
+                  Remove Nurses
+                </button>
+              </div>
             </div>
+      
+            {actionType && itemType && (
+              <AssignRemoveModal
+                type={actionType}
+                itemType={itemType}
+                isOpen={true}
+                onClose={() => {
+                  onClose();
+                  setItemType(null);
+                }}
+                departmentId={departmentId}
+              />
+            )}
+      
+            <div className="mt-6 flex justify-end">
+              <button
+                onClick={onClose}
+                className="w-full py-3 px-4 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              >
+                Close
+              </button>
+            </div>
+          </div>
         </div>
-    );
+      );
+      
 };
 
 export default ManageDepartmentModal;

@@ -39,9 +39,7 @@ export const createPatient = async (patientDto: CUPatientDto): Promise<GeneralSe
 // Update patient
 export const updatePatient = async (patientId: number, patientDto: CUPatientDto): Promise<GeneralServiceResponseDto> => {
   try {
-    console.log(patientDto);
     const response : AxiosResponse<any> = await axiosInstance.put(`/Patient/${patientId}`, patientDto);
-    console.log(response);
     const result : GeneralServiceResponseDto = {
       isSucceed: response.data.isSucceed,
         statusCode: response.data.statusCode,

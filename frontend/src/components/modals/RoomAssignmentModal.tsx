@@ -65,7 +65,7 @@ const RoomAssignmentModal: React.FC<RoomAssignmentModalProps> = ({ isOpen, onClo
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm bg-gray-800 bg-opacity-50">
             <div className="bg-white p-4 rounded shadow-lg max-w-md w-full">
                 <h2 className="text-xl font-bold mb-4">Manage Rooms for Doctor</h2>
 

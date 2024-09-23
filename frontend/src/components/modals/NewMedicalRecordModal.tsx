@@ -113,7 +113,7 @@ const NewMedicalRecordModal: React.FC<NewMedicalRecordModalProps> = ({ isOpen, o
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center backdrop-blur-sm justify-center z-50 p-4">
       <div className="bg-white rounded-lg w-full max-w-md mx-auto overflow-hidden">
         <div className="flex flex-col h-screen max-h-[90vh]">
           <div className="flex-shrink-0 p-6">

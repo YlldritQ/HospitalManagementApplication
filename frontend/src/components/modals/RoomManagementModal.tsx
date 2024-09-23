@@ -61,35 +61,35 @@ const RoomManagementModal: React.FC<RoomManagementModalProps> = ({ isOpen, onClo
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-            <div className="bg-white p-4 rounded shadow-lg max-w-md w-full">
-                <h2 className="text-xl font-bold mb-4">Manage Rooms for Department</h2>
-
-                <div className="mb-4">
+        <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-r backdrop-blur-sm from-gray-900 via-gray-800 to-gray-900 bg-opacity-50 p-4">
+            <div className="w-full max-w-xl bg-gray-800 p-8 rounded-lg shadow-xl border border-gray-700">
+                <h2 className="text-3xl font-bold text-white mb-8 text-center">Manage Rooms for Department</h2>
+    
+                <div className="flex justify-center space-x-4 mb-8">
                     <button
                         onClick={() => setMode('assign')}
-                        className={`py-2 px-4 rounded ${mode === 'assign' ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-800'}`}
+                        className={`py-2 px-4 rounded ${mode === 'assign' ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'}`}
                     >
                         Assign Rooms
                     </button>
                     <button
                         onClick={() => setMode('remove')}
-                        className={`py-2 px-4 rounded ${mode === 'remove' ? 'bg-red-500 text-white' : 'bg-gray-300 text-gray-800'}`}
+                        className={`py-2 px-4 rounded ${mode === 'remove' ? 'bg-red-600 text-white' : 'bg-gray-700 text-gray-300'}`}
                     >
                         Remove Rooms
                     </button>
                 </div>
-
+    
                 {loading ? (
-                    <div>Loading...</div>
+                    <div className="text-center text-white">Loading...</div>
                 ) : (
                     <div>
                         {mode === 'assign' && (
                             <div className="mb-4">
-                                <h3 className="text-lg font-semibold">Available Rooms to Assign</h3>
+                                <h3 className="text-lg font-semibold text-white">Available Rooms to Assign</h3>
                                 <ul>
                                     {rooms.map(room => (
-                                        <li key={room.id} className="flex items-center mb-2">
+                                        <li key={room.id} className="flex items-center mb-2 text-white">
                                             <input
                                                 type="checkbox"
                                                 id={`assign-room-${room.id}`}
@@ -103,13 +103,13 @@ const RoomManagementModal: React.FC<RoomManagementModalProps> = ({ isOpen, onClo
                                 </ul>
                             </div>
                         )}
-
+    
                         {mode === 'remove' && (
                             <div className="mb-4">
-                                <h3 className="text-lg font-semibold">Assigned Rooms to Remove</h3>
+                                <h3 className="text-lg font-semibold text-white">Assigned Rooms to Remove</h3>
                                 <ul>
                                     {rooms.filter(room => selectedRemoveRoomIds.includes(room.id)).map(room => (
-                                        <li key={room.id} className="flex items-center mb-2">
+                                        <li key={room.id} className="flex items-center mb-2 text-white">
                                             <input
                                                 type="checkbox"
                                                 id={`remove-room-${room.id}`}
@@ -123,17 +123,17 @@ const RoomManagementModal: React.FC<RoomManagementModalProps> = ({ isOpen, onClo
                                 </ul>
                             </div>
                         )}
-
+    
                         <div className="mt-4 flex justify-end">
                             <button
                                 onClick={onClose}
-                                className="bg-gray-500 text-white py-2 px-4 rounded mr-2"
+                                className="bg-gray-500 text-white py-2 px-4 rounded mr-2 hover:bg-gray-600 transition duration-200"
                             >
                                 Cancel
                             </button>
                             <button
                                 onClick={handleSubmit}
-                                className={`py-2 px-4 rounded ${mode === 'assign' ? 'bg-blue-500 text-white' : 'bg-red-500 text-white'}`}
+                                className={`py-2 px-4 rounded ${mode === 'assign' ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-red-600 text-white hover:bg-red-700'} transition duration-200`}
                             >
                                 {mode === 'assign' ? 'Assign' : 'Remove'}
                             </button>
@@ -143,6 +143,7 @@ const RoomManagementModal: React.FC<RoomManagementModalProps> = ({ isOpen, onClo
             </div>
         </div>
     );
+    
 };
 
 export default RoomManagementModal;

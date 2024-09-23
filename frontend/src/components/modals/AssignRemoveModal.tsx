@@ -106,46 +106,52 @@ const AssignRemoveModal: React.FC<AssignRemoveModalProps> = ({
 
   if (!isOpen) return null;
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-      <div className="bg-white p-6 rounded shadow-lg max-w-md w-full">
-        <h3 className="text-lg font-semibold mb-4">
+    <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm bg-gray-900 bg-opacity-75 p-4">
+      <div className="w-full max-w-lg bg-gray-800 p-8 rounded-lg shadow-xl border border-gray-700">
+        <h3 className="text-2xl font-bold text-white mb-6 text-center">
           {type === 'assign' ? 'Assign' : 'Remove'} {itemType.charAt(0).toUpperCase() + itemType.slice(1)}
         </h3>
         {loading ? (
-          <p>Loading...</p>
+          <p className="text-white text-center">Loading...</p>
         ) : (
-          <div>
+          <div className="space-y-4">
             {items.map((item) => (
-              <div key={(item as any).id} className="flex items-center mb-2">
+              <div key={(item as any).id} className="flex items-center">
                 <input
                   id={`item-${(item as any).id}`}
                   type="checkbox"
                   checked={selectedItems.includes((item as any).id)}
                   onChange={() => handleItemSelection((item as any).id)}
-                  className="mr-2"
+                  className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mr-3"
                 />
-                <label htmlFor={`item-${(item as any).id}`} className="cursor-pointer">
+                <label
+                  htmlFor={`item-${(item as any).id}`}
+                  className="text-gray-300 cursor-pointer"
+                >
                   {itemType.charAt(0).toUpperCase() + itemType.slice(1)} {(item as any).id}
                 </label>
               </div>
             ))}
           </div>
         )}
-        <button
-          onClick={handleAction}
-          className="inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 mt-4"
-        >
-          {type === 'assign' ? 'Assign' : 'Remove'}
-        </button>
-        <button
-          onClick={onClose}
-          className="inline-block bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 ml-4 mt-4"
-        >
-          Close
-        </button>
+        <div className="flex justify-end space-x-4 mt-6">
+          <button
+            onClick={handleAction}
+            className="w-full py-3 px-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+          >
+            {type === 'assign' ? 'Assign' : 'Remove'}
+          </button>
+          <button
+            onClick={onClose}
+            className="w-full py-3 px-4 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+          >
+            Close
+          </button>
+        </div>
       </div>
     </div>
   );
+  
 };
 
 export default AssignRemoveModal;

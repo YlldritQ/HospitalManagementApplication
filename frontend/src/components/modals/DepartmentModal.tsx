@@ -62,55 +62,67 @@ const DepartmentModal: React.FC<DepartmentModalProps> = ({ isOpen, onClose, depa
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-            <div className="bg-white p-4 rounded shadow-lg max-w-md w-full">
-                <h2 className="text-xl font-bold mb-4">{mode === 'create' ? 'Add Department' : 'Edit Department'}</h2>
-
-                {loading ? (
-                    <div>Loading...</div>
-                ) : (
-                    <div>
-                        <div className="mb-4">
-                            <label htmlFor="department-name" className="block text-gray-700">Name</label>
-                            <input
-                                id="department-name"
-                                type="text"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                placeholder="Enter department name"
-                                className="border rounded w-full p-2"
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label htmlFor="department-description" className="block text-gray-700">Description</label>
-                            <textarea
-                                id="department-description"
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
-                                placeholder="Enter department description"
-                                className="border rounded w-full p-2"
-                            />
-                        </div>
-
-                        <div className="mt-4 flex justify-end">
-                            <button
-                                onClick={onClose}
-                                className="bg-gray-500 text-white py-2 px-4 rounded mr-2"
-                            >
-                                Cancel
-                            </button>
-                            <button
-                                onClick={handleSubmit}
-                                className={`py-2 px-4 rounded ${mode === 'create' ? 'bg-blue-500 text-white' : 'bg-green-500 text-white'}`}
-                            >
-                                {mode === 'create' ? 'Create' : 'Save'}
-                            </button>
-                        </div>
-                    </div>
-                )}
-            </div>
+        <div className="fixed inset-0 flex items-start justify-center bg-black bg-opacity-50 backdrop-blur-sm z-50 overflow-y-auto">
+          <div className="mt-10 w-full max-w-lg bg-gray-800 p-6 rounded-lg shadow-xl border border-gray-700">
+            <h2 className="text-2xl font-bold text-white mb-8 text-center">
+              {mode === 'create' ? 'Add Department' : 'Edit Department'}
+            </h2>
+      
+            {loading ? (
+              <div className="text-center text-gray-300">Loading...</div>
+            ) : (
+              <div>
+                <div className="mb-6">
+                  <label htmlFor="department-name" className="block text-sm font-medium text-gray-300 mb-2">
+                    Name
+                  </label>
+                  <input
+                    id="department-name"
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Enter department name"
+                    className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div className="mb-6">
+                  <label htmlFor="department-description" className="block text-sm font-medium text-gray-300 mb-2">
+                    Description
+                  </label>
+                  <textarea
+                    id="department-description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    placeholder="Enter department description"
+                    rows={4}
+                    className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+      
+                <div className="mt-6 flex justify-end space-x-4">
+                  <button
+                    onClick={onClose}
+                    className="py-3 px-4 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleSubmit}
+                    className={`py-3 px-4 font-semibold rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                      mode === 'create'
+                        ? 'bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 text-white'
+                        : 'bg-green-600 hover:bg-green-700 focus:ring-green-500 text-white'
+                    }`}
+                  >
+                    {mode === 'create' ? 'Create' : 'Save'}
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-    );
+      );
+      
 };
 
 export default DepartmentModal;

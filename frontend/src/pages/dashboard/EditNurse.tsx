@@ -113,180 +113,190 @@ const EditNurse: React.FC = () => {
     }
   };
 
+  const formatDate = (date: Date | string | null): string => {
+    if (!date) return ""; // Return empty string if date is null or undefined
+
+    const dateObj = typeof date === "string" ? new Date(date) : date;
+    // Check if the date is valid
+    return !isNaN(dateObj.getTime()) ? dateObj.toISOString().substring(0, 10) : "";
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="max-w-5xl mx-auto p-8 bg-gray-100 rounded-md shadow-md">
-      <h1 className="text-3xl font-bold mb-6 text-blue-600">
-        <p>Edit Nurse Information</p>
-      </h1>
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 p-4">
+      <div className="w-full max-w-xl bg-gray-800 p-8 rounded-lg shadow-xl border border-gray-700">
+        <h2 className="text-3xl font-bold text-white mb-8 text-center">Edit Nurse Information</h2>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="firstName" className="block text-sm font-medium text-gray-300 mb-1">
+                First Name
+              </label>
+              <input
+                type="text"
+                name="firstName"
+                id="firstName"
+                value={nurse.firstName}
+                onChange={handleChange}
+                placeholder="Enter first name"
+                className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+  
+            <div>
+              <label htmlFor="lastName" className="block text-sm font-medium text-gray-300 mb-1">
+                Last Name
+              </label>
+              <input
+                type="text"
+                name="lastName"
+                id="lastName"
+                value={nurse.lastName}
+                onChange={handleChange}
+                placeholder="Enter last name"
+                className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+          </div>
+  
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="gender" className="block text-sm font-medium text-gray-300 mb-1">
+                Gender
+              </label>
+              <select
+                name="gender"
+                id="gender"
+                value={nurse.gender}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              >
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+  
+            <div>
+              <label htmlFor="contactInfo" className="block text-sm font-medium text-gray-300 mb-1">
+                Contact Info
+              </label>
+              <input
+                type="text"
+                name="contactInfo"
+                id="contactInfo"
+                value={nurse.contactInfo}
+                onChange={handleChange}
+                placeholder="Enter contact info"
+                className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+          </div>
+  
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-300 mb-1">
+                Date of Birth
+              </label>
+              <input
+                type="date"
+                name="dateOfBirth"
+                id="dateOfBirth"
+                value={formatDate(nurse.dateOfBirth)}
+                onChange={handleChange}
+                max={new Date().toISOString().substring(0, 10)} // Limit to past dates
+                className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+  
+            <div>
+              <label htmlFor="dateHired" className="block text-sm font-medium text-gray-300 mb-1">
+                Date Hired
+              </label>
+              <input
+                type="date"
+                name="dateHired"
+                id="dateHired"
+                value={formatDate(nurse.dateHired)}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+          </div>
+  
           <div>
-            <label htmlFor="firstName" className="block text-sm font-semibold text-gray-700">
-              First Name
+            <label htmlFor="qualifications" className="block text-sm font-medium text-gray-300 mb-1">
+              Qualifications
             </label>
             <input
               type="text"
-              name="firstName"
-              id="firstName"
-              value={nurse.firstName}
+              name="qualifications"
+              id="qualifications"
+              value={nurse.qualifications}
               onChange={handleChange}
-              placeholder="Enter first name"
-              className="mt-1 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Enter qualifications"
+              className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
-
-          <div>
-            <label htmlFor="lastName" className="block text-sm font-semibold text-gray-700">
-              Last Name
-            </label>
+  
+          <div className="flex items-center">
             <input
-              type="text"
-              name="lastName"
-              id="lastName"
-              value={nurse.lastName}
+              type="checkbox"
+              name="isAvailable"
+              id="isAvailable"
+              checked={nurse.isAvailable}
               onChange={handleChange}
-              placeholder="Enter last name"
-              className="mt-1 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-              required
+              className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
             />
+            <label htmlFor="isAvailable" className="ml-2 block text-sm text-gray-300">
+              Available
+            </label>
           </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  
           <div>
-            <label htmlFor="gender" className="block text-sm font-semibold text-gray-700">
-              Gender
+            <label htmlFor="departmentId" className="block text-sm font-medium text-gray-300 mb-1">
+              Department
             </label>
             <select
-              name="gender"
-              id="gender"
-              value={nurse.gender}
+              name="departmentId"
+              id="departmentId"
+              value={nurse.departmentId}
               onChange={handleChange}
-              className="mt-1 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             >
-              <option value="">Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
+              <option value="">Select a Department</option>
+              {departments.map((dept) => (
+                <option key={dept.id} value={dept.id}>
+                  {dept.name}
+                </option>
+              ))}
             </select>
           </div>
-
-          <div>
-            <label htmlFor="contactInfo" className="block text-sm font-semibold text-gray-700">
-              Contact Info
-            </label>
-            <input
-              type="text"
-              name="contactInfo"
-              id="contactInfo"
-              value={nurse.contactInfo}
-              onChange={handleChange}
-              placeholder="Enter contact info"
-              className="mt-1 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-              required
-            />
+  
+          <div className="flex justify-end">
+            <button
+              type="submit"
+              className="mt-4 w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            >
+              {id ? 'Update Nurse' : 'Add Nurse'}
+            </button>
           </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label htmlFor="dateOfBirth" className="block text-sm font-semibold text-gray-700">
-              Date of Birth
-            </label>
-            <input
-              type="date"
-              name="dateOfBirth"
-              id="dateOfBirth"
-              value={nurse.dateOfBirth.toISOString().substring(0, 10)}
-              onChange={handleChange}
-              className="mt-1 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-              required
-            />
-          </div>
-
-          <div>
-            <label htmlFor="dateHired" className="block text-sm font-semibold text-gray-700">
-              Date Hired
-            </label>
-            <input
-              type="date"
-              name="dateHired"
-              id="dateHired"
-              value={nurse.dateHired.toISOString().substring(0, 10)}
-              onChange={handleChange}
-              className="mt-1 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-              required
-            />
-          </div>
-        </div>
-
-        <div>
-          <label htmlFor="qualifications" className="block text-sm font-semibold text-gray-700">
-            Qualifications
-          </label>
-          <input
-            type="text"
-            name="qualifications"
-            id="qualifications"
-            value={nurse.qualifications}
-            onChange={handleChange}
-            placeholder="Enter qualifications"
-            className="mt-1 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            required
-          />
-        </div>
-
-        <div className="flex items-center">
-          <input
-            type="checkbox"
-            name="isAvailable"
-            id="isAvailable"
-            checked={nurse.isAvailable}
-            onChange={handleChange}
-            className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-          />
-          <label htmlFor="isAvailable" className="ml-2 block text-sm text-gray-700">
-            Available
-          </label>
-        </div>
-
-        <div>
-          <label htmlFor="departmentId" className="block text-sm font-semibold text-gray-700">
-            Department
-          </label>
-          <select
-            name="departmentId"
-            id="departmentId"
-            value={nurse.departmentId}
-            onChange={handleChange}
-            className="mt-1 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            required
-          >
-            <option value="">Select a Department</option>
-            {departments.map((dept) => (
-              <option key={dept.id} value={dept.id}>
-                {dept.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="flex justify-end">
-          <button
-            type="submit"
-            className="mt-4 bg-blue-600 text-white py-3 px-6 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          >
-            {id ? 'Update Nurse' : 'Add Nurse'}
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
+  
 };
 
 export default EditNurse;

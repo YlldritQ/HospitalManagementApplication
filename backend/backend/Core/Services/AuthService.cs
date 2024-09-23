@@ -209,6 +209,7 @@ namespace backend.Core.Services
                                 FirstName = user.FirstName,
                                 LastName = user.LastName,
                                 DateOfBirth = existingPatient.DateOfBirth, // Adjust as needed
+                                DateHired = DateTime.UtcNow,
                                 Gender =existingPatient.Gender, // Adjust as needed
                                 ContactInfo = existingPatient.ContactInfo, // Adjust as needed
                                 UserId = user.Id,
@@ -281,6 +282,7 @@ namespace backend.Core.Services
                                 FirstName = user.FirstName,
                                 LastName = user.LastName,
                                 DateOfBirth = existingPatient.DateOfBirth, // Adjust as needed
+                                DateHired = DateTime.UtcNow,
                                 Gender = existingPatient.Gender, // Adjust as needed
                                 ContactInfo = existingPatient.ContactInfo, // Adjust as needed
                                 UserId = user.Id,
@@ -306,6 +308,7 @@ namespace backend.Core.Services
                                 FirstName = existingDoctor.FirstName,
                                 LastName = existingDoctor.LastName,
                                 DateOfBirth = existingDoctor.DateOfBirth, // Adjust as needed
+                                DateHired = DateTime.UtcNow,
                                 Gender = existingDoctor.Gender, // Adjust as needed
                                 ContactInfo = existingDoctor.ContactInfo, // Adjust as needed
                                 UserId = user.Id,
@@ -331,6 +334,7 @@ namespace backend.Core.Services
                                 FirstName = existingNurse.FirstName,
                                 LastName = existingNurse.LastName,
                                 DateOfBirth = existingNurse.DateOfBirth, // Adjust as needed
+                                DateHired = DateTime.UtcNow,
                                 Gender = existingNurse.Gender, // Adjust as needed
                                 ContactInfo = existingNurse.ContactInfo, // Adjust as needed
                                 UserId = user.Id,

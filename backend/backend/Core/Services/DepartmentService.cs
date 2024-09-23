@@ -212,6 +212,7 @@ public class DepartmentService : IDepartmentService
         foreach (var room in rooms)
         {
             room.DepartmentId = departmentId;
+            room.IsOccupied = true;
         }
 
         await _context.SaveChangesAsync();
@@ -223,6 +224,7 @@ public class DepartmentService : IDepartmentService
         foreach (var room in rooms)
         {
             room.DepartmentId = null; // Assuming nullable foreign key
+            room.IsOccupied = false;
         }
 
         await _context.SaveChangesAsync();
