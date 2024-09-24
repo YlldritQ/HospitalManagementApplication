@@ -3,31 +3,33 @@ import { useParams, useNavigate } from "react-router-dom";
 import {
   getDoctors,
   getRoomsAssignedToDoctor,
+  getDoctorByUserId,
 } from "../../services/doctorService";
-import { DoctorDto } from "../../types/doctorTypes";
+
 import { toast } from "react-hot-toast";
 import {
   getAppointments,
   deleteAppointment,
   getAppointmentById,
   createAppointment,
+  getAppointmentsByDoctorId,
 } from "../../services/appointmentService";
 import { AppointmentDto, CUAppointmentDto } from "../../types/appointmentTypes";
 import { getAllPatients } from "../../services/patientService";
 import { RoomDto } from "../../types/roomTypes";
 import { PatientDto } from "../../types/patientTypes";
-
+import useAuth from "../../hooks/useAuth.hook";
+import { DoctorDto } from "../../types/doctorTypes";
 const Appointment: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const [, setLoading] = useState(true);
   const [rooms, setRooms] = useState<RoomDto[]>([]);
   const [patients, setPatients] = useState<PatientDto[]>([]);
-  const [doctors, setDoctors] = useState<DoctorDto[]>([]);
   const [appointments, setAppointments] = useState<AppointmentDto[]>([]);
-  const [selectedAppointment, setSelectedAppointment] =
-    useState<AppointmentDto | null>(null);
-  const [isCreatingAppointment, setIsCreatingAppointment] =
-    useState<boolean>(false);
+  const [selectedAppointment, setSelectedAppointment] = useState<AppointmentDto | null>(null);
+  const [isCreatingAppointment, setIsCreatingAppointment] = useState<boolean>(false);
   const [formData, setFormData] = useState<CUAppointmentDto>({
     appointmentDate: new Date(),
     patientId: 0,
@@ -38,49 +40,83 @@ const Appointment: React.FC = () => {
   const [appointmentTime, setAppointmentTime] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
 
+  const [doctors, setDoctors] = useState<DoctorDto[]>([]);
+
+  // Fetching doctor and appointments based on user ID
+  const fetchAppointmentsBasedOnRole = async () => {
+    if (!user?.id) return; // Ensure user is logged in
+  
+    try {
+      setLoading(true); // Start loading before fetching data
+  
+      if (user.roles.includes("Admin")) {
+        // Fetch all appointments for admin
+        const fetchedAppointments = await getAppointments();
+        setAppointments(fetchedAppointments);
+      } else if (user.roles.includes("Doctor")) {
+        // Fetch appointments by doctor ID
+        const doctor = await getDoctorByUserId(user.id);
+        if (doctor) {
+          const fetchedAppointments = await getAppointmentsByDoctorId(doctor.id);
+          setAppointments(fetchedAppointments);
+        } else {
+          setError("Doctor not found for the current user.");
+        }
+      } else {
+        setError("Unauthorized access.");
+      }
+    } catch (err) {
+      // More specific error logging
+      console.error(err); // Log the error for debugging
+      if (err instanceof Error) {
+        toast.error(`Error: ${err.message}`);
+        setError(`Error: ${err.message}`);
+      } else {
+        toast.error("An unknown error occurred.");
+        setError("An unknown error occurred.");
+      }
+    } finally {
+      setLoading(false); // Stop loading once data is fetched
+    }
+  };
+  
   useEffect(() => {
     const fetchPatients = async () => {
       try {
         const patientsData = await getAllPatients();
+        console.log("Fetched Patients: ", patientsData);
         setPatients(patientsData);
       } catch (err) {
         toast.error("Failed to fetch patients");
       }
     };
-
+  
     const fetchDoctors = async () => {
       try {
+        setLoading(true); // Start loading
         const doctorsData = await getDoctors();
+        console.log("Fetched Doctors: ", doctorsData);
         setDoctors(doctorsData);
       } catch (err) {
-        toast.error("Failed to fetch doctors");
+        //handleError(err, "Failed to fetch doctors");
+      } finally {
+        setLoading(false); // Stop loading
       }
     };
-
+  
     const fetchAppointments = async () => {
-      try {
-        const fetchedAppointments = await getAppointments();
-        const transformedAppointments = fetchedAppointments.map(
-          (item: any) => ({
-            id: item.id,
-            appointmentDate: new Date(item.appointmentDate),
-            patientId: item.patientId,
-            doctorId: item.doctorId,
-            status: item.status,
-            roomId: item.roomId,
-          })
-        );
-        setAppointments(transformedAppointments);
-      } catch (err) {
-        toast.error("Failed to fetch appointments");
-      }
+      await fetchAppointmentsBasedOnRole();
     };
-
+  
     fetchPatients();
     fetchDoctors();
     fetchAppointments();
-  }, [id]);
+  }, [id, user?.id, user?.roles]);
+  
+  
+  
 
+  // Handling appointment creation
   const handleCreateAppointment = async () => {
     if (!(formData.appointmentDate instanceof Date) || !appointmentTime) {
       toast.error('Invalid date or time.');
@@ -121,6 +157,7 @@ const Appointment: React.FC = () => {
     }
   };
 
+  // Handling appointment deletion
   const handleDeleteAppointment = async (id: number) => {
     try {
       await deleteAppointment(id);
@@ -132,6 +169,7 @@ const Appointment: React.FC = () => {
     }
   };
 
+  // Handling changes in doctor selection
   const handleDoctorChange = async (
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
@@ -142,13 +180,14 @@ const Appointment: React.FC = () => {
       try {
         const doctorRooms = await getRoomsAssignedToDoctor(doctorId);
         setRooms(doctorRooms);
-        setFormData((prev) => ({ ...prev, roomId: 0 }));
+        setFormData((prev) => ({ ...prev, roomId: 0 })); // Reset roomId when doctor changes
       } catch (err) {
         toast.error("Failed to fetch rooms for the selected doctor");
       }
     }
   };
 
+  // Handling changes in form inputs
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -160,6 +199,7 @@ const Appointment: React.FC = () => {
     }));
   };
 
+  // Handling changes in date input
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setFormData((prev) => ({
@@ -168,6 +208,9 @@ const Appointment: React.FC = () => {
     }));
   };
 
+  
+
+  // Viewing appointment details
   const handleViewDetails = async (id: number) => {
     try {
       const appointment = await getAppointmentById(id);
@@ -177,6 +220,7 @@ const Appointment: React.FC = () => {
           appointmentDate: new Date(appointment.appointmentDate),
         };
         setSelectedAppointment(transformedAppointment);
+        navigate('/appointment');
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -188,6 +232,7 @@ const Appointment: React.FC = () => {
   };
 
   if (error) return <div>{error}</div>;
+
 
   return (
     <div className="max-w-4xl mx-auto p-4 bg-white rounded shadow-md">
@@ -391,45 +436,38 @@ const Appointment: React.FC = () => {
         </div>
 
         {selectedAppointment && (
-          <div className="mt-8 p-4 border rounded bg-gray-100">
-            <h2 className="text-xl font-semibold mb-4">Appointment Details</h2>
-            <p>
-              <strong>ID:</strong> {selectedAppointment.id}
-            </p>
-            <p>
-              <strong>Date:</strong>{" "}
-              {selectedAppointment.appointmentDate.toDateString()}
-            </p>
-            <p>
-              <strong>Patient ID:</strong> {selectedAppointment.patientId}
-            </p>
-            <p>
-              <strong>Doctor ID:</strong> {selectedAppointment.doctorId}
-            </p>
-            <p>
-              <strong>Status:</strong> {selectedAppointment.status}
-            </p>
-            <p>
-              <strong>Room:</strong> {selectedAppointment.roomId}
-            </p>
-            <button
-              className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-200"
-              onClick={() =>
-                navigate(
-                  `/dashboard/edit-appointment/${selectedAppointment.id}`
-                )
-              }
-            >
-              Edit Appointment
-            </button>
-            <button
-              className="mt-4 ml-2 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors duration-200"
-              onClick={() => setSelectedAppointment(null)}
-            >
-              Close
-            </button>
-          </div>
-        )}
+  <div className="mt-8 p-4 border rounded bg-gray-100">
+    <h2 className="text-xl font-semibold mb-4">Appointment Details</h2>
+    <p>
+      <strong>ID:</strong> {selectedAppointment.id}
+    </p>
+    <p>
+      <strong>Date:</strong> {selectedAppointment.appointmentDate.toDateString()}
+    </p>
+    <p>
+      <strong>Time:</strong> {selectedAppointment.appointmentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+    </p>
+    <p>
+      <strong>Patient ID:</strong> {selectedAppointment.patientId}
+    </p>
+    <p>
+      <strong>Doctor ID:</strong> {selectedAppointment.doctorId}
+    </p>
+    <p>
+      <strong>Room ID:</strong> {selectedAppointment.roomId}
+    </p>
+    <p>
+      <strong>Status:</strong> {selectedAppointment.status}
+    </p>
+    <button
+      className="mt-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors duration-200"
+      onClick={() => setSelectedAppointment(null)} // Close details view
+    >
+      Close
+    </button>
+  </div>
+)}
+
       </div>
     </div>
   );
