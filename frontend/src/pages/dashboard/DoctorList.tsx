@@ -88,75 +88,79 @@ const DoctorList: React.FC = () => {
     if (error) return <div className="text-center text-red-600">{error}</div>;
 
     return (
-        <div className="container mx-auto p-4">
-            <h1 className="text-2xl font-bold mb-4">Doctor List</h1>
-
-            <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
-                <thead>
-                    <tr className="w-full bg-gray-200 text-left">
-                        <th className="py-3 px-4 border-b">ID</th>
-                        <th className="py-3 px-4 border-b">Name</th>
-                        <th className="py-3 px-4 border-b">Specialty</th>
-                        <th className="py-3 px-4 border-b">Contact Info</th>
-                        <th className="py-3 px-4 border-b">Department</th>
-                        <th className="py-3 px-4 border-b">Available</th>
-                        <th className="py-3 px-4 border-b">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {doctors.map(doctor => (
-                        <tr key={doctor.id} className="border-b">
-                            <td className="py-3 px-4">{doctor.id}</td>
-                            <td className="py-3 px-4">{`${doctor.firstName} ${doctor.lastName}`}</td>
-                            <td className="py-3 px-4">{doctor.specialty}</td>
-                            <td className="py-3 px-4">{doctor.contactInfo}</td>
-                            <td className="py-3 px-4">
-                                {doctor.departmentId > 0 ? departments[doctor.departmentId] : 'N/A'}
-                            </td>
-                            <td className="py-3 px-4">
-                                <span
-                                    className={`inline-block px-3 py-1 rounded-full text-white ${doctor.isAvailable ? 'bg-green-500' : 'bg-red-500'}`}
-                                >
-                                    {doctor.isAvailable ? 'Available' : 'Not Available'}
-                                </span>
-                            </td>
-                            <td className="py-3 px-4">
-                                <button
-                                    onClick={() => handleButtonClick(doctor.id)}
-                                    className="text-blue-500 hover:underline mr-3"
-                                >
-                                    Edit
-                                </button>
-                                <button
-                                    onClick={() => handleDelete(doctor.id)}
-                                    className="text-red-500 hover:underline mr-3"
-                                >
-                                    Delete
-                                </button>
-                                <button
-                                    onClick={() => handleAssignRoomsClick(doctor.id, doctor.departmentId)}
-                                    className="text-green-500 hover:underline mr-3"
-                                >
-                                    Manage Rooms
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-            <Toaster />
-            {selectedDoctor !== null && selectedDepartment !== null &&
+        <div className="flex flex-col items-start justify-start p-4 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 min-h-screen w-full">
+          <h1 className="text-3xl font-bold text-white mb-8">Doctor List</h1>
+          
+          <table className="min-w-full bg-gray-700 rounded-lg overflow-hidden shadow-lg">
+            <thead>
+              <tr className="bg-gray-900 text-white">
+                <th className="py-4 px-6 text-left text-sm font-medium border-b border-gray-600">ID</th>
+                <th className="py-4 px-6 text-left text-sm font-medium border-b border-gray-600">Name</th>
+                <th className="py-4 px-6 text-left text-sm font-medium border-b border-gray-600">Specialty</th>
+                <th className="py-4 px-6 text-left text-sm font-medium border-b border-gray-600">Contact Info</th>
+                <th className="py-4 px-6 text-left text-sm font-medium border-b border-gray-600">Department</th>
+                <th className="py-4 px-6 text-left text-sm font-medium border-b border-gray-600">Available</th>
+                <th className="py-4 px-6 text-left text-sm font-medium border-b border-gray-600">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {doctors.map(doctor => (
+                <tr key={doctor.id} className="border-b border-gray-700">
+                  <td className="py-4 px-6 text-white">{doctor.id}</td>
+                  <td className="py-4 px-6 text-white">{`${doctor.firstName} ${doctor.lastName}`}</td>
+                  <td className="py-4 px-6 text-white">{doctor.specialty}</td>
+                  <td className="py-4 px-6 text-white">{doctor.contactInfo}</td>
+                  <td className="py-4 px-6 text-white">
+                    {doctor.departmentId > 0 ? departments[doctor.departmentId] : 'N/A'}
+                  </td>
+                  <td className="py-4 px-6">
+                    <span
+                      className={`inline-block px-3 py-1 rounded-full text-white font-semibold ${
+                        doctor.isAvailable ? 'bg-green-500' : 'bg-red-500'
+                      }`}
+                    >
+                      {doctor.isAvailable ? 'Available' : 'Not Available'}
+                    </span>
+                  </td>
+                  <td className="py-4 px-6">
+                    <button
+                      onClick={() => handleButtonClick(doctor.id)}
+                      className="text-blue-400 hover:underline mr-4 transition duration-200"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(doctor.id)}
+                      className="text-red-400 hover:underline mr-4 transition duration-200"
+                    >
+                      Delete
+                    </button>
+                    <button
+                      onClick={() => handleAssignRoomsClick(doctor.id, doctor.departmentId)}
+                      className="text-green-400 hover:underline transition duration-200"
+                    >
+                      Manage Rooms
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          
+          <Toaster />
+          {selectedDoctor !== null && selectedDepartment !== null && (
             <RoomAssignmentModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                doctorId={selectedDoctor ?? 0}
-                departmentId={selectedDepartment ?? 0}
-                onAssign={handleAssignRooms}
-                onRemove={handleRemoveRooms}
+              isOpen={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
+              doctorId={selectedDoctor ?? 0}
+              departmentId={selectedDepartment ?? 0}
+              onAssign={handleAssignRooms}
+              onRemove={handleRemoveRooms}
             />
-}
+          )}
         </div>
-    );
+      );
+      
 };
 
 export default DoctorList;

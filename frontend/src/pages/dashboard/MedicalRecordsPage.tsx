@@ -181,8 +181,6 @@ const MedicalRecordsPage: React.FC = () => {
     );
   };
 
-
-  
   const generatePDF = () => {
     if (selectedPatientId === null) {
       setError("Please select a patient.");
@@ -320,19 +318,19 @@ const MedicalRecordsPage: React.FC = () => {
       setError("Please select a patient.");
       return;
     }
-  
+
     const patientRecords = records.filter(
       (record) => record.patientId === selectedPatientId
     );
     const patient = patients.find((p) => p.patientId === selectedPatientId);
-  
+
     if (!patient) {
       setError("Selected patient not found.");
       return;
     }
-  
+
     const doc = new jsPDF();
-  
+
     // Title
     doc.setFontSize(20);
     doc.setFont("helvetica", "bold");
@@ -342,11 +340,11 @@ const MedicalRecordsPage: React.FC = () => {
       20,
       { align: "center" }
     );
-  
+
     // Add a horizontal line under the title
     doc.setLineWidth(0.5);
     doc.line(15, 25, doc.internal.pageSize.getWidth() - 15, 25);
-  
+
     // Patient Information Section
     doc.setFontSize(14);
     doc.text(`Patient Details:`, 14, 35);
@@ -357,71 +355,55 @@ const MedicalRecordsPage: React.FC = () => {
       16,
       54
     );
-  
+
     // Add space before records
     doc.setLineWidth(0.5);
     doc.line(15, 60, doc.internal.pageSize.getWidth() - 15, 60);
     doc.setFont("helvetica", "bold");
     doc.text(`Prescription Records:`, 14, 70);
     doc.setFont("helvetica", "normal");
-  
+
     let yPosition = 80; // Starting Y position for records
-  
+
     patientRecords.forEach((record) => {
       const doctor = doctors.find((d) => d.id === record.doctorId);
       const prescription = prescriptions.find(
         (p) => p.id === record.prescriptionId
       );
-  
-    
-  
+
       // Record Details in block format
       doc.setFont("helvetica", "normal");
       doc.text(
-        `Doctor: ${
-          doctor ? `${doctor.firstName} ${doctor.lastName}` : "N/A"
-        }`,
+        `Doctor: ${doctor ? `${doctor.firstName} ${doctor.lastName}` : "N/A"}`,
         16,
         yPosition
       );
       yPosition += 10;
       doc.text(
         `Prescription: ${
-          prescription
-            ? `${prescription.medicationName}`
-            : "N/A"
+          prescription ? `${prescription.medicationName}` : "N/A"
         }`,
         16,
         yPosition
       );
       yPosition += 10; // Add space between records
       doc.text(
-        `Dosage: ${
-          prescription
-            ? `${prescription.dosage}`
-            : "N/A"
-        }`,
+        `Dosage: ${prescription ? `${prescription.dosage}` : "N/A"}`,
         16,
         yPosition
       );
       yPosition += 10;
       doc.text(
         `Instructions: ${
-          prescription
-            ? `${prescription.instructions}`
-            : "N/A"
+          prescription ? `${prescription.instructions}` : "N/A"
         }`,
         16,
         yPosition
       );
       yPosition += 10;
-      
+
       doc.text(
-        `Date Issued: ${
-          prescription
-            ? `${prescription.dateIssued}`
-            : "N/A"
-        }`,
+        `Date Issued: ${prescription ? `${prescription.dateIssued}` : "N/A"}`,
         16,
         yPosition
       );
@@ -436,7 +418,7 @@ const MedicalRecordsPage: React.FC = () => {
       );
       yPosition += 6;
     });
-  
+
     // Footer with generated date
     doc.setFontSize(10);
     doc.text(
@@ -444,7 +426,7 @@ const MedicalRecordsPage: React.FC = () => {
       14,
       doc.internal.pageSize.height - 10
     );
-  
+
     // Save the PDF
     doc.save(
       `prescription-records-${patient.firstName}-${
@@ -452,61 +434,75 @@ const MedicalRecordsPage: React.FC = () => {
       }-${new Date().getTime()}.pdf`
     );
   };
-  
 
   return (
-    <div className="container mx-auto px-4 py-6">
-      <h1 className="text-3xl font-semibold mb-6">Medical Records</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 p-4">
+      <h1 className="text-3xl font-semibold mb-6 text-white">
+        Medical Records
+      </h1>
       {error && <p className="text-red-500 mb-4">{error}</p>}
 
-      <div className="flex items-center gap-4">
-        <label
-          htmlFor="patientSelect"
-          className="block text-gray-700 text-sm font-bold mb-2"
-        >
-          Select Patient
-        </label>
-        <select
-          id="patientSelect"
-          value={selectedPatientId || ""}
-          onChange={(e) => setSelectedPatientId(Number(e.target.value))}
-          className="border rounded-lg px-4 py-2 w-full"
-        >
-          <option value="">Select a patient</option>
-          {patients.map((patient) => (
-            <option key={patient.patientId} value={patient.patientId}>
-              {patient.firstName} {patient.lastName}
-            </option>
-          ))}
-        </select>
+      <div className="flex items-center gap-4 mb-6">
 
-        <button
-          onClick={() => setModalOpen(true)}
-          className="bg-blue-600 text-white px-4 py-2 rounded-md mb-4"
-        >
-          Create New Record
-        </button>
-        <button
-          onClick={generatePDF}
-          className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition"
-        >
-          Download PDF
-        </button>
-        <button
-  onClick={generatePrescriptionPDF}
-  className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition"
->
-  Download Prescription PDF
-</button>
+  <button
+    onClick={() => setModalOpen(true)}
+    className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition min-w-[150px]"
+  >
+    Create New Record
+  </button>
+  <button
+    onClick={generatePDF}
+    className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition min-w-[150px]"
+  >
+    Download PDF
+  </button>
+  <label
+    htmlFor="patientSelect"
+    className="block text-gray-300 text-sm font-bold mb-2"
+  >
+    Select Patient
+  </label>
+<div>
+  <select
+    id="patientSelect"
+    value={selectedPatientId || ""}
+    onChange={(e) => setSelectedPatientId(Number(e.target.value))}
+    className="shadow appearance-none border border-gray-600 rounded-lg px-4 py-2 pr-8 w-full text-gray-300 bg-gray-700 focus:outline-none focus:ring focus:ring-blue-600"
+  >
+    <option value="">Select a patient</option>
+    {patients.map((patient) => (
+      <option key={patient.patientId} value={patient.patientId}>
+        {patient.firstName} {patient.lastName}
+      </option>
+    ))}
+  </select>
+  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-300">
+    <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+      <path
+        fillRule="evenodd"
+        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+        clipRule="evenodd"
+      />
+    </svg>
+  </div>
+  </div>
+  <button
+    onClick={generatePrescriptionPDF}
+    className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition min-w-[150px]"
+  >
+    Download Prescription
+  </button>
+</div>
 
-      </div>
 
-      <div className="bg-white p-6 rounded-lg shadow-lg">
-        <h2 className="text-xl font-semibold mb-4">Existing Records</h2>
-        <table className="min-w-full bg-white table-auto border-collapse">
+      <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full">
+        <h2 className="text-xl font-semibold mb-4 text-white">
+          Existing Records
+        </h2>
+        <table className="min-w-full bg-gray-800 table-auto border-collapse">
           <thead>
             <tr>
-              <th className="border-b px-4 py-2 text-left text-gray-600">
+              <th className="border-b px-4 py-2 text-left text-gray-300">
                 <button
                   onClick={() => handleSort("id")}
                   className="flex items-center"
@@ -516,7 +512,7 @@ const MedicalRecordsPage: React.FC = () => {
                     (sortDirection === "asc" ? " 🔽" : " 🔼")}
                 </button>
               </th>
-              <th className="border-b px-4 py-2 text-left text-gray-600">
+              <th className="border-b px-4 py-2 text-left text-gray-300">
                 <button
                   onClick={() => handleSort("patientId")}
                   className="flex items-center"
@@ -526,7 +522,7 @@ const MedicalRecordsPage: React.FC = () => {
                     (sortDirection === "asc" ? " 🔽" : " 🔼")}
                 </button>
               </th>
-              <th className="border-b px-4 py-2 text-left text-gray-600">
+              <th className="border-b px-4 py-2 text-left text-gray-300">
                 <button
                   onClick={() => handleSort("recordDate")}
                   className="flex items-center"
@@ -536,7 +532,7 @@ const MedicalRecordsPage: React.FC = () => {
                     (sortDirection === "asc" ? " 🔽" : " 🔼")}
                 </button>
               </th>
-              <th className="border-b px-4 py-2 text-left text-gray-600">
+              <th className="border-b px-4 py-2 text-left text-gray-300">
                 <button
                   onClick={() => handleSort("recordDetails")}
                   className="flex items-center"
@@ -546,24 +542,24 @@ const MedicalRecordsPage: React.FC = () => {
                     (sortDirection === "asc" ? " 🔽" : " 🔼")}
                 </button>
               </th>
-              <th className="border-b px-4 py-2 text-left text-gray-600">
+              <th className="border-b px-4 py-2 text-left text-gray-300">
                 Doctor
               </th>
-              <th className="border-b px-4 py-2 text-left text-gray-600">
+              <th className="border-b px-4 py-2 text-left text-gray-300">
                 Nurse
               </th>
-              <th className="border-b px-4 py-2 text-left text-gray-600">
+              <th className="border-b px-4 py-2 text-left text-gray-300">
                 Prescription
               </th>
-              <th className="border-b px-4 py-2 text-left text-gray-600">
+              <th className="border-b px-4 py-2 text-left text-gray-300">
                 Actions
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-gray-800 divide-y divide-gray-700">
             {records.map((record) => {
               const patient = patients.find(
-                (patient) => patient.patientId === record.patientId
+                (p) => p.patientId === record.patientId
               );
               const doctor = doctors.find((d) => d.id === record.doctorId);
               const nurse = nurses.find((n) => n.id === record.nurseId);
@@ -573,13 +569,13 @@ const MedicalRecordsPage: React.FC = () => {
 
               return (
                 <tr key={record.id}>
-                  <td className="px-4 py-2">{record.id}</td>
-                  <td className="px-4 py-2">
+                  <td className="px-4 py-2 text-gray-300">{record.id}</td>
+                  <td className="px-4 py-2 text-gray-300">
                     {patient
                       ? `${patient.firstName} ${patient.lastName}`
                       : "N/A"}
                   </td>
-                  <td className="px-4 py-2">
+                  <td className="px-4 py-2 text-gray-300">
                     {new Date(record.recordDate).toLocaleString("en-US", {
                       year: "numeric",
                       month: "long",
@@ -589,14 +585,16 @@ const MedicalRecordsPage: React.FC = () => {
                       hour12: true,
                     })}
                   </td>
-                  <td className="px-4 py-2">{record.recordDetails}</td>
-                  <td className="px-4 py-2">
+                  <td className="px-4 py-2 text-gray-300">
+                    {record.recordDetails}
+                  </td>
+                  <td className="px-4 py-2 text-gray-300">
                     {doctor ? `${doctor.firstName} ${doctor.lastName}` : "N/A"}
                   </td>
-                  <td className="px-4 py-2">
+                  <td className="px-4 py-2 text-gray-300">
                     {nurse ? `${nurse.firstName} ${nurse.lastName}` : "N/A"}
                   </td>
-                  <td className="px-4 py-2">
+                  <td className="px-4 py-2 text-gray-300">
                     {prescription
                       ? `${prescription.medicationName} (${prescription.dosage})`
                       : "N/A"}
@@ -626,106 +624,124 @@ const MedicalRecordsPage: React.FC = () => {
       </div>
 
       {showEditForm && editingRecord && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
-            <h2 className="text-2xl font-semibold mb-4">Edit Medical Record</h2>
-            <div className="mb-4">
-              <label
-                htmlFor="recordDetailsEdit"
-                className="block text-gray-700"
-              >
-                Record Details
-              </label>
-              <textarea
-                id="recordDetailsEdit"
-                value={editingRecord.recordDetails}
-                onChange={(e) =>
-                  setEditingRecord({
-                    ...editingRecord,
-                    recordDetails: e.target.value,
-                  })
-                }
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-blur-sm p-4">
+          <div className="w-full max-w-xl bg-gray-800 p-8 rounded-lg shadow-xl border border-gray-700">
+            <h2 className="text-3xl font-bold text-white mb-8 text-center">
+              Edit Medical Record
+            </h2>
+            <div>
+              <div className="mb-4">
+                <label
+                  htmlFor="recordDetailsEdit"
+                  className="block text-sm font-medium text-gray-300"
+                >
+                  Record Details
+                </label>
+                <textarea
+                  id="recordDetailsEdit"
+                  value={editingRecord.recordDetails}
+                  onChange={(e) =>
+                    setEditingRecord({
+                      ...editingRecord,
+                      recordDetails: e.target.value,
+                    })
+                  }
+                  className="mt-1 block w-full px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="doctorIdEdit"
+                  className="block text-sm font-medium text-gray-300"
+                >
+                  Doctor
+                </label>
+                <select
+                  id="doctorIdEdit"
+                  value={editingRecord.doctorId}
+                  onChange={(e) =>
+                    setEditingRecord({
+                      ...editingRecord,
+                      doctorId: Number(e.target.value),
+                    })
+                  }
+                  className="mt-1 block w-full px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="0">Select a doctor</option>
+                  {doctors.map((doctor) => (
+                    <option key={doctor.id} value={doctor.id}>
+                      {doctor.firstName} {doctor.lastName}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="nurseIdEdit"
+                  className="block text-sm font-medium text-gray-300"
+                >
+                  Nurse
+                </label>
+                <select
+                  id="nurseIdEdit"
+                  value={editingRecord.nurseId}
+                  onChange={(e) =>
+                    setEditingRecord({
+                      ...editingRecord,
+                      nurseId: Number(e.target.value),
+                    })
+                  }
+                  className="mt-1 block w-full px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="0">Select a nurse</option>
+                  {nurses.map((nurse) => (
+                    <option key={nurse.id} value={nurse.id}>
+                      {nurse.firstName} {nurse.lastName}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="prescriptionIdEdit"
+                  className="block text-sm font-medium text-gray-300"
+                >
+                  Prescription
+                </label>
+                <select
+                  id="prescriptionIdEdit"
+                  value={editingRecord.prescriptionId}
+                  onChange={(e) =>
+                    setEditingRecord({
+                      ...editingRecord,
+                      prescriptionId: Number(e.target.value),
+                    })
+                  }
+                  className="mt-1 block w-full px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="0">Select a prescription</option>
+                  {prescriptions.map((prescription) => (
+                    <option key={prescription.id} value={prescription.id}>
+                      {prescription.medicationName}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="flex justify-end space-x-2">
+                <button
+                  onClick={handleUpdate}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  Save Changes
+                </button>
+                <button
+                  onClick={() => setShowEditForm(false)}
+                  className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-gray-600"
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
-            <div className="mb-4">
-              <label htmlFor="doctorIdEdit" className="block text-gray-700">
-                Doctor
-              </label>
-              <select
-                id="doctorIdEdit"
-                value={editingRecord.doctorId}
-                onChange={(e) =>
-                  setEditingRecord({
-                    ...editingRecord,
-                    doctorId: Number(e.target.value),
-                  })
-                }
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              >
-                <option value="0">Select a doctor</option>
-                {doctors.map((doctor) => (
-                  <option key={doctor.id} value={doctor.id}>
-                    {doctor.firstName} {doctor.lastName}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="mb-4">
-              <label htmlFor="nurseIdEdit" className="block text-gray-700">
-                Nurse
-              </label>
-              <select
-                id="nurseIdEdit"
-                value={editingRecord.nurseId}
-                onChange={(e) =>
-                  setEditingRecord({
-                    ...editingRecord,
-                    nurseId: Number(e.target.value),
-                  })
-                }
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              >
-                <option value="0">Select a nurse</option>
-                {nurses.map((nurse) => (
-                  <option key={nurse.id} value={nurse.id}>
-                    {nurse.firstName} {nurse.lastName}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="prescriptionIdEdit"
-                className="block text-gray-700"
-              >
-                Prescription ID
-              </label>
-              <input
-                id="prescriptionIdEdit"
-                type="number"
-                value={editingRecord.prescriptionId || ""}
-                onChange={(e) =>
-                  setEditingRecord({
-                    ...editingRecord,
-                    prescriptionId: Number(e.target.value),
-                  })
-                }
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-            </div>
-            <button
-              onClick={handleUpdate}
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition mr-2"
-            >
-              Update
-            </button>
-            <button
-              onClick={() => setShowEditForm(false)}
-              className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition"
-            >
-              Cancel
-            </button>
           </div>
         </div>
       )}

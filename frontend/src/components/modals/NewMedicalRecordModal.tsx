@@ -113,16 +113,16 @@ const NewMedicalRecordModal: React.FC<NewMedicalRecordModalProps> = ({ isOpen, o
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center backdrop-blur-sm justify-center z-50 p-4">
-      <div className="bg-white rounded-lg w-full max-w-md mx-auto overflow-hidden">
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-blur-sm p-4">
+      <div className="bg-gray-800 rounded-lg w-full max-w-md mx-auto overflow-hidden shadow-lg border border-gray-700">
         <div className="flex flex-col h-screen max-h-[90vh]">
           <div className="flex-shrink-0 p-6">
-            <h2 className="text-xl font-semibold mb-4">Create New Medical Record</h2>
+            <h2 className="text-2xl font-bold text-white mb-4 text-center">Create New Medical Record</h2>
           </div>
           <div className="flex-1 overflow-y-auto p-6">
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label htmlFor="patientId" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="patientId" className="block text-sm font-medium text-gray-300">
                   Patient
                 </label>
                 <select
@@ -130,7 +130,7 @@ const NewMedicalRecordModal: React.FC<NewMedicalRecordModalProps> = ({ isOpen, o
                   id="patientId"
                   value={formData.patientId}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
                   required
                 >
                   <option value="">Select a patient</option>
@@ -141,9 +141,9 @@ const NewMedicalRecordModal: React.FC<NewMedicalRecordModalProps> = ({ isOpen, o
                   ))}
                 </select>
               </div>
-
+  
               <div>
-                <label htmlFor="recordDetails" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="recordDetails" className="block text-sm font-medium text-gray-300">
                   Record Details
                 </label>
                 <textarea
@@ -151,13 +151,13 @@ const NewMedicalRecordModal: React.FC<NewMedicalRecordModalProps> = ({ isOpen, o
                   id="recordDetails"
                   value={formData.recordDetails}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
                   required
                 />
               </div>
-
+  
               <div>
-                <label htmlFor="doctorId" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="doctorId" className="block text-sm font-medium text-gray-300">
                   Doctor
                 </label>
                 <select
@@ -165,7 +165,7 @@ const NewMedicalRecordModal: React.FC<NewMedicalRecordModalProps> = ({ isOpen, o
                   id="doctorId"
                   value={formData.doctorId}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
                   required
                 >
                   <option value="">Select a doctor</option>
@@ -176,9 +176,9 @@ const NewMedicalRecordModal: React.FC<NewMedicalRecordModalProps> = ({ isOpen, o
                   ))}
                 </select>
               </div>
-
+  
               <div>
-                <label htmlFor="nurseId" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="nurseId" className="block text-sm font-medium text-gray-300">
                   Nurse
                 </label>
                 <select
@@ -186,7 +186,7 @@ const NewMedicalRecordModal: React.FC<NewMedicalRecordModalProps> = ({ isOpen, o
                   id="nurseId"
                   value={formData.nurseId}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
                 >
                   <option value="">Select a nurse</option>
                   {nurses.map((nurse) => (
@@ -196,11 +196,11 @@ const NewMedicalRecordModal: React.FC<NewMedicalRecordModalProps> = ({ isOpen, o
                   ))}
                 </select>
               </div>
-
+  
               <div>
-                <h3 className="text-lg font-semibold mt-4">Prescription Details (if applicable)</h3>
+                <h3 className="text-lg font-semibold mt-4 text-gray-300">Prescription Details (if applicable)</h3>
                 <div>
-                  <label htmlFor="medicationName" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="medicationName" className="block text-sm font-medium text-gray-300">
                     Medication Name
                   </label>
                   <input
@@ -209,11 +209,11 @@ const NewMedicalRecordModal: React.FC<NewMedicalRecordModalProps> = ({ isOpen, o
                     id="medicationName"
                     value={prescriptionData.medicationName}
                     onChange={handlePrescriptionChange}
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                    className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
                   />
                 </div>
                 <div>
-                  <label htmlFor="dosage" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="dosage" className="block text-sm font-medium text-gray-300">
                     Dosage
                   </label>
                   <input
@@ -222,11 +222,11 @@ const NewMedicalRecordModal: React.FC<NewMedicalRecordModalProps> = ({ isOpen, o
                     id="dosage"
                     value={prescriptionData.dosage}
                     onChange={handlePrescriptionChange}
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                    className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
                   />
                 </div>
                 <div>
-                  <label htmlFor="instructions" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="instructions" className="block text-sm font-medium text-gray-300">
                     Instructions
                   </label>
                   <textarea
@@ -234,22 +234,22 @@ const NewMedicalRecordModal: React.FC<NewMedicalRecordModalProps> = ({ isOpen, o
                     id="instructions"
                     value={prescriptionData.instructions}
                     onChange={handlePrescriptionChange}
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                    className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
                   />
                 </div>
               </div>
-
-              <div className="flex-shrink-0 flex justify-end p-4 bg-gray-100">
+  
+              <div className="flex-shrink-0 flex justify-end p-4 bg-gray-800">
                 <button
                   type="button"
                   onClick={onClose}
-                  className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400"
+                  className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="ml-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                  className="ml-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
                   disabled={isCreatingPrescription}
                 >
                   {isCreatingPrescription ? 'Creating Prescription...' : 'Create'}
@@ -261,6 +261,7 @@ const NewMedicalRecordModal: React.FC<NewMedicalRecordModalProps> = ({ isOpen, o
       </div>
     </div>
   );
+  
 };
 
 export default NewMedicalRecordModal;
