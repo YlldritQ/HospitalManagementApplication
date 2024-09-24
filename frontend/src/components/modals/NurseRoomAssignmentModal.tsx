@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { getUnassignedRoomsForDoctorsByDepartment } from '../../services/roomService'; // Adjust the import path as needed
+import { getUnassignedRoomsForNurses } from '../../services/roomService'; // Adjust import path
 import { RoomDto } from '../../types/roomTypes';
 import { toast } from 'react-hot-toast';
-import { DoctorRoomManagementDto } from '../../types/doctorTypes'; // Adjust the import path as needed
-import { getRoomsAssignedToDoctor } from '../../services/doctorService';
+import { NurseRoomAssignmentDto } from '../../types/nurseTypes'; // Adjust import path
+import { getRoomsAssignedToNurse } from '../../services/nurseService';
 
-interface RoomAssignmentModalProps {
+interface NurseRoomAssignmentModalProps {
     isOpen: boolean;
     onClose: () => void;
-    doctorId: number;
+    nurseId: number;
     departmentId: number;
-    onAssign: (dto: DoctorRoomManagementDto) => void;
-    onRemove: (dto: DoctorRoomManagementDto) => void;
+    onAssign: (dto: NurseRoomAssignmentDto) => void;
+    onRemove: (dto: NurseRoomAssignmentDto) => void;
 }
 
-const RoomAssignmentModal: React.FC<RoomAssignmentModalProps> = ({ isOpen, onClose, doctorId, departmentId,onAssign, onRemove }) => {
+const NurseRoomAssignmentModal : React.FC<NurseRoomAssignmentModalProps> = ({ isOpen, onClose, nurseId, departmentId, onAssign, onRemove }) => {
     const [unassignedRooms, setUnassignedRooms] = useState<RoomDto[]>([]);
     const [assignedRooms, setAssignedRooms] = useState<RoomDto[]>([]);
     const [selectedAssignRoomIds, setSelectedAssignRoomIds] = useState<number[]>([]);
@@ -27,9 +27,9 @@ const RoomAssignmentModal: React.FC<RoomAssignmentModalProps> = ({ isOpen, onClo
             const fetchRooms = async () => {
                 setLoading(true);
                 try {
-                    const unassignedData = await getUnassignedRoomsForDoctorsByDepartment(departmentId);
+                    const unassignedData = await getUnassignedRoomsForNurses(departmentId);
                     setUnassignedRooms(unassignedData);
-                    const assignedData = await getRoomsAssignedToDoctor(doctorId);
+                    const assignedData = await getRoomsAssignedToNurse(nurseId);
                     setAssignedRooms(assignedData);
                 } catch (err) {
                     toast.error('Failed to fetch rooms');
@@ -39,7 +39,7 @@ const RoomAssignmentModal: React.FC<RoomAssignmentModalProps> = ({ isOpen, onClo
             };
             fetchRooms();
         }
-    }, [isOpen, doctorId]);
+    }, [isOpen, nurseId]);
 
     const handleRoomToggleAssign = (roomId: number) => {
         setSelectedAssignRoomIds(prevIds =>
@@ -54,10 +54,12 @@ const RoomAssignmentModal: React.FC<RoomAssignmentModalProps> = ({ isOpen, onClo
     };
 
     const handleSubmit = () => {
+        const dto: NurseRoomAssignmentDto = { nurseId, roomIds: mode === 'assign' ? selectedAssignRoomIds : selectedRemoveRoomIds };
+
         if (mode === 'assign') {
-            onAssign({ doctorId, roomIds: selectedAssignRoomIds });
+            onAssign(dto);
         } else if (mode === 'remove') {
-            onRemove({ doctorId, roomIds: selectedRemoveRoomIds });
+            onRemove(dto);
         }
         onClose();
     };
@@ -65,16 +67,18 @@ const RoomAssignmentModal: React.FC<RoomAssignmentModalProps> = ({ isOpen, onClo
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-30 backdrop-blur-sm backdrop-filter p-4">
-          <div className="w-full max-w-xl bg-gray-800 p-8 rounded-lg shadow-xl border border-gray-700">
-            <h2 className="text-3xl font-bold text-white mb-8 text-center">Manage Rooms for Doctor</h2>
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 backdrop-blur-sm p-4">
+          <div className="w-full max-w-lg bg-gray-800 p-8 rounded-lg shadow-xl border border-gray-700">
+            <h2 className="text-3xl font-bold text-white mb-8 text-center">
+              Manage Rooms for Nurse
+            </h2>
       
             <div className="flex justify-center space-x-4 mb-8">
               <button
                 onClick={() => setMode('assign')}
                 className={`py-2 px-4 rounded ${
                   mode === 'assign' ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'
-                }`}
+                } transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500`}
               >
                 Assign Rooms
               </button>
@@ -82,7 +86,7 @@ const RoomAssignmentModal: React.FC<RoomAssignmentModalProps> = ({ isOpen, onClo
                 onClick={() => setMode('remove')}
                 className={`py-2 px-4 rounded ${
                   mode === 'remove' ? 'bg-red-600 text-white' : 'bg-gray-700 text-gray-300'
-                }`}
+                } transition duration-200 focus:outline-none focus:ring-2 focus:ring-red-500`}
               >
                 Remove Rooms
               </button>
@@ -103,7 +107,7 @@ const RoomAssignmentModal: React.FC<RoomAssignmentModalProps> = ({ isOpen, onClo
                             id={`assign-room-${room.id}`}
                             checked={selectedAssignRoomIds.includes(room.id)}
                             onChange={() => handleRoomToggleAssign(room.id)}
-                            className="mr-2"
+                            className="mr-2 h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-600 rounded"
                           />
                           <label htmlFor={`assign-room-${room.id}`}>{room.id}</label>
                         </li>
@@ -123,7 +127,7 @@ const RoomAssignmentModal: React.FC<RoomAssignmentModalProps> = ({ isOpen, onClo
                             id={`remove-room-${room.id}`}
                             checked={selectedRemoveRoomIds.includes(room.id)}
                             onChange={() => handleRoomToggleRemove(room.id)}
-                            className="mr-2"
+                            className="mr-2 h-5 w-5 text-red-600 focus:ring-red-500 border-gray-600 rounded"
                           />
                           <label htmlFor={`remove-room-${room.id}`}>{room.id}</label>
                         </li>
@@ -132,18 +136,20 @@ const RoomAssignmentModal: React.FC<RoomAssignmentModalProps> = ({ isOpen, onClo
                   </div>
                 )}
       
-                <div className="mt-4 flex justify-end">
+                <div className="mt-6 flex justify-end space-x-4">
                   <button
                     onClick={onClose}
-                    className="bg-gray-500 text-white py-2 px-4 rounded mr-2 hover:bg-gray-600 transition duration-200"
+                    className="py-2 px-4 bg-gray-500 text-white font-semibold rounded-md transition duration-200 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={handleSubmit}
                     className={`py-2 px-4 rounded ${
-                      mode === 'assign' ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-red-600 text-white hover:bg-red-700'
-                    } transition duration-200`}
+                      mode === 'assign' ? 'bg-blue-600 hover:bg-blue-700' : 'bg-red-600 hover:bg-red-700'
+                    } text-white font-semibold transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                      mode === 'assign' ? 'focus:ring-blue-500' : 'focus:ring-red-500'
+                    }`}
                   >
                     {mode === 'assign' ? 'Assign' : 'Remove'}
                   </button>
@@ -156,4 +162,4 @@ const RoomAssignmentModal: React.FC<RoomAssignmentModalProps> = ({ isOpen, onClo
       
 };
 
-export default RoomAssignmentModal;
+export default NurseRoomAssignmentModal;

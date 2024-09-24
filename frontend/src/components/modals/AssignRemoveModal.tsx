@@ -106,7 +106,7 @@ const AssignRemoveModal: React.FC<AssignRemoveModalProps> = ({
 
   if (!isOpen) return null;
   return (
-    <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm bg-gray-900 bg-opacity-75 p-4">
+    <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm bg-gray-900 bg-opacity-50 p-4">
       <div className="w-full max-w-lg bg-gray-800 p-8 rounded-lg shadow-xl border border-gray-700">
         <h3 className="text-2xl font-bold text-white mb-6 text-center">
           {type === 'assign' ? 'Assign' : 'Remove'} {itemType.charAt(0).toUpperCase() + itemType.slice(1)}

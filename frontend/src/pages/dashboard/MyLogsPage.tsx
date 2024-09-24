@@ -36,10 +36,10 @@ const MyLogsPage = () => {
   }
 
   return (
-    <div className="pageTemplate2">
-      <h1 className="text-2xl font-bold">My Logs</h1>
-      <div className="pageTemplate3 items-stretch">
-        <div className="grid grid-cols-6 p-2 border-2 border-gray-200 rounded-lg">
+    <div className="pageTemplate2 p-6 bg-gray-800">
+      <h1 className="text-3xl font-bold text-white mb-4">My Logs</h1>
+      <div className="w-full h-full p-4 flex flex-col justify-start items-stretch gap-2 bg-gray-900 border-2 rounded-lg">
+        <div className="grid grid-cols-6 p-2 bg-gray-700 text-gray-200 font-semibold border-b-2 border-gray-500">
           <span>No</span>
           <span>Date</span>
           <span>Username</span>
@@ -48,17 +48,18 @@ const MyLogsPage = () => {
         {myLogs.map((item, index) => (
           <div
             key={index}
-            className="grid grid-cols-6 p-2 border-2 border-gray-300 rounded-lg"
+            className="grid grid-cols-6 p-2 hover:bg-gray-800 transition-colors duration-200 border-b border-gray-600"
           >
-            <span>{index + 1}</span>
-            <span>{moment(item.createdAt).fromNow()}</span>
-            <span>{item.userName}</span>
-            <span className="col-span-3">{item.description}</span>
+            <span className="text-gray-300">{index + 1}</span>
+            <span className="text-gray-300">{moment(item.createdAt).fromNow()}</span>
+            <span className="text-gray-300">{item.userName}</span>
+            <span className="col-span-3 text-gray-300">{item.description}</span>
           </div>
         ))}
       </div>
     </div>
   );
+  
 };
 
 export default MyLogsPage;
