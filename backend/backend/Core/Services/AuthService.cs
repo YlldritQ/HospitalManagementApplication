@@ -587,6 +587,15 @@ namespace backend.Core.Services
                 StatusCode = 403,
                 Message = "You are not allowed to delete this user"
             };
-        } 
+        }
+        public async Task<IList<string>> GetRolesById(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if(user == null)
+            {
+                throw new ArgumentException("User Doesn't Exist");
+            }
+            return await _userManager.GetRolesAsync(user);
+        }
     }
 }

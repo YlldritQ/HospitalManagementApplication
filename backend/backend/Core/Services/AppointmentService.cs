@@ -3,6 +3,11 @@ using backend.Core.DbContext;
 using Microsoft.EntityFrameworkCore;
 using backend.Core.Dtos.Appointment;
 using backend.Core.Dtos.General;
+using Microsoft.IdentityModel.Tokens;
+using backend.Core.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using backend.Core.Entities;
+using backend.Core.Constants;
 
 namespace backend.Core.Services
 {
@@ -10,11 +15,14 @@ namespace backend.Core.Services
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IAuthService _authService;
 
-        public AppointmentService(ApplicationDbContext context, IMapper mapper)
+
+        public AppointmentService(ApplicationDbContext context, IMapper mapper, IAuthService authService)
         {
             _context = context;
             _mapper = mapper;
+            _authService = authService;
         }
 
         public async Task<AppointmentDto> GetAppointmentByIdAsync(int appointmentId)
@@ -43,6 +51,69 @@ namespace backend.Core.Services
                 .Include(a => a.Room)
                 .ToListAsync();
 
+            return _mapper.Map<IEnumerable<AppointmentDto>>(appointments);
+        }
+
+        public async Task<IEnumerable<AppointmentDto>> GetAppointmentsByUserId(string id)
+        {
+            // Get the roles of the user based on their ID
+            var userRoles = await _authService.GetRolesById(id);
+
+            if (userRoles == null)
+            {
+                throw new ArgumentException("No roles found for the user.");
+            }
+
+            IEnumerable<Appointment> appointments = Enumerable.Empty<Appointment>(); // Default empty collection
+
+            // Check if the user is a patient
+            if (userRoles.Contains(StaticUserRoles.PATIENT))
+            {
+                var patientService = new PatientService(_context, _mapper);
+                var patient = await patientService.GetPatientByUserIdAsync(id);
+
+                if (patient != null)
+                {
+                    // Get appointments for the patient
+                    appointments = await _context.Appointments
+                        .AsNoTracking() // Use AsNoTracking for read-only queries
+                        .Include(a => a.Patient)
+                        .Include(a => a.Doctor)
+                        .Include(a => a.Room)
+                        .Where(a => a.PatientId == patient.PatientId)
+                        .ToListAsync();
+                }
+            }
+            // Check if the user is a doctor
+            else if (userRoles.Contains(StaticUserRoles.DOCTOR))
+            {
+                var doctorService = new DoctorService(_context, _mapper);
+                var doctor = await doctorService.GetDoctorByUserIdAsync(id);
+
+                if (doctor != null)
+                {
+                    // Get appointments for the doctor
+                    appointments = await _context.Appointments
+                        .AsNoTracking()
+                        .Include(a => a.Patient)
+                        .Include(a => a.Doctor)
+                        .Include(a => a.Room)
+                        .Where(a => a.DoctorId == doctor.Id)
+                        .ToListAsync();
+                }
+            }
+            else
+            {
+                throw new ArgumentException("The user is not authorized to view appointments.");
+            }
+
+            // If no appointments are found, throw an exception
+            if (appointments == null || !appointments.Any())
+            {
+                throw new ArgumentException("No appointments found for the given user.");
+            }
+
+            // Map the appointments to AppointmentDto and return them
             return _mapper.Map<IEnumerable<AppointmentDto>>(appointments);
         }
 
@@ -197,6 +268,32 @@ namespace backend.Core.Services
                 response.StatusCode = 400;
                 response.Message = string.Join(" ", errorMessages);
                 return response;
+            }
+
+            TimeSpan appointmentDuration = TimeSpan.FromMinutes(30);
+            TimeSpan bufferPeriod = TimeSpan.FromMinutes(30); // 30 minutes buffer period
+
+            DateTime appointmentEnd = appointmentDto.AppointmentDate.Add(appointmentDuration);
+
+            // Fetch potential conflicting appointments from the database
+            var possibleConflicts = await _context.Appointments
+                .Where(a => a.DoctorId == appointmentDto.DoctorId)
+                .ToListAsync(); // Fetch into memory to handle complex time logic in-memory
+
+            // Now check for time conflicts in-memory
+            bool conflictExists = possibleConflicts.Any(a =>
+                (a.AppointmentDate < appointmentEnd && a.AppointmentDate.Add(appointmentDuration) > appointmentDto.AppointmentDate) ||
+                (appointmentDto.AppointmentDate <= a.AppointmentDate && appointmentDto.AppointmentDate >= a.AppointmentDate.Subtract(bufferPeriod))
+            );
+
+            if (conflictExists)
+            {
+                return new GeneralServiceResponseDto
+                {
+                    IsSucceed = false,
+                    StatusCode = 409,
+                    Message = "An appointment already exists in the specified time window or too close to an existing appointment."
+                };
             }
 
             // Map the DTO to the entity and update references

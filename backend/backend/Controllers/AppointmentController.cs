@@ -24,6 +24,13 @@ namespace backend.Controllers
             var appointments = await _appointmentService.GetAllAppointmentsAsync();
             return Ok(appointments);
         }
+        [HttpGet("GetAppointmentsByUser/{id}")]
+        [Authorize(Roles = StaticUserRoles.AdminDoctorNursePatient)]
+        public async Task<ActionResult<IEnumerable<AppointmentDto>>> GetAppointmentsByUserId(string id)
+        {
+            var appointments = await _appointmentService.GetAppointmentsByUserId(id);
+            return Ok(appointments);
+        }
 
         // GET: api/appointment/{id}
         [HttpGet("{id}")]

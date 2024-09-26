@@ -25,6 +25,16 @@ export const getPatientById = async (patientId: number): Promise<PatientDto | nu
   }
 };
 
+export const getPatientByUserId = async (userId: string | undefined): Promise<PatientDto | null> => {
+  try {
+    const response = await axiosInstance.get(`/Patient/user/${userId}`);
+    return response.data as PatientDto;
+  } catch (error) {
+    handleError(error);
+    return null; // Return null in case of an error
+  }
+};
+
 // Create a new patient
 export const createPatient = async (patientDto: CUPatientDto): Promise<GeneralServiceResponseDto> => {
   try {

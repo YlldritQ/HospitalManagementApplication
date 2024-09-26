@@ -21,7 +21,7 @@ namespace backend.Controllers
 
         // GET: api/doctor
         [HttpGet]
-        [Authorize(Roles = StaticUserRoles.AdminDoctorNurse)]
+        [Authorize(Roles = StaticUserRoles.AdminDoctorNursePatient)]
         public async Task<ActionResult<IEnumerable<DoctorDto>>> GetAllDoctors()
         {
             var doctors = await _doctorService.GetAllDoctorsAsync();

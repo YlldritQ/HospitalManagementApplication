@@ -33,6 +33,20 @@ namespace backend.Core.Services
             return _mapper.Map<PatientDto>(patient);
         }
 
+        public async Task<PatientDto> GetPatientByUserIdAsync(string id)
+        {
+            var patient = await _context.Patients
+                .AsNoTracking()
+                .Include(p => p.Appointments)
+                .Include(p => p.Prescriptions)
+                .Include(p => p.MedicalRecords)
+                .FirstOrDefaultAsync(p => p.UserId == id);
+
+            if (patient == null) return null;
+
+            return _mapper.Map<PatientDto>(patient);
+        }
+
         public async Task<IEnumerable<PatientDto>> GetAllPatientsAsync()
         {
             var patients = await _context.Patients

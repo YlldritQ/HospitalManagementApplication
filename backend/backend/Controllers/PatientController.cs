@@ -34,6 +34,17 @@ namespace backend.Controllers
             }
             return Ok(patient);
         }
+        [HttpGet("user/{id}")]
+        public async Task<ActionResult<PatientDto>> GetPatientByUserId(string id)
+        {
+            var patient = await _patientService.GetPatientByUserIdAsync(id);
+            if (patient == null)
+            {
+                return NotFound();
+            }
+            return Ok(patient);
+        }
+
 
         // POST: api/patient
         [HttpPost]

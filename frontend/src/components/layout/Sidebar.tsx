@@ -56,6 +56,15 @@ const Sidebar = () => {
           </button>
 
           <button
+            onClick={() => handleClick(PATH_DASHBOARD.appointment)}
+            className="flex items-center gap-3 text-gray-300 hover:bg-blue-800 p-3 rounded-lg w-full transition"
+          >
+            <AiOutlineCalendar className="text-green-400 w-6 h-6" />
+            <span className="font-medium text-sm">Appointments</span>
+          </button>
+
+
+          <button
             onClick={() => handleClick(PATH_DASHBOARD.nurseList)}
             className="flex items-center gap-3 text-gray-300 hover:bg-blue-800 p-3 rounded-lg w-full transition"
           >

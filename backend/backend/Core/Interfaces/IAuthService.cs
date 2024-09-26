@@ -17,5 +17,6 @@ namespace backend.Core.Interfaces
         Task<LoginServiceResponseDto> UpdateUserAsync(string id, UpdateDto update);
         Task<IEnumerable<string>> GetUsernamesListAsync();
         Task<GeneralServiceResponseDto> DeleteUserAsync(ClaimsPrincipal User, string UserName);
+        Task<IList<string>> GetRolesById(string id);
     }
 }

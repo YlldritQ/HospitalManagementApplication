@@ -2,14 +2,16 @@ import axiosInstance from "../utils/axiosInstance";
 import axios, { AxiosResponse } from 'axios';
 import { AppointmentDto, CUAppointmentDto } from '../types/appointmentTypes'; // Import necessary types
 import { GeneralServiceResponseDto } from "../types/generalTypes";
+import toast from "react-hot-toast";
+
 
 // Get all appointments
 export const getAppointments = async (): Promise<AppointmentDto[]> => {
   try {
-    const response: AxiosResponse<AppointmentDto[]> = await axiosInstance.get('/Appointment');
-    return response.data;
+    const response = await axiosInstance.get('/Appointment/GetAllAppointments');
+    return response.data as AppointmentDto[];
   } catch (error) {
-    handleError(error, '/Appointment/GetAllAppointments');
+    handleError(error);
     return []; // Return an empty array in case of an error
   }
 };
@@ -17,21 +19,30 @@ export const getAppointments = async (): Promise<AppointmentDto[]> => {
 // Get appointment by ID
 export const getAppointmentById = async (id: number): Promise<AppointmentDto | null> => {
   try {
-    const response: AxiosResponse<AppointmentDto> = await axiosInstance.get(`/Appointment/${id}`);
-    return response.data;
+    const response = await axiosInstance.get(`/Appointment/${id}`);
+    return response.data as AppointmentDto;
   } catch (error) {
-    handleError(error, `/Appointment/${id}`);
+    handleError(error);
     return null; // Return null in case of an error
   }
 };
 
-// Get appointment by Doctor ID
+export const getAppointmentByUserId = async (id: String | undefined): Promise<AppointmentDto[]> => {
+  try {
+    const response = await axiosInstance.get(`/Appointment/GetAppointmentsByUser/${id}`);
+    return response.data as AppointmentDto[];
+  } catch (error) {
+    handleError(error);
+    return []; // Return null in case of an error
+  }
+};
+
 export const getAppointmentsByDoctorId = async (doctorId: number): Promise<AppointmentDto[]> => {
   try {
     const response: AxiosResponse<AppointmentDto[]> = await axiosInstance.get(`/Appointment/doctor/${doctorId}`);
     return response.data;
   } catch (error) {
-    handleError(error, `/appointments?doctorId=${doctorId}`);
+    handleError(error);
     return []; // Return an empty array in case of an error
   }
 };
@@ -39,10 +50,10 @@ export const getAppointmentsByDoctorId = async (doctorId: number): Promise<Appoi
 // Create a new appointment
 export const createAppointment = async (appointmentDto: CUAppointmentDto): Promise<GeneralServiceResponseDto> => {
   try {
-    const response: AxiosResponse<GeneralServiceResponseDto> = await axiosInstance.post('/Appointment', appointmentDto);
-    return response.data;
+    const response = await axiosInstance.post('/Appointment', appointmentDto);
+    return response.data as GeneralServiceResponseDto;
   } catch (error) {
-    handleError(error, '/Appointment');
+    handleError(error);
     throw error; // Rethrow the error after logging it
   }
 };
@@ -50,10 +61,18 @@ export const createAppointment = async (appointmentDto: CUAppointmentDto): Promi
 // Update an appointment
 export const updateAppointment = async (id: number, appointmentDto: CUAppointmentDto): Promise<GeneralServiceResponseDto> => {
   try {
-    const response: AxiosResponse<GeneralServiceResponseDto> = await axiosInstance.put(`/Appointment/${id}`, appointmentDto);
-    return response.data; // Assume the response data already matches GeneralServiceResponseDto
+    const response: AxiosResponse<any> = await axiosInstance.put(`/Appointment/${id}`, appointmentDto);
+
+    // Assuming the response data contains the necessary properties, map them to GeneralServiceResponseDto
+    const result: GeneralServiceResponseDto = {
+      isSucceed: response.data.isSucceed,
+      statusCode: response.data.statusCode,
+      message: response.data.message
+    };
+
+    return result;
   } catch (error) {
-    handleError(error, `/Appointment/${id}`);
+    handleError(error);
     throw error; // Rethrow the error after logging it
   }
 };
@@ -62,24 +81,20 @@ export const updateAppointment = async (id: number, appointmentDto: CUAppointmen
 export const deleteAppointment = async (id: number): Promise<void> => {
   try {
     await axiosInstance.delete(`/Appointment/${id}`);
+    toast.success("Deleted successfuly");
   } catch (error) {
-    handleError(error, `/Appointment/${id}`);
+    handleError(error);
     throw error; // Rethrow the error after logging it
   }
 };
 
 // Handle Axios Errors
-const handleError = (error: any, endpoint: string) => {
+const handleError = (error: any) => {
   if (axios.isAxiosError(error)) {
-    // Log detailed error information
-    console.error(`API call to ${endpoint} failed with status ${error.response?.status}: ${error.response?.statusText}`);
-    if (error.response) {
-      console.error('Response data:', error.response.data);
-    }
-    throw new Error(error.response?.data?.message || error.response?.statusText || 'API call failed');
+    console.error(`API call failed with status ${error.response?.status}: ${error.response?.statusText}`);
+    throw new Error(error.response?.statusText || 'API call failed');
   } else {
-    console.error(`Unknown error occurred during Axios fetch to ${endpoint}:`, error);
+    console.error('Unknown error occurred during Axios fetch');
     throw new Error('Unknown error occurred during Axios fetch');
   }
 };
-

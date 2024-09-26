@@ -8,6 +8,7 @@ namespace backend.Core.Interfaces
     public interface IPatientService
     {
         Task<PatientDto> GetPatientByIdAsync(int patientId);
+        Task<PatientDto> GetPatientByUserIdAsync(string id);
         Task<IEnumerable<PatientDto>> GetAllPatientsAsync();
         Task<GeneralServiceResponseDto> CreatePatientAsync(CUPatientDto patientDto);
         Task<GeneralServiceResponseDto> UpdatePatientAsync(int patientId, CUPatientDto patientDto);
