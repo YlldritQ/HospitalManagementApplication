@@ -25,7 +25,12 @@ const medicalRecordService = {
 
     async deleteMedicalRecord(id: number): Promise<void> {
         await axiosInstance.delete<void>(`${API_BASE_URL}/${id}`);
-    }
+    },
+    async getMedicalRecordsByUserId(id: string | undefined): Promise<MedicalRecordDto[]> {
+        const response = await axiosInstance.get<MedicalRecordDto[]>(`${API_BASE_URL}/user/${id}`);
+        return response.data;
+    },
+    
 };
 
 export default medicalRecordService;

@@ -15,12 +15,16 @@ import { PrescriptionDto } from "../../types/prescriptionTypes"; // Import types
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import NewMedicalRecordModal from "../../components/modals/NewMedicalRecordModal";
+import useAuth from "../../hooks/useAuth.hook";
 
 const MedicalRecordsPage: React.FC = () => {
   const [records, setRecords] = useState<MedicalRecordDto[]>([]);
   const [patients, setPatients] = useState<PatientDto[]>([]);
   const [doctors, setDoctors] = useState<DoctorDto[]>([]);
   const [nurses, setNurses] = useState<NurseDto[]>([]);
+  const { user: loggedInUser } = useAuth();
+  const roles = loggedInUser?.roles;
+  const userId = loggedInUser?.id;
   const [isModalOpen, setModalOpen] = useState(false);
   const [prescriptions, setPrescriptions] = useState<PrescriptionDto[]>([]);
   const [selectedPatientId, setSelectedPatientId] = useState<number | null>(
@@ -35,62 +39,125 @@ const MedicalRecordsPage: React.FC = () => {
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
 
   useEffect(() => {
-    const fetchRecords = async () => {
-      try {
-        const fetchedRecords =
-          await medicalRecordService.getAllMedicalRecords();
-        setRecords(fetchedRecords);
-      } catch (error) {
-        console.error(error);
-        setError("Failed to fetch records.");
-      }
-    };
+    if (
+      roles?.includes("Admin") ||
+      roles?.includes("Doctor") ||
+      roles?.includes("Nurse")
+    ) {
+      const fetchRecords = async () => {
+        try {
+          const fetchedRecords =
+            await medicalRecordService.getAllMedicalRecords();
+          setRecords(fetchedRecords);
+        } catch (error) {
+          console.error(error);
+          setError("Failed to fetch records.");
+        }
+      };
 
-    const fetchPatients = async () => {
-      try {
-        const fetchedPatients = await getAllPatients();
-        setPatients(fetchedPatients);
-      } catch (error) {
-        console.error(error);
-        setError("Failed to fetch patients.");
-      }
-    };
+      const fetchPatients = async () => {
+        try {
+          const fetchedPatients = await getAllPatients();
+          setPatients(fetchedPatients);
+        } catch (error) {
+          console.error(error);
+          setError("Failed to fetch patients.");
+        }
+      };
 
-    const fetchDoctors = async () => {
-      try {
-        const fetchedDoctors = await getDoctors();
-        setDoctors(fetchedDoctors);
-      } catch (error) {
-        console.error(error);
-        setError("Failed to fetch doctors.");
-      }
-    };
+      const fetchDoctors = async () => {
+        try {
+          const fetchedDoctors = await getDoctors();
+          setDoctors(fetchedDoctors);
+        } catch (error) {
+          console.error(error);
+          setError("Failed to fetch doctors.");
+        }
+      };
 
-    const fetchNurses = async () => {
-      try {
-        const fetchedNurses = await getAllNurses();
-        setNurses(fetchedNurses);
-      } catch (error) {
-        console.error(error);
-        setError("Failed to fetch nurses.");
-      }
-    };
+      const fetchNurses = async () => {
+        try {
+          const fetchedNurses = await getAllNurses();
+          setNurses(fetchedNurses);
+        } catch (error) {
+          console.error(error);
+          setError("Failed to fetch nurses.");
+        }
+      };
 
-    const fetchPrescriptions = async () => {
-      try {
-        const allPrescriptions = await getAllPrescriptions();
-        setPrescriptions(allPrescriptions);
-      } catch (error) {
-        console.error(error);
-        setError("Failed to fetch prescriptions.");
-      }
-    };
+      const fetchPrescriptions = async () => {
+        try {
+          const allPrescriptions = await getAllPrescriptions();
+          setPrescriptions(allPrescriptions);
+        } catch (error) {
+          console.error(error);
+          setError("Failed to fetch prescriptions.");
+        }
+      };
 
-    fetchRecords();
-    fetchPatients();
-    fetchDoctors();
-    fetchNurses();
-    fetchPrescriptions();
+      fetchRecords();
+      fetchPatients();
+      fetchDoctors();
+      fetchNurses();
+      fetchPrescriptions();
+    } else {
+      const fetchRecords = async () => {
+        try {
+          const fetchedRecords =
+            await medicalRecordService.getMedicalRecordsByUserId(userId);
+          setRecords(fetchedRecords);
+        } catch (error) {
+          console.error(error);
+          setError("Failed to fetch records.");
+        }
+      };
+
+      const fetchPatients = async () => {
+        try {
+          const fetchedPatients = await getAllPatients();
+          setPatients(fetchedPatients);
+        } catch (error) {
+          console.error(error);
+          setError("Failed to fetch patients.");
+        }
+      };
+
+      const fetchDoctors = async () => {
+        try {
+          const fetchedDoctors = await getDoctors();
+          setDoctors(fetchedDoctors);
+        } catch (error) {
+          console.error(error);
+          setError("Failed to fetch doctors.");
+        }
+      };
+
+      const fetchNurses = async () => {
+        try {
+          const fetchedNurses = await getAllNurses();
+          setNurses(fetchedNurses);
+        } catch (error) {
+          console.error(error);
+          setError("Failed to fetch nurses.");
+        }
+      };
+
+      const fetchPrescriptions = async () => {
+        try {
+          const allPrescriptions = await getAllPrescriptions();
+          setPrescriptions(allPrescriptions);
+        } catch (error) {
+          console.error(error);
+          setError("Failed to fetch prescriptions.");
+        }
+      };
+
+      fetchRecords();
+      fetchPatients();
+      fetchDoctors();
+      fetchNurses();
+      fetchPrescriptions();
+    }
   }, []);
 
   const handleCreate = async (recordDto: CUMedicalRecordDto) => {
@@ -442,164 +509,164 @@ const MedicalRecordsPage: React.FC = () => {
       </h1>
       {error && <p className="text-red-500 mb-4">{error}</p>}
 
-      <div className="flex items-center gap-4 mb-6">
-
-  <button
-    onClick={() => setModalOpen(true)}
-    className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition min-w-[150px]"
-  >
-    Create New Record
-  </button>
-  <button
-    onClick={generatePDF}
-    className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition min-w-[150px]"
-  >
-    Download PDF
-  </button>
-  <label
-    htmlFor="patientSelect"
-    className="block text-gray-300 text-sm font-bold mb-2"
-  >
-    Select Patient
-  </label>
-<div>
-  <select
-    id="patientSelect"
-    value={selectedPatientId || ""}
-    onChange={(e) => setSelectedPatientId(Number(e.target.value))}
-    className="shadow appearance-none border border-gray-600 rounded-lg px-4 py-2 pr-8 w-full text-gray-300 bg-gray-700 focus:outline-none focus:ring focus:ring-blue-600"
-  >
-    <option value="">Select a patient</option>
-    {patients.map((patient) => (
-      <option key={patient.patientId} value={patient.patientId}>
-        {patient.firstName} {patient.lastName}
-      </option>
-    ))}
-  </select>
-  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-300">
-    <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
-      <path
-        fillRule="evenodd"
-        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-        clipRule="evenodd"
-      />
-    </svg>
-  </div>
-  </div>
-  <button
-    onClick={generatePrescriptionPDF}
-    className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition min-w-[150px]"
-  >
-    Download Prescription
-  </button>
-</div>
-
-
-      <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full">
-        <h2 className="text-xl font-semibold mb-4 text-white">
-          Existing Records
-        </h2>
-        <table className="min-w-full bg-gray-800 table-auto border-collapse">
-          <thead>
-            <tr>
-              <th className="border-b px-4 py-2 text-left text-gray-300">
-                <button
-                  onClick={() => handleSort("id")}
-                  className="flex items-center"
+      {roles?.includes("Nurse") && (
+        <div>
+          <div className="flex items-center gap-4 mb-6">
+            <button
+              onClick={generatePDF}
+              className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition min-w-[150px]"
+            >
+              Download PDF
+            </button>
+            <label
+              htmlFor="patientSelect"
+              className="block text-gray-300 text-sm font-bold mb-2"
+            >
+              Select Patient
+            </label>
+            <div>
+              <select
+                id="patientSelect"
+                value={selectedPatientId || ""}
+                onChange={(e) => setSelectedPatientId(Number(e.target.value))}
+                className="shadow appearance-none border border-gray-600 rounded-lg px-4 py-2 pr-8 w-full text-gray-300 bg-gray-700 focus:outline-none focus:ring focus:ring-blue-600"
+              >
+                <option value="">Select a patient</option>
+                {patients.map((patient) => (
+                  <option key={patient.patientId} value={patient.patientId}>
+                    {patient.firstName} {patient.lastName}
+                  </option>
+                ))}
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-300">
+                <svg
+                  className="w-4 h-4"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
                 >
-                  ID
-                  {sortColumn === "id" &&
-                    (sortDirection === "asc" ? " 🔽" : " 🔼")}
-                </button>
-              </th>
-              <th className="border-b px-4 py-2 text-left text-gray-300">
-                <button
-                  onClick={() => handleSort("patientId")}
-                  className="flex items-center"
-                >
-                  Patient
-                  {sortColumn === "patientId" &&
-                    (sortDirection === "asc" ? " 🔽" : " 🔼")}
-                </button>
-              </th>
-              <th className="border-b px-4 py-2 text-left text-gray-300">
-                <button
-                  onClick={() => handleSort("recordDate")}
-                  className="flex items-center"
-                >
-                  Date
-                  {sortColumn === "recordDate" &&
-                    (sortDirection === "asc" ? " 🔽" : " 🔼")}
-                </button>
-              </th>
-              <th className="border-b px-4 py-2 text-left text-gray-300">
-                <button
-                  onClick={() => handleSort("recordDetails")}
-                  className="flex items-center"
-                >
-                  Details
-                  {sortColumn === "recordDetails" &&
-                    (sortDirection === "asc" ? " 🔽" : " 🔼")}
-                </button>
-              </th>
-              <th className="border-b px-4 py-2 text-left text-gray-300">
-                Doctor
-              </th>
-              <th className="border-b px-4 py-2 text-left text-gray-300">
-                Nurse
-              </th>
-              <th className="border-b px-4 py-2 text-left text-gray-300">
-                Prescription
-              </th>
-              <th className="border-b px-4 py-2 text-left text-gray-300">
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-gray-800 divide-y divide-gray-700">
-            {records.map((record) => {
-              const patient = patients.find(
-                (p) => p.patientId === record.patientId
-              );
-              const doctor = doctors.find((d) => d.id === record.doctorId);
-              const nurse = nurses.find((n) => n.id === record.nurseId);
-              const prescription = prescriptions.find(
-                (p) => p.id === record.prescriptionId
-              );
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            </div>
+            <button
+              onClick={generatePrescriptionPDF}
+              className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition min-w-[150px]"
+            >
+              Download Prescription
+            </button>
+          </div>
 
-              return (
-                <tr key={record.id}>
-                  <td className="px-4 py-2 text-gray-300">{record.id}</td>
-                  <td className="px-4 py-2 text-gray-300">
-                    {patient
-                      ? `${patient.firstName} ${patient.lastName}`
-                      : "N/A"}
-                  </td>
-                  <td className="px-4 py-2 text-gray-300">
-                    {new Date(record.recordDate).toLocaleString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                      hour: "numeric",
-                      minute: "numeric",
-                      hour12: true,
-                    })}
-                  </td>
-                  <td className="px-4 py-2 text-gray-300">
-                    {record.recordDetails}
-                  </td>
-                  <td className="px-4 py-2 text-gray-300">
-                    {doctor ? `${doctor.firstName} ${doctor.lastName}` : "N/A"}
-                  </td>
-                  <td className="px-4 py-2 text-gray-300">
-                    {nurse ? `${nurse.firstName} ${nurse.lastName}` : "N/A"}
-                  </td>
-                  <td className="px-4 py-2 text-gray-300">
-                    {prescription
-                      ? `${prescription.medicationName} (${prescription.dosage})`
-                      : "N/A"}
-                  </td>
-                  <td className="px-4 py-2">
+          <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full">
+            <h2 className="text-xl font-semibold mb-4 text-white">
+              Existing Records
+            </h2>
+            <table className="min-w-full bg-gray-800 table-auto border-collapse">
+              <thead>
+                <tr>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    <button
+                      onClick={() => handleSort("id")}
+                      className="flex items-center"
+                    >
+                      ID
+                      {sortColumn === "id" &&
+                        (sortDirection === "asc" ? " 🔽" : " 🔼")}
+                    </button>
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    <button
+                      onClick={() => handleSort("patientId")}
+                      className="flex items-center"
+                    >
+                      Patient
+                      {sortColumn === "patientId" &&
+                        (sortDirection === "asc" ? " 🔽" : " 🔼")}
+                    </button>
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    <button
+                      onClick={() => handleSort("recordDate")}
+                      className="flex items-center"
+                    >
+                      Date
+                      {sortColumn === "recordDate" &&
+                        (sortDirection === "asc" ? " 🔽" : " 🔼")}
+                    </button>
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    <button
+                      onClick={() => handleSort("recordDetails")}
+                      className="flex items-center"
+                    >
+                      Details
+                      {sortColumn === "recordDetails" &&
+                        (sortDirection === "asc" ? " 🔽" : " 🔼")}
+                    </button>
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    Doctor
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    Nurse
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    Prescription
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-gray-800 divide-y divide-gray-700">
+                {records.map((record) => {
+                  const patient = patients.find(
+                    (p) => p.patientId === record.patientId
+                  );
+                  const doctor = doctors.find((d) => d.id === record.doctorId);
+                  const nurse = nurses.find((n) => n.id === record.nurseId);
+                  const prescription = prescriptions.find(
+                    (p) => p.id === record.prescriptionId
+                  );
+
+                  return (
+                    <tr key={record.id}>
+                      <td className="px-4 py-2 text-gray-300">{record.id}</td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {patient
+                          ? `${patient.firstName} ${patient.lastName}`
+                          : "N/A"}
+                      </td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {new Date(record.recordDate).toLocaleString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                          hour: "numeric",
+                          minute: "numeric",
+                          hour12: true,
+                        })}
+                      </td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {record.recordDetails}
+                      </td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {doctor
+                          ? `${doctor.firstName} ${doctor.lastName}`
+                          : "N/A"}
+                      </td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {nurse ? `${nurse.firstName} ${nurse.lastName}` : "N/A"}
+                      </td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {prescription
+                          ? `${prescription.medicationName} (${prescription.dosage})`
+                          : "N/A"}
+                      </td>
+                      {/* <td className="px-4 py-2">
                     <button
                       onClick={() => {
                         setEditingRecord(record);
@@ -615,14 +682,576 @@ const MedicalRecordsPage: React.FC = () => {
                     >
                       Delete
                     </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+                  </td> */}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
 
+      {roles?.includes("Admin") && (
+        <div>
+          <div className="flex items-center gap-4 mb-6">
+            <button
+              onClick={() => setModalOpen(true)}
+              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition min-w-[150px]"
+            >
+              Create New Record
+            </button>
+            <button
+              onClick={generatePDF}
+              className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition min-w-[150px]"
+            >
+              Download PDF
+            </button>
+            <label
+              htmlFor="patientSelect"
+              className="block text-gray-300 text-sm font-bold mb-2"
+            >
+              Select Patient
+            </label>
+            <div>
+              <select
+                id="patientSelect"
+                value={selectedPatientId || ""}
+                onChange={(e) => setSelectedPatientId(Number(e.target.value))}
+                className="shadow appearance-none border border-gray-600 rounded-lg px-4 py-2 pr-8 w-full text-gray-300 bg-gray-700 focus:outline-none focus:ring focus:ring-blue-600"
+              >
+                <option value="">Select a patient</option>
+                {patients.map((patient) => (
+                  <option key={patient.patientId} value={patient.patientId}>
+                    {patient.firstName} {patient.lastName}
+                  </option>
+                ))}
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-300">
+                <svg
+                  className="w-4 h-4"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            </div>
+            <button
+              onClick={generatePrescriptionPDF}
+              className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition min-w-[150px]"
+            >
+              Download Prescription
+            </button>
+          </div>
+
+          <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full">
+            <h2 className="text-xl font-semibold mb-4 text-white">
+              Existing Records
+            </h2>
+            <table className="min-w-full bg-gray-800 table-auto border-collapse">
+              <thead>
+                <tr>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    <button
+                      onClick={() => handleSort("id")}
+                      className="flex items-center"
+                    >
+                      ID
+                      {sortColumn === "id" &&
+                        (sortDirection === "asc" ? " 🔽" : " 🔼")}
+                    </button>
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    <button
+                      onClick={() => handleSort("patientId")}
+                      className="flex items-center"
+                    >
+                      Patient
+                      {sortColumn === "patientId" &&
+                        (sortDirection === "asc" ? " 🔽" : " 🔼")}
+                    </button>
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    <button
+                      onClick={() => handleSort("recordDate")}
+                      className="flex items-center"
+                    >
+                      Date
+                      {sortColumn === "recordDate" &&
+                        (sortDirection === "asc" ? " 🔽" : " 🔼")}
+                    </button>
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    <button
+                      onClick={() => handleSort("recordDetails")}
+                      className="flex items-center"
+                    >
+                      Details
+                      {sortColumn === "recordDetails" &&
+                        (sortDirection === "asc" ? " 🔽" : " 🔼")}
+                    </button>
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    Doctor
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    Nurse
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    Prescription
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-gray-800 divide-y divide-gray-700">
+                {records.map((record) => {
+                  const patient = patients.find(
+                    (p) => p.patientId === record.patientId
+                  );
+                  const doctor = doctors.find((d) => d.id === record.doctorId);
+                  const nurse = nurses.find((n) => n.id === record.nurseId);
+                  const prescription = prescriptions.find(
+                    (p) => p.id === record.prescriptionId
+                  );
+
+                  return (
+                    <tr key={record.id}>
+                      <td className="px-4 py-2 text-gray-300">{record.id}</td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {patient
+                          ? `${patient.firstName} ${patient.lastName}`
+                          : "N/A"}
+                      </td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {new Date(record.recordDate).toLocaleString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                          hour: "numeric",
+                          minute: "numeric",
+                          hour12: true,
+                        })}
+                      </td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {record.recordDetails}
+                      </td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {doctor
+                          ? `${doctor.firstName} ${doctor.lastName}`
+                          : "N/A"}
+                      </td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {nurse ? `${nurse.firstName} ${nurse.lastName}` : "N/A"}
+                      </td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {prescription
+                          ? `${prescription.medicationName} (${prescription.dosage})`
+                          : "N/A"}
+                      </td>
+                      <td className="px-4 py-2">
+                        <button
+                          onClick={() => {
+                            setEditingRecord(record);
+                            setShowEditForm(true);
+                          }}
+                          className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out shadow-sm"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDelete(record.id)}
+                          className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300 ease-in-out shadow-sm ml-4"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {roles?.includes("Doctor") && (
+        <div>
+          <div className="flex items-center gap-4 mb-6">
+            <button
+              onClick={generatePDF}
+              className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition min-w-[150px]"
+            >
+              Download PDF
+            </button>
+            <label
+              htmlFor="patientSelect"
+              className="block text-gray-300 text-sm font-bold mb-2"
+            >
+              Select Patient
+            </label>
+            <div>
+              <select
+                id="patientSelect"
+                value={selectedPatientId || ""}
+                onChange={(e) => setSelectedPatientId(Number(e.target.value))}
+                className="shadow appearance-none border border-gray-600 rounded-lg px-4 py-2 pr-8 w-full text-gray-300 bg-gray-700 focus:outline-none focus:ring focus:ring-blue-600"
+              >
+                <option value="">Select a patient</option>
+                {patients.map((patient) => (
+                  <option key={patient.patientId} value={patient.patientId}>
+                    {patient.firstName} {patient.lastName}
+                  </option>
+                ))}
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-300">
+                <svg
+                  className="w-4 h-4"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            </div>
+            <button
+              onClick={generatePrescriptionPDF}
+              className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition min-w-[150px]"
+            >
+              Download Prescription
+            </button>
+          </div>
+
+          <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full">
+            <h2 className="text-xl font-semibold mb-4 text-white">
+              Existing Records
+            </h2>
+            <table className="min-w-full bg-gray-800 table-auto border-collapse">
+              <thead>
+                <tr>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    <button
+                      onClick={() => handleSort("id")}
+                      className="flex items-center"
+                    >
+                      ID
+                      {sortColumn === "id" &&
+                        (sortDirection === "asc" ? " 🔽" : " 🔼")}
+                    </button>
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    <button
+                      onClick={() => handleSort("patientId")}
+                      className="flex items-center"
+                    >
+                      Patient
+                      {sortColumn === "patientId" &&
+                        (sortDirection === "asc" ? " 🔽" : " 🔼")}
+                    </button>
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    <button
+                      onClick={() => handleSort("recordDate")}
+                      className="flex items-center"
+                    >
+                      Date
+                      {sortColumn === "recordDate" &&
+                        (sortDirection === "asc" ? " 🔽" : " 🔼")}
+                    </button>
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    <button
+                      onClick={() => handleSort("recordDetails")}
+                      className="flex items-center"
+                    >
+                      Details
+                      {sortColumn === "recordDetails" &&
+                        (sortDirection === "asc" ? " 🔽" : " 🔼")}
+                    </button>
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    Doctor
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    Nurse
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    Prescription
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-gray-800 divide-y divide-gray-700">
+                {records.map((record) => {
+                  const patient = patients.find(
+                    (p) => p.patientId === record.patientId
+                  );
+                  const doctor = doctors.find((d) => d.id === record.doctorId);
+                  const nurse = nurses.find((n) => n.id === record.nurseId);
+                  const prescription = prescriptions.find(
+                    (p) => p.id === record.prescriptionId
+                  );
+
+                  return (
+                    <tr key={record.id}>
+                      <td className="px-4 py-2 text-gray-300">{record.id}</td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {patient
+                          ? `${patient.firstName} ${patient.lastName}`
+                          : "N/A"}
+                      </td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {new Date(record.recordDate).toLocaleString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                          hour: "numeric",
+                          minute: "numeric",
+                          hour12: true,
+                        })}
+                      </td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {record.recordDetails}
+                      </td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {doctor
+                          ? `${doctor.firstName} ${doctor.lastName}`
+                          : "N/A"}
+                      </td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {nurse ? `${nurse.firstName} ${nurse.lastName}` : "N/A"}
+                      </td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {prescription
+                          ? `${prescription.medicationName} (${prescription.dosage})`
+                          : "N/A"}
+                      </td>
+                      <td className="px-4 py-2">
+                        <button
+                          onClick={() => {
+                            setEditingRecord(record);
+                            setShowEditForm(true);
+                          }}
+                          className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out shadow-sm"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDelete(record.id)}
+                          className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300 ease-in-out shadow-sm ml-4"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {roles?.includes("Patient") && (
+        <div>
+          <div className="flex items-center gap-4 mb-6">
+            <button
+              onClick={() => setModalOpen(true)}
+              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition min-w-[150px]"
+            >
+              Create New Record
+            </button>
+            <button
+              onClick={generatePDF}
+              className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition min-w-[150px]"
+            >
+              Download PDF
+            </button>
+            {/* <label
+              htmlFor="patientSelect"
+              className="block text-gray-300 text-sm font-bold mb-2"
+            >
+              Select Patient
+            </label>
+            <div> */}
+              {/* <select
+                id="patientSelect"
+                value={selectedPatientId || ""}
+                onChange={(e) => setSelectedPatientId(Number(e.target.value))}
+                className="shadow appearance-none border border-gray-600 rounded-lg px-4 py-2 pr-8 w-full text-gray-300 bg-gray-700 focus:outline-none focus:ring focus:ring-blue-600"
+              >
+                <option value="">Select a patient</option>
+                {patients.map((patient) => (
+                  <option key={patient.patientId} value={patient.patientId}>
+                    {patient.firstName} {patient.lastName}
+                  </option>
+                ))}
+              </select> */}
+              {/* <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-300">
+                <svg
+                  className="w-4 h-4"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            </div> */}
+            <button
+              onClick={generatePrescriptionPDF}
+              className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition min-w-[150px]"
+            >
+              Download Prescription
+            </button>
+          </div>
+
+          <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full">
+            <h2 className="text-xl font-semibold mb-4 text-white">
+              Existing Records
+            </h2>
+            <table className="min-w-full bg-gray-800 table-auto border-collapse">
+              <thead>
+                <tr>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    <button
+                      onClick={() => handleSort("id")}
+                      className="flex items-center"
+                    >
+                      ID
+                      {sortColumn === "id" &&
+                        (sortDirection === "asc" ? " 🔽" : " 🔼")}
+                    </button>
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    <button
+                      onClick={() => handleSort("patientId")}
+                      className="flex items-center"
+                    >
+                      Patient
+                      {sortColumn === "patientId" &&
+                        (sortDirection === "asc" ? " 🔽" : " 🔼")}
+                    </button>
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    <button
+                      onClick={() => handleSort("recordDate")}
+                      className="flex items-center"
+                    >
+                      Date
+                      {sortColumn === "recordDate" &&
+                        (sortDirection === "asc" ? " 🔽" : " 🔼")}
+                    </button>
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    <button
+                      onClick={() => handleSort("recordDetails")}
+                      className="flex items-center"
+                    >
+                      Details
+                      {sortColumn === "recordDetails" &&
+                        (sortDirection === "asc" ? " 🔽" : " 🔼")}
+                    </button>
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    Doctor
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    Nurse
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    Prescription
+                  </th>
+                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-gray-800 divide-y divide-gray-700">
+                {records.map((record) => {
+                  const patient = patients.find(
+                    (p) => p.patientId === record.patientId
+                  );
+                  const doctor = doctors.find((d) => d.id === record.doctorId);
+                  const nurse = nurses.find((n) => n.id === record.nurseId);
+                  const prescription = prescriptions.find(
+                    (p) => p.id === record.prescriptionId
+                  );
+
+                  return (
+                    <tr key={record.id}>
+                      <td className="px-4 py-2 text-gray-300">{record.id}</td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {patient
+                          ? `${patient.firstName} ${patient.lastName}`
+                          : "N/A"}
+                      </td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {new Date(record.recordDate).toLocaleString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                          hour: "numeric",
+                          minute: "numeric",
+                          hour12: true,
+                        })}
+                      </td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {record.recordDetails}
+                      </td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {doctor
+                          ? `${doctor.firstName} ${doctor.lastName}`
+                          : "N/A"}
+                      </td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {nurse ? `${nurse.firstName} ${nurse.lastName}` : "N/A"}
+                      </td>
+                      <td className="px-4 py-2 text-gray-300">
+                        {prescription
+                          ? `${prescription.medicationName} (${prescription.dosage})`
+                          : "N/A"}
+                      </td>
+                      {/* <td className="px-4 py-2">
+                    <button
+                      onClick={() => {
+                        setEditingRecord(record);
+                        setShowEditForm(true);
+                      }}
+                      className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out shadow-sm"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(record.id)}
+                      className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300 ease-in-out shadow-sm ml-4"
+                    >
+                      Delete
+                    </button>
+                  </td> */}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
       {showEditForm && editingRecord && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-blur-sm p-4">
           <div className="w-full max-w-xl bg-gray-800 p-8 rounded-lg shadow-xl border border-gray-700">
