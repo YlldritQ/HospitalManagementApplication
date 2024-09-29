@@ -6,6 +6,8 @@ using backend.Core.Dtos.Records;
 public interface IMedicalRecordService
 {
     Task<MedicalRecordDto> GetMedicalRecordByIdAsync(int recordId);
+
+    Task<IEnumerable<MedicalRecordDto>> GetMedicalRecordByUserId(string id);
     Task<IEnumerable<MedicalRecordDto>> GetAllMedicalRecordsAsync();
     Task<GeneralServiceResponseDto> CreateMedicalRecordAsync(CUMedicalRecordDto recordDto);
     Task<GeneralServiceResponseDto> UpdateMedicalRecordAsync(int recordId, CUMedicalRecordDto recordDto);

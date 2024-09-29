@@ -1,6 +1,8 @@
 ﻿using backend.Core.Constants;
+using backend.Core.Dtos.Appointment;
 using backend.Core.Dtos.Records;
 using backend.Core.Interfaces;
+using backend.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -37,6 +39,15 @@ namespace backend.Controllers
                 return NotFound();
             }
             return Ok(record);
+        }
+
+        // Get: api/medicalrecordbyuserid
+        [HttpGet("GetMedicalRecordByUser/{id}")]
+        [Authorize(Roles = StaticUserRoles.AdminDoctorNursePatient)]
+        public async Task<ActionResult<IEnumerable<MedicalRecordDto>>> GetMedicalRecordByUserId(string id)
+        {
+            var records = await _medicalRecordService.GetMedicalRecordByUserId(id);
+            return Ok(records);
         }
 
         // POST: api/medicalrecord

@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using backend.Core.Constants;
 using backend.Core.DbContext;
+using backend.Core.Dtos.Appointment;
 using backend.Core.Dtos.General;
 using backend.Core.Dtos.Records;
 using backend.Core.Entities;
+using backend.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Core.Services
@@ -11,11 +14,13 @@ namespace backend.Core.Services
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IAuthService _authService;
 
-        public MedicalRecordService(ApplicationDbContext context, IMapper mapper)
+        public MedicalRecordService(ApplicationDbContext context, IMapper mapper, IAuthService authService)
         {
             _context = context;
             _mapper = mapper;
+            _authService = authService;
         }
 
         public async Task<MedicalRecordDto> GetMedicalRecordByIdAsync(int recordId)
@@ -32,7 +37,74 @@ namespace backend.Core.Services
             return _mapper.Map<MedicalRecordDto>(record);
         }
 
-        public async Task<IEnumerable<MedicalRecordDto>> GetAllMedicalRecordsAsync()
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+            public async Task<IEnumerable<MedicalRecordDto>> GetMedicalRecordByUserId(string id)
+            {
+                // Get the roles of the user based on their ID
+                var userRoles = await _authService.GetRolesById(id);
+
+                if (userRoles == null)
+                {
+                    throw new ArgumentException("No roles found for the user.");
+                }
+
+                IEnumerable<MedicalRecord> records = Enumerable.Empty<MedicalRecord>(); // Default empty collection
+
+                // Check if the user is a patient
+                if (userRoles.Contains(StaticUserRoles.PATIENT))
+                {
+                    var patientService = new PatientService(_context, _mapper);
+                    var patient = await patientService.GetPatientByUserIdAsync(id);
+
+                    if (patient != null)
+                    {
+                        // Get medical records for the patient
+                        records = await _context.MedicalRecords
+                            .Include(r => r.Patient)
+                            .Include(r => r.Doctor)
+                            .Include(r => r.Nurse)
+                            .Include(r => r.Prescription)
+                            .AsNoTracking()
+                            .ToListAsync();
+                    }
+                }
+                // Check if the user is a doctor
+                else if (userRoles.Contains(StaticUserRoles.DOCTOR))
+                {
+                    var doctorService = new DoctorService(_context, _mapper);
+                    var doctor = await doctorService.GetDoctorByUserIdAsync(id);
+
+                    if (doctor != null)
+                    {
+                        // Get medical records for the doctor
+                        records = await _context.MedicalRecords
+                            .Include(r => r.Patient)
+                            .Include(r => r.Doctor)
+                            .Include(r => r.Nurse)
+                            .Include(r => r.Prescription)
+                            .AsNoTracking()
+                            .ToListAsync();
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("The user is not authorized to view medical records.");
+                }
+
+                // Ensure records exist or throw an exception
+                if (records == null || !records.Any())
+                {
+                    throw new ArgumentException("No medical records found for the given user.");
+                }
+
+                // Return mapped MedicalRecordDto
+                return _mapper.Map<IEnumerable<MedicalRecordDto>>(records);
+            }
+        
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////
+            public async Task<IEnumerable<MedicalRecordDto>> GetAllMedicalRecordsAsync()
         {
             var records = await _context.MedicalRecords
                 .Include(r => r.Patient) // Include patient for detailed DTO
