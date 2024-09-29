@@ -65,6 +65,7 @@ namespace backend.Core.Services
                             .Include(r => r.Doctor)
                             .Include(r => r.Nurse)
                             .Include(r => r.Prescription)
+                            .Where(r => r.PatientId == patient.PatientId)
                             .AsNoTracking()
                             .ToListAsync();
                     }
@@ -83,6 +84,7 @@ namespace backend.Core.Services
                             .Include(r => r.Doctor)
                             .Include(r => r.Nurse)
                             .Include(r => r.Prescription)
+                            .Where(r => r.DoctorId == doctor.Id)
                             .AsNoTracking()
                             .ToListAsync();
                     }
