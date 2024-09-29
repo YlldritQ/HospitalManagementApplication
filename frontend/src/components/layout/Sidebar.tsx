@@ -7,7 +7,6 @@ import {
   FaBed
 } from "react-icons/fa";
 import { MdOutlineMedicalServices } from "react-icons/md";
-import { TbMessages } from "react-icons/tb";
 import { AiOutlineCalendar,AiOutlineLogout } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth.hook";
@@ -151,6 +150,16 @@ const Sidebar = () => {
             <FaClipboardList className="text-red-400 w-6 h-6" />
             <span className="font-medium text-sm">Patient List</span>
           </button>
+
+          
+          <button
+            onClick={() => handleClick(PATH_DASHBOARD.roomList)}
+            className="flex items-center gap-3 text-gray-300 hover:bg-blue-800 p-3 rounded-lg w-full transition"
+          >
+            <FaBed className="text-red-400 w-6 h-6" />
+            <span className="font-medium text-sm">Rooms</span>
+          </button>
+
         </>
       );
     }
@@ -181,6 +190,15 @@ const Sidebar = () => {
             <FaClipboardList className="text-red-400 w-6 h-6" />
             <span className="font-medium text-sm">Patient List</span>
           </button>
+          
+          <button
+            onClick={() => handleClick(PATH_DASHBOARD.roomList)}
+            className="flex items-center gap-3 text-gray-300 hover:bg-blue-800 p-3 rounded-lg w-full transition"
+          >
+            <FaBed className="text-red-400 w-6 h-6" />
+            <span className="font-medium text-sm">Rooms</span>
+          </button>
+
         </>
       );
     }
@@ -195,6 +213,14 @@ const Sidebar = () => {
             <FaUserInjured className="text-teal-400 w-6 h-6" />
             <span className="font-medium text-sm">User Dashboard</span>
           </button>
+          
+          <button
+            onClick={() => handleClick(PATH_DASHBOARD.appointment)}
+            className="flex items-center gap-3 text-gray-300 hover:bg-blue-800 p-3 rounded-lg w-full transition"
+          >
+            <AiOutlineCalendar className="text-green-400 w-6 h-6" />
+            <span className="font-medium text-sm">Appointments</span>
+          </button>
 
           <button
             onClick={() => handleClick("/user/medical-records")}
@@ -203,14 +229,16 @@ const Sidebar = () => {
             <MdOutlineMedicalServices className="text-orange-400 w-6 h-6" />
             <span className="font-medium text-sm">Medical Records</span>
           </button>
-
+          
           <button
-            onClick={() => handleClick("/user/messages")}
+            onClick={() => handleClick(PATH_DASHBOARD.roomList)}
             className="flex items-center gap-3 text-gray-300 hover:bg-blue-800 p-3 rounded-lg w-full transition"
           >
-            <TbMessages className="text-purple-400 w-6 h-6" />
-            <span className="font-medium text-sm">Messages</span>
+            <FaBed className="text-red-400 w-6 h-6" />
+            <span className="font-medium text-sm">Rooms</span>
           </button>
+
+
         </>
       );
     }

@@ -1,18 +1,24 @@
-import PageAccessTemplate from '../../components/dashboard/page-access/PageAccessTemplate';
-import { BsGlobeAmericas } from "react-icons/bs";
+import NursePage from "./NursePage";
+import DoctorPage from "./DoctorPage";
+import AdminPage from "./AdminPage";
+import useAuth from "../../hooks/useAuth.hook";
 
-const DashboardPage = () => {
+
+const DashboardPage: React.FC = () => {
+
+  const { user: loggedInUser } = useAuth();
+  const roles = loggedInUser?.roles;
   return (
-    <div className="pageTemplate2">
-      <PageAccessTemplate color="#000" icon={BsGlobeAmericas} role="Dashboard">
-        <div className="text-2xl space-y-2">
-          <h1>Dashboard Access can be either:</h1>
-          <h1>Owner</h1>
-          <h1>Admin</h1>
-          <h1>Manager</h1>
-          <h1>User</h1>
-        </div>
-      </PageAccessTemplate>
+    <div >
+      {roles?.includes("Admin") && (
+        <AdminPage></AdminPage>
+      )}
+      {roles?.includes("Doctor") && (
+        <DoctorPage></DoctorPage>
+      )}
+      {roles?.includes("Nurse") && (
+        <NursePage></NursePage>
+      )}
     </div>
   );
 };
