@@ -84,7 +84,7 @@ namespace backend.Core.Services
                             .Include(r => r.Doctor)
                             .Include(r => r.Nurse)
                             .Include(r => r.Prescription)
-                            .Where(r => r.DoctorId == doctor.Id)
+                            .Where(r => r.DoctorId == doctor.Id )
                             .AsNoTracking()
                             .ToListAsync();
                     }
