@@ -4,7 +4,7 @@ import {
   MedicalRecordDto,
 } from "../../types/medicalRecordTypes";
 import medicalRecordService from "../../services/medicalRecordService";
-import { getAllPatients } from "../../services/patientService";
+import { getAllPatients, getPatientByUserId } from "../../services/patientService";
 import { getDoctors } from "../../services/doctorService";
 import { getAllNurses } from "../../services/nurseService";
 import { PatientDto } from "../../types/patientTypes";
@@ -20,6 +20,7 @@ import useAuth from "../../hooks/useAuth.hook";
 const MedicalRecordsPage: React.FC = () => {
   const [records, setRecords] = useState<MedicalRecordDto[]>([]);
   const [patients, setPatients] = useState<PatientDto[]>([]);
+  const [patient, setPatient] = useState<PatientDto | null>();
   const [doctors, setDoctors] = useState<DoctorDto[]>([]);
   const [nurses, setNurses] = useState<NurseDto[]>([]);
   const { user: loggedInUser } = useAuth();
@@ -37,128 +38,52 @@ const MedicalRecordsPage: React.FC = () => {
   const [showEditForm, setShowEditForm] = useState(false);
   const [sortColumn, setSortColumn] = useState<keyof MedicalRecordDto>("id");
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
-
   useEffect(() => {
-    if (
-      roles?.includes("Admin") ||
-      roles?.includes("Doctor") ||
-      roles?.includes("Nurse")
-    ) {
-      const fetchRecords = async () => {
-        try {
-          const fetchedRecords =
-            await medicalRecordService.getAllMedicalRecords();
-          setRecords(fetchedRecords);
-        } catch (error) {
-          console.error(error);
-          setError("Failed to fetch records.");
+    const fetchData = async () => {
+      try {
+        // Fetch medical records based on the user's role
+        let fetchedRecords;
+        if (
+          roles?.includes("Admin") ||
+          roles?.includes("Doctor") ||
+          roles?.includes("Nurse")
+        ) {
+          fetchedRecords = await medicalRecordService.getAllMedicalRecords();
+        } else {
+          fetchedRecords = await medicalRecordService.getMedicalRecordsByUserId(userId);
         }
-      };
-
-      const fetchPatients = async () => {
-        try {
-          const fetchedPatients = await getAllPatients();
-          setPatients(fetchedPatients);
-        } catch (error) {
-          console.error(error);
-          setError("Failed to fetch patients.");
+        setRecords(fetchedRecords);
+  
+        // Fetch patients
+        const fetchedPatients = await getAllPatients();
+        setPatients(fetchedPatients);
+  
+        // Fetch doctors
+        const fetchedDoctors = await getDoctors();
+        setDoctors(fetchedDoctors);
+  
+        // Fetch nurses
+        const fetchedNurses = await getAllNurses();
+        setNurses(fetchedNurses);
+  
+        // Fetch prescriptions
+        const allPrescriptions = await getAllPrescriptions();
+        setPrescriptions(allPrescriptions);
+  
+        // Fetch patient for non-admin roles
+        if (!roles?.includes("Admin")) {
+          const patient = await getPatientByUserId(userId);
+          setPatient(patient);
         }
-      };
-
-      const fetchDoctors = async () => {
-        try {
-          const fetchedDoctors = await getDoctors();
-          setDoctors(fetchedDoctors);
-        } catch (error) {
-          console.error(error);
-          setError("Failed to fetch doctors.");
-        }
-      };
-
-      const fetchNurses = async () => {
-        try {
-          const fetchedNurses = await getAllNurses();
-          setNurses(fetchedNurses);
-        } catch (error) {
-          console.error(error);
-          setError("Failed to fetch nurses.");
-        }
-      };
-
-      const fetchPrescriptions = async () => {
-        try {
-          const allPrescriptions = await getAllPrescriptions();
-          setPrescriptions(allPrescriptions);
-        } catch (error) {
-          console.error(error);
-          setError("Failed to fetch prescriptions.");
-        }
-      };
-
-      fetchRecords();
-      fetchPatients();
-      fetchDoctors();
-      fetchNurses();
-      fetchPrescriptions();
-    } else {
-      const fetchRecords = async () => {
-        try {
-          const fetchedRecords =
-            await medicalRecordService.getMedicalRecordsByUserId(userId);
-          setRecords(fetchedRecords);
-        } catch (error) {
-          console.error(error);
-          setError("Failed to fetch records.");
-        }
-      };
-
-      const fetchPatients = async () => {
-        try {
-          const fetchedPatients = await getAllPatients();
-          setPatients(fetchedPatients);
-        } catch (error) {
-          console.error(error);
-          setError("Failed to fetch patients.");
-        }
-      };
-
-      const fetchDoctors = async () => {
-        try {
-          const fetchedDoctors = await getDoctors();
-          setDoctors(fetchedDoctors);
-        } catch (error) {
-          console.error(error);
-          setError("Failed to fetch doctors.");
-        }
-      };
-
-      const fetchNurses = async () => {
-        try {
-          const fetchedNurses = await getAllNurses();
-          setNurses(fetchedNurses);
-        } catch (error) {
-          console.error(error);
-          setError("Failed to fetch nurses.");
-        }
-      };
-
-      const fetchPrescriptions = async () => {
-        try {
-          const allPrescriptions = await getAllPrescriptions();
-          setPrescriptions(allPrescriptions);
-        } catch (error) {
-          console.error(error);
-          setError("Failed to fetch prescriptions.");
-        }
-      };
-
-      fetchRecords();
-      fetchPatients();
-      fetchDoctors();
-      fetchNurses();
-      fetchPrescriptions();
-    }
-  }, []);
+      } catch (error) {
+        console.error(error);
+        setError("Failed to fetch data.");
+      }
+    };
+  
+    fetchData();
+  }, [roles, userId]); // Add `roles` and `userId` as dependencies
+  
 
   const handleCreate = async (recordDto: CUMedicalRecordDto) => {
     try {
@@ -501,22 +426,17 @@ const MedicalRecordsPage: React.FC = () => {
       }-${new Date().getTime()}.pdf`
     );
   };
-  const generateMyPrescriptionPDF = () => {
-    if (selectedPatientId === null) {
-      setError("Please select a patient.");
-      return;
-    }
-
-    const patientRecords = records.filter(
-      (record) => record.patientId === selectedPatientId
-    );
-    const patient = patients.find((p) => p.patientId === selectedPatientId);
-
+  const generateMyRecordsPDF = () => {
+    
     if (!patient) {
       setError("Selected patient not found.");
       return;
     }
 
+    const patientRecords = records.filter(
+      (record) => record.patientId === patient?.patientId
+    );
+    
     const doc = new jsPDF();
 
     // Title
@@ -1195,7 +1115,7 @@ const MedicalRecordsPage: React.FC = () => {
               Create New Record
             </button>
             <button
-              onClick={generatePDF}
+              onClick={generateMyRecordsPDF}
               className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition min-w-[150px]"
             >
               Download PDF
