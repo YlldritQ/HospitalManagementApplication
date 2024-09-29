@@ -23,18 +23,17 @@ const EditAppointmentModal: React.FC<EditAppointmentModalProps> = ({
   onSubmit,
   appointment,
 }) => {
-    const formatDate = (date: Date | string | null): string => {
-        if (!date) return "";
-        const dateObj = typeof date === "string" ? new Date(date) : date;
-        if (!isNaN(dateObj.getTime())) {
-          const timezoneOffset = dateObj.getTimezoneOffset() * 60000; // Offset in milliseconds
-          const localDate = new Date(dateObj.getTime() - timezoneOffset);
-          return localDate.toISOString().substring(0, 16); // YYYY-MM-DDTHH:mm format
-        }
-        return "";
-      };
-      
-      
+  const formatDate = (date: Date | string | null): string => {
+    if (!date) return "";
+    const dateObj = typeof date === "string" ? new Date(date) : date;
+    if (!isNaN(dateObj.getTime())) {
+      const timezoneOffset = dateObj.getTimezoneOffset() * 60000; // Offset in milliseconds
+      const localDate = new Date(dateObj.getTime() - timezoneOffset);
+      return localDate.toISOString().substring(0, 16); // YYYY-MM-DDTHH:mm format
+    }
+    return "";
+  };
+
   const { user: loggedInUser } = useAuth(); // Get the logged-in user
   const roles = loggedInUser?.roles;
 
@@ -81,12 +80,12 @@ const EditAppointmentModal: React.FC<EditAppointmentModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     // Convert the local time back to UTC
     const localDate = new Date(appointmentDate);
     const timezoneOffset = localDate.getTimezoneOffset() * 60000; // Offset in milliseconds
     const utcDate = new Date(localDate.getTime() - timezoneOffset); // Convert local time to UTC
-  
+
     const updatedAppointment: CUAppointmentDto = {
       appointmentDate: utcDate, // Send the UTC date to the server
       patientId: appointment.patientId, // Keep patientId unchanged
@@ -96,7 +95,6 @@ const EditAppointmentModal: React.FC<EditAppointmentModalProps> = ({
     };
     onSubmit(updatedAppointment);
   };
-  
 
   return isOpen ? (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-900 backdrop-blur-sm bg-opacity-50">

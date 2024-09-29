@@ -135,11 +135,10 @@ const AppointmentsPage: React.FC = () => {
     setModalOpen(true);
   };
 
-  console.log(appointments);
   return (
     <div className="flex flex-col items-start justify-start p-4 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 min-h-screen w-full">
       <h1 className="text-3xl font-bold text-white mb-8">Appointments</h1>
-
+      
       {userRole?.includes("Admin") && (
         <div className="mb-8 w-full">
           <h2 className="text-2xl font-bold text-white mb-4">Admin View</h2>

@@ -60,14 +60,30 @@ const CreateAppointmentModal: React.FC<CreateAppointmentModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const localDate = new Date(appointmentDate);
+    const timezoneOffset = localDate.getTimezoneOffset() * 60000; // Offset in milliseconds
+    const utcDate = new Date(localDate.getTime() - timezoneOffset); 
+
     const newAppointment: CUAppointmentDto = {
-      appointmentDate: new Date(appointmentDate),
+      appointmentDate: new Date(utcDate),
       patientId: Number(patientId),
       doctorId: Number(doctorId),
       status: "Scheduled", // Default status for new appointments
       roomId: Number(roomId),
     };
     onSubmit(newAppointment);
+  };
+
+  const formatDate = (date: Date | string | null): string => {
+    if (!date) return "";
+    const dateObj = typeof date === "string" ? new Date(date) : date;
+    if (!isNaN(dateObj.getTime())) {
+      const timezoneOffset = dateObj.getTimezoneOffset() * 60000; // Offset in milliseconds
+      const localDate = new Date(dateObj.getTime() - timezoneOffset);
+      return localDate.toISOString().substring(0, 16); // YYYY-MM-DDTHH:mm format
+    }
+    return "";
   };
 
   return isOpen ? (
@@ -85,7 +101,7 @@ const CreateAppointmentModal: React.FC<CreateAppointmentModalProps> = ({
             <input
               type="datetime-local"
               id="appointmentDate"
-              value={appointmentDate}
+              value={formatDate(appointmentDate)}
               onChange={(e) => setAppointmentDate(e.target.value)}
               required
               className="w-full p-2 rounded bg-gray-700 text-white"
