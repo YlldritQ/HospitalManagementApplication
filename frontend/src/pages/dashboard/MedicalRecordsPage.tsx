@@ -4,7 +4,10 @@ import {
   MedicalRecordDto,
 } from "../../types/medicalRecordTypes";
 import medicalRecordService from "../../services/medicalRecordService";
-import { getAllPatients, getPatientByUserId } from "../../services/patientService";
+import {
+  getAllPatients,
+  getPatientByUserId,
+} from "../../services/patientService";
 import { getDoctors } from "../../services/doctorService";
 import { getAllNurses } from "../../services/nurseService";
 import { PatientDto } from "../../types/patientTypes";
@@ -50,28 +53,30 @@ const MedicalRecordsPage: React.FC = () => {
         ) {
           fetchedRecords = await medicalRecordService.getAllMedicalRecords();
         } else {
-          fetchedRecords = await medicalRecordService.getMedicalRecordsByUserId(userId);
+          fetchedRecords = await medicalRecordService.getMedicalRecordsByUserId(
+            userId
+          );
         }
         setRecords(fetchedRecords);
-  
+
         // Fetch patients
         const fetchedPatients = await getAllPatients();
         setPatients(fetchedPatients);
-  
+
         // Fetch doctors
         const fetchedDoctors = await getDoctors();
         setDoctors(fetchedDoctors);
-  
+
         // Fetch nurses
         const fetchedNurses = await getAllNurses();
         setNurses(fetchedNurses);
-  
+
         // Fetch prescriptions
         const allPrescriptions = await getAllPrescriptions();
         setPrescriptions(allPrescriptions);
-  
+
         // Fetch patient for non-admin roles
-        if (!roles?.includes("Admin")) {
+        if (roles?.includes("Patient")) {
           const patient = await getPatientByUserId(userId);
           setPatient(patient);
         }
@@ -80,10 +85,9 @@ const MedicalRecordsPage: React.FC = () => {
         setError("Failed to fetch data.");
       }
     };
-  
+
     fetchData();
   }, [roles, userId]); // Add `roles` and `userId` as dependencies
-  
 
   const handleCreate = async (recordDto: CUMedicalRecordDto) => {
     try {
@@ -426,8 +430,7 @@ const MedicalRecordsPage: React.FC = () => {
       }-${new Date().getTime()}.pdf`
     );
   };
-  const generateMyRecordsPDF = () => {
-    
+  const generateMyPrescriptionPDF = () => {
     if (!patient) {
       setError("Selected patient not found.");
       return;
@@ -436,7 +439,7 @@ const MedicalRecordsPage: React.FC = () => {
     const patientRecords = records.filter(
       (record) => record.patientId === patient?.patientId
     );
-    
+
     const doc = new jsPDF();
 
     // Title
@@ -541,6 +544,132 @@ const MedicalRecordsPage: React.FC = () => {
         patient.lastName
       }-${new Date().getTime()}.pdf`
     );
+  };
+  const generateMyRecordsPDF = () => {
+    if (!patient) {
+      setError("Selected patient not found.");
+      return;
+    }
+
+    const patientRecords = records.filter(
+      (record) => record.patientId === patient?.patientId
+    );
+
+    const doc = new jsPDF();
+
+    // Center the title and make it bold
+    doc.setFontSize(20);
+    doc.setFont("helvetica", "bold");
+    doc.text(
+      `Medical Records for ${patient.firstName} ${patient.lastName}`,
+      doc.internal.pageSize.getWidth() / 2,
+      20,
+      { align: "center" }
+    );
+
+    // Add a horizontal line under the title
+    doc.setLineWidth(0.5);
+    doc.line(15, 25, doc.internal.pageSize.getWidth() - 15, 25);
+
+    // Patient Information Section
+    doc.setFontSize(14);
+    doc.text(`Patient Details:`, 14, 35);
+    doc.setFontSize(12);
+    doc.text(`ID: ${patient.patientId}`, 16, 42);
+    doc.text(`Name: ${patient.firstName} ${patient.lastName}`, 16, 48);
+    doc.text(
+      `Date of Birth: ${new Date(patient.dateOfBirth).toLocaleDateString()}`,
+      16,
+      54
+    );
+    doc.text(`Gender: ${patient.gender || "Unknown"}`, 16, 60);
+    doc.text(`Contact: ${patient.contactInfo || "N/A"}`, 16, 66);
+
+    // Add space between patient details and medical records
+    doc.setLineWidth(0.5);
+    doc.line(15, 72, doc.internal.pageSize.getWidth() - 15, 72);
+    doc.setFont("helvetica", "bold");
+    doc.text(`Medical Records:`, 14, 80);
+    doc.setFont("helvetica", "normal");
+
+    let yPosition = 90; // Starting Y position for medical records
+
+    patientRecords.forEach((record, index) => {
+      const doctor = doctors.find((d) => d.id === record.doctorId);
+      const nurse = nurses.find((n) => n.id === record.nurseId);
+      const recordPrescriptions =
+        record.prescriptionId !== undefined
+          ? prescriptions.find((p) => p.id === record.prescriptionId)
+            ? `${
+                prescriptions.find((p) => p.id === record.prescriptionId)
+                  ?.medicationName
+              } (${
+                prescriptions.find((p) => p.id === record.prescriptionId)
+                  ?.dosage
+              })`
+            : "N/A"
+          : "N/A";
+
+      // Record Heading
+      doc.setFont("helvetica", "bold");
+      doc.text(`Record ${index + 1}:`, 14, yPosition);
+      yPosition += 8;
+
+      // Record Details in block format
+      doc.setFont("helvetica", "normal");
+      doc.text(
+        `Date: ${new Date(record.recordDate).toLocaleString()}`,
+        16,
+        yPosition
+      );
+      yPosition += 6;
+      doc.text(`Details: ${record.recordDetails}`, 16, yPosition);
+      yPosition += 6;
+      doc.text(
+        `Doctor: ${
+          doctor
+            ? `${doctor.firstName} ${doctor.lastName} (Specialty: ${doctor.specialty})`
+            : "N/A"
+        }`,
+        16,
+        yPosition
+      );
+      yPosition += 6;
+      doc.text(
+        `Nurse: ${nurse ? `${nurse.firstName} ${nurse.lastName}` : "N/A"}`,
+        16,
+        yPosition
+      );
+      yPosition += 6;
+      doc.text(`Prescriptions: ${recordPrescriptions || "N/A"}`, 16, yPosition);
+      yPosition += 10; // Add some extra space between records
+
+      // Add a line between records
+      doc.setLineWidth(0.1);
+      doc.line(
+        15,
+        yPosition - 2,
+        doc.internal.pageSize.getWidth() - 15,
+        yPosition - 2
+      );
+      yPosition += 6;
+    });
+
+    // Footer with generated date
+    doc.setFontSize(10);
+    doc.text(
+      `Generated on: ${new Date().toLocaleDateString()}`,
+      14,
+      doc.internal.pageSize.height - 10
+    );
+
+    // Save the PDF with a descriptive name
+    doc.save(
+      `medical-records-${patient.firstName}-${
+        patient.lastName
+      }-${new Date().getTime()}.pdf`
+    );
+
   };
 
   return (
@@ -1127,7 +1256,7 @@ const MedicalRecordsPage: React.FC = () => {
               Select Patient
             </label>
             <div> */}
-              {/* <select
+            {/* <select
                 id="patientSelect"
                 value={selectedPatientId || ""}
                 onChange={(e) => setSelectedPatientId(Number(e.target.value))}
@@ -1140,7 +1269,7 @@ const MedicalRecordsPage: React.FC = () => {
                   </option>
                 ))}
               </select> */}
-              {/* <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-300">
+            {/* <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-300">
                 <svg
                   className="w-4 h-4"
                   viewBox="0 0 20 20"
@@ -1155,7 +1284,7 @@ const MedicalRecordsPage: React.FC = () => {
               </div>
             </div> */}
             <button
-              onClick={generatePrescriptionPDF}
+              onClick={generateMyPrescriptionPDF}
               className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition min-w-[150px]"
             >
               Download Prescription
@@ -1218,9 +1347,9 @@ const MedicalRecordsPage: React.FC = () => {
                   <th className="border-b px-4 py-2 text-left text-gray-300">
                     Prescription
                   </th>
-                  <th className="border-b px-4 py-2 text-left text-gray-300">
+                  {/* <th className="border-b px-4 py-2 text-left text-gray-300">
                     Actions
-                  </th>
+                  </th> */}
                 </tr>
               </thead>
               <tbody className="bg-gray-800 divide-y divide-gray-700">

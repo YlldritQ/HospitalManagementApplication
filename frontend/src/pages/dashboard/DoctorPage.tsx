@@ -14,6 +14,7 @@ const DoctorPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const { user: loggedInUser } = useAuth();
   const userId = loggedInUser?.id; // Replace with actual logged-in user ID or retrieve from context
+  
 
   useEffect(() => {
     const fetchNurseAndRooms = async () => {

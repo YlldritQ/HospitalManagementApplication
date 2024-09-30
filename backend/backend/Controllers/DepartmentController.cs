@@ -19,7 +19,7 @@ namespace backend.Controllers
 
         // GET: api/department
         [HttpGet]
-        [Authorize(Roles = StaticUserRoles.ADMIN)]
+        [Authorize(Roles = StaticUserRoles.AdminDoctorNurse)]
         public async Task<ActionResult<IEnumerable<DepartmentDto>>> GetAllDepartments()
         {
             var departments = await _departmentService.GetAllDepartmentsAsync();

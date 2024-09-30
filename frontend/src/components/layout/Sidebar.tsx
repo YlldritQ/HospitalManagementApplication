@@ -223,7 +223,7 @@ const Sidebar = () => {
           </button>
 
           <button
-            onClick={() => handleClick("/user/medical-records")}
+            onClick={() => handleClick(PATH_DASHBOARD.medicalRecordList)}
             className="flex items-center gap-3 text-gray-300 hover:bg-blue-800 p-3 rounded-lg w-full transition"
           >
             <MdOutlineMedicalServices className="text-orange-400 w-6 h-6" />
