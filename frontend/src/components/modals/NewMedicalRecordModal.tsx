@@ -4,11 +4,10 @@ import { CUPrescriptionDto, PrescriptionDto } from '../../types/prescriptionType
 import { createPrescription } from '../../services/prescriptionService';
 import { getDoctors } from '../../services/doctorService'; // Import doctor service
 import { getAllNurses } from '../../services/nurseService'; // Import nurse service
-import { getAllPatients, getPatientByUserId } from '../../services/patientService'; // Import patient service
+import { getAllPatients } from '../../services/patientService'; // Import patient service
 import { DoctorDto } from '../../types/doctorTypes';
 import { NurseDto } from '../../types/nurseTypes';
 import { PatientDto } from '../../types/patientTypes';
-import useAuth from "../../hooks/useAuth.hook";
 
 interface NewMedicalRecordModalProps {
   isOpen: boolean;
@@ -35,10 +34,7 @@ const NewMedicalRecordModal: React.FC<NewMedicalRecordModalProps> = ({ isOpen, o
   });
 
   const [isCreatingPrescription, setIsCreatingPrescription] = useState(false);
-  const [patientId, setPatientId] = useState("");
-  const { user: loggedInUser } = useAuth();
-  const userId = loggedInUser?.id;
-  const roles = loggedInUser?.roles;
+
   const [doctors, setDoctors] = useState<DoctorDto[]>([]);
   const [nurses, setNurses] = useState<NurseDto[]>([]);
   const [patients, setPatients] = useState<PatientDto[]>([]);
@@ -61,12 +57,6 @@ const NewMedicalRecordModal: React.FC<NewMedicalRecordModalProps> = ({ isOpen, o
         }
       };
       fetchDoctorsNursesPatients();
-
-      if (roles?.includes("Patient")) {
-        getPatientByUserId(userId).then((patientData) =>
-          setPatientId(String(patientData?.patientId))
-        );
-      }
     }
   }, [isOpen]);
 
@@ -131,40 +121,26 @@ const NewMedicalRecordModal: React.FC<NewMedicalRecordModalProps> = ({ isOpen, o
           </div>
           <div className="flex-1 overflow-y-auto p-6">
             <form onSubmit={handleSubmit} className="space-y-4">
-            {roles?.includes("Admin") ? (
-            <div className="mb-4">
-              <label htmlFor="patient" className="block text-white mb-2">
-                Select Patient
-              </label>
-              <select
-                id="patient"
-                value={patientId}
-                onChange={(e) => setPatientId(e.target.value)}
-                required
-                className="w-full p-2 rounded bg-gray-700 text-white"
-              >
-                <option value="">Select a patient</option>
-                {patients.map((patient) => (
-                  <option key={patient.patientId} value={patient.patientId}>
-                    {patient.firstName} {patient.lastName}
-                  </option>
-                ))}
-              </select>
-            </div>
-          ) : (
-            <div className="mb-4">
-              <label htmlFor="patient" className="block text-white mb-2">
-                Patient
-              </label>
-              <input
-                type="text"
-                id="patient"
-                value={`${loggedInUser?.firstName} ${loggedInUser?.lastName}`}
-                disabled
-                className="w-full p-2 rounded bg-gray-700 text-white"
-              />
-            </div>
-          )}
+              <div>
+                <label htmlFor="patientId" className="block text-sm font-medium text-gray-300">
+                  Patient
+                </label>
+                <select
+                  name="patientId"
+                  id="patientId"
+                  value={formData.patientId}
+                  onChange={handleInputChange}
+                  className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white"
+                  required
+                >
+                  <option value="">Select a patient</option>
+                  {patients.map((patient) => (
+                    <option key={patient.patientId} value={patient.patientId}>
+                      {patient.firstName} {patient.lastName}
+                    </option>
+                  ))}
+                </select>
+              </div>
   
               <div>
                 <label htmlFor="recordDetails" className="block text-sm font-medium text-gray-300">
