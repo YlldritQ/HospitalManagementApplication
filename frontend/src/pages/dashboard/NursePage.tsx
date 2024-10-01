@@ -88,29 +88,13 @@ const NursePage: React.FC = () => {
             </p>
             <Button 
               label="View Appointments" 
-              onClick={() => handleButtonClick('/nurse/appointments')} 
+              onClick={() => handleButtonClick('/dashboard/appointment')} 
               variant="primary" 
               type="button" 
               className="text-white bg-[#50E3C2] hover:bg-[#3D8B74]"
             />
           </div>
 
-          {/* Notifications Section */}
-          <div className="bg-white p-6 rounded-lg shadow-lg border-t-4 border-[#F5A623]">
-            <h2 className="text-2xl font-bold mb-4 flex items-center text-[#F5A623]">
-              <FaListUl className="mr-3 text-3xl" /> Notifications
-            </h2>
-            <p className="text-gray-700 mb-4">
-              Stay updated with important notifications relevant to your practice.
-            </p>
-            <Button 
-              label="View Notifications" 
-              onClick={() => handleButtonClick('/nurse/notifications')} 
-              variant="primary" 
-              type="button" 
-              className="text-white bg-[#F5A623] hover:bg-[#CF8C2F]"
-            />
-          </div>
 
           {/* Assigned Rooms Section */}
           <div className="bg-white p-6 rounded-lg shadow-lg border-t-4 border-[#7D3F5C]">
