@@ -1061,6 +1061,7 @@ const MedicalRecordsPage: React.FC = () => {
             >
               Create New Record
             </button>
+          
             <button
               onClick={generatePDF}
               className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition min-w-[150px]"
