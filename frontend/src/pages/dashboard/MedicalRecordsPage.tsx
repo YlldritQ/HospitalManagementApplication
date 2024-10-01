@@ -1054,6 +1054,13 @@ const MedicalRecordsPage: React.FC = () => {
       {roles?.includes("Doctor") && (
         <div>
           <div className="flex items-center gap-4 mb-6">
+          <button
+              onClick={() => setModalOpen(true)}
+              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition min-w-[150px]"
+            >
+              Create New Record
+            </button>
+          
             <button
               onClick={generatePDF}
               className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition min-w-[150px]"
