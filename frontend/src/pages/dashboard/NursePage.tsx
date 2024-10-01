@@ -71,7 +71,7 @@ const NursePage: React.FC = () => {
             </p>
             <Button 
               label="View Patients" 
-              onClick={() => handleButtonClick('/nurse/patients')} 
+              onClick={() => handleButtonClick('/dashboard/patient-list')} 
               variant="primary" 
               type="button" 
               className="text-white bg-[#4A90E2] hover:bg-[#357ABD]"

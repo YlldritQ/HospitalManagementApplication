@@ -18,6 +18,7 @@ export const setSession = (accessToken: string | null) => {
   
   export const allAccessRoles = [RolesEnum.DOCTOR, RolesEnum.ADMIN, RolesEnum.NURSE, RolesEnum.PATIENT, RolesEnum.USER];
   export const adminAccessRoles = [RolesEnum.ADMIN];
+  export const adminDoctorPatientRoles = [RolesEnum.DOCTOR, RolesEnum.ADMIN, RolesEnum.PATIENT];
   
   export const allowedRolesForUpdateArray = (loggedInUser?: IAuthUser): string[] => {
     return loggedInUser?.roles.includes(RolesEnum.ADMIN)

@@ -2,7 +2,7 @@ import { Suspense, lazy } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { PATH_DASHBOARD, PATH_PUBLIC } from "./paths";
 import AuthGuard from "../auth/AuthGuard";
-import { allAccessRoles, adminAccessRoles } from "../auth/auth.utils";
+import { allAccessRoles, adminAccessRoles, adminDoctorPatientRoles } from "../auth/auth.utils";
 import Layout from "../components/layout";
 
 // Lazy load components
@@ -181,22 +181,6 @@ const GlobalRouter = () => {
           />
 
           <Route
-            path={PATH_DASHBOARD.appointment}
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <Appointment />
-              </Suspense>
-            }
-          />
-          <Route
-            path={PATH_DASHBOARD.editAppointment}
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <EditAppointment />
-              </Suspense>
-            }
-          />
-          <Route
             path={PATH_DASHBOARD.roomList}
             element={
               <Suspense fallback={<div>Loading...</div>}>
@@ -231,6 +215,25 @@ const GlobalRouter = () => {
               </Suspense>
             }
           />
+        </Route>
+
+        <Route element={<AuthGuard roles={adminDoctorPatientRoles}/>}>
+        <Route
+            path={PATH_DASHBOARD.appointment}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Appointment />
+              </Suspense>
+            }
+          />
+          <Route
+            path={PATH_DASHBOARD.editAppointment}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <EditAppointment />
+              </Suspense>
+            }
+            />
         </Route>
 
         {/* Admin Routes */}
