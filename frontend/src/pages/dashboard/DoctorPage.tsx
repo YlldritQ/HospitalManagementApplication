@@ -1,6 +1,5 @@
 import PageAccessTemplate from '../../components/dashboard/page-access/PageAccessTemplate';
 import { FaUserCog, FaCalendarAlt, FaUsers, FaFileMedical, FaBed } from 'react-icons/fa';
-import { MdNotifications } from 'react-icons/md';
 import Button from '../../components/general/Button';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';

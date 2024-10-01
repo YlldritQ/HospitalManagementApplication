@@ -1,13 +1,14 @@
 // src/pages/dashboard/NursePage.tsx
 import React, { useEffect, useState } from 'react';
 import PageAccessTemplate from '../../components/dashboard/page-access/PageAccessTemplate';
-import { FaUserNurse, FaListUl, FaBed } from 'react-icons/fa';
+import { FaUserNurse, FaListUl, FaBed, FaFileMedical } from 'react-icons/fa';
 import Button from '../../components/general/Button';
 import { useNavigate } from 'react-router-dom';
 import { getNurseByUserId } from '../../services/nurseService'; // Ensure correct path
 import { getRoomsAssignedToNurse } from '../../services/nurseService'; // Ensure correct path
 import { RoomDto } from '../../types/roomTypes'; // Ensure correct path
 import useAuth from '../../hooks/useAuth.hook';
+
 
 const NursePage: React.FC = () => {
   const navigate = useNavigate();
@@ -78,20 +79,20 @@ const NursePage: React.FC = () => {
             />
           </div>
 
-          {/* Appointments Section */}
-          <div className="bg-white p-6 rounded-lg shadow-lg border-t-4 border-[#50E3C2]">
-            <h2 className="text-2xl font-bold mb-4 flex items-center text-[#50E3C2]">
-              <FaListUl className="mr-3 text-3xl" /> Appointment Schedule
+          {/* Medical Records Section */}
+          <div className="bg-white p-6 rounded-lg shadow-lg border-t-4 border-[#D0021B]">
+            <h2 className="text-2xl font-bold mb-4 flex items-center text-[#D0021B]">
+              <FaFileMedical className="mr-3 text-3xl" /> Medical Records
             </h2>
             <p className="text-gray-700 mb-4">
-              Check your upcoming appointments and manage your schedule efficiently.
+              Access and review patient medical records with ease and confidentiality.
             </p>
             <Button 
-              label="View Appointments" 
-              onClick={() => handleButtonClick('/dashboard/appointment')} 
+              label="View Records" 
+              onClick={() => handleButtonClick('/dashboard/medicalRecord-list')} 
               variant="primary" 
               type="button" 
-              className="text-white bg-[#50E3C2] hover:bg-[#3D8B74]"
+              className="text-white bg-[#D0021B] hover:bg-[#B72D1F]"
             />
           </div>
 
