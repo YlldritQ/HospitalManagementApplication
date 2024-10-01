@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace backend.Core.DbContext
 {
@@ -29,7 +30,8 @@ namespace backend.Core.DbContext
         public DbSet<Prescription> Prescriptions { get; set; }
         public DbSet<DoctorRoom> DoctorRooms { get; set; }
         public DbSet<NurseRoom> NurseRooms { get; set; }
-
+        public DbSet<Team>  Teams { get; set; }
+        public DbSet<Player> Players { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -106,6 +108,11 @@ namespace backend.Core.DbContext
                 .WithMany(dept => dept.Nurses)
                 .HasForeignKey(n => n.DepartmentId)
                 .IsRequired(false);
+
+            builder.Entity<Player>()
+                .HasOne(n => n.Team)
+                .WithMany(dept => dept.Players)
+                .HasForeignKey(n => n.TeamId);
 
             // Doctor - Appointment (One-to-Many)
             builder.Entity<Appointment>()

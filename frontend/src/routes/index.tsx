@@ -35,6 +35,8 @@ const EditDepartment = lazy(() => import("../pages/dashboard/EditDepartment"));
 const MedicalRecord = lazy(() => import("../pages/dashboard/MedicalRecordsPage"));
 const ProfilePage = lazy(() => import("../pages/dashboard/ProfilePage"));
 const UpdateProfile = lazy(() => import("../pages/dashboard/UpdateProfilePage"));
+const TeamList = lazy(() => import("../pages/dashboard/TeamList"));
+const UpdateTeam = lazy(() => import("../pages/dashboard/EditTeam"));
 
 
 const GlobalRouter = () => {
@@ -74,6 +76,22 @@ const GlobalRouter = () => {
             element={
               <Suspense fallback={<div>Loading...</div>}>
                 <DashboardPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={PATH_DASHBOARD.teamList}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <TeamList />
+              </Suspense>
+            }
+          />
+          <Route
+            path={PATH_DASHBOARD.updateTeam}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <UpdateTeam />
               </Suspense>
             }
           />

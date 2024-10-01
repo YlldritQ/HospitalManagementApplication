@@ -12,6 +12,7 @@ using backend.Core.Dtos.ManyToMany;
 using backend.Core.Dtos.Appointment;
 using backend.Core.Dtos.Department;
 using backend.Core.Dtos.Auth;
+using backend.Core.Dtos;
 
 namespace backend.Core.AutoMapperConfig
 {
@@ -80,6 +81,18 @@ namespace backend.Core.AutoMapperConfig
 
             CreateMap<UpdateDto, ApplicationUser>();
             CreateMap<ApplicationUser, UpdateDto>();
+
+            CreateMap<TeamDto, Team>();
+            CreateMap<Team, TeamDto>();
+
+            CreateMap<Player, PlayerDto>();
+            CreateMap<PlayerDto, Player>();
+
+            CreateMap<CUTeamDto, Team>();
+            CreateMap<Team, CUTeamDto>();
+
+            CreateMap<Player, CUPlayerDto>();
+            CreateMap<CUPlayerDto, Player>();
         }
     }
 }
