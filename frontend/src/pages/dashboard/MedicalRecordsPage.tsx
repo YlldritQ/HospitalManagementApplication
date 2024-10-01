@@ -677,7 +677,8 @@ const MedicalRecordsPage: React.FC = () => {
       <h1 className="text-3xl font-semibold mb-6 text-white">
         Medical Records
       </h1>
-      {error && <p className="text-red-500 mb-4">{error}</p>}
+      {error && <p className="text-red-500">{error}</p>}
+
 
       {roles?.includes("Nurse") && (
         <div>
@@ -1054,6 +1055,12 @@ const MedicalRecordsPage: React.FC = () => {
       {roles?.includes("Doctor") && (
         <div>
           <div className="flex items-center gap-4 mb-6">
+          <button
+              onClick={() => setModalOpen(true)}
+              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition min-w-[150px]"
+            >
+              Create New Record
+            </button>
             <button
               onClick={generatePDF}
               className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition min-w-[150px]"
@@ -1237,12 +1244,7 @@ const MedicalRecordsPage: React.FC = () => {
       {roles?.includes("Patient") && (
         <div>
           <div className="flex items-center gap-4 mb-6">
-            <button
-              onClick={() => setModalOpen(true)}
-              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition min-w-[150px]"
-            >
-              Create New Record
-            </button>
+            
             <button
               onClick={generateMyRecordsPDF}
               className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition min-w-[150px]"

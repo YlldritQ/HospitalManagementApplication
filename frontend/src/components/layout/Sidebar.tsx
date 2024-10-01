@@ -229,16 +229,6 @@ const Sidebar = () => {
             <MdOutlineMedicalServices className="text-orange-400 w-6 h-6" />
             <span className="font-medium text-sm">Medical Records</span>
           </button>
-          
-          <button
-            onClick={() => handleClick(PATH_DASHBOARD.roomList)}
-            className="flex items-center gap-3 text-gray-300 hover:bg-blue-800 p-3 rounded-lg w-full transition"
-          >
-            <FaBed className="text-red-400 w-6 h-6" />
-            <span className="font-medium text-sm">Rooms</span>
-          </button>
-
-
         </>
       );
     }
@@ -268,17 +258,17 @@ const Sidebar = () => {
       </div>
 
       {/* Logout Button */}
-      <div className="mt-4 border-t border-gray-600 pt-4">
-        {isAuthenticated && (
-          <button
-            onClick={logout}
-            className="flex items-center gap-3 text-gray-300 hover:bg-red-700 p-3 rounded-lg w-full transition"
-          >
-            <AiOutlineLogout className="text-red-400 w-6 h-6" />
-            <span className="font-medium text-sm">Logout</span>
-          </button>
-        )}
-      </div>
+      <div className="mt-4 border-t border-gray-600 pt-4 sticky bottom-1">
+  {isAuthenticated && (
+    <button
+      onClick={logout}
+      className="flex items-center gap-3 text-gray-700 bg-gray-100 hover:bg-red-500 hover:text-white p-3 rounded-lg w-full transition duration-300"
+    >
+      <AiOutlineLogout className="w-6 h-6 text-red-400 hover:text-white transition duration-300" />
+      <span className="font-medium text-sm">Logout</span>
+    </button>
+  )}
+</div>
     </div>
   );
 };

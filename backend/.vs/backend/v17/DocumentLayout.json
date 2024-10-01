@@ -1,173 +1,173 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\",
+  "WorkspaceRootPath": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\controllers\\medicalrecordcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\controllers\\medicalrecordcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\controllers\\medicalrecordcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\controllers\\departmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\controllers\\departmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\controllers\\departmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\controllers\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\controllers\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\controllers\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\controllers\\patientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\controllers\\patientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\controllers\\patientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\controllers\\prescriptioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\controllers\\prescriptioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\controllers\\prescriptioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\services\\medicalrecordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\services\\medicalrecordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\services\\medicalrecordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\services\\departmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\services\\departmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\services\\departmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\services\\appointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\services\\appointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\services\\appointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\interfaces\\iappointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\interfaces\\iappointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\interfaces\\iappointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\services\\patientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\services\\patientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\services\\patientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\interfaces\\ipatientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\interfaces\\ipatientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\interfaces\\ipatientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\controllers\\appointmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\controllers\\appointmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\controllers\\appointmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\services\\doctorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\services\\doctorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\services\\doctorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\interfaces\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\interfaces\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\interfaces\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\entities\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\entities\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\entities\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\dtos\\auth\\userinforesult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\dtos\\auth\\userinforesult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\dtos\\auth\\userinforesult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\constants\\staticuserroles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\constants\\staticuserroles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\constants\\staticuserroles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\dtos\\general\\generalserviceresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\dtos\\general\\generalserviceresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\dtos\\general\\generalserviceresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\dtos\\auth\\updatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\dtos\\auth\\updatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\dtos\\auth\\updatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\interfaces\\iprescriptionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\interfaces\\iprescriptionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\interfaces\\iprescriptionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\automapperconfig\\automapperconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\automapperconfig\\automapperconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\automapperconfig\\automapperconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\dtos\\auth\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\dtos\\auth\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\dtos\\auth\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\interfaces\\imedicalrecordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\interfaces\\imedicalrecordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\interfaces\\imedicalrecordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\migrations\\20240920204524_userupdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\migrations\\20240920204524_userupdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\migrations\\20240920204524_userupdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\dtos\\records\\cumedicalrecorddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\dtos\\records\\cumedicalrecorddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\dtos\\records\\cumedicalrecorddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\dtos\\doctor\\doctordto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\dtos\\doctor\\doctordto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\dtos\\doctor\\doctordto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\dbcontext\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\dbcontext\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\dbcontext\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\dtos\\prescription\\cuprescriptiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\dtos\\prescription\\cuprescriptiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\dtos\\prescription\\cuprescriptiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\services\\prescriptionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\services\\prescriptionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\services\\prescriptionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\entities\\prescription.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\entities\\prescription.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\entities\\prescription.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\migrations\\20240914212952_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\migrations\\20240914212952_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\migrations\\20240914212952_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\interfaces\\inurseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\interfaces\\inurseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\interfaces\\inurseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\interfaces\\idoctorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\interfaces\\idoctorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\interfaces\\idoctorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\services\\nurseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\services\\nurseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\services\\nurseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\controllers\\nursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\controllers\\nursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\controllers\\nursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\entities\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\entities\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\entities\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\entities\\nurse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\entities\\nurse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\entities\\nurse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\entities\\medicalrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\entities\\medicalrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\entities\\medicalrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\entities\\medicalstaff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\entities\\medicalstaff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\entities\\medicalstaff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\pc\\onedrive\\desktop\\hospitalapp\\hospitalmanagementapplication\\backend\\backend\\core\\dtos\\records\\medicalrecorddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|c:\\users\\blerton\\onedrive\\documents\\onedrive\\desktop\\hm\\hospitalmanagementapplication\\backend\\backend\\core\\dtos\\records\\medicalrecorddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66716896-BCC8-4E09-A253-55C6213CB12B}|backend\\backend.csproj|solutionrelative:backend\\core\\dtos\\records\\medicalrecorddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -178,516 +178,512 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 17,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DepartmentController.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\DepartmentController.cs",
-              "RelativeDocumentMoniker": "backend\\Controllers\\DepartmentController.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\DepartmentController.cs",
-              "RelativeToolTip": "backend\\Controllers\\DepartmentController.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAACAAAAAJAAAA",
+              "DocumentIndex": 3,
+              "Title": "PatientController.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Controllers\\PatientController.cs",
+              "RelativeDocumentMoniker": "backend\\Controllers\\PatientController.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Controllers\\PatientController.cs",
+              "RelativeToolTip": "backend\\Controllers\\PatientController.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAA0wCoAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-30T20:24:22.382Z",
+              "WhenOpened": "2024-10-01T12:49:40.693Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "IPatientService.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IPatientService.cs",
+              "RelativeDocumentMoniker": "backend\\Core\\Interfaces\\IPatientService.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IPatientService.cs",
+              "RelativeToolTip": "backend\\Core\\Interfaces\\IPatientService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAA5AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-01T12:49:40.705Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "PatientService.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\PatientService.cs",
+              "RelativeDocumentMoniker": "backend\\Core\\Services\\PatientService.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\PatientService.cs",
+              "RelativeToolTip": "backend\\Core\\Services\\PatientService.cs",
+              "ViewState": "AQIAABsAAAAAAAAAAAAYwC4AAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-01T12:49:40.717Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AppointmentService.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\AppointmentService.cs",
+              "RelativeDocumentMoniker": "backend\\Core\\Services\\AppointmentService.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\AppointmentService.cs",
+              "RelativeToolTip": "backend\\Core\\Services\\AppointmentService.cs",
+              "ViewState": "AQIAAEwAAAAAAAAAAAAkwHcAAABXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-01T12:49:40.731Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MedicalRecordController.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Controllers\\MedicalRecordController.cs",
+              "RelativeDocumentMoniker": "backend\\Controllers\\MedicalRecordController.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Controllers\\MedicalRecordController.cs",
+              "RelativeToolTip": "backend\\Controllers\\MedicalRecordController.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAA0wCwAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-01T12:49:40.896Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
               "Title": "DepartmentService.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\DepartmentService.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\DepartmentService.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Services\\DepartmentService.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\DepartmentService.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\DepartmentService.cs",
               "RelativeToolTip": "backend\\Core\\Services\\DepartmentService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-29T02:54:23.066Z"
+              "WhenOpened": "2024-10-01T12:49:40.68Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PatientController.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\PatientController.cs",
-              "RelativeDocumentMoniker": "backend\\Controllers\\PatientController.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\PatientController.cs",
-              "RelativeToolTip": "backend\\Controllers\\PatientController.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAA0wCoAAAAiAAAA",
+              "DocumentIndex": 1,
+              "Title": "DepartmentController.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Controllers\\DepartmentController.cs",
+              "RelativeDocumentMoniker": "backend\\Controllers\\DepartmentController.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Controllers\\DepartmentController.cs",
+              "RelativeToolTip": "backend\\Controllers\\DepartmentController.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAACAAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-26T10:30:37.814Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "IPatientService.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IPatientService.cs",
-              "RelativeDocumentMoniker": "backend\\Core\\Interfaces\\IPatientService.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IPatientService.cs",
-              "RelativeToolTip": "backend\\Core\\Interfaces\\IPatientService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAA5AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-26T10:28:58.911Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "PatientService.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\PatientService.cs",
-              "RelativeDocumentMoniker": "backend\\Core\\Services\\PatientService.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\PatientService.cs",
-              "RelativeToolTip": "backend\\Core\\Services\\PatientService.cs",
-              "ViewState": "AQIAABsAAAAAAAAAAAAYwC4AAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-25T12:51:53.346Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AppointmentService.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\AppointmentService.cs",
-              "RelativeDocumentMoniker": "backend\\Core\\Services\\AppointmentService.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\AppointmentService.cs",
-              "RelativeToolTip": "backend\\Core\\Services\\AppointmentService.cs",
-              "ViewState": "AQIAAEwAAAAAAAAAAAAkwHcAAABXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-25T12:11:17.552Z"
+              "WhenOpened": "2024-10-01T12:49:40.466Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
               "Title": "IAppointmentService.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IAppointmentService.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IAppointmentService.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Interfaces\\IAppointmentService.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IAppointmentService.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IAppointmentService.cs",
               "RelativeToolTip": "backend\\Core\\Interfaces\\IAppointmentService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-25T12:10:40.413Z"
+              "WhenOpened": "2024-10-01T12:49:40.744Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 12,
               "Title": "AppointmentController.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\AppointmentController.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Controllers\\AppointmentController.cs",
               "RelativeDocumentMoniker": "backend\\Controllers\\AppointmentController.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\AppointmentController.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Controllers\\AppointmentController.cs",
               "RelativeToolTip": "backend\\Controllers\\AppointmentController.cs",
               "ViewState": "AQIAABMAAAAAAAAAAAAQwB0AAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-24T20:45:57.918Z"
+              "WhenOpened": "2024-10-01T12:49:40.76Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 19,
               "Title": "GeneralServiceResponseDto.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\General\\GeneralServiceResponseDto.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\General\\GeneralServiceResponseDto.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Dtos\\General\\GeneralServiceResponseDto.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\General\\GeneralServiceResponseDto.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\General\\GeneralServiceResponseDto.cs",
               "RelativeToolTip": "backend\\Core\\Dtos\\General\\GeneralServiceResponseDto.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-22T02:22:04.086Z"
+              "WhenOpened": "2024-10-01T12:49:40.774Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 17,
               "Title": "UserInfoResult.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Auth\\UserInfoResult.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Auth\\UserInfoResult.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Dtos\\Auth\\UserInfoResult.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Auth\\UserInfoResult.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Auth\\UserInfoResult.cs",
               "RelativeToolTip": "backend\\Core\\Dtos\\Auth\\UserInfoResult.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAAoAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-21T20:47:04.743Z"
+              "WhenOpened": "2024-10-01T12:49:40.789Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 15,
               "Title": "IAuthService.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IAuthService.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IAuthService.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Interfaces\\IAuthService.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IAuthService.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IAuthService.cs",
               "RelativeToolTip": "backend\\Core\\Interfaces\\IAuthService.cs",
               "ViewState": "AQIAAAYAAAAAAAAAAAA+wBMAAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-20T23:47:36.389Z"
+              "WhenOpened": "2024-10-01T12:49:40.802Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 22,
               "Title": "AutoMapperConfig.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\AutoMapperConfig\\AutoMapperConfig.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\AutoMapperConfig\\AutoMapperConfig.cs",
               "RelativeDocumentMoniker": "backend\\Core\\AutoMapperConfig\\AutoMapperConfig.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\AutoMapperConfig\\AutoMapperConfig.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\AutoMapperConfig\\AutoMapperConfig.cs",
               "RelativeToolTip": "backend\\Core\\AutoMapperConfig\\AutoMapperConfig.cs",
               "ViewState": "AQIAAD4AAAAAAAAAAAAQwFEAAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-20T23:36:36.94Z"
+              "WhenOpened": "2024-10-01T12:49:40.816Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 20,
               "Title": "UpdateDto.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Auth\\UpdateDto.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Auth\\UpdateDto.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Dtos\\Auth\\UpdateDto.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Auth\\UpdateDto.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Auth\\UpdateDto.cs",
               "RelativeToolTip": "backend\\Core\\Dtos\\Auth\\UpdateDto.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-20T23:28:43.288Z"
+              "WhenOpened": "2024-10-01T12:49:40.829Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 25,
               "Title": "20240920204524_UserUpdate.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Migrations\\20240920204524_UserUpdate.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Migrations\\20240920204524_UserUpdate.cs",
               "RelativeDocumentMoniker": "backend\\Migrations\\20240920204524_UserUpdate.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Migrations\\20240920204524_UserUpdate.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Migrations\\20240920204524_UserUpdate.cs",
               "RelativeToolTip": "backend\\Migrations\\20240920204524_UserUpdate.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-20T20:45:25.011Z"
+              "WhenOpened": "2024-10-01T12:49:40.843Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 16,
               "Title": "ApplicationUser.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\ApplicationUser.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\ApplicationUser.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Entities\\ApplicationUser.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\ApplicationUser.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\ApplicationUser.cs",
               "RelativeToolTip": "backend\\Core\\Entities\\ApplicationUser.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-20T19:56:50.926Z"
+              "WhenOpened": "2024-10-01T12:49:40.856Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 23,
               "Title": "RegisterDto.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Auth\\RegisterDto.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Auth\\RegisterDto.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Dtos\\Auth\\RegisterDto.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Auth\\RegisterDto.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Auth\\RegisterDto.cs",
               "RelativeToolTip": "backend\\Core\\Dtos\\Auth\\RegisterDto.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAABAAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-20T19:55:03.78Z"
+              "WhenOpened": "2024-10-01T12:49:40.869Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 13,
               "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "backend\\Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Controllers\\AuthController.cs",
               "RelativeToolTip": "backend\\Controllers\\AuthController.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAABEAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T15:03:28.541Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MedicalRecordController.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\MedicalRecordController.cs",
-              "RelativeDocumentMoniker": "backend\\Controllers\\MedicalRecordController.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\MedicalRecordController.cs",
-              "RelativeToolTip": "backend\\Controllers\\MedicalRecordController.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAAUwCwAAAAoAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T21:21:28.597Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-01T12:49:40.882Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 14,
               "Title": "DoctorService.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\DoctorService.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\DoctorService.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Services\\DoctorService.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\DoctorService.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\DoctorService.cs",
               "RelativeToolTip": "backend\\Core\\Services\\DoctorService.cs",
               "ViewState": "AQIAABgAAAAAAAAAAAAYwI0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-15T23:29:20.834Z"
+              "WhenOpened": "2024-10-01T12:49:40.91Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "DoctorController.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\DoctorController.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Controllers\\DoctorController.cs",
               "RelativeDocumentMoniker": "backend\\Controllers\\DoctorController.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\DoctorController.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Controllers\\DoctorController.cs",
               "RelativeToolTip": "backend\\Controllers\\DoctorController.cs",
               "ViewState": "AQIAACEAAAAAAAAAAAA1wBcAAABCAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-15T23:27:48.358Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-01T12:49:40.924Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 24,
               "Title": "IMedicalRecordService.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IMedicalRecordService.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IMedicalRecordService.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Interfaces\\IMedicalRecordService.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IMedicalRecordService.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IMedicalRecordService.cs",
               "RelativeToolTip": "backend\\Core\\Interfaces\\IMedicalRecordService.cs",
               "ViewState": "AQIAAAoAAAAAAAAAAAAuwAoAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T20:17:33.052Z"
+              "WhenOpened": "2024-10-01T12:49:40.938Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 28,
               "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\DbContext\\ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\DbContext\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "backend\\Core\\DbContext\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\DbContext\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\DbContext\\ApplicationDbContext.cs",
               "RelativeToolTip": "backend\\Core\\DbContext\\ApplicationDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T19:16:20.799Z"
+              "WhenOpened": "2024-10-01T12:49:40.951Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 18,
               "Title": "StaticUserRoles.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Constants\\StaticUserRoles.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Constants\\StaticUserRoles.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Constants\\StaticUserRoles.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Constants\\StaticUserRoles.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Constants\\StaticUserRoles.cs",
               "RelativeToolTip": "backend\\Core\\Constants\\StaticUserRoles.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T15:21:18.257Z"
+              "WhenOpened": "2024-10-01T12:49:40.966Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 27,
               "Title": "DoctorDto.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Doctor\\DoctorDto.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Doctor\\DoctorDto.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Dtos\\Doctor\\DoctorDto.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Doctor\\DoctorDto.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Doctor\\DoctorDto.cs",
               "RelativeToolTip": "backend\\Core\\Dtos\\Doctor\\DoctorDto.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T17:12:41.834Z"
+              "WhenOpened": "2024-10-01T12:49:40.981Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
               "Title": "MedicalRecordService.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\MedicalRecordService.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\MedicalRecordService.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Services\\MedicalRecordService.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\MedicalRecordService.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\MedicalRecordService.cs",
               "RelativeToolTip": "backend\\Core\\Services\\MedicalRecordService.cs",
               "ViewState": "AQIAADIAAAAAAAAAAAAmwFYAAABAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T20:17:51.172Z"
+              "WhenOpened": "2024-10-01T12:49:40.995Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 34,
               "Title": "IDoctorService.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IDoctorService.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IDoctorService.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Interfaces\\IDoctorService.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IDoctorService.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IDoctorService.cs",
               "RelativeToolTip": "backend\\Core\\Interfaces\\IDoctorService.cs",
               "ViewState": "AQIAAAYAAAAAAAAAAAAAABEAAABJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-15T23:28:50.311Z"
+              "WhenOpened": "2024-10-01T12:49:41.009Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "PrescriptionController.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\PrescriptionController.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Controllers\\PrescriptionController.cs",
               "RelativeDocumentMoniker": "backend\\Controllers\\PrescriptionController.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\PrescriptionController.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Controllers\\PrescriptionController.cs",
               "RelativeToolTip": "backend\\Controllers\\PrescriptionController.cs",
               "ViewState": "AQIAABMAAAAAAAAAAAAQwDAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-18T21:30:31.961Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-01T12:49:41.024Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 21,
               "Title": "IPrescriptionService.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IPrescriptionService.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IPrescriptionService.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Interfaces\\IPrescriptionService.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IPrescriptionService.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\IPrescriptionService.cs",
               "RelativeToolTip": "backend\\Core\\Interfaces\\IPrescriptionService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-18T21:32:21.595Z"
+              "WhenOpened": "2024-10-01T12:49:41.037Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 29,
               "Title": "CUPrescriptionDto.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Prescription\\CUPrescriptionDto.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Prescription\\CUPrescriptionDto.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Dtos\\Prescription\\CUPrescriptionDto.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Prescription\\CUPrescriptionDto.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Prescription\\CUPrescriptionDto.cs",
               "RelativeToolTip": "backend\\Core\\Dtos\\Prescription\\CUPrescriptionDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-18T23:22:44.685Z"
+              "WhenOpened": "2024-10-01T12:49:41.052Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 30,
               "Title": "PrescriptionService.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\PrescriptionService.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\PrescriptionService.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Services\\PrescriptionService.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\PrescriptionService.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\PrescriptionService.cs",
               "RelativeToolTip": "backend\\Core\\Services\\PrescriptionService.cs",
               "ViewState": "AQIAADIAAAAAAAAAAAAgwEAAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-18T21:32:41.009Z"
+              "WhenOpened": "2024-10-01T12:49:41.069Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 35,
               "Title": "NurseService.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\NurseService.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\NurseService.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Services\\NurseService.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\NurseService.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\NurseService.cs",
               "RelativeToolTip": "backend\\Core\\Services\\NurseService.cs",
               "ViewState": "AQIAABsAAAAAAAAAAAAYwCEAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-15T23:24:47.761Z"
+              "WhenOpened": "2024-10-01T12:49:41.082Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 33,
               "Title": "INurseService.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\INurseService.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\INurseService.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Interfaces\\INurseService.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\INurseService.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Interfaces\\INurseService.cs",
               "RelativeToolTip": "backend\\Core\\Interfaces\\INurseService.cs",
               "ViewState": "AQIAAAYAAAAAAAAAAAAAABEAAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-15T23:24:02.811Z"
+              "WhenOpened": "2024-10-01T12:49:41.096Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 36,
               "Title": "NurseController.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\NurseController.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Controllers\\NurseController.cs",
               "RelativeDocumentMoniker": "backend\\Controllers\\NurseController.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Controllers\\NurseController.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Controllers\\NurseController.cs",
               "RelativeToolTip": "backend\\Controllers\\NurseController.cs",
               "ViewState": "AQIAAJYAAAAAAAAAAAAIwKUAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-15T23:21:47.413Z"
+              "WhenOpened": "2024-10-01T12:49:41.111Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
               "Title": "AuthService.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\AuthService.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Services\\AuthService.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\AuthService.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Services\\AuthService.cs",
               "RelativeToolTip": "backend\\Core\\Services\\AuthService.cs",
               "ViewState": "AQIAAEMCAAAAAAAAAAAuwFUCAAA6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-15T22:39:45.449Z"
+              "WhenOpened": "2024-10-01T12:49:41.126Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 37,
               "Title": "Doctor.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\Doctor.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\Doctor.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Entities\\Doctor.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\Doctor.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\Doctor.cs",
               "RelativeToolTip": "backend\\Core\\Entities\\Doctor.cs",
               "ViewState": "AgIAAAMAAABgZmZmZmYkwAcAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T21:01:33.336Z"
+              "WhenOpened": "2024-10-01T12:49:41.141Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 32,
               "Title": "20240914212952_InitialCreate.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Migrations\\20240914212952_InitialCreate.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Migrations\\20240914212952_InitialCreate.cs",
               "RelativeDocumentMoniker": "backend\\Migrations\\20240914212952_InitialCreate.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Migrations\\20240914212952_InitialCreate.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Migrations\\20240914212952_InitialCreate.cs",
               "RelativeToolTip": "backend\\Migrations\\20240914212952_InitialCreate.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T21:29:52.57Z"
+              "WhenOpened": "2024-10-01T12:49:41.16Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 31,
               "Title": "Prescription.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\Prescription.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\Prescription.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Entities\\Prescription.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\Prescription.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\Prescription.cs",
               "RelativeToolTip": "backend\\Core\\Entities\\Prescription.cs",
               "ViewState": "AQIAAAUAAAAAAAAAAAAAwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T21:07:32.486Z"
+              "WhenOpened": "2024-10-01T12:49:41.176Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 38,
               "Title": "Nurse.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\Nurse.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\Nurse.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Entities\\Nurse.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\Nurse.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\Nurse.cs",
               "RelativeToolTip": "backend\\Core\\Entities\\Nurse.cs",
               "ViewState": "AgIAAAoAAABgZmZmZmY4wBMAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T21:04:21.77Z"
+              "WhenOpened": "2024-10-01T12:49:41.19Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 39,
               "Title": "MedicalRecord.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\MedicalRecord.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\MedicalRecord.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Entities\\MedicalRecord.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\MedicalRecord.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\MedicalRecord.cs",
               "RelativeToolTip": "backend\\Core\\Entities\\MedicalRecord.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T20:17:15.447Z"
+              "WhenOpened": "2024-10-01T12:49:41.204Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 40,
               "Title": "MedicalStaff.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\MedicalStaff.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\MedicalStaff.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Entities\\MedicalStaff.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\MedicalStaff.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Entities\\MedicalStaff.cs",
               "RelativeToolTip": "backend\\Core\\Entities\\MedicalStaff.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T21:05:39.978Z"
+              "WhenOpened": "2024-10-01T12:49:41.219Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 26,
               "Title": "CUMedicalRecordDto.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Records\\CUMedicalRecordDto.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Records\\CUMedicalRecordDto.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Dtos\\Records\\CUMedicalRecordDto.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Records\\CUMedicalRecordDto.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Records\\CUMedicalRecordDto.cs",
               "RelativeToolTip": "backend\\Core\\Dtos\\Records\\CUMedicalRecordDto.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T20:16:50.019Z"
+              "WhenOpened": "2024-10-01T12:49:41.235Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 41,
               "Title": "MedicalRecordDto.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Records\\MedicalRecordDto.cs",
+              "DocumentMoniker": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Records\\MedicalRecordDto.cs",
               "RelativeDocumentMoniker": "backend\\Core\\Dtos\\Records\\MedicalRecordDto.cs",
-              "ToolTip": "C:\\Users\\PC\\OneDrive\\Desktop\\HospitalApp\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Records\\MedicalRecordDto.cs",
+              "ToolTip": "C:\\Users\\Blerton\\OneDrive\\Documents\\OneDrive\\Desktop\\HM\\HospitalManagementApplication\\backend\\backend\\Core\\Dtos\\Records\\MedicalRecordDto.cs",
               "RelativeToolTip": "backend\\Core\\Dtos\\Records\\MedicalRecordDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T20:16:36.5Z"
+              "WhenOpened": "2024-10-01T12:49:41.249Z"
             }
           ]
         },
