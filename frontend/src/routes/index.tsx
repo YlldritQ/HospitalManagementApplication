@@ -37,6 +37,8 @@ const ProfilePage = lazy(() => import("../pages/dashboard/ProfilePage"));
 const UpdateProfile = lazy(() => import("../pages/dashboard/UpdateProfilePage"));
 const TeamList = lazy(() => import("../pages/dashboard/TeamList"));
 const UpdateTeam = lazy(() => import("../pages/dashboard/EditTeam"));
+const PlayerList = lazy(() => import("../pages/dashboard/PlayerList"));
+const UpdatePlayer = lazy(() => import("../pages/dashboard/EditPlayer"));
 
 
 const GlobalRouter = () => {
@@ -92,6 +94,22 @@ const GlobalRouter = () => {
             element={
               <Suspense fallback={<div>Loading...</div>}>
                 <UpdateTeam />
+              </Suspense>
+            }
+          />
+          <Route
+            path={PATH_DASHBOARD.playerList}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <PlayerList />
+              </Suspense>
+            }
+          />
+          <Route
+            path={PATH_DASHBOARD.updatePlayer}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <UpdatePlayer />
               </Suspense>
             }
           />

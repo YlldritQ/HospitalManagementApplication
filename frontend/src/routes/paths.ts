@@ -33,7 +33,9 @@ export const PATH_DASHBOARD = {
   profilePage: "/dashboard/profile",
   updateProfile: "/dashboard/updateProfile/:id",
   teamList: "/dashboard/team-list",
-  updateTeam: "/dashboard/edit-team/:id"
+  updateTeam: "/dashboard/edit-team/:id",
+  playerList: "/dashboard/player-list",
+  updatePlayer: "/dashboard/edit-player/:id"
 };
 
 
