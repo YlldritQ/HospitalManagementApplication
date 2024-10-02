@@ -10,7 +10,7 @@ const EditPlayer: React.FC = () => {
 
   const [Player, setPlayer] = useState<CUPlayerDto>({
     Name: '',
-    number:0,
+    Number:0,
     BirthYear: 0,
     TeamId:0,
   });
@@ -38,7 +38,7 @@ const EditPlayer: React.FC = () => {
           if (data) {
             setPlayer({
               Name: data.Name,
-              number: data.number,
+              Number: data.Number,
               BirthYear: data.BirthYear,
               TeamId: data.TeamId,
             });
@@ -59,24 +59,13 @@ const EditPlayer: React.FC = () => {
   }, [id]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type } = event.target;
+    const { name, value } = event.target;
 
-    if (type === 'checkbox') {
-      setPlayer((prevState) => ({
-        ...prevState,
-        [name]: (event.target as HTMLInputElement).checked,
-      }));
-    } else if (type === 'date') {
-      setPlayer((prevState) => ({
-        ...prevState,
-        [name]: new Date(value),
-      }));
-    } else {
       setPlayer((prevState) => ({
         ...prevState,
         [name]: value,
       }));
-    }
+    
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -114,13 +103,13 @@ const EditPlayer: React.FC = () => {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="firstName" className="block text-sm font-medium text-gray-300 mb-1">
+              <label htmlFor="Name" className="block text-sm font-medium text-gray-300 mb-1">
                 Name
               </label>
               <input
                 type="text"
-                name="firstName"
-                id="firstName"
+                name="Name"
+                id="Name"
                 value={Player.Name}
                 onChange={handleChange}
                 placeholder="Enter first name"
@@ -135,13 +124,13 @@ const EditPlayer: React.FC = () => {
   
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-300 mb-1">
+              <label htmlFor="BirthYear" className="block text-sm font-medium text-gray-300 mb-1">
                 Date of Birth
               </label>
               <input
-                type="number"
-                name="dateOfBirth"
-                id="dateOfBirth"
+                type="text"
+                name="BirthYear"
+                id="BirthYear"
                 value={Player.BirthYear}
                 onChange={handleChange}
                 className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -153,14 +142,14 @@ const EditPlayer: React.FC = () => {
 
   
           <div>
-            <label htmlFor="qualifications" className="block text-sm font-medium text-gray-300 mb-1">
+            <label htmlFor="number" className="block text-sm font-medium text-gray-300 mb-1">
               Number
             </label>
             <input
               type="text"
-              name="qualifications"
-              id="qualifications"
-              value={Player.number}
+              name="number"
+              id="number"
+              value={Player.Number}
               onChange={handleChange}
               placeholder="Enter qualifications"
               className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
