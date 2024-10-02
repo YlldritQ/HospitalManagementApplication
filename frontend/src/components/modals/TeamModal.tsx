@@ -11,7 +11,7 @@ interface TeamModalProps {
 
 const TeamModal: React.FC<TeamModalProps> = ({ isOpen, onClose, TeamId }) => {
     const [Team, setTeam] = useState<TeamDto | null>(null);
-    const [Name, setName] = useState<string>('');
+    const [name, setName] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
     const [mode, setMode] = useState<'create' | 'edit'>('create');
 
@@ -42,11 +42,11 @@ const TeamModal: React.FC<TeamModalProps> = ({ isOpen, onClose, TeamId }) => {
     const handleSubmit = async () => {
         try {
             if (mode === 'create') {
-                await createTeam({ Name });
+                await createTeam({ name });
                 toast.success('Team created successfully');
             } else {
                 if (Team) {
-                    await updateTeam(TeamId, { ...Team, Name });
+                    await updateTeam(TeamId, { ...Team, name });
                     toast.success('Team updated successfully');
                 }
             }
@@ -76,7 +76,7 @@ const TeamModal: React.FC<TeamModalProps> = ({ isOpen, onClose, TeamId }) => {
                   <input
                     id="Team-name"
                     type="text"
-                    value={Name}
+                    value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Enter Team name"
                     className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"

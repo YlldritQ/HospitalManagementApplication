@@ -8,7 +8,7 @@ const EditTeam: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
     const [Team, setTeam] = useState<TeamDto | null>(null);
-    const [Name, setName] = useState<string>('');
+    const [name, setName] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -38,7 +38,7 @@ const EditTeam: React.FC = () => {
         try {
             if (Team) {
                 const updatedTeam: CUTeamDto = { // Correct type here
-                    Name 
+                    name 
                 };
                 await updateTeam(Team.id, updatedTeam); // Update function needs id and full Team object
                 toast.success('Team updated successfully');
@@ -64,7 +64,7 @@ const EditTeam: React.FC = () => {
                 <input
                   id="name"
                   type="text"
-                  value={Name}
+                  value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Enter Team name"
                   title="Team name"

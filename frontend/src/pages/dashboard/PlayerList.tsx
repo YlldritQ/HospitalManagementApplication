@@ -72,8 +72,13 @@ const PlayerList: React.FC = () => {
     } catch (err) {
       toast.error("Failed to create player");
     }
-  };
 
+  };
+  const findTeamName = (teamId: number) => {
+    const team = teams.find((p) => p.id === teamId);
+    return team ? `${team.name}` : "Unknown department";
+  };
+  
   if (loading) return <div className="text-center">Loading...</div>;
   if (error) return <div className="text-center text-red-600">{error}</div>;
 
@@ -93,6 +98,7 @@ const PlayerList: React.FC = () => {
             <th className="py-4 px-6 text-left text-sm font-medium border-b border-gray-600">Name</th>
             <th className="py-4 px-6 text-left text-sm font-medium border-b border-gray-600">Number</th>
             <th className="py-4 px-6 text-left text-sm font-medium border-b border-gray-600">Birth Year</th>
+            <th className="py-4 px-6 text-left text-sm font-medium border-b border-gray-600">Team</th>
             <th className="py-4 px-6 text-left text-sm font-medium border-b border-gray-600">Actions</th>
           </tr>
         </thead>
@@ -100,9 +106,10 @@ const PlayerList: React.FC = () => {
   {players.map((player) => (
     <tr key={player.id} className="border-b border-gray-700">
       <td className="py-4 px-6 text-white">{player.id}</td>
-      <td className="py-4 px-6 text-white">{player.Name}</td> {/* Use player.Name */}
-      <td className="py-4 px-6 text-white">{player.Number}</td> {/* Use player.Number */}
-      <td className="py-4 px-6 text-white">{player.BirthYear}</td> {/* Use player.BirthYear */}
+      <td className="py-4 px-6 text-white">{player.name}</td> {/* Use player.Name */}
+      <td className="py-4 px-6 text-white">{player.number}</td> {/* Use player.Number */}
+      <td className="py-4 px-6 text-white">{player.birthYear}</td> {/* Use player.BirthYear */}
+      <td className="py-4 px-6 text-white">{findTeamName(player.teamId) }</td> {/* Use player.BirthYear */}
       <td className="py-4 px-6">
         <button
           onClick={() => handleButtonClick(player.id)}

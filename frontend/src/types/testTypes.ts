@@ -4,19 +4,19 @@ export interface TeamDto {
 }
 
 export interface CUTeamDto {
-    Name: string;
+    name: string;
 }
 
 export interface PlayerDto {
     id: number;
-    Name: string;
-    Number: number;
-    BirthYear: number;
-    TeamId: number;
+    name: string;
+    number: number;
+    birthYear: number;
+    teamId: number;
 }
 export interface CUPlayerDto {
-    Name: string;
-    Number: number;
-    BirthYear: number;
-    TeamId: number;
+    name: string;
+    number: number;
+    birthYear: number;
+    teamId: number;
 }

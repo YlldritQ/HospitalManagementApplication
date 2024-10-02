@@ -69,8 +69,8 @@ const PlayerEdit: React.FC = () => {
                 type="text"
                 name="firstName"
                 id="firstName"
-                value={player.Name}
-                onChange={(e) => setPlayer({ ...player, Name: e.target.value })}
+                value={player.name}
+                onChange={(e) => setPlayer({ ...player, name: e.target.value })}
                 placeholder="Enter first name"
                 className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
@@ -85,10 +85,10 @@ const PlayerEdit: React.FC = () => {
                 type="number"
                 name="Number"
                 id="Number"
-                value={player.Number || ""} // Ensure value is a string for controlled input
+                value={player.number || ""} // Ensure value is a string for controlled input
                 onChange={(e) => {
                 const newValue = e.target.value;
-                setPlayer({ ...player, Number: newValue ? Number(newValue) : 0 }); // Convert to number or set to 0 if empty
+                setPlayer({ ...player, number: newValue ? Number(newValue) : 0 }); // Convert to number or set to 0 if empty
                 }}
                 placeholder="Enter number"
                 className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -105,10 +105,10 @@ const PlayerEdit: React.FC = () => {
               <input
                 name="BirthYear"
                 id="BirthYear"
-                value={player.BirthYear || ""} // Ensure value is a string for controlled input
+                value={player.birthYear || ""} // Ensure value is a string for controlled input
                 onChange={(e) => {
                 const newValue = e.target.value;
-                setPlayer({ ...player, BirthYear: newValue ? Number(newValue) : 0 }); // Convert to number or set to 0 if empty
+                setPlayer({ ...player, birthYear: newValue ? Number(newValue) : 0 }); // Convert to number or set to 0 if empty
                 }}
                 placeholder="Enter BirthYear"
                 className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -126,10 +126,10 @@ const PlayerEdit: React.FC = () => {
               <select
                 name="teamId"
                 id="teamId"
-                value={player.TeamId|| ""}
+                value={player.teamId|| ""}
                 onChange={(e) => {
                   const newValue = e.target.value;
-                  setPlayer({ ...player, TeamId: newValue ? Number(newValue) : 0 }); // Convert to number or set to 0 if empty
+                  setPlayer({ ...player, teamId: newValue ? Number(newValue) : 0 }); // Convert to number or set to 0 if empty
                   }}
                 className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
