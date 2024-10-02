@@ -93,6 +93,20 @@ namespace backend.Core.AutoMapperConfig
 
             CreateMap<Player, CUPlayerDto>();
             CreateMap<CUPlayerDto, Player>();
+
+            CreateMap<PlanetDto, Planet>();
+            CreateMap<Planet, PlanetDto>();
+
+            CreateMap<CUPlanetDto, Planet>();
+            CreateMap<Planet, CUPlanetDto>();
+
+            CreateMap<SateliteDto, Satelite>();
+            CreateMap<Satelite, SateliteDto>();
+
+            CreateMap<CUSateliteDto, Satelite>();
+            CreateMap<Satelite, CUSateliteDto>();
         }
+
+    }
     }
 }

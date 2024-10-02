@@ -33,6 +33,10 @@ namespace backend.Core.DbContext
         public DbSet<Team>  Teams { get; set; }
         public DbSet<Player> Players { get; set; }
 
+        public DbSet<Planet> Planets { get; set; }
+
+        public DbSet<Satelite> Satelites { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -113,6 +117,11 @@ namespace backend.Core.DbContext
                 .HasOne(n => n.Team)
                 .WithMany(dept => dept.Players)
                 .HasForeignKey(n => n.TeamId);
+
+            builder.Entity<Satelite>()
+                .HasOne(n => n.Planet)
+                .WithMany(dept => dept.Satelites)
+                .HasForeignKey(n => n.PlanetId);
 
             // Doctor - Appointment (One-to-Many)
             builder.Entity<Appointment>()
