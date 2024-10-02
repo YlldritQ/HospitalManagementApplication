@@ -1,177 +1,141 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { toast } from 'react-hot-toast';
-import { getPlayerByID, getTeams, updatePlayer } from '../../services/testServices';
-import { CUPlayerDto, TeamDto, PlayerDto } from '../../types/testTypes';
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { getPlayerByID, getTeams, updatePlayer } from "../../services/testServices"; // Assuming you have this service
+import { CUPlayerDto, TeamDto } from "../../types/testTypes";
+import { toast } from "react-hot-toast";
 
-const EditPlayer: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
+const PlayerEdit: React.FC = () => {
+  const { id } = useParams<{ id: string }>(); // Get the player ID from URL params
   const navigate = useNavigate();
-
-  const [Player, setPlayer] = useState<CUPlayerDto>({
-    Name: '',
-    Number:0,
-    BirthYear: 0,
-    TeamId:0,
-  });
-
-  const [Teams, setTeams] = useState<TeamDto[]>([]);
+  const [player, setPlayer] = useState<CUPlayerDto | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [teams, setTeams] = useState<TeamDto[]>([]);
 
   useEffect(() => {
+    const fetchPlayer = async () => {
+      try {
+        const data = await getPlayerByID(Number(id)); // Assuming this service fetches player by ID
+        setPlayer(data);
+      } catch (err) {
+        toast.error("Failed to fetch player details");
+      } finally {
+        setLoading(false);
+      }
+    };
+
     const fetchTeams = async () => {
       try {
-        const departmentData: TeamDto[] = await getTeams();
-        setTeams(departmentData);
+        const teamData: TeamDto[] = await getTeams();
+        console.log("Fetched teams:", teamData);
+        setTeams(teamData);
       } catch (err) {
         toast.error('Failed to fetch Teams');
       }
     };
 
+    fetchPlayer();
     fetchTeams();
-
-    if (id) {
-      const fetchPlayer = async () => {
-        try {
-          const data: PlayerDto | null = await getPlayerByID(Number(id));
-          if (data) {
-            setPlayer({
-              Name: data.Name,
-              Number: data.Number,
-              BirthYear: data.BirthYear,
-              TeamId: data.TeamId,
-            });
-          } else {
-            setError('Player not found');
-          }
-        } catch (err) {
-          setError('Failed to fetch Player details');
-        } finally {
-          setLoading(false);
-        }
-      };
-
-      fetchPlayer();
-    } else {
-      setLoading(false);
-    }
   }, [id]);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = event.target;
-
-      setPlayer((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
-    
-  };
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const updatedPlayer: CUPlayerDto = {
-      ...Player,
-      
-    };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!player) return;
 
     try {
-      if (id) {
-        console.log(updatePlayer);
-        await updatePlayer(Number(id), updatedPlayer);
-          toast.success(`Player updated successfully`);
-        }
-      
-      navigate('/dashboard/Player-list');
+      await updatePlayer(Number(id), player); // Assuming this updates the player
+      toast.success("Player updated successfully");
+      navigate("/dashboard/player-list"); // Redirect after successful update
     } catch (err) {
-      toast.error('Failed to save Player');
+      toast.error("Failed to update player");
     }
   };
 
-  
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading) return <div className="text-center">Loading...</div>;
+  if (!player) return <div className="text-center">Player not found</div>;
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 p-4">
       <div className="w-full max-w-5xl bg-gray-800 p-8 rounded-lg shadow-xl border border-gray-700">
         <h1 className="text-3xl font-bold text-white mb-8 text-center">
-          Edit Player Information
+          Edit player Information
         </h1>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="Name" className="block text-sm font-medium text-gray-300 mb-1">
-                Name
+              <label htmlFor="firstName" className="block text-sm font-medium text-gray-300 mb-1">
+                First Name
               </label>
               <input
                 type="text"
-                name="Name"
-                id="Name"
-                value={Player.Name}
-                onChange={handleChange}
+                name="firstName"
+                id="firstName"
+                value={player.Name}
+                onChange={(e) => setPlayer({ ...player, Name: e.target.value })}
                 placeholder="Enter first name"
                 className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
             </div>
   
-                      
-          </div>
-
-  
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="BirthYear" className="block text-sm font-medium text-gray-300 mb-1">
-                Date of Birth
+              <label htmlFor="Number" className="block text-sm font-medium text-gray-300 mb-1">
+                Number
               </label>
               <input
-                type="text"
-                name="BirthYear"
-                id="BirthYear"
-                value={Player.BirthYear}
-                onChange={handleChange}
+                type="number"
+                name="Number"
+                id="Number"
+                value={player.Number || ""} // Ensure value is a string for controlled input
+                onChange={(e) => {
+                const newValue = e.target.value;
+                setPlayer({ ...player, Number: newValue ? Number(newValue) : 0 }); // Convert to number or set to 0 if empty
+                }}
+                placeholder="Enter number"
                 className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
             </div>
           </div>
   
-
-  
-          <div>
-            <label htmlFor="number" className="block text-sm font-medium text-gray-300 mb-1">
-              Number
-            </label>
-            <input
-              type="text"
-              name="number"
-              id="number"
-              value={Player.Number}
-              onChange={handleChange}
-              placeholder="Enter qualifications"
-              className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-  
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="departmentId" className="block text-sm font-medium text-gray-300 mb-1">
+              <label htmlFor="BirthYear" className="block text-sm font-medium text-gray-300 mb-1">
+                BirthYear
+              </label>
+              <input
+                name="BirthYear"
+                id="BirthYear"
+                value={player.BirthYear || ""} // Ensure value is a string for controlled input
+                onChange={(e) => {
+                const newValue = e.target.value;
+                setPlayer({ ...player, BirthYear: newValue ? Number(newValue) : 0 }); // Convert to number or set to 0 if empty
+                }}
+                placeholder="Enter BirthYear"
+                className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+          </div>
+  
+           
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="Team" className="block text-sm font-medium text-gray-300 mb-1">
                 Team
               </label>
               <select
                 name="teamId"
                 id="teamId"
-                value={Player.TeamId}
-                onChange={handleChange}
+                value={player.TeamId|| ""}
+                onChange={(e) => {
+                  const newValue = e.target.value;
+                  setPlayer({ ...player, TeamId: newValue ? Number(newValue) : 0 }); // Convert to number or set to 0 if empty
+                  }}
                 className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               >
                 <option value="">Select Team</option>
-                {Teams.map((dept) => (
+                {teams.map((dept) => (
                   <option key={dept.id} value={dept.id}>
                     {dept.name}
                   </option>
@@ -186,14 +150,13 @@ const EditPlayer: React.FC = () => {
               type="submit"
               className="inline-flex items-center px-6 py-3 bg-blue-600 text-white text-sm font-semibold rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
-              Save Player
+              Save player
             </button>
           </div>
         </form>
       </div>
     </div>
   );
-  
 };
 
-export default EditPlayer;
+export default PlayerEdit;
