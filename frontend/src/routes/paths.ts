@@ -1,4 +1,5 @@
 
+
   export const PATH_PUBLIC = {
   register: "/register",
   login: "/",
@@ -35,7 +36,11 @@ export const PATH_DASHBOARD = {
   teamList: "/dashboard/team-list",
   updateTeam: "/dashboard/edit-team/:id",
   playerList: "/dashboard/player-list",
-  updatePlayer: "/dashboard/edit-player/:id"
+  updatePlayer: "/dashboard/edit-player/:id",
+  planetList: "/dashboard/planet-list",
+  updatePlanet: "/dashboard/edit-planet/:id",
+  sateliteList: "/dashboard/satelite-list",
+  updateSatelite: "/dashboard/edit-satelite/:id"
 };
 
 

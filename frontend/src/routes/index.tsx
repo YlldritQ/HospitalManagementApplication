@@ -39,6 +39,8 @@ const TeamList = lazy(() => import("../pages/dashboard/TeamList"));
 const UpdateTeam = lazy(() => import("../pages/dashboard/EditTeam"));
 const PlayerList = lazy(() => import("../pages/dashboard/PlayerList"));
 const UpdatePlayer = lazy(() => import("../pages/dashboard/EditPlayer"));
+const PlanetList = lazy(() => import("../pages/dashboard/PlanetList"));
+
 
 
 const GlobalRouter = () => {
@@ -113,6 +115,38 @@ const GlobalRouter = () => {
               </Suspense>
             }
           />
+          <Route
+            path={PATH_DASHBOARD.planetList}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <PlanetList />
+              </Suspense>
+            }
+          />
+          {/* <Route
+            path={PATH_DASHBOARD.updatePlanet}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <UpdatePlanet />
+              </Suspense>
+            }
+          />
+          <Route
+            path={PATH_DASHBOARD.sateliteList}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <SateliteList />
+              </Suspense>
+            }
+          />
+          <Route
+            path={PATH_DASHBOARD.updateSatelite}
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <UpdateSatelite />
+              </Suspense>
+            }
+          /> */}
           <Route
             path={PATH_DASHBOARD.myLogs}
             element={
